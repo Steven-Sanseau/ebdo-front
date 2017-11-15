@@ -50,7 +50,7 @@ export class Checkout extends React.Component {
           </Helmet>
           <Grid fluid>
             <Row>
-              <Col center="xs" mdOffset={1} xs={12} md={11}>
+              <Col mdOffset={1} xs={12} md={11}>
                 <Header />
               </Col>
             </Row>

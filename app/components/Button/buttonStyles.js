@@ -14,11 +14,11 @@ const buttonStyles = css`
   cursor: pointer;
   outline: 0;
   color: #fff;
-  background: #aac64c;
+  background: var(--booger);
   padding: 10px 20px;
 
   &:active {
-    background: #aac64c;
+    background: var(--booger);
     color: #fff;
   }
 `;
