@@ -4,7 +4,10 @@
   "description": "Ebdo Front-end Subscription",
   "repository": {
     "type": "git",
-    "url": "git://github.com/EbdoJournal/ebdo-subscribe-front"
+    "url": "git://github.com/EbdoJournal/ebdo-subscribe-front.git"
+  },
+  "engine": {
+    "node": "9.x"
   },
   "author": "Steven Sanséau",
   "license": "MIT",
