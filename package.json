@@ -4,11 +4,7 @@
   "description": "Ebdo Front-end Subscription",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
-  },
-  "engines": {
-    "npm": ">=5",
-    "node": ">=8"
+    "url": "git://github.com/EbdoJournal/ebdo-subscribe-front"
   },
   "author": "Steven Sanséau",
   "license": "MIT",
