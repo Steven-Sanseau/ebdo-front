@@ -6,7 +6,8 @@
     "type": "git",
     "url": "git://github.com/EbdoJournal/ebdo-subscribe-front.git"
   },
-  "engine": {
+  "engines": {
+    "npm": "5.x",
     "node": "9.x"
   },
   "author": "Steven Sanséau",
