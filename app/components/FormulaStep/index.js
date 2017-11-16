@@ -1,24 +1,13 @@
-/**
-*
-* FormulaStep
-*
-*/
-
-import React from 'react';
+import React from 'react'
 // import styled from 'styled-components';
 
-
-class FormulaStep extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class FormulaStep extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
-    return (
-      <div>
-      </div>
-    );
+    return <div />
   }
 }
 
-FormulaStep.propTypes = {
+FormulaStep.propTypes = {}
 
-};
-
-export default FormulaStep;
+export default FormulaStep

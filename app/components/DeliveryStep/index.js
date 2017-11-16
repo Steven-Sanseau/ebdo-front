@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Row, Col } from 'react-flexbox-grid'
 
-import Button from '../Button';
-import WhiteWrapper from './WhiteWrapper';
-import Title from './Title';
-import FormDelivery from './FormDelivery';
-import SquareCheckout from '../SquareCheckout';
-import TextAdress from './TextAdress';
+import Button from '../Button'
+import WhiteWrapper from './WhiteWrapper'
+import Title from './Title'
+import FormDelivery from './FormDelivery'
+import SquareCheckout from '../SquareCheckout'
+import TextAdress from './TextAdress'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       adress: {
@@ -31,18 +30,18 @@ class DeliveryStep extends React.Component {
           postalCode: '75018'
         }
       }
-    };
+    }
 
-    this.change = this.change.bind(this);
+    this.change = this.change.bind(this)
   }
 
   change() {
-    this.props.changeStep(this.props.stepNumber);
+    this.props.changeStep(this.props.stepNumber)
   }
 
   render() {
-    const { isOpen, nextStep, changeStep, stepNumber } = this.props;
-    const { adress } = this.state;
+    const { isOpen, nextStep } = this.props
+    const { adress } = this.state
 
     return (
       <div>
@@ -89,7 +88,7 @@ class DeliveryStep extends React.Component {
                 </Col>
                 <Col xs={5}>
                   <TextAdress>
-                    Mes numéros seront envoyés à l'adresse suivante: <br />
+                    Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
                     <b>{adress.delivery.name}</b>, {adress.delivery.adress},{' '}
                     {adress.delivery.postalCode} {adress.delivery.city} ({
                       adress.delivery.country
@@ -102,7 +101,7 @@ class DeliveryStep extends React.Component {
           </Row>
         )}
       </div>
-    );
+    )
   }
 }
 
@@ -111,6 +110,6 @@ DeliveryStep.propTypes = {
   isOpen: PropTypes.bool,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
-};
+}
 
-export default DeliveryStep;
+export default DeliveryStep

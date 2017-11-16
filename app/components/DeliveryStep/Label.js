@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Label = styled.label`
   font-family: 'FG-R';
@@ -6,6 +6,6 @@ const Label = styled.label`
   line-height: 14px;
   text-align: left;
   color: #000000;
-`;
+`
 
-export default Label;
+export default Label

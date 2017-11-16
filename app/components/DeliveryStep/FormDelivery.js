@@ -1,28 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import React from 'react'
+// import PropTypes from 'prop-types'
+// import styled from 'styled-components'
+import { Row, Col } from 'react-flexbox-grid'
 
-import Label from './Label';
-import Input from './Input';
-import InputWrapper from './InputWrapper';
-import Required from './Required';
+import Label from './Label'
+import Input from './Input'
+import InputWrapper from './InputWrapper'
+import Required from './Required'
 
 class FormDelivery extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { value: '' };
+    super(props)
+    this.state = { value: '' }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value })
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
   }
 
   render() {
@@ -165,10 +165,10 @@ class FormDelivery extends React.Component {
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-FormDelivery.propTypes = {};
+FormDelivery.propTypes = {}
 
-export default FormDelivery;
+export default FormDelivery

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Title = styled.div`
   font-family: 'FG-B';
@@ -7,6 +7,6 @@ const Title = styled.div`
   text-align: left;
   margin-top: 23px;
   color: #000000;
-`;
+`
 
-export default Title;
+export default Title
