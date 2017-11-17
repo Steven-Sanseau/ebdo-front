@@ -13,7 +13,12 @@ import makeSelectCheckout from './selectors'
 import reducer from './reducer'
 import saga from './saga'
 
+import FormulaStep from '../../components/FormulaStep/Loadable'
+import StartStep from '../../components/StartStep/Loadable'
+import VoucherStep from '../../components/VoucherStep/Loadable'
+import EmailStep from '../../components/EmailStep/Loadable'
 import DeliveryStep from '../../components/DeliveryStep/Loadable'
+import PaymentStep from '../../components/PaymentStep/Loadable'
 
 import Header from '../../components/Header'
 import Layout from './Layout'
@@ -56,11 +61,61 @@ export class Checkout extends React.Component {
             </Row>
             <Row>
               <Col xs={12}>
-                <DeliveryStep
+                <FormulaStep
                   stepNumber={1}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   isOpen={step === 1}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <StartStep
+                  stepNumber={2}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  isOpen={step === 2}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <VoucherStep
+                  stepNumber={3}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  isOpen={step === 3}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <EmailStep
+                  stepNumber={4}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  isOpen={step === 4}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <DeliveryStep
+                  stepNumber={5}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  isOpen={step === 5}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <PaymentStep
+                  stepNumber={6}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  isOpen={step === 6}
                 />
               </Col>
             </Row>

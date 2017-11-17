@@ -14,8 +14,15 @@ import Required from './Required'
 class FormDelivery extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { value: '' }
+    this.state = {
+      adress: {}
+    }
 
+    this.handleName = this.handleName.bind(this)
+    this.handleCompany = this.handleCompany.bind(this)
+    this.handlePostalCode = this.handlePostalCode.bind(this)
+    this.handleCity = this.handleCity.bind(this)
+    this.handleCountry = this.handleCountry.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handlePlace = this.handlePlace.bind(this)
@@ -30,15 +37,45 @@ class FormDelivery extends React.Component {
         value(suggestion) {
           return suggestion.name
         }
-      }
+      },
+      countries: ['fr', 'be', 'ca', 'lu']
     })
 
     this.placesAutocomplete.on('clear', () => {
       this.adressInput.textContent = 'none'
     })
+
+    this.state = this.props.adress
   }
 
-  handleChange(event) {}
+  handleName(event) {
+    this.handleChange('name', event.target.value)
+  }
+
+  handleCompany(event) {
+    this.handleChange('company', event.target.value)
+  }
+
+  handlePostalCode(event) {
+    this.handleChange('postalCode', event.target.value)
+  }
+
+  handleCity(event) {
+    this.handleChange('city', event.target.value)
+  }
+
+  handleCountry(event) {
+    this.handleChange('country', event.target.value)
+  }
+
+  handleChange(key, val) {
+    event.preventDefault()
+    this.setState(
+      _.extend(this.props.adress, {
+        [key]: val
+      })
+    )
+  }
 
   handleSubmit(event) {
     event.preventDefault()
@@ -46,17 +83,20 @@ class FormDelivery extends React.Component {
 
   handlePlace(event) {
     event.preventDefault()
-    this.props.adress.adress = event.target.value || ''
+    this.handleChange('adress', event.target.value)
     this.placesAutocomplete.on('change', e => {
-      console.log(e.suggestion)
-      this.props.adress.adress = e.suggestion.name || ''
-      this.props.adress.city = e.suggestion.city || ''
-      this.props.adress.postalCode = e.suggestion.postcode || ''
+      this.setState(
+        _.extend(this.props.adress, {
+          adress: e.suggestion.name || '',
+          city: e.suggestion.hit.city || '',
+          postalCode: e.suggestion.postcode || '',
+          country: e.suggestion.country || ''
+        })
+      )
     })
   }
 
   render() {
-    const adress = this.props.adress
     return (
       <div>
         <Row>
@@ -77,8 +117,8 @@ class FormDelivery extends React.Component {
                           <Input
                             type="text"
                             name="name"
-                            value={adress.name}
-                            onChange={this.handleChange}
+                            value={this.props.adress.name}
+                            onChange={this.handleName}
                             placeholder="John Doe"
                           />
                         </Col>
@@ -97,8 +137,8 @@ class FormDelivery extends React.Component {
                           <Input
                             type="text"
                             name="company"
-                            value={adress.company}
-                            onChange={this.handleChange}
+                            value={this.props.adress.company}
+                            onChange={this.handleCompany}
                             placeholder="Nom de la Société"
                           />
                         </Col>
@@ -122,6 +162,7 @@ class FormDelivery extends React.Component {
                             type="text"
                             id="address-input"
                             name="adress"
+                            value={this.props.adress.adress}
                             onChange={this.handlePlace}
                             placeholder="Adresse"
                           />
@@ -143,8 +184,8 @@ class FormDelivery extends React.Component {
                           <Input
                             type="text"
                             name="postalCode"
-                            value={adress.postalCode}
-                            onChange={this.handleChange}
+                            value={this.props.adress.postalCode}
+                            onChange={this.handlePostalCode}
                             placeholder="00000"
                           />
                         </Col>
@@ -168,8 +209,8 @@ class FormDelivery extends React.Component {
                           <Input
                             type="text"
                             name="city"
-                            value={adress.city}
-                            onChange={this.handleChange}
+                            value={this.props.adress.city}
+                            onChange={this.handleCity}
                             placeholder="Paris"
                           />
                         </Col>
@@ -188,8 +229,8 @@ class FormDelivery extends React.Component {
                           <Input
                             type="text"
                             name="country"
-                            value={adress.country}
-                            onChange={this.placeChange}
+                            value={this.props.adress.country}
+                            onChange={this.handleCountry}
                             placeholder="Pays"
                           />
                         </Col>

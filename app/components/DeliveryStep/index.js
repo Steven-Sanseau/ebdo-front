@@ -4,7 +4,7 @@ import { Row, Col } from 'react-flexbox-grid'
 
 import Button from '../Button'
 import WhiteWrapper from './WhiteWrapper'
-import Title from './Title'
+import Title from '../TitleStep/Title'
 import FormDelivery from './FormDelivery'
 import SquareCheckout from '../SquareCheckout'
 import TextAdress from './TextAdress'
@@ -15,13 +15,7 @@ class DeliveryStep extends React.Component {
 
     this.state = {
       adress: {
-        delivery: {
-          name: 'Steven Sanséau',
-          adress: '13 rue  marx Dormoy',
-          city: 'Paris',
-          country: 'France',
-          postalCode: '75018'
-        },
+        delivery: {},
         invoice: {
           name: 'Steven Sanséau',
           adress: '13 rue  marx Dormoy',
@@ -40,7 +34,7 @@ class DeliveryStep extends React.Component {
   }
 
   render() {
-    const { isOpen, nextStep } = this.props
+    const { isOpen, nextStep, stepNumber } = this.props
     const { adress } = this.state
 
     return (
@@ -54,7 +48,7 @@ class DeliveryStep extends React.Component {
                     <Row>
                       <Col xs={2}>
                         <Row end="xs">
-                          <SquareCheckout number={1} />
+                          <SquareCheckout number={stepNumber} />
                         </Row>
                       </Col>
                       <Col xs={5}>
@@ -68,9 +62,13 @@ class DeliveryStep extends React.Component {
                     <FormDelivery adress={adress.delivery} />
                   </Col>
                 </Row>
-                <Row>
-                  <Col xs={12}>
-                    <Button handleRoute={nextStep}>Étape Suivante</Button>
+                <Row center="xs">
+                  <Col xs={5}>
+                    <Row start="xs">
+                      <Col xs={12}>
+                        <Button handleRoute={nextStep}>Étape Suivante</Button>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </WhiteWrapper>
@@ -89,7 +87,9 @@ class DeliveryStep extends React.Component {
                 <Col xs={5}>
                   <TextAdress>
                     Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
-                    <b>{adress.delivery.name}</b>, {adress.delivery.adress},{' '}
+                    <b>{adress.delivery.name}</b>, {adress.delivery.adress}, ({
+                      adress.delivery.company
+                    })
                     {adress.delivery.postalCode} {adress.delivery.city} ({
                       adress.delivery.country
                     })
