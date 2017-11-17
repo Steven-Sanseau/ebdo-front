@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 
 import Button from '../Button'
-import WhiteWrapper from './WhiteWrapper'
+import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import Title from '../TitleStep/Title'
-import FormDelivery from './FormDelivery'
 import SquareCheckout from '../SquareCheckout'
+
 import TextAdress from './TextAdress'
+import FormDelivery from './FormDelivery'
 
 class DeliveryStep extends React.Component {
   constructor(props) {

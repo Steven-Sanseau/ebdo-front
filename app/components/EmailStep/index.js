@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import styled from 'styled-components';
+import { Row, Col } from 'react-flexbox-grid'
+
+import Button from '../Button'
+import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import SquareCheckout from '../SquareCheckout'
 import Title from '../TitleStep/Title'
 
@@ -16,7 +19,6 @@ class EmailStep extends React.Component {
 
   render() {
     const { isOpen, nextStep, stepNumber } = this.props
-    const { adress } = this.state
 
     return (
       <div>
