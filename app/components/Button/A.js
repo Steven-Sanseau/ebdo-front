@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import buttonStyles from './buttonStyles';
+import aStyles from './aStyles'
 
-const A = styled.a`${buttonStyles}`;
+const A = styled.a`
+  ${aStyles};
+`
 
-export default A;
+export default A

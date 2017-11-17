@@ -28,7 +28,7 @@ export class Checkout extends React.Component {
     super(props)
 
     this.state = {
-      step: 1
+      step: 5
     }
 
     this.nextStep = this.nextStep.bind(this)
@@ -65,7 +65,7 @@ export class Checkout extends React.Component {
                   stepNumber={1}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 1}
+                  currentStep={step}
                 />
               </Col>
             </Row>
@@ -75,7 +75,7 @@ export class Checkout extends React.Component {
                   stepNumber={2}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 2}
+                  currentStep={step}
                 />
               </Col>
             </Row>
@@ -85,7 +85,7 @@ export class Checkout extends React.Component {
                   stepNumber={3}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 3}
+                  currentStep={step}
                 />
               </Col>
             </Row>
@@ -95,7 +95,7 @@ export class Checkout extends React.Component {
                   stepNumber={4}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 4}
+                  currentStep={step}
                 />
               </Col>
             </Row>
@@ -105,7 +105,7 @@ export class Checkout extends React.Component {
                   stepNumber={5}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 5}
+                  currentStep={step}
                 />
               </Col>
             </Row>
@@ -115,7 +115,7 @@ export class Checkout extends React.Component {
                   stepNumber={6}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
-                  isOpen={step === 6}
+                  currentStep={step}
                 />
               </Col>
             </Row>

@@ -2,14 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import places from 'places.js'
-
-// import styled from 'styled-components'
 import { Row, Col } from 'react-flexbox-grid'
 
-import Label from './Label'
-import Input from './Input'
-import InputWrapper from './InputWrapper'
-import Required from './Required'
+import InputText from '../InputText'
 
 class FormDelivery extends React.Component {
   constructor(props) {
@@ -104,139 +99,67 @@ class FormDelivery extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <Row>
                 <Col xs={12} lg={6}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Nom complet
-                          <Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            name="name"
-                            value={this.props.adress.name}
-                            onChange={this.handleName}
-                            placeholder="John Doe"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Nom"
+                    name="name"
+                    value={this.props.adress.name}
+                    onChange={this.handleName}
+                    placeholder="Henry Michel"
+                  />
                 </Col>
                 <Col xs={12} lg={6}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>Société</Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            name="company"
-                            value={this.props.adress.company}
-                            onChange={this.handleCompany}
-                            placeholder="Nom de la Société"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Société"
+                    name="company"
+                    value={this.props.adress.company}
+                    onChange={this.handleCompany}
+                    placeholder="Nom de la Société"
+                  />
                 </Col>
               </Row>
               <Row>
                 <Col xs={12} lg={8}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Adresse<Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            id="address-input"
-                            name="adress"
-                            value={this.props.adress.adress}
-                            onChange={this.handlePlace}
-                            placeholder="Adresse"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Adresse"
+                    id="address-input"
+                    name="adress"
+                    isRequired
+                    value={this.props.adress.adress}
+                    onChange={this.handlePlace}
+                    placeholder="Adresse"
+                  />
                 </Col>
                 <Col lg={4} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Code Postal<Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            name="postalCode"
-                            value={this.props.adress.postalCode}
-                            onChange={this.handlePostalCode}
-                            placeholder="00000"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Code Postal"
+                    name="postalCode"
+                    isRequired
+                    value={this.props.adress.postalCode}
+                    onChange={this.handlePostalCode}
+                    placeholder="00000"
+                  />
                 </Col>
               </Row>
               <Row>
                 <Col lg={6} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Ville
-                          <Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            name="city"
-                            value={this.props.adress.city}
-                            onChange={this.handleCity}
-                            placeholder="Paris"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Ville"
+                    name="city"
+                    isRequired
+                    value={this.props.adress.city}
+                    onChange={this.handleCity}
+                    placeholder="Paris"
+                  />
                 </Col>
                 <Col lg={6} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>Pays</Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            name="country"
-                            value={this.props.adress.country}
-                            onChange={this.handleCountry}
-                            placeholder="Pays"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Pays"
+                    name="country"
+                    isRequired
+                    value={this.props.adress.country}
+                    onChange={this.handleCountry}
+                    placeholder="Pays"
+                  />
                 </Col>
               </Row>
             </form>
