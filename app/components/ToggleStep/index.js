@@ -7,8 +7,8 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
+import Title from '../LayoutStep/Title'
 import SquareCheckout from '../SquareCheckout'
-import Title from '../TitleStep/Title'
 
 class ToggleStep extends React.Component {
   constructor(props) {

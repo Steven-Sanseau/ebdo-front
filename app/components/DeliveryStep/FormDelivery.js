@@ -64,7 +64,6 @@ class FormDelivery extends React.Component {
   }
 
   handleChange(key, val) {
-    event.preventDefault()
     this.setState(
       _.extend(this.props.adress, {
         [key]: val
