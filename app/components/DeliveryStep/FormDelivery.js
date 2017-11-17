@@ -1,5 +1,8 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+import places from 'places.js'
+
 // import styled from 'styled-components'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -15,17 +18,45 @@ class FormDelivery extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePlace = this.handlePlace.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value })
+  componentDidMount() {
+    this.adressInput = document.querySelector('#address-input')
+    this.placesAutocomplete = places({
+      container: this.adressInput,
+      type: 'address',
+      templates: {
+        value(suggestion) {
+          return suggestion.name
+        }
+      }
+    })
+
+    this.placesAutocomplete.on('clear', () => {
+      this.adressInput.textContent = 'none'
+    })
   }
+
+  handleChange(event) {}
 
   handleSubmit(event) {
     event.preventDefault()
   }
 
+  handlePlace(event) {
+    event.preventDefault()
+    this.props.adress.adress = event.target.value || ''
+    this.placesAutocomplete.on('change', e => {
+      console.log(e.suggestion)
+      this.props.adress.adress = e.suggestion.name || ''
+      this.props.adress.city = e.suggestion.city || ''
+      this.props.adress.postalCode = e.suggestion.postcode || ''
+    })
+  }
+
   render() {
+    const adress = this.props.adress
     return (
       <div>
         <Row>
@@ -45,7 +76,8 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
+                            name="name"
+                            value={adress.name}
                             onChange={this.handleChange}
                             placeholder="John Doe"
                           />
@@ -64,7 +96,8 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
+                            name="company"
+                            value={adress.company}
                             onChange={this.handleChange}
                             placeholder="Nom de la Société"
                           />
@@ -87,8 +120,9 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
+                            id="address-input"
+                            name="adress"
+                            onChange={this.handlePlace}
                             placeholder="Adresse"
                           />
                         </Col>
@@ -108,7 +142,8 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
+                            name="postalCode"
+                            value={adress.postalCode}
                             onChange={this.handleChange}
                             placeholder="00000"
                           />
@@ -124,7 +159,7 @@ class FormDelivery extends React.Component {
                     <Label>
                       <Row>
                         <Col xs={12}>
-                          Nom complet
+                          Ville
                           <Required>*</Required>
                         </Col>
                       </Row>
@@ -132,9 +167,10 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
+                            name="city"
+                            value={adress.city}
                             onChange={this.handleChange}
-                            placeholder="John Doe"
+                            placeholder="Paris"
                           />
                         </Col>
                       </Row>
@@ -151,7 +187,8 @@ class FormDelivery extends React.Component {
                         <Col xs={12}>
                           <Input
                             type="text"
-                            value={this.state.value}
+                            name="country"
+                            value={adress.country}
                             onChange={this.placeChange}
                             placeholder="Pays"
                           />
@@ -169,6 +206,8 @@ class FormDelivery extends React.Component {
   }
 }
 
-FormDelivery.propTypes = {}
+FormDelivery.propTypes = {
+  adress: PropTypes.object
+}
 
 export default FormDelivery

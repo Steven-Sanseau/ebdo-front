@@ -65,7 +65,7 @@ class DeliveryStep extends React.Component {
                 </Row>
                 <Row center="xs">
                   <Col xs={5}>
-                    <FormDelivery />
+                    <FormDelivery adress={adress.delivery} />
                   </Col>
                 </Row>
                 <Row>

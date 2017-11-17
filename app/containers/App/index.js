@@ -10,7 +10,6 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={Checkout} />
         <Route exact path="/subscribe" component={Checkout} />
-        <Route exact path="/subscribe/:step" component={Checkout} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
