@@ -163,6 +163,9 @@
     ],
     "include": ["core-js", "lodash", "eventsource-polyfill"]
   },
+  "pre-commit": {
+    "silent": true
+  },
   "jest": {
     "collectCoverageFrom": [
       "app/**/*.{js,jsx}",
