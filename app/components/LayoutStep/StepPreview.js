@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const StepPreview = styled.label`
-  opacity: 0.7;
+const StepPreview = styled.div`
+  color: var(--silver);
 `
 
 export default StepPreview

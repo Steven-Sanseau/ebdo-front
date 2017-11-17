@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 

@@ -73,7 +73,7 @@ class ToggleStep extends React.Component {
                 <Row>
                   <Col xs={2}>
                     <Row end="xs">
-                      <SquareCheckout number={stepNumber} />
+                      <SquareCheckout number={stepNumber} silver />
                     </Row>
                   </Col>
                   <Col xs={5}>

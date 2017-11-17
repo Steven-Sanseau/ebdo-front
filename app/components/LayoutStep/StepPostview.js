@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-const StepPostview = styled.label``
+const StepPostview = styled.div``
 
 export default StepPostview

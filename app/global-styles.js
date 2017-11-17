@@ -40,5 +40,7 @@ injectGlobal`
       --silver: #d4dadd;
       --pale-grey: #e8eef1;
       --background: #fafafa;
+      --black: #000000;
+      --white-true: #ffffff;
     }
 `

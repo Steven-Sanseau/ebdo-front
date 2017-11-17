@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 
 class FormulaStep extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      formula: true
+    }
   }
 
   contentOpen() {
@@ -14,7 +17,7 @@ class FormulaStep extends React.Component {
   }
 
   contentClose() {
-    return <div>Je m'abonne sans engagement pour un montant de </div>
+    return <div>Je mabonne sans engagement pour un montant de </div>
   }
 
   render() {
