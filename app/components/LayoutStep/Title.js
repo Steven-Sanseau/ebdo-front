@@ -6,7 +6,7 @@ const Title = styled.div`
   font-weight: bold;
   text-align: left;
   margin-top: 23px;
-  color: #000000;
+  color: var(${props => (props.color === 'silver' ? '--silver' : '--black')});
 `
 
 export default Title
