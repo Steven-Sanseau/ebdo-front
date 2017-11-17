@@ -12,6 +12,7 @@ import injectReducer from 'utils/injectReducer'
 import makeSelectCheckout from './selectors'
 import reducer from './reducer'
 import saga from './saga'
+import { injectStripe } from 'react-stripe-elements'
 
 import FormulaStep from '../../components/FormulaStep/Loadable'
 import StartStep from '../../components/StartStep/Loadable'
@@ -28,7 +29,7 @@ export class Checkout extends React.Component {
     super(props)
 
     this.state = {
-      step: 5
+      step: 1
     }
 
     this.nextStep = this.nextStep.bind(this)
@@ -37,11 +38,19 @@ export class Checkout extends React.Component {
 
   nextStep() {
     const { step } = this.state
-    this.setState({ step: step + 1 < 6 ? step + 1 : 6 })
+    this.setState({ step: step + 1 })
   }
 
   changeStep(stepElem) {
     this.setState({ step: stepElem })
+  }
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+
+    this.props.stripe.createToken({ name: 'Jenny Rosen' }).then(({ token }) => {
+      console.log('Received Stripe token:', token)
+    })
   }
 
   render() {
