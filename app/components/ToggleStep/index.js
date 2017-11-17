@@ -5,6 +5,8 @@ import { Row, Col } from 'react-flexbox-grid'
 import Button from '../Button'
 import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
+import StepPreview from '../LayoutStep/StepPreview'
+import StepPostview from '../LayoutStep/StepPostview'
 import SquareCheckout from '../SquareCheckout'
 import Title from '../TitleStep/Title'
 
@@ -20,7 +22,7 @@ class ToggleStep extends React.Component {
 
   render() {
     const {
-      isOpen,
+      currentStep,
       nextStep,
       stepNumber,
       title,
@@ -30,7 +32,7 @@ class ToggleStep extends React.Component {
 
     return (
       <div>
-        {isOpen && (
+        {currentStep === stepNumber && (
           <Row>
             <Col xs={12}>
               <WhiteWrapper>
@@ -64,22 +66,42 @@ class ToggleStep extends React.Component {
             </Col>
           </Row>
         )}
-        {!isOpen && (
-          <Row>
-            <Col xs={8} xsOffset={2}>
-              <Row>
-                <Col xs={2}>
-                  <Row end="xs">
-                    <SquareCheckout checked />
-                  </Row>
-                </Col>
-                <Col xs={5}>
-                  <TextSummary>{contentClose}</TextSummary>
-                  <Button onClick={this.change}>Modifier</Button>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+        {currentStep < stepNumber && (
+          <StepPreview>
+            <Row>
+              <Col xs={8} xsOffset={2}>
+                <Row>
+                  <Col xs={2}>
+                    <Row end="xs">
+                      <SquareCheckout number={stepNumber} />
+                    </Row>
+                  </Col>
+                  <Col xs={5}>
+                    <Title>{title}</Title>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </StepPreview>
+        )}
+        {currentStep > stepNumber && (
+          <StepPostview>
+            <Row>
+              <Col xs={8} xsOffset={2}>
+                <Row>
+                  <Col xs={2}>
+                    <Row end="xs">
+                      <SquareCheckout checked />
+                    </Row>
+                  </Col>
+                  <Col xs={5}>
+                    <TextSummary>{contentClose}</TextSummary>
+                    <Button onClick={this.change}>Modifier</Button>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </StepPostview>
         )}
       </div>
     )
@@ -87,10 +109,10 @@ class ToggleStep extends React.Component {
 }
 
 ToggleStep.propTypes = {
-  contentOpen: PropTypes.func,
-  contentClose: PropTypes.func,
+  contentOpen: PropTypes.object,
+  contentClose: PropTypes.object,
   stepNumber: PropTypes.number,
-  isOpen: PropTypes.bool,
+  currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
 }

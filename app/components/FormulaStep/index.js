@@ -18,27 +18,25 @@ class FormulaStep extends React.Component {
   }
 
   render() {
-    const { isOpen, nextStep, changeStep, stepNumber } = this.props
+    const { currentStep, nextStep, changeStep, stepNumber } = this.props
 
     return (
-      <div>
-        <ToggleStep
-          title="Je choisis ma formule"
-          stepNumber={stepNumber}
-          contentClose={this.contentClose()}
-          contentOpen={this.contentOpen()}
-          isOpen={isOpen}
-          changeStep={changeStep}
-          nextStep={nextStep}
-        />
-      </div>
+      <ToggleStep
+        title="Je choisis ma formule"
+        stepNumber={stepNumber}
+        contentClose={this.contentClose()}
+        contentOpen={this.contentOpen()}
+        currentStep={currentStep}
+        changeStep={changeStep}
+        nextStep={nextStep}
+      />
     )
   }
 }
 
 FormulaStep.propTypes = {
   stepNumber: PropTypes.number,
-  isOpen: PropTypes.bool,
+  currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
 }
