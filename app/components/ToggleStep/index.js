@@ -5,28 +5,12 @@ import { Row, Col } from 'react-flexbox-grid'
 import Button from '../Button'
 import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
-import Title from '../TitleStep/Title'
 import SquareCheckout from '../SquareCheckout'
+import Title from '../TitleStep/Title'
 
-import FormDelivery from './FormDelivery'
-
-class DeliveryStep extends React.Component {
+class ToggleStep extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      adress: {
-        delivery: {},
-        invoice: {
-          name: 'Steven Sanséau',
-          adress: '13 rue  marx Dormoy',
-          city: 'Paris',
-          country: 'France',
-          postalCode: '75018'
-        }
-      }
-    }
-
     this.change = this.change.bind(this)
   }
 
@@ -35,8 +19,14 @@ class DeliveryStep extends React.Component {
   }
 
   render() {
-    const { isOpen, nextStep, stepNumber } = this.props
-    const { adress } = this.state
+    const {
+      isOpen,
+      nextStep,
+      stepNumber,
+      title,
+      contentOpen,
+      contentClose
+    } = this.props
 
     return (
       <div>
@@ -53,15 +43,13 @@ class DeliveryStep extends React.Component {
                         </Row>
                       </Col>
                       <Col xs={5}>
-                        <Title>Je renseigne mon adresse de livraison</Title>
+                        <Title>{title}</Title>
                       </Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row center="xs">
-                  <Col xs={5}>
-                    <FormDelivery adress={adress.delivery} />
-                  </Col>
+                  <Col xs={5}>{contentOpen}</Col>
                 </Row>
                 <Row center="xs">
                   <Col xs={5}>
@@ -86,15 +74,7 @@ class DeliveryStep extends React.Component {
                   </Row>
                 </Col>
                 <Col xs={5}>
-                  <TextSummary>
-                    Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
-                    <b>{adress.delivery.name}</b>, {adress.delivery.adress}, ({
-                      adress.delivery.company
-                    })
-                    {adress.delivery.postalCode} {adress.delivery.city} ({
-                      adress.delivery.country
-                    })
-                  </TextSummary>
+                  <TextSummary>{contentClose}</TextSummary>
                   <Button onClick={this.change}>Modifier</Button>
                 </Col>
               </Row>
@@ -106,11 +86,13 @@ class DeliveryStep extends React.Component {
   }
 }
 
-DeliveryStep.propTypes = {
+ToggleStep.propTypes = {
+  contentOpen: PropTypes.func,
+  contentClose: PropTypes.func,
   stepNumber: PropTypes.number,
   isOpen: PropTypes.bool,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
 }
 
-export default DeliveryStep
+export default ToggleStep
