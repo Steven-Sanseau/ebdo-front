@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Input = styled.input`
   font-family: 'FG-R';
@@ -16,6 +16,6 @@ const Input = styled.input`
   &:focus {
     outline-width: 0;
   }
-`;
+`
 
-export default Input;
+export default Input
