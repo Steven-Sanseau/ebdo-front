@@ -55,6 +55,12 @@ class DeliveryStep extends React.Component {
         })
         {adress.delivery.postalCode} {adress.delivery.city} ({
           adress.delivery.country
+        }) Facturation
+        <b>{adress.invoice.name}</b>, {adress.invoice.adress}, ({
+          adress.invoice.company
+        })
+        {adress.invoice.postalCode} {adress.invoice.city} ({
+          adress.invoice.country
         })
       </div>
     )
