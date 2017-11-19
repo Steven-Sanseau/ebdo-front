@@ -22,7 +22,7 @@ export default class CheckboxShowInvoiceForm extends React.Component {
     const { isChecked } = this.props
     return (
       <Row>
-        <Col xs={5}>
+        <Col lg={5} xs={11}>
           <Title>Adresse de facturation</Title>
           <Checkbox
             text="Utiliser la même adresse"
