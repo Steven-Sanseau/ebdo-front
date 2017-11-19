@@ -1,20 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 
 class VoucherStep extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   contentOpen() {
     return <div>Code promo</div>
   }
 
   contentClose() {
-    return <div>Je n'ai pas de code promo</div>
+    return <div>Je nai pas de code promo</div>
   }
 
   render() {

@@ -117,6 +117,7 @@ class ToggleStep extends React.Component {
 ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
+  title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,

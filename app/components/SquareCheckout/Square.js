@@ -5,10 +5,15 @@ const Square = styled.div`
   height: 30px;
   border-radius: 10px;
   background-color: var(
-    ${props =>
-      props.color === 'green'
-        ? '--booger'
-        : props.color === 'silver' ? '--silver' : '--black'}
+    ${props => {
+      if (props.color === 'green') {
+        return '--booger'
+      } else if (props.color === 'silver') {
+        return '--silver'
+      }
+
+      return '--black'
+    }}
   );
   position: relative;
   margin-top: 17px;

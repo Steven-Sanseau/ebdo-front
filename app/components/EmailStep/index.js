@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import ToggleStep from '../ToggleStep/Loadable'
 
 class EmailStep extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   contentOpen() {
     return <div>Email</div>
   }

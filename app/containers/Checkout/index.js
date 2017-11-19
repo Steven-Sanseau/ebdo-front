@@ -12,7 +12,7 @@ import injectReducer from 'utils/injectReducer'
 import makeSelectCheckout from './selectors'
 import reducer from './reducer'
 import saga from './saga'
-import { injectStripe } from 'react-stripe-elements'
+// import { injectStripe } from 'react-stripe-elements'
 
 import FormulaStep from '../../components/FormulaStep/Loadable'
 import StartStep from '../../components/StartStep/Loadable'
@@ -48,9 +48,9 @@ export class Checkout extends React.Component {
   handleSubmit = ev => {
     ev.preventDefault()
 
-    this.props.stripe.createToken({ name: 'Jenny Rosen' }).then(({ token }) => {
-      console.log('Received Stripe token:', token)
-    })
+    // this.props.stripe.createToken({ name: 'Jenny Rosen' }).then(({ token }) => {
+    //   console.log('Received Stripe token:', token)
+    // })
   }
 
   render() {

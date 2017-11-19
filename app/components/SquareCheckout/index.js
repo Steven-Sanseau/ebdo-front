@@ -6,7 +6,6 @@ import Icon from './Icon'
 import Square from './Square'
 
 class SquareCheckout extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { checked, number, silver } = this.props
     return (
