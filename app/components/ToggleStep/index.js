@@ -97,12 +97,12 @@ class ToggleStep extends React.Component {
             <Row>
               <Col lg={8} lgOffset={2} xs={12}>
                 <Row>
-                  <Col xs={2}>
+                  <Col lg={2} xs={2}>
                     <Row end="xs">
                       <SquareCheckout checked />
                     </Row>
                   </Col>
-                  <Col xs={5}>
+                  <Col lg={5} xs={10}>
                     <TextSummary>{contentClose}</TextSummary>
                     <Button onClick={this.change}>Modifier</Button>
                   </Col>

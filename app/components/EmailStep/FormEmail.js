@@ -29,6 +29,16 @@ export default class FormEmail extends React.Component {
     )
   }
 
+  validateEmail(event) {
+    const emailInput = event.target.value
+
+    if (emailInput === '') {
+      return false
+    }
+
+    return true
+  }
+
   handleSubmit(event) {
     event.preventDefault()
   }
