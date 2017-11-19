@@ -99,6 +99,8 @@ class FormDelivery extends React.Component {
               <Row>
                 <Col xs={12} lg={6}>
                   <InputText
+                    error
+                    errorMessage="Veuillez renseigner votre Nom"
                     label="Nom"
                     name="name"
                     value={this.props.adress.name}
