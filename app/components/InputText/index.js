@@ -11,16 +11,18 @@ class InputText extends React.Component {
   render() {
     return (
       <InputWrapper>
-        <Label>
+        <Label error={this.props.error || false}>
           <Row>
             <Col xs={12}>
-              {this.props.label}
+              {!this.props.error && this.props.label}
+              {this.props.error && this.props.errorMessage}
               {this.props.isRequired && <Required>*</Required>}
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
               <Input
+                error={this.props.error || false}
                 type="text"
                 id={this.props.id || ''}
                 name={this.props.name || ''}
@@ -39,6 +41,8 @@ class InputText extends React.Component {
 InputText.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
   isRequired: PropTypes.bool,
   name: PropTypes.string,
   placeholder: PropTypes.string,

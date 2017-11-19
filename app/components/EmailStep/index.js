@@ -1,14 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 
 class EmailStep extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   contentOpen() {
     return <div>Email</div>
   }

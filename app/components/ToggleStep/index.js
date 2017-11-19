@@ -7,8 +7,9 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
+import Title from '../LayoutStep/Title'
+import HR from '../LayoutStep/HR'
 import SquareCheckout from '../SquareCheckout'
-import Title from '../TitleStep/Title'
 
 class ToggleStep extends React.Component {
   constructor(props) {
@@ -73,13 +74,18 @@ class ToggleStep extends React.Component {
                 <Row>
                   <Col xs={2}>
                     <Row end="xs">
-                      <SquareCheckout number={stepNumber} />
+                      <SquareCheckout number={stepNumber} silver />
                     </Row>
                   </Col>
-                  <Col xs={5}>
-                    <Title>{title}</Title>
+                  <Col xs={7}>
+                    <Title color="silver">{title}</Title>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row center="xs">
+              <Col xs={7}>
+                <HR />
               </Col>
             </Row>
           </StepPreview>
@@ -111,6 +117,7 @@ class ToggleStep extends React.Component {
 ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
+  title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,

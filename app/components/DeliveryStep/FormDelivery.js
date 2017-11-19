@@ -64,7 +64,6 @@ class FormDelivery extends React.Component {
   }
 
   handleChange(key, val) {
-    event.preventDefault()
     this.setState(
       _.extend(this.props.adress, {
         [key]: val
@@ -100,6 +99,8 @@ class FormDelivery extends React.Component {
               <Row>
                 <Col xs={12} lg={6}>
                   <InputText
+                    error
+                    errorMessage="Veuillez renseigner votre Nom"
                     label="Nom"
                     name="name"
                     value={this.props.adress.name}

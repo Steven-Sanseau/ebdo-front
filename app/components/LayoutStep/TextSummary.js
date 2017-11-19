@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const TextSummary = styled.label`
+const TextSummary = styled.div`
   font-family: 'FG-R';
   font-size: 16px;
   color: #000;

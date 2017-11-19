@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const NumberIcon = styled.div`
   font-family: 'FG-B';
-  color: #000;
+  color: var(${props => (props.color === 'silver' ? '--silver' : '--black')});
   font-weight: bold;
   font-size: 16px;
   line-height: 16px;
@@ -10,11 +10,13 @@ const NumberIcon = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: #fff;
+  background-color: var(
+    ${props => (props.color !== 'silver' ? '--white-true' : '--background')}
+  );
   top: 5px;
   left: 5px;
   padding: 5px;
   border-radius: 5px;
-`;
+`
 
-export default NumberIcon;
+export default NumberIcon

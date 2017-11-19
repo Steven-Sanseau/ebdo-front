@@ -1,24 +1,13 @@
-/**
-*
-* InvoiceStep
-*
-*/
-
-import React from 'react';
+import React from 'react'
 // import styled from 'styled-components';
 
-
-class InvoiceStep extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class InvoiceStep extends React.Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
-    return (
-      <div>
-      </div>
-    );
+    return <div />
   }
 }
 
-InvoiceStep.propTypes = {
+InvoiceStep.propTypes = {}
 
-};
-
-export default InvoiceStep;
+export default InvoiceStep
