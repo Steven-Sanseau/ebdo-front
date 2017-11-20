@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ToggleStep from '../ToggleStep/Loadable'
+import FormulaText from './FormulaText'
+import InputCheckbox from '../InputCheckbox'
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -13,7 +15,19 @@ class FormulaStep extends React.Component {
   }
 
   contentOpen() {
-    return <div>Coucou</div>
+    const { formula } = this.state
+    return (
+      <div>
+        <FormulaText>
+          Nous vous proposons deux formules. L’une vous permet de vous abonner
+          pour une durée fixe, en réglant la totalité de votre abonnement dès
+          maintenant. La seconde est sans engagement de durée et vous propose de
+          choisir le montant de votre prélèvement mensuel.
+          <br />
+          <br />Je souhaite m’abonner:
+        </FormulaText>
+      </div>
+    )
   }
 
   contentClose() {
