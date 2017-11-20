@@ -5,7 +5,7 @@ const NumberIcon = styled.div`
   color: var(${props => (props.color === 'silver' ? '--silver' : '--black')});
   font-weight: bold;
   font-size: 16px;
-  line-height: 16px;
+  line-height: 10px;
   text-align: center;
   position: absolute;
   width: 20px;
