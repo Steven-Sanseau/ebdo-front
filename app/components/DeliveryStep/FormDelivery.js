@@ -25,6 +25,7 @@ class FormDelivery extends React.Component {
 
   componentDidMount() {
     this.adressInput = document.querySelector('#address-input')
+    console.log(this.adressInput)
     this.placesAutocomplete = places({
       container: this.adressInput,
       type: 'address',
@@ -37,7 +38,7 @@ class FormDelivery extends React.Component {
     })
 
     this.placesAutocomplete.on('clear', () => {
-      this.adressInput.textContent = 'none'
+      this.adressInput.value = ''
     })
 
     this.state = this.props.adress
@@ -125,6 +126,9 @@ class FormDelivery extends React.Component {
                     id="address-input"
                     name="adress"
                     isRequired
+                    // ref={input => {
+                    //   this.adressInput = input
+                    // }}
                     value={this.props.adress.adress}
                     onChange={this.handlePlace}
                     placeholder="Adresse"
