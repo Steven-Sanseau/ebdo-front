@@ -45,14 +45,16 @@ class ToggleStep extends React.Component {
                           <SquareCheckout number={stepNumber} />
                         </Row>
                       </Col>
-                      <Col xs={5}>
+                      <Col lg={5} md={11} xs={12}>
                         <Title>{title}</Title>
                       </Col>
                     </Row>
                   </Col>
                 </Row>
                 <Row center="xs">
-                  <Col xs={5}>{contentOpen}</Col>
+                  <Col md={11} xs={11} lg={5}>
+                    {contentOpen}
+                  </Col>
                 </Row>
                 <Row center="xs">
                   <Col xs={5}>
@@ -70,7 +72,7 @@ class ToggleStep extends React.Component {
         {currentStep < stepNumber && (
           <StepPreview>
             <Row>
-              <Col xs={8} xsOffset={2}>
+              <Col xs={12} lg={8} lgOffset={2}>
                 <Row>
                   <Col xs={2}>
                     <Row end="xs">
@@ -93,14 +95,14 @@ class ToggleStep extends React.Component {
         {currentStep > stepNumber && (
           <StepPostview>
             <Row>
-              <Col xs={8} xsOffset={2}>
+              <Col lg={8} lgOffset={2} xs={12}>
                 <Row>
-                  <Col xs={2}>
+                  <Col lg={2} xs={2}>
                     <Row end="xs">
                       <SquareCheckout checked />
                     </Row>
                   </Col>
-                  <Col xs={5}>
+                  <Col lg={5} xs={10}>
                     <TextSummary>{contentClose}</TextSummary>
                     <Button onClick={this.change}>Modifier</Button>
                   </Col>

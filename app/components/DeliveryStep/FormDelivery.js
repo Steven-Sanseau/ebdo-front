@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import ReactDOM from 'react-dom'
 import places from 'places.js'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -24,7 +25,8 @@ class FormDelivery extends React.Component {
   }
 
   componentDidMount() {
-    this.adressInput = document.querySelector('#address-input')
+    this.adressInput = ReactDOM.findDOMNode(this.adressInput)
+
     this.placesAutocomplete = places({
       container: this.adressInput,
       type: 'address',
@@ -37,7 +39,7 @@ class FormDelivery extends React.Component {
     })
 
     this.placesAutocomplete.on('clear', () => {
-      this.adressInput.textContent = 'none'
+      this.adressInput.value = ''
     })
 
     this.state = this.props.adress
@@ -125,6 +127,9 @@ class FormDelivery extends React.Component {
                     id="address-input"
                     name="adress"
                     isRequired
+                    reference={input => {
+                      this.adressInput = input
+                    }}
                     value={this.props.adress.adress}
                     onChange={this.handlePlace}
                     placeholder="Adresse"

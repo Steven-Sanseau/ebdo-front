@@ -2,14 +2,28 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ToggleStep from '../ToggleStep/Loadable'
+import FormEmail from './FormEmail'
 
 class EmailStep extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      email: ''
+    }
+  }
+
   contentOpen() {
-    return <div>Email</div>
+    return (
+      <div>
+        <FormEmail email={this.state.email} />
+      </div>
+    )
   }
 
   contentClose() {
-    return <div>Mon Email est </div>
+    const { email } = this.state
+    return <div>Mon Email est {email}</div>
   }
 
   render() {

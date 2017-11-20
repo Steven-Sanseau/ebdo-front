@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ToggleStep from '../ToggleStep/Loadable'
 
 import FormDelivery from './FormDelivery'
+import CheckboxShowInvoiceForm from './CheckboxShowInvoiceForm'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
@@ -19,13 +20,29 @@ class DeliveryStep extends React.Component {
           country: 'France',
           postalCode: '75018'
         }
-      }
+      },
+      isInvoiceSameDelivery: true
     }
+
+    this.showInvoiceForm = this.showInvoiceForm.bind(this)
+  }
+
+  showInvoiceForm() {
+    this.setState({ isInvoiceSameDelivery: !this.state.isInvoiceSameDelivery })
   }
 
   contentOpen() {
-    const { adress } = this.state
-    return <FormDelivery adress={adress.delivery} />
+    const { adress, isInvoiceSameDelivery } = this.state
+    return (
+      <div>
+        <FormDelivery adress={adress.delivery} />
+        <CheckboxShowInvoiceForm
+          isChecked={isInvoiceSameDelivery}
+          showInvoiceForm={this.showInvoiceForm}
+        />
+        {!isInvoiceSameDelivery && <FormDelivery adress={adress.invoice} />}
+      </div>
+    )
   }
 
   contentClose() {
@@ -38,6 +55,12 @@ class DeliveryStep extends React.Component {
         })
         {adress.delivery.postalCode} {adress.delivery.city} ({
           adress.delivery.country
+        }) Facturation
+        <b>{adress.invoice.name}</b>, {adress.invoice.adress}, ({
+          adress.invoice.company
+        })
+        {adress.invoice.postalCode} {adress.invoice.city} ({
+          adress.invoice.country
         })
       </div>
     )
