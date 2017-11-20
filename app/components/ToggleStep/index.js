@@ -7,6 +7,9 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
+import StepPostviewText from '../LayoutStep/StepPostviewText'
+import NextStep from '../LayoutStep/NextStep'
+import UpdateStep from '../LayoutStep/UpdateStep'
 import Title from '../LayoutStep/Title'
 import HR from '../LayoutStep/HR'
 import SquareCheckout from '../SquareCheckout'
@@ -60,7 +63,9 @@ class ToggleStep extends React.Component {
                   <Col xs={5}>
                     <Row start="xs">
                       <Col xs={12}>
-                        <Button handleRoute={nextStep}>Étape Suivante</Button>
+                        <NextStep>
+                          <Button handleRoute={nextStep}>Étape Suivante</Button>
+                        </NextStep>
                       </Col>
                     </Row>
                   </Col>
@@ -103,8 +108,12 @@ class ToggleStep extends React.Component {
                     </Row>
                   </Col>
                   <Col lg={5} xs={10}>
-                    <TextSummary>{contentClose}</TextSummary>
-                    <Button onClick={this.change}>Modifier</Button>
+                    <StepPostviewText>
+                      <TextSummary>{contentClose}</TextSummary>
+                      <UpdateStep>
+                        <Button onClick={this.change}>Modifier</Button>
+                      </UpdateStep>
+                    </StepPostviewText>
                   </Col>
                 </Row>
               </Col>

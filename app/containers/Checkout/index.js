@@ -29,7 +29,7 @@ export class Checkout extends React.Component {
     super(props)
 
     this.state = {
-      step: 5
+      step: 1
     }
 
     this.nextStep = this.nextStep.bind(this)

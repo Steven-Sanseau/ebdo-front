@@ -5,11 +5,11 @@ injectGlobal`
 
     @font-face {
        font-family: 'FG-B';
-       src: url('./FoundersGrotesk-Bold.otf') format('opentype');
+       src: url('./FoundersGroteskWeb-Bold.woff') format('woff');
     }
     @font-face {
        font-family: 'FG-R';
-       src: url('./FoundersGrotesk-Regular.otf') format('opentype');
+       src: url('./FoundersGroteskWeb-Regular.woff') format('woff');
     }
 
     html,
