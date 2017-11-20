@@ -23,12 +23,13 @@ class InputText extends React.Component {
             <Col xs={12}>
               <Input
                 error={this.props.error || false}
-                type="text"
                 id={this.props.id || ''}
                 name={this.props.name || ''}
-                value={this.props.value || ''}
                 onChange={this.props.onChange || null}
                 placeholder={this.props.placeholder || ''}
+                ref={this.props.reference || null}
+                type="text"
+                value={this.props.value || ''}
               />
             </Col>
           </Row>
@@ -39,15 +40,16 @@ class InputText extends React.Component {
 }
 
 InputText.propTypes = {
-  id: PropTypes.string,
-  label: PropTypes.string,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  id: PropTypes.string,
   isRequired: PropTypes.bool,
+  label: PropTypes.string,
   name: PropTypes.string,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+  reference: PropTypes.func,
+  value: PropTypes.string
 }
 
 export default InputText

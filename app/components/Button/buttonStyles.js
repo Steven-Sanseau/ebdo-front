@@ -1,8 +1,9 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 const buttonStyles = css`
   display: inline-block;
   box-sizing: border-box;
+  border: none;
   font-family: 'FG-R';
   font-size: 16px;
   line-height: 16px;
@@ -21,6 +22,6 @@ const buttonStyles = css`
     background: var(--booger);
     color: #fff;
   }
-`;
+`
 
-export default buttonStyles;
+export default buttonStyles

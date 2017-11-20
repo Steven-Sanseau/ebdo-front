@@ -4,25 +4,27 @@ import PropTypes from 'prop-types'
 // import styled from 'styled-components';
 import IconCheckbox from './IconCheckbox'
 import TextCheckbox from './TextCheckbox'
+import DisplayFlex from './DisplayFlex'
+import Button from './Button'
 
 function Checkbox(props) {
   const { isChecked, text, onCheck } = props
   return (
     <div>
-      <button onClick={onCheck}>
+      <Button onClick={onCheck}>
         {isChecked && (
-          <div>
+          <DisplayFlex>
             <IconCheckbox checked>✓</IconCheckbox>
             <TextCheckbox checked>{text}</TextCheckbox>
-          </div>
+          </DisplayFlex>
         )}
         {!isChecked && (
-          <div>
+          <DisplayFlex>
             <IconCheckbox />
             <TextCheckbox>{text}</TextCheckbox>
-          </div>
+          </DisplayFlex>
         )}
-      </button>
+      </Button>
     </div>
   )
 }
