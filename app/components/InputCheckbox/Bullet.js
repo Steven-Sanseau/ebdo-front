@@ -9,6 +9,8 @@ const Bullet = styled.div`
   border: 1px solid;
   border-color: var(${props => (props.checked ? '--booger' : '--silver')});
   display: inline-flex;
+  position: absolute;
+  top: 12px;
 `
 
 export default Bullet

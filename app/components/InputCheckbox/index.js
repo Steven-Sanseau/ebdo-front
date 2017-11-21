@@ -30,8 +30,10 @@ class InputCheckbox extends React.Component {
     const { text, isChecked, onCheck } = this.props
     return (
       <InputWrapper checked={isChecked} onClick={this.handleClic}>
-        <Bullet checked={isChecked}>{isChecked && <BulletCheck />}</Bullet>
-        <Text>{text}</Text>
+        <Bullet checked={isChecked}>
+          <BulletCheck checked={isChecked} />
+        </Bullet>
+        <Text checked={isChecked}>{text}</Text>
       </InputWrapper>
     )
   }

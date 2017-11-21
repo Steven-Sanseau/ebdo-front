@@ -79,7 +79,7 @@ class FormulaStep extends React.Component {
               marks={marks}
               step={null}
               onChange={this.handleSlider}
-              defaultValue={12}
+              defaultValue={price}
             />
           </Col>
         </Row>

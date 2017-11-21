@@ -7,6 +7,8 @@ const InputWrapper = styled.div`
   padding: 13px 15px;
   border-radius: 6px;
   font-size: 16px;
+  position: relative;
+  cursor: pointer;
 `
 
 export default InputWrapper
