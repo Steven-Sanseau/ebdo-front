@@ -2,41 +2,48 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import InputWrapper from './InputWrapper'
+import Text from './Text'
+import Bullet from './Bullet'
+import BulletCheck from './BulletCheck'
 
 class InputCheckbox extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      checked: false
+      isChecked: false
     }
+
+    this.handleClic = this.handleClic.bind(this)
   }
 
   componentDidMount() {
-    this.state.checked = this.props.checked
+    this.state.isChecked = this.props.isChecked
+  }
+
+  handleClic() {
+    console.log('coucou')
+    this.props.onCheck(this.props.valueCheck)
   }
 
   render() {
+    const { text, isChecked, onCheck } = this.props
     return (
-      <InputWrapper>
-        <input type="checkbox" checked={this.state.checked} />
-        <Input
-          error={this.props.error || false}
-          id={this.props.id || ''}
-          name={this.props.name || ''}
-          onChange={this.props.onChange || null}
-          placeholder={this.props.placeholder || ''}
-          ref={this.props.reference || null}
-          type="text"
-          value={this.props.value || ''}
-        />
+      <InputWrapper checked={isChecked} onClick={this.handleClic}>
+        <Bullet checked={isChecked}>
+          <BulletCheck checked={isChecked} />
+        </Bullet>
+        <Text checked={isChecked}>{text}</Text>
       </InputWrapper>
     )
   }
 }
 
 InputCheckbox.propTypes = {
-  checked: PropTypes.bool
+  isChecked: PropTypes.bool,
+  text: PropTypes.string,
+  onCheck: PropTypes.func,
+  valueCheck: PropTypes.number
 }
 
 export default InputCheckbox

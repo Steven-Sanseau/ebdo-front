@@ -18,6 +18,7 @@ injectGlobal`
       height: 100%;
       width: 100%;
       font-family: 'FG-R';
+      letter-spacing: 0.5px;
     }
 
     :root {
