@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Row, Col } from 'react-flexbox-grid'
 
 import injectSaga from 'utils/injectSaga'
 import injectReducer from 'utils/injectReducer'
@@ -62,73 +62,71 @@ export class Checkout extends React.Component {
             <title>Soutenir ebdo</title>
             <meta name="description" content="Abonnement à ebdo le journal" />
           </Helmet>
-          <Grid fluid>
-            <Row center="xs" start="lg">
-              <Col mdOffset={1} xs={12} md={11}>
-                <Header />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <FormulaStep
-                  stepNumber={1}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <StartStep
-                  stepNumber={2}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <VoucherStep
-                  stepNumber={3}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <EmailStep
-                  stepNumber={4}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <DeliveryStep
-                  stepNumber={5}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <PaymentStep
-                  stepNumber={6}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Col>
-            </Row>
-          </Grid>
+          <Row center="xs" start="lg">
+            <Col mdOffset={1} xs={12} md={11}>
+              <Header />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <FormulaStep
+                stepNumber={1}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <StartStep
+                stepNumber={2}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <VoucherStep
+                stepNumber={3}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <EmailStep
+                stepNumber={4}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <DeliveryStep
+                stepNumber={5}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <PaymentStep
+                stepNumber={6}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
         </Layout>
       </div>
     )

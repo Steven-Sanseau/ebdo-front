@@ -233,6 +233,7 @@
     "minimist": "1.2.0",
     "places.js": "^1.4.15",
     "prop-types": "15.6.0",
+    "rc-slider": "^8.4.0",
     "react": "16.1.1",
     "react-dom": "16.1.1",
     "react-flexbox-grid": "^2.0.0",
