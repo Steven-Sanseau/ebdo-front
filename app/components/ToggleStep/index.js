@@ -48,7 +48,7 @@ class ToggleStep extends React.Component {
                           <SquareCheckout number={stepNumber} />
                         </Row>
                       </Col>
-                      <Col lg={5} md={11} xs={12}>
+                      <Col lg={6} md={11} xs={12}>
                         <Title>{title}</Title>
                       </Col>
                     </Row>

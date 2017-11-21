@@ -1,11 +1,59 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'moment'
+import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 
+import InputCheckbox from 'components/InputCheckbox'
+
 class StartStep extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      startNow: true,
+      startDate: null
+    }
+    this.handleCheckbox = this.handleCheckbox.bind(this)
+  }
+
+  handleCheckbox() {
+    this.setState({ startNow: !this.state.startNow })
+  }
+
   contentOpen() {
-    return <div>Code promo</div>
+    const { startNow, startDate } = this.state
+    return (
+      <div>
+        <Row start="xs">
+          <Col xs={12}>
+            <Row>
+              <Col lg={6} xs={12}>
+                <InputCheckbox
+                  text="La semaine prochaine"
+                  onCheck={this.handleCheckbox}
+                  isChecked={startNow}
+                  valueCheck={3}
+                />
+              </Col>
+              <Col lg={6} xs={12}>
+                <InputCheckbox
+                  text="A une date ultérieure"
+                  onCheck={this.handleCheckbox}
+                  isChecked={!startNow}
+                  valueCheck={6}
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        {!startNow && (
+          <Row start="xs">
+            <Col xs={12}>Input</Col>
+          </Row>
+        )}
+      </div>
+    )
   }
 
   contentClose() {
