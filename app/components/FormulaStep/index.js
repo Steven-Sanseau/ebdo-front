@@ -5,11 +5,11 @@ import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from '../ToggleStep/Loadable'
 import FormulaText from './FormulaText'
-import InputCheckbox from '../InputCheckbox'
 import BoldText from './BoldText'
 import GreyText from './GreyText'
 
 import Checkbox from 'components/Checkbox'
+import InputCheckbox from 'components/InputCheckbox'
 
 import 'rc-slider/assets/index.css'
 import './slider.css'
@@ -20,27 +20,41 @@ class FormulaStep extends React.Component {
 
     this.state = {
       formula: true,
-      isChecked: false
+      isChecked: false,
+      price: 12,
+      recurring: 0
     }
 
     this.handleSlider = this.handleSlider.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
+    this.handleCheckboxInput = this.handleCheckboxInput.bind(this)
   }
 
-  handleSlider(event) {
-    console.log(event)
+  handleSlider(choice) {
+    this.setState({ price: choice })
   }
+
   handleCheckbox() {
     this.setState({ isChecked: !this.state.isChecked })
   }
 
+  handleCheckboxInput(value) {
+    this.setState({ recurring: value })
+  }
+
   contentOpen() {
-    const { formula, isChecked } = this.state
+    const { formula, isChecked, price, recurring } = this.state
     const marks = {
       5: '5€',
       8: '8€',
       12: '12€',
       20: '20€'
+    }
+
+    const textCheckbox = {
+      threemonth: `3 Mois (${3 * price}€)`,
+      sixmonth: `6 Mois (${6 * price}€)`,
+      twelvemonth: `12 Mois (${12 * price}€)`
     }
 
     return (
@@ -96,12 +110,52 @@ class FormulaStep extends React.Component {
             />
           </Col>
         </Row>
+        {isChecked && (
+          <Row start="xs">
+            <Col xs={12}>
+              <Row>
+                <Col lg={4} xs={12}>
+                  <InputCheckbox
+                    text={textCheckbox.threemonth}
+                    onCheck={this.handleCheckboxInput}
+                    isChecked={recurring === 3}
+                    valueCheck={3}
+                  />
+                </Col>
+                <Col lg={4} xs={12}>
+                  <InputCheckbox
+                    text={textCheckbox.sixmonth}
+                    onCheck={this.handleCheckboxInput}
+                    isChecked={recurring === 6}
+                    valueCheck={6}
+                  />
+                </Col>
+                <Col lg={4} xs={12}>
+                  <InputCheckbox
+                    text={textCheckbox.twelvemonth}
+                    onCheck={this.handleCheckboxInput}
+                    isChecked={recurring === 12}
+                    valueCheck={12}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        )}
       </div>
     )
   }
 
   contentClose() {
-    return <div>Je mabonne sans engagement pour un montant de </div>
+    const { price, recurring } = this.state
+    return (
+      <div>
+        Je m{"'"}abonne sans engagement pour un montant de{' '}
+        <BoldText>{price}€</BoldText>
+        <BoldText>/mois</BoldText>
+        {recurring !== 0 && <BoldText> pendant {recurring} mois</BoldText>}
+      </div>
+    )
   }
 
   render() {
