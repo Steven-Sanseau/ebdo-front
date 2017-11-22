@@ -21,7 +21,7 @@
   margin-top: -60px !important;
 }
 
-.rc-slider-mark span.rc-slider-mark-text-active:last-child {
+.rc-slider-mark-text-active {
   font-family: 'FG-B';
   color: var(--black);
   font-size: 26px;

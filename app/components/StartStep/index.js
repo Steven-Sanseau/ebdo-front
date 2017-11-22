@@ -6,23 +6,36 @@ import { Row, Col } from 'react-flexbox-grid'
 import ToggleStep from '../ToggleStep/Loadable'
 
 import InputCheckbox from 'components/InputCheckbox'
+import DropdownInput from 'components/DropdownInput'
 
 class StartStep extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       startNow: true,
       startDate: null
     }
+
     this.handleCheckbox = this.handleCheckbox.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleCheckbox() {
     this.setState({ startNow: !this.state.startNow })
   }
 
+  handleSelect(value) {
+    console.log(value)
+    this.setState({ startDate: value })
+  }
+
   contentOpen() {
     const { startNow, startDate } = this.state
+    const thisFriday = 'Vendredi 12 Novembre'
+
+    const options = ['Vendredi 12/11', 'Vendredi 19/11', 'Vendredi 25/11']
+
     return (
       <div>
         <Row start="xs">
@@ -49,7 +62,9 @@ class StartStep extends React.Component {
         </Row>
         {!startNow && (
           <Row start="xs">
-            <Col xs={12}>Input</Col>
+            <Col xs={6}>
+              <DropdownInput placeholder="Vendredi JJ / MM / AAAA" />
+            </Col>
           </Row>
         )}
       </div>
