@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Dropdown from 'react-dropdown'
+import { Row, Col } from 'react-flexbox-grid'
 
 import DropdownWrapper from './DropdownWrapper'
+import Label from './Label'
 
 import './Dropdown.css'
 
@@ -10,32 +12,51 @@ class DropdownInput extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = { value: null }
+
     this.handleSelect = this.handleSelect.bind(this)
   }
 
-  handleSelect(val) {
-    console.log(val)
+  componentDidMount() {
+    this.state.value = this.props.value || null
+  }
+
+  handleSelect(value) {
+    this.setState({ value })
+    this.props.handleChange(value)
   }
 
   render() {
-    const options = ['Vendredi 12/11', 'Vendredi 19/11', 'Vendredi 25/11']
-    const { placeholder } = this.props
-
+    const { placeholder, options, label } = this.props
+    const { value } = this.state
     return (
       <DropdownWrapper>
-        <Dropdown
-          className="dropdown-input"
-          options={options}
-          onChange={this.handleSelect}
-          placeholder={placeholder}
-        />
+        <Row>
+          <Col xs={12}>
+            <Label>{label}</Label>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Dropdown
+              className="dropdown-input"
+              options={options}
+              value={value}
+              onChange={this.handleSelect}
+              placeholder={placeholder}
+            />
+          </Col>
+        </Row>
       </DropdownWrapper>
     )
   }
 }
 
 DropdownInput.propTypes = {
-  placeholder: PropTypes.string
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  options: PropTypes.array,
+  handleChange: PropTypes.func
 }
 
 export default DropdownInput

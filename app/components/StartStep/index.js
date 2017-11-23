@@ -26,15 +26,27 @@ class StartStep extends React.Component {
   }
 
   handleSelect(value) {
-    console.log(value)
-    this.setState({ startDate: value })
+    this.setState({ startDate: value.value })
+  }
+
+  getNextFriday() {
+    const options = []
+    for (let i = 0; i < 20; i++) {
+      const date = Moment()
+        .add(7 * i, 'day')
+        .day(5)
+
+      options.push({
+        label: `Vendredi ${date.format('DD/MM/YYYY')}`,
+        value: date.format()
+      })
+    }
+    return options
   }
 
   contentOpen() {
     const { startNow, startDate } = this.state
-    const thisFriday = 'Vendredi 12 Novembre'
-
-    const options = ['Vendredi 12/11', 'Vendredi 19/11', 'Vendredi 25/11']
+    const options = this.getNextFriday()
 
     return (
       <div>
@@ -62,8 +74,14 @@ class StartStep extends React.Component {
         </Row>
         {!startNow && (
           <Row start="xs">
-            <Col xs={6}>
-              <DropdownInput placeholder="Vendredi JJ / MM / AAAA" />
+            <Col xs={12} lg={6}>
+              <DropdownInput
+                label="Choisir la date de prise d'effet:"
+                placeholder="Vendredi JJ / MM / AAAA"
+                handleChange={this.handleSelect}
+                options={options}
+                value={startDate}
+              />
             </Col>
           </Row>
         )}
@@ -72,9 +90,11 @@ class StartStep extends React.Component {
   }
 
   contentClose() {
+    const { startNow, startDate } = this.state
     return (
       <div>
         Mon abonnement débutera avec la reception de mon premier numéro le
+        {!startNow && <div>{startDate}</div>}
       </div>
     )
   }
