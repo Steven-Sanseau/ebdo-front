@@ -72,7 +72,7 @@ class FormulaStep extends React.Component {
           </Col>
         </Row>
         <Row center="xs">
-          <Col lg={6} xs={11}>
+          <Col lg={6} xs={10}>
             <Slider
               min={5}
               max={20}

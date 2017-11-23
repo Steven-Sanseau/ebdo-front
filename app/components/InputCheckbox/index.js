@@ -11,30 +11,46 @@ class InputCheckbox extends React.Component {
     super(props)
 
     this.state = {
-      isChecked: false
+      isChecked: false,
+      isHover: false
     }
 
     this.handleClic = this.handleClic.bind(this)
+    this.handleMouseHover = this.handleMouseHover.bind(this)
   }
 
   componentDidMount() {
     this.state.isChecked = this.props.isChecked
   }
 
+  handleMouseHover() {
+    this.setState({ isHover: !this.state.isHover })
+  }
+
   handleClic() {
-    console.log('coucou')
     this.props.onCheck(this.props.valueCheck)
   }
 
   render() {
-    const { text, isChecked, onCheck } = this.props
+    const { text, isChecked, onCheck, isHover } = this.props
     return (
-      <InputWrapper checked={isChecked} onClick={this.handleClic}>
-        <Bullet checked={isChecked}>
-          <BulletCheck checked={isChecked} />
-        </Bullet>
-        <Text checked={isChecked}>{text}</Text>
-      </InputWrapper>
+      <div
+        onMouseEnter={this.handleMouseHover}
+        onMouseLeave={this.handleMouseHover}
+      >
+        <InputWrapper
+          checked={isChecked}
+          onClick={this.handleClic}
+          hover={isHover}
+        >
+          <Bullet checked={isChecked}>
+            <BulletCheck checked={isChecked} />
+          </Bullet>
+          <Text checked={isChecked} hover={isHover}>
+            {text}
+          </Text>
+        </InputWrapper>
+      </div>
     )
   }
 }

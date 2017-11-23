@@ -2,10 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ToggleStep from '../ToggleStep/Loadable'
+import FormVoucher from './FormVoucher'
 
 class VoucherStep extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { voucher: '' }
+  }
+
   contentOpen() {
-    return <div>Code promo</div>
+    const { voucher } = this.state
+    return (
+      <div>
+        <FormVoucher voucher={voucher} />
+      </div>
+    )
   }
 
   contentClose() {
