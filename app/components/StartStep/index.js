@@ -14,19 +14,19 @@ class StartStep extends React.Component {
 
     this.state = {
       startNow: true,
-      startDate: null
+      startDate: {}
     }
 
     this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
   }
 
-  handleCheckbox() {
-    this.setState({ startNow: !this.state.startNow })
+  handleCheckbox(value) {
+    this.setState({ startNow: value })
   }
 
   handleSelect(value) {
-    this.setState({ startDate: value.value })
+    this.setState({ startDate: value.label })
   }
 
   getNextFriday() {
@@ -57,22 +57,22 @@ class StartStep extends React.Component {
                 <InputCheckbox
                   text="La semaine prochaine"
                   onCheck={this.handleCheckbox}
-                  isChecked={startNow}
-                  valueCheck={3}
+                  isChecked={startNow === 1}
+                  valueCheck={1}
                 />
               </Col>
               <Col lg={6} xs={12}>
                 <InputCheckbox
                   text="A une date ultérieure"
                   onCheck={this.handleCheckbox}
-                  isChecked={!startNow}
-                  valueCheck={6}
+                  isChecked={startNow === 0}
+                  valueCheck={0}
                 />
               </Col>
             </Row>
           </Col>
         </Row>
-        {!startNow && (
+        {startNow === 0 && (
           <Row start="xs">
             <Col xs={12} lg={6}>
               <DropdownInput
@@ -94,7 +94,7 @@ class StartStep extends React.Component {
     return (
       <div>
         Mon abonnement débutera avec la reception de mon premier numéro le
-        {!startNow && <div>{startDate}</div>}
+        {startNow === 0 && <div>{startDate}</div>}
       </div>
     )
   }

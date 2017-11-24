@@ -13,7 +13,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-// import { StripeProvider } from 'react-stripe-elements'
+import { StripeProvider } from 'react-stripe-elements'
 import FontFaceObserver from 'fontfaceobserver'
 import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
@@ -75,13 +75,13 @@ const MOUNT_NODE = document.getElementById('app')
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
-      {/* <StripeProvider apiKey={process.env.STRIPE_KEY_API || ''}> */}
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-      {/* </StripeProvider> */}
+      <StripeProvider apiKey={process.env.STRIPE_KEY_API || ''}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </StripeProvider>
     </Provider>,
     MOUNT_NODE
   )

@@ -1,6 +1,7 @@
 .rc-slider {
   display: inline-flex;
   margin-bottom: 40px;
+  cursor: ew-resize;
 }
 
 .rc-slider-track {
