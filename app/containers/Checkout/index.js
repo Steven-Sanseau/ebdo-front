@@ -12,7 +12,7 @@ import injectReducer from 'utils/injectReducer'
 import makeSelectCheckout from './selectors'
 import reducer from './reducer'
 import saga from './saga'
-// import { injectStripe } from 'react-stripe-elements'
+import { Elements } from 'react-stripe-elements'
 
 import FormulaStep from '../../components/FormulaStep/Loadable'
 import StartStep from '../../components/StartStep/Loadable'
@@ -29,7 +29,7 @@ export class Checkout extends React.Component {
     super(props)
 
     this.state = {
-      step: 2
+      step: 6
     }
 
     this.nextStep = this.nextStep.bind(this)
@@ -119,12 +119,14 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <PaymentStep
-                stepNumber={6}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
+              <Elements>
+                <PaymentStep
+                  stepNumber={6}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  currentStep={step}
+                />
+              </Elements>
             </Col>
           </Row>
         </Layout>

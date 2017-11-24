@@ -32,7 +32,7 @@ class InputCheckbox extends React.Component {
   }
 
   render() {
-    const { text, isChecked, onCheck, isHover } = this.props
+    const { text, isChecked, onCheck, isHover, icon } = this.props
     return (
       <div
         onMouseEnter={this.handleMouseHover}
@@ -49,6 +49,7 @@ class InputCheckbox extends React.Component {
           <Text checked={isChecked} hover={isHover}>
             {text}
           </Text>
+          {icon || null}
         </InputWrapper>
       </div>
     )
@@ -59,7 +60,8 @@ InputCheckbox.propTypes = {
   isChecked: PropTypes.bool,
   text: PropTypes.string,
   onCheck: PropTypes.func,
-  valueCheck: PropTypes.number
+  valueCheck: PropTypes.number,
+  icon: PropTypes.object
 }
 
 export default InputCheckbox
