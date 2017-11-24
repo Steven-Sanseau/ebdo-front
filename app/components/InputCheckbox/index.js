@@ -5,6 +5,7 @@ import InputWrapper from './InputWrapper'
 import Text from './Text'
 import Bullet from './Bullet'
 import BulletCheck from './BulletCheck'
+import IconWrapper from './IconWrapper'
 
 class InputCheckbox extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class InputCheckbox extends React.Component {
           <Text checked={isChecked} hover={isHover}>
             {text}
           </Text>
-          {icon || null}
+          <IconWrapper>{icon || null}</IconWrapper>
         </InputWrapper>
       </div>
     )
