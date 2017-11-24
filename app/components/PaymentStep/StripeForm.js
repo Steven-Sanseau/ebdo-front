@@ -21,42 +21,50 @@ export default class StripeForm extends Component {
   render() {
     return (
       <div>
-        <Label>
-          <Row>
-            <Col xs={12}>
-              Numéro de carte<Required>*</Required>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CardNumberElement className="card-number input-stripe" />
-            </Col>
-          </Row>
-        </Label>
-        <Label>
-          <Row>
-            <Col xs={12}>
-              Date d'expiration<Required>*</Required>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CardExpiryElement className="card-expire input-stripe" />
-            </Col>
-          </Row>
-        </Label>
-        <Label>
-          <Row>
-            <Col xs={12}>
-              CVC<Required>*</Required>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CardCVCElement className="card-cvc input-stripe" />
-            </Col>
-          </Row>
-        </Label>
+        <Row>
+          <Col xs={6}>
+            <Label>
+              <Row>
+                <Col xs={12}>
+                  Numéro de carte<Required>*</Required>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <CardNumberElement className="card-number input-stripe" />
+                </Col>
+              </Row>
+            </Label>
+          </Col>
+          <Col xs={3}>
+            <Label>
+              <Row>
+                <Col xs={12}>
+                  Date d'expiration<Required>*</Required>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <CardExpiryElement className="card-expire input-stripe" />
+                </Col>
+              </Row>
+            </Label>
+          </Col>
+          <Col xs={3}>
+            <Label>
+              <Row>
+                <Col xs={12}>
+                  CVC<Required>*</Required>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <CardCVCElement className="card-cvc input-stripe" />
+                </Col>
+              </Row>
+            </Label>
+          </Col>
+        </Row>
       </div>
     )
   }

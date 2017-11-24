@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const UpdateStep = styled.div`
+const UpdateStep = styled.span`
   display: flex;
 `
 

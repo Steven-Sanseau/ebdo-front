@@ -17,19 +17,14 @@ class PaymentStep extends React.Component {
     super(props)
 
     this.state = {
-      paiementMethod: 'SEPA'
+      paiementMethod: 1
     }
 
-    this.handlePaiementMethodSepa = this.handlePaiementMethodSepa.bind(this)
-    this.handlePaiementMethodCB = this.handlePaiementMethodCB.bind(this)
+    this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
   }
 
-  handlePaiementMethodSepa() {
-    this.setState({ paiementMethod: 'SEPA' })
-  }
-
-  handlePaiementMethodCB() {
-    this.setState({ paiementMethod: 'CB' })
+  handlePaiementMethod(value) {
+    this.setState({ paiementMethod: value })
   }
 
   contentOpen() {
@@ -41,33 +36,35 @@ class PaymentStep extends React.Component {
             <Row>
               <Col lg={6} xs={12}>
                 <InputCheckbox
-                  text="Sepa"
-                  onCheck={this.handlePaiementMethodSepa}
-                  isChecked={paiementMethod === 'SEPA'}
+                  text="Prélèvement SEPA"
+                  onCheck={this.handlePaiementMethod}
+                  isChecked={paiementMethod === 1}
                   icon={<SepaIcon />}
+                  valueCheck={1}
                 />
               </Col>
               <Col lg={6} xs={12}>
                 <InputCheckbox
-                  text="CB"
-                  onCheck={this.handlePaiementMethodCB}
-                  isChecked={paiementMethod === 'CB'}
+                  text="Carte Banquaire"
+                  onCheck={this.handlePaiementMethod}
+                  isChecked={paiementMethod === 2}
                   icon={<CBIcon />}
+                  valueCheck={2}
                 />
               </Col>
             </Row>
           </Col>
         </Row>
-        {paiementMethod === 'SEPA' && (
+        {paiementMethod === 1 && (
           <Row>
             <Col xs={6}>
               <SlimpayForm />
             </Col>
           </Row>
         )}
-        {paiementMethod === 'CB' && (
+        {paiementMethod === 2 && (
           <Row>
-            <Col xs={6}>
+            <Col xs={12}>
               <StripeForm />
             </Col>
           </Row>
