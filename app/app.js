@@ -1,10 +1,3 @@
-/**
- * app.js
- *
- * This is the entry file for the application, only setup and boilerplate
- * code.
- */
-
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill'
 
@@ -75,7 +68,11 @@ const MOUNT_NODE = document.getElementById('app')
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
-      <StripeProvider apiKey={process.env.STRIPE_KEY_API || ''}>
+      <StripeProvider
+        apiKey={
+          process.env.STRIPE_KEY_API || 'pk_test_23Oa4S48HIVPGSAYphIe8823'
+        }
+      >
         <LanguageProvider messages={messages}>
           <ConnectedRouter history={history}>
             <App />

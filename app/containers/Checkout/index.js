@@ -6,13 +6,13 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { Row, Col } from 'react-flexbox-grid'
+import { Elements, injectStripe } from 'react-stripe-elements'
 
 import injectSaga from 'utils/injectSaga'
 import injectReducer from 'utils/injectReducer'
 import makeSelectCheckout from './selectors'
 import reducer from './reducer'
 import saga from './saga'
-import { Elements } from 'react-stripe-elements'
 
 import FormulaStep from '../../components/FormulaStep/Loadable'
 import StartStep from '../../components/StartStep/Loadable'
@@ -43,14 +43,6 @@ export class Checkout extends React.Component {
 
   changeStep(stepElem) {
     this.setState({ step: stepElem })
-  }
-
-  handleSubmit = ev => {
-    ev.preventDefault()
-
-    // this.props.stripe.createToken({ name: 'Jenny Rosen' }).then(({ token }) => {
-    //   console.log('Received Stripe token:', token)
-    // })
   }
 
   render() {

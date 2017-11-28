@@ -16,13 +16,20 @@ export default class StripeForm extends Component {
     super(props)
 
     this.state = {}
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(event) {
+    this.props.submitPayement(event)
   }
 
   render() {
     return (
       <div>
+        {/* <form onSubmit={this.handleSubmit}> */}
         <Row>
-          <Col xs={6}>
+          <Col lg={6} xs={12}>
             <Label>
               <Row>
                 <Col xs={12}>
@@ -36,11 +43,11 @@ export default class StripeForm extends Component {
               </Row>
             </Label>
           </Col>
-          <Col xs={3}>
+          <Col lg={3} xs={12}>
             <Label>
               <Row>
                 <Col xs={12}>
-                  Date d'expiration<Required>*</Required>
+                  Date d{"'"}expiration<Required>*</Required>
                 </Col>
               </Row>
               <Row>
@@ -50,7 +57,7 @@ export default class StripeForm extends Component {
               </Row>
             </Label>
           </Col>
-          <Col xs={3}>
+          <Col lg={3} xs={12}>
             <Label>
               <Row>
                 <Col xs={12}>
@@ -65,9 +72,12 @@ export default class StripeForm extends Component {
             </Label>
           </Col>
         </Row>
+        {/* </form> */}
       </div>
     )
   }
 }
 
-StripeForm.propTypes = {}
+StripeForm.propTypes = {
+  submitPayement: PropTypes.func
+}

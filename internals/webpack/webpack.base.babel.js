@@ -1,7 +1,3 @@
-/**
- * COMMON WEBPACK CONFIGURATION
- */
-
 const path = require('path')
 const webpack = require('webpack')
 
@@ -102,7 +98,13 @@ module.exports = options => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new webpack.ContextReplacementPlugin(
+      /\.\/locale$/,
+      'empty-module',
+      false,
+      /js$/
+    )
   ]),
   resolve: {
     modules: ['app', 'node_modules'],
@@ -111,5 +113,8 @@ module.exports = options => ({
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
-  performance: options.performance || {}
+  performance: options.performance || {},
+  node: {
+    fs: 'empty'
+  }
 })
