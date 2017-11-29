@@ -4,10 +4,11 @@ import { Row, Col } from 'react-flexbox-grid'
 
 import { injectStripe } from 'react-stripe-elements'
 
-import ToggleStep from '../ToggleStep/Loadable'
 import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
+
+import ToggleStep from '../ToggleStep/Loadable'
 
 import StripeForm from './StripeForm'
 import SlimpayForm from './SlimpayForm'
@@ -17,14 +18,24 @@ class PaymentStep extends React.Component {
     super(props)
 
     this.state = {
-      paiementMethod: 1
+      paiementMethod: 1,
+      tokenCard: ''
     }
 
     this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
+    this.handlePaiementInfo = this.handlePaiementInfo.bind(this)
   }
 
   handlePaiementMethod(value) {
     this.setState({ paiementMethod: value })
+  }
+
+  handlePaiementInfo(event) {
+    event.preventDefault()
+
+    this.props.stripe.createToken().then(({ token }) => {
+      this.setState({ tokenCard: token })
+    })
   }
 
   contentOpen() {
@@ -65,7 +76,9 @@ class PaymentStep extends React.Component {
         {paiementMethod === 2 && (
           <Row>
             <Col xs={12}>
-              <StripeForm />
+              <form onSubmit={this.handlePaiementInfo}>
+                <StripeForm />
+              </form>
             </Col>
           </Row>
         )}
@@ -102,7 +115,8 @@ PaymentStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func
+  nextStep: PropTypes.func,
+  stripe: PropTypes.object
 }
 
 export default injectStripe(PaymentStep)

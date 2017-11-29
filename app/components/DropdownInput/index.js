@@ -17,12 +17,12 @@ class DropdownInput extends React.Component {
     this.handleSelect = this.handleSelect.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.state.value = nextProps.value
-  }
-
   componentDidMount() {
     this.state.value = this.props.value
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.value = nextProps.value
   }
 
   handleSelect(value) {
@@ -60,7 +60,7 @@ DropdownInput.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   options: PropTypes.array,
-  value: PropTypes.string,
+  value: PropTypes.object,
   handleChange: PropTypes.func
 }
 
