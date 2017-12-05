@@ -14,6 +14,8 @@ injectGlobal`
 
     html,
     body {
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing: grayscale;
       font-size: 200%;
       height: 100%;
       width: 100%;
