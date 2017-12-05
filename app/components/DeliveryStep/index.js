@@ -1,28 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Button from '../Button';
-import WhiteWrapper from './WhiteWrapper';
-import Title from './Title';
-import FormDelivery from './FormDelivery';
-import SquareCheckout from '../SquareCheckout';
-import TextAdress from './TextAdress';
+import ToggleStep from '../ToggleStep/Loadable'
+
+import FormDelivery from './FormDelivery'
+import CheckboxShowInvoiceForm from './CheckboxShowInvoiceForm'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       adress: {
-        delivery: {
-          name: 'Steven Sanséau',
-          adress: '13 rue  marx Dormoy',
-          city: 'Paris',
-          country: 'France',
-          postalCode: '75018'
-        },
+        delivery: {},
         invoice: {
           name: 'Steven Sanséau',
           adress: '13 rue  marx Dormoy',
@@ -30,87 +20,74 @@ class DeliveryStep extends React.Component {
           country: 'France',
           postalCode: '75018'
         }
-      }
-    };
+      },
+      isInvoiceSameDelivery: true
+    }
 
-    this.change = this.change.bind(this);
+    this.showInvoiceForm = this.showInvoiceForm.bind(this)
   }
 
-  change() {
-    this.props.changeStep(this.props.stepNumber);
+  showInvoiceForm() {
+    this.setState({ isInvoiceSameDelivery: !this.state.isInvoiceSameDelivery })
+  }
+
+  contentOpen() {
+    const { adress, isInvoiceSameDelivery } = this.state
+    return (
+      <div>
+        <FormDelivery adress={adress.delivery} />
+        <CheckboxShowInvoiceForm
+          isChecked={isInvoiceSameDelivery}
+          showInvoiceForm={this.showInvoiceForm}
+        />
+        {!isInvoiceSameDelivery && <FormDelivery adress={adress.invoice} />}
+      </div>
+    )
+  }
+
+  contentClose() {
+    const { adress } = this.state
+    return (
+      <div>
+        Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
+        <b>{adress.delivery.name}</b>, {adress.delivery.adress}, ({
+          adress.delivery.company
+        })
+        {adress.delivery.postalCode} {adress.delivery.city} ({
+          adress.delivery.country
+        }) Facturation
+        <b>{adress.invoice.name}</b>, {adress.invoice.adress}, ({
+          adress.invoice.company
+        })
+        {adress.invoice.postalCode} {adress.invoice.city} ({
+          adress.invoice.country
+        })
+      </div>
+    )
   }
 
   render() {
-    const { isOpen, nextStep, changeStep, stepNumber } = this.props;
-    const { adress } = this.state;
+    const { currentStep, nextStep, changeStep, stepNumber } = this.props
 
     return (
-      <div>
-        {isOpen && (
-          <Row>
-            <Col xs={12}>
-              <WhiteWrapper>
-                <Row>
-                  <Col xs={8} xsOffset={2}>
-                    <Row>
-                      <Col xs={2}>
-                        <Row end="xs">
-                          <SquareCheckout number={1} />
-                        </Row>
-                      </Col>
-                      <Col xs={5}>
-                        <Title>Je renseigne mon adresse de livraison</Title>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row center="xs">
-                  <Col xs={5}>
-                    <FormDelivery />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <Button handleRoute={nextStep}>Étape Suivante</Button>
-                  </Col>
-                </Row>
-              </WhiteWrapper>
-            </Col>
-          </Row>
-        )}
-        {!isOpen && (
-          <Row>
-            <Col xs={8} xsOffset={2}>
-              <Row>
-                <Col xs={2}>
-                  <Row end="xs">
-                    <SquareCheckout checked />
-                  </Row>
-                </Col>
-                <Col xs={5}>
-                  <TextAdress>
-                    Mes numéros seront envoyés à l'adresse suivante: <br />
-                    <b>{adress.delivery.name}</b>, {adress.delivery.adress},{' '}
-                    {adress.delivery.postalCode} {adress.delivery.city} ({
-                      adress.delivery.country
-                    })
-                  </TextAdress>
-                  <Button onClick={this.change}>Modifier</Button>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        )}
-      </div>
-    );
+      <ToggleStep
+        title="Je renseigne mon adresse"
+        stepNumber={stepNumber}
+        contentClose={this.contentClose()}
+        contentOpen={this.contentOpen()}
+        currentStep={currentStep}
+        changeStep={changeStep}
+        nextStep={nextStep}
+      />
+    )
   }
 }
 
 DeliveryStep.propTypes = {
   stepNumber: PropTypes.number,
-  isOpen: PropTypes.bool,
+  currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
-};
+}
 
-export default DeliveryStep;
+export default DeliveryStep

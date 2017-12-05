@@ -1,0 +1,50 @@
+.rc-slider {
+  display: inline-flex;
+  margin-bottom: 40px;
+  cursor: ew-resize;
+}
+
+.rc-slider-track {
+  background-color: var(--squash);
+  height: 3px;
+}
+
+.rc-slider-rail {
+  height: 3px;
+  background-color: var(--pale-grey);
+}
+
+.rc-slider-mark-text {
+  font-family: 'FG-B';
+  color: var(--pale-grey);
+  font-size: 18px;
+  margin-left: -13% !important;
+  margin-top: -60px !important;
+}
+
+.rc-slider-mark-text-active {
+  font-family: 'FG-B';
+  color: var(--black);
+  font-size: 26px;
+  margin-top: -68px !important;
+}
+
+.rc-slider-dot {
+  width: 18px;
+  height: 18px;
+  bottom: -6px;
+  border: none;
+  background-color: var(--pale-grey);
+}
+
+.rc-slider-dot-active {
+  width: 28px;
+  height: 28px;
+  bottom: -12px;
+  border: none;
+  background-color: var(--squash);
+}
+
+.rc-slider-handle {
+  display: none;
+}

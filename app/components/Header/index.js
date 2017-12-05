@@ -1,8 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Logo from './Logo';
-import SubTitle from './SubTitle';
-import Wrapper from './Wrapper';
+import React from 'react'
+
+import LogoWrapper from './LogoWrapper'
+import SubTitle from './SubTitle'
+import Wrapper from './Wrapper'
+import Logo from '../Icon/Logo'
 
 class Header extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -10,14 +11,16 @@ class Header extends React.Component {
     return (
       <div>
         <Wrapper>
-          <Logo>ebdo</Logo>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
           <SubTitle>Je m’abonne</SubTitle>
         </Wrapper>
       </div>
-    );
+    )
   }
 }
 
-Header.propTypes = {};
+Header.propTypes = {}
 
-export default Header;
+export default Header

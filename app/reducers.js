@@ -2,22 +2,24 @@
  * Combine all reducers in this file and export the combined reducers.
  */
 
-import { combineReducers } from 'redux-immutable';
-import { fromJS } from 'immutable';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { fromJS } from 'immutable'
+import { combineReducers } from 'redux-immutable'
+import { LOCATION_CHANGE } from 'react-router-redux'
+
+import languageProviderReducer from 'containers/LanguageProvider/reducer'
 
 /*
  * routeReducer
  *
  * The reducer merges route location changes into our immutable state.
- * The change is necessitated by moving to react-router-redux@4
+ * The change is necessitated by moving to react-router-redux@5
  *
  */
 
 // Initial routing state
 const routeInitialState = fromJS({
   location: null
-});
+})
 
 /**
  * Merge route into the global application state
@@ -28,9 +30,9 @@ function routeReducer(state = routeInitialState, action) {
     case LOCATION_CHANGE:
       return state.merge({
         location: action.payload
-      });
+      })
     default:
-      return state;
+      return state
   }
 }
 
@@ -40,6 +42,7 @@ function routeReducer(state = routeInitialState, action) {
 export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
+    language: languageProviderReducer,
     ...injectedReducers
-  });
+  })
 }

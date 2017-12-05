@@ -1,28 +1,95 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import React from 'react'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+import ReactDOM from 'react-dom'
+import places from 'places.js'
+import { Row, Col } from 'react-flexbox-grid'
 
-import Label from './Label';
-import Input from './Input';
-import InputWrapper from './InputWrapper';
-import Required from './Required';
+import InputText from '../InputText'
 
 class FormDelivery extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { value: '' };
+    super(props)
+    this.state = {
+      adress: {}
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleName = this.handleName.bind(this)
+    this.handleCompany = this.handleCompany.bind(this)
+    this.handlePostalCode = this.handlePostalCode.bind(this)
+    this.handleCity = this.handleCity.bind(this)
+    this.handleCountry = this.handleCountry.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePlace = this.handlePlace.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  componentDidMount() {
+    this.adressInput = ReactDOM.findDOMNode(this.adressInput)
+
+    this.placesAutocomplete = places({
+      container: this.adressInput,
+      type: 'address',
+      templates: {
+        value(suggestion) {
+          return suggestion.name
+        }
+      },
+      countries: ['fr', 'be', 'ca', 'lu']
+    })
+
+    this.placesAutocomplete.on('clear', () => {
+      this.adressInput.value = ''
+    })
+
+    this.state = this.props.adress
+  }
+
+  handleName(event) {
+    this.handleChange('name', event.target.value)
+  }
+
+  handleCompany(event) {
+    this.handleChange('company', event.target.value)
+  }
+
+  handlePostalCode(event) {
+    this.handleChange('postalCode', event.target.value)
+  }
+
+  handleCity(event) {
+    this.handleChange('city', event.target.value)
+  }
+
+  handleCountry(event) {
+    this.handleChange('country', event.target.value)
+  }
+
+  handleChange(key, val) {
+    this.setState(
+      _.extend(this.props.adress, {
+        [key]: val
+      })
+    )
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
+  }
+
+  handlePlace(event) {
+    event.preventDefault()
+    this.handleChange('adress', event.target.value)
+    this.placesAutocomplete.on('change', e => {
+      this.setState(
+        _.extend(this.props.adress, {
+          adress: e.suggestion.name || '',
+          city: e.suggestion.hit.city || '',
+          postalCode: e.suggestion.postcode || '',
+          country: e.suggestion.country || ''
+        })
+      )
+    })
   }
 
   render() {
@@ -33,142 +100,84 @@ class FormDelivery extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <Row>
                 <Col xs={12} lg={6}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Nom complet
-                          <Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            placeholder="John Doe"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    error
+                    errorMessage="Veuillez renseigner votre Nom"
+                    label="Nom"
+                    name="name"
+                    value={this.props.adress.name}
+                    onChange={this.handleName}
+                    placeholder="Henry Michel"
+                  />
                 </Col>
                 <Col xs={12} lg={6}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>Société</Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            placeholder="Nom de la Société"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Société"
+                    name="company"
+                    value={this.props.adress.company}
+                    onChange={this.handleCompany}
+                    placeholder="Nom de la Société"
+                  />
                 </Col>
               </Row>
               <Row>
                 <Col xs={12} lg={8}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Adresse<Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            placeholder="Adresse"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Adresse"
+                    id="address-input"
+                    name="adress"
+                    isRequired
+                    reference={input => {
+                      this.adressInput = input
+                    }}
+                    value={this.props.adress.adress}
+                    onChange={this.handlePlace}
+                    placeholder="Adresse"
+                  />
                 </Col>
                 <Col lg={4} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Code Postal<Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            placeholder="00000"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Code Postal"
+                    name="postalCode"
+                    isRequired
+                    value={this.props.adress.postalCode}
+                    onChange={this.handlePostalCode}
+                    placeholder="00000"
+                  />
                 </Col>
               </Row>
               <Row>
                 <Col lg={6} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>
-                          Nom complet
-                          <Required>*</Required>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            placeholder="John Doe"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Ville"
+                    name="city"
+                    isRequired
+                    value={this.props.adress.city}
+                    onChange={this.handleCity}
+                    placeholder="Paris"
+                  />
                 </Col>
                 <Col lg={6} xs={12}>
-                  <InputWrapper>
-                    <Label>
-                      <Row>
-                        <Col xs={12}>Pays</Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12}>
-                          <Input
-                            type="text"
-                            value={this.state.value}
-                            onChange={this.placeChange}
-                            placeholder="Pays"
-                          />
-                        </Col>
-                      </Row>
-                    </Label>
-                  </InputWrapper>
+                  <InputText
+                    label="Pays"
+                    name="country"
+                    isRequired
+                    value={this.props.adress.country}
+                    onChange={this.handleCountry}
+                    placeholder="Pays"
+                  />
                 </Col>
               </Row>
             </form>
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-FormDelivery.propTypes = {};
+FormDelivery.propTypes = {
+  adress: PropTypes.object
+}
 
-export default FormDelivery;
+export default FormDelivery

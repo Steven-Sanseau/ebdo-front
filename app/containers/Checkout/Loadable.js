@@ -1,12 +1,6 @@
-/**
- *
- * Asynchronously loads the component for Checkout
- *
- */
-
-import Loadable from 'react-loadable';
+import Loadable from 'react-loadable'
 
 export default Loadable({
   loader: () => import('./index'),
-  loading: () => null,
-});
+  loading: () => null
+})
