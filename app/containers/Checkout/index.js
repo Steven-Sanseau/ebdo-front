@@ -1,39 +1,46 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { Row, Col } from 'react-flexbox-grid'
+import { Elements } from 'react-stripe-elements'
+
+import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-
-import { Row, Col } from 'react-flexbox-grid'
-import { Elements, injectStripe } from 'react-stripe-elements'
-
 import injectSaga from 'utils/injectSaga'
 import injectReducer from 'utils/injectReducer'
-import makeSelectCheckout from './selectors'
-import reducer from './reducer'
-import saga from './saga'
+import {
+  makeSelectCheckout,
+  makeSelectClient
+} from 'containers/Checkout/selectors'
+import reducer from 'containers/Checkout/reducer'
+import saga from 'containers/Checkout/saga'
 
-import FormulaStep from '../../components/FormulaStep/Loadable'
-import StartStep from '../../components/StartStep/Loadable'
-import VoucherStep from '../../components/VoucherStep/Loadable'
-import EmailStep from '../../components/EmailStep/Loadable'
-import DeliveryStep from '../../components/DeliveryStep/Loadable'
-import PaymentStep from '../../components/PaymentStep/Loadable'
+import FormulaStep from 'components/FormulaStep/Loadable'
+import EmailStep from 'containers/EmailStep/Loadable'
+import DeliveryStep from 'components/DeliveryStep/Loadable'
+import PaymentStep from 'components/PaymentStep/Loadable'
 
-import Header from '../../components/Header'
-import Layout from './Layout'
+import Header from 'components/Header'
+import Layout from 'containers/Checkout/Layout'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      step: 6
+      step: 3
     }
 
     this.nextStep = this.nextStep.bind(this)
+    this.handleEmailNextStep = this.handleEmailNextStep.bind(this)
     this.changeStep = this.changeStep.bind(this)
+  }
+
+  componentDidMount() {}
+
+  handleEmailNextStep(email) {
+    this.nextStep()
   }
 
   nextStep() {
@@ -71,30 +78,10 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <StartStep
-                stepNumber={2}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <VoucherStep
+              <EmailStep
                 stepNumber={3}
                 changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
+                nextStep={this.handleEmailNextStep}
                 currentStep={step}
               />
             </Col>
@@ -102,7 +89,7 @@ export class Checkout extends React.Component {
           <Row>
             <Col xs={12}>
               <DeliveryStep
-                stepNumber={5}
+                stepNumber={4}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -113,7 +100,7 @@ export class Checkout extends React.Component {
             <Col xs={12}>
               <Elements>
                 <PaymentStep
-                  stepNumber={6}
+                  stepNumber={5}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   currentStep={step}
@@ -128,11 +115,14 @@ export class Checkout extends React.Component {
 }
 
 Checkout.propTypes = {
+  checkout: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  client: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout()
+  checkout: makeSelectCheckout(),
+  client: makeSelectClient()
 })
 
 function mapDispatchToProps(dispatch) {

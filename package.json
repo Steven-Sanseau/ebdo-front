@@ -16,18 +16,15 @@
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
-    "extract-intl":
-      "babel-node --presets env,stage-0 -- ./internals/scripts/extract-intl.js",
+    "extract-intl": "babel-node --presets env,stage-0 -- ./internals/scripts/extract-intl.js",
     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
     "preinstall": "npm run npmcheckversion",
     "postinstall": "npm run build && npm run build:dll",
-    "build":
-      "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
     "start": "cross-env NODE_ENV=development node server",
-    "start:tunnel":
-      "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
+    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
     "heroku-postbuild": "npm run build",
@@ -36,12 +33,10 @@
     "setup": "node ./internals/scripts/setup.js",
     "postsetup": "npm run build:dll",
     "clean": "shjs ./internals/scripts/clean.js",
-    "clean:all":
-      "npm run analyze:clean && npm run test:clean && npm run build:clean",
+    "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
     "generate": "plop --plopfile internals/generators/index.js",
     "lint": "npm run lint:js",
-    "lint:eslint":
-      "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean && npm run lint",
@@ -54,7 +49,9 @@
     "*.js": "lint:eslint"
   },
   "babel": {
-    "plugins": ["styled-components"],
+    "plugins": [
+      "styled-components"
+    ],
     "presets": [
       [
         "env",
@@ -67,7 +64,9 @@
     ],
     "env": {
       "production": {
-        "only": ["app"],
+        "only": [
+          "app"
+        ],
         "plugins": [
           "transform-react-remove-prop-types",
           "transform-react-constant-elements",
@@ -75,7 +74,10 @@
         ]
       },
       "test": {
-        "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "dynamic-import-node"
+        ]
       }
     }
   },
@@ -88,7 +90,11 @@
       "jest": true,
       "es6": true
     },
-    "plugins": ["redux-saga", "react", "jsx-a11y"],
+    "plugins": [
+      "redux-saga",
+      "react",
+      "jsx-a11y"
+    ],
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module",
@@ -97,10 +103,19 @@
       }
     },
     "rules": {
-      "arrow-parens": [0, "always"],
-      "arrow-body-style": [2, "as-needed"],
+      "arrow-parens": [
+        0,
+        "always"
+      ],
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ],
       "class-methods-use-this": 0,
-      "comma-dangle": [0, "never"],
+      "comma-dangle": [
+        0,
+        "never"
+      ],
       "import/imports-first": 0,
       "import/newline-after-import": 0,
       "import/no-dynamic-require": 0,
@@ -130,7 +145,10 @@
       "no-use-before-define": 0,
       "prefer-template": 2,
       "react/forbid-prop-types": 0,
-      "react/jsx-first-prop-new-line": [2, "multiline"],
+      "react/jsx-first-prop-new-line": [
+        2,
+        "multiline"
+      ],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,
       "react/require-default-props": 0,
@@ -139,7 +157,10 @@
       "redux-saga/no-yield-in-race": 2,
       "redux-saga/yield-effects": 2,
       "require-yield": 0,
-      "semi": [0, "nerver"]
+      "semi": [
+        0,
+        "nerver"
+      ]
     },
     "settings": {
       "import/resolver": {
@@ -160,7 +181,11 @@
       "minimist",
       "sanitize.css"
     ],
-    "include": ["core-js", "lodash", "eventsource-polyfill"]
+    "include": [
+      "core-js",
+      "lodash",
+      "eventsource-polyfill"
+    ]
   },
   "jest": {
     "collectCoverageFrom": [
@@ -179,22 +204,25 @@
         "lines": 98
       }
     },
-    "moduleDirectories": ["node_modules", "app"],
+    "moduleDirectories": [
+      "node_modules",
+      "app"
+    ],
     "moduleNameMapper": {
-      ".*\\.(css|less|styl|scss|sass)$":
-        "<rootDir>/internals/mocks/cssModule.js",
-      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/internals/mocks/image.js"
+      ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssModule.js",
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js"
     },
-    "setupTestFrameworkScriptFile":
-      "<rootDir>/internals/testing/test-bundler.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js",
     "testRegex": "tests/.*\\.test\\.js$"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-polyfill": "6.26.0",
     "chalk": "2.3.0",
     "compression": "1.7.1",
     "cross-env": "5.1.1",
+    "dotenv": "^4.0.0",
+    "email-regex": "^2.0.0",
     "express": "4.16.2",
     "fontfaceobserver": "2.0.13",
     "grid-styled": "^2.0.0-11",
@@ -206,13 +234,13 @@
     "ip": "1.1.5",
     "lodash": "4.17.4",
     "minimist": "1.2.0",
-    "moment": "^2.19.3",
+    "moment": "^2.19.4",
     "places.js": "^1.4.15",
     "prop-types": "15.6.0",
     "rc-slider": "^8.5.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-dropdown": "^1.3.2",
+    "react-dropdown": "^1.3.4",
     "react-flexbox-grid": "^2.0.0",
     "react-helmet": "5.2.0",
     "react-intl": "2.4.0",
@@ -247,12 +275,12 @@
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "circular-dependency-plugin": "4.2.1",
+    "circular-dependency-plugin": "4.3.0",
     "coveralls": "3.0.0",
     "css-loader": "0.28.7",
     "empty-module": "^0.0.2",
     "enzyme": "3.2.0",
-    "eslint": "4.12.1",
+    "eslint": "4.13.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-import-resolver-webpack": "0.8.3",
@@ -272,7 +300,7 @@
     "ngrok": "2.2.24",
     "node-plop": "0.9.0",
     "null-loader": "0.1.1",
-    "offline-plugin": "4.8.4",
+    "offline-plugin": "4.8.5",
     "plop": "1.9.0",
     "react-test-renderer": "16.2.0",
     "rimraf": "2.6.2",

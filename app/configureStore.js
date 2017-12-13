@@ -1,20 +1,23 @@
 /**
- * Create the store with dynamic reducers
+ * Create the store with asynchronously loaded reducers
  */
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
-import createSagaMiddleware from 'redux-saga'
+import { createLogicMiddleware } from 'redux-logic'
 import createReducer from './reducers'
-
-const sagaMiddleware = createSagaMiddleware()
+import requestUtil from './utils/request'
 
 export default function configureStore(initialState = {}, history) {
+  // inject helpers, make requestUtil available to all logic
+  const injectedHelpers = { requestUtil }
+  const logicMiddleware = createLogicMiddleware([], injectedHelpers)
+
   // Create the store with two middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
+  // 1. logicMiddleware: enables redux-logic
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [sagaMiddleware, routerMiddleware(history)]
+  const middlewares = [logicMiddleware, routerMiddleware(history)]
 
   const enhancers = [applyMiddleware(...middlewares)]
 
@@ -24,11 +27,7 @@ export default function configureStore(initialState = {}, history) {
     process.env.NODE_ENV !== 'production' &&
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          // TODO Try to remove when `react-router-redux` is out of beta, LOCATION_CHANGE should not be fired more than once after hot reloading
-          // Prevent recomputing reducers for `replaceReducer`
-          shouldHotReload: false
-        })
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : compose
   /* eslint-enable */
 
@@ -39,15 +38,19 @@ export default function configureStore(initialState = {}, history) {
   )
 
   // Extensions
-  store.runSaga = sagaMiddleware.run
-  store.injectedReducers = {} // Reducer registry
-  store.injectedSagas = {} // Saga registry
+  store.logicMiddleware = logicMiddleware
+  store.asyncReducers = {} // Async reducer registry
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers))
+      import('./reducers').then(reducerModule => {
+        const createReducers = reducerModule.default
+        const nextReducers = createReducers(store.asyncReducers)
+
+        store.replaceReducer(nextReducers)
+      })
     })
   }
 

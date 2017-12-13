@@ -3,7 +3,11 @@ import { createSelector } from 'reselect'
 /**
  * Direct selector to the checkout state domain
  */
-const selectCheckoutDomain = state => state.get('checkout')
+const selectGlobal = state => state.get('global')
+
+const selectCheckout = state => state.get('checkout')
+
+const selectClient = state => state.get('checkout').get('client')
 
 /**
  * Other specific selectors
@@ -14,7 +18,9 @@ const selectCheckoutDomain = state => state.get('checkout')
  */
 
 const makeSelectCheckout = () =>
-  createSelector(selectCheckoutDomain, substate => substate.toJS())
+  createSelector(selectCheckout, globalState => globalState.get('checkout'))
 
-export default makeSelectCheckout
-export { selectCheckoutDomain }
+const makeSelectClient = () =>
+  createSelector(selectClient, selectClient => selectClient.email)
+
+export { makeSelectCheckout, makeSelectClient, selectClient }

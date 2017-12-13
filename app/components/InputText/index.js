@@ -6,6 +6,7 @@ import Label from './Label'
 import Input from './Input'
 import InputWrapper from './InputWrapper'
 import Required from './Required'
+import ErrorMessage from './ErrorMessage'
 
 class InputText extends React.Component {
   render() {
@@ -14,8 +15,7 @@ class InputText extends React.Component {
         <Label error={this.props.error || false}>
           <Row>
             <Col xs={12}>
-              {!this.props.error && this.props.label}
-              {this.props.error && this.props.errorMessage}
+              {this.props.label}
               {this.props.isRequired && <Required>*</Required>}
             </Col>
           </Row>
@@ -33,6 +33,15 @@ class InputText extends React.Component {
               />
             </Col>
           </Row>
+          {this.props.error && (
+            <Row>
+              <Col xs={12}>
+                {this.props.errorMessage && (
+                  <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+                )}
+              </Col>
+            </Row>
+          )}
         </Label>
       </InputWrapper>
     )
