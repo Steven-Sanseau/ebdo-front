@@ -27,6 +27,7 @@ function* postClient() {
       }
     })
     yield put(postClientLoaded(client))
+    yield put(nextStep())
   } catch (err) {
     yield put(postClientError(err.message))
   }

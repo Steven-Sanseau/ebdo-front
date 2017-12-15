@@ -27,7 +27,7 @@ class FormDelivery extends React.Component {
           return suggestion.name
         }
       },
-      countries: ['fr', 'be', 'ca', 'lu']
+      countries: ['fr', 'be', 'lu']
     })
 
     this.placesAutocomplete.on('clear', () => {
