@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 import { POST_CLIENT, POST_ADRESS } from 'containers/Checkout/constants'
@@ -44,7 +44,7 @@ function* postAdress(action) {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postAdressLoaded(adressResponse))
+    yield put(postAdressLoaded(action.typeOfAdress, adressResponse))
     yield put(nextStep())
   } catch (err) {
     yield put(postAdressError(err.message))
@@ -53,5 +53,5 @@ function* postAdress(action) {
 
 export default function* saga() {
   yield takeLatest(POST_CLIENT, postClient)
-  yield takeLatest(POST_ADRESS, postAdress)
+  yield takeEvery(POST_ADRESS, postAdress)
 }

@@ -53,7 +53,7 @@ class FormDelivery extends React.Component {
     this.placesAutocomplete.on('change', e => {
       this.props.handleChange(this.props.typeOfAdress, {
         adress: e.suggestion.name || '',
-        city: e.suggestion.hit.city[0] || '',
+        city: e.suggestion.city || '',
         postal_code: e.suggestion.postcode || '',
         country: e.suggestion.country || ''
       })

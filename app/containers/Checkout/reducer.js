@@ -1,5 +1,4 @@
 import Immutable from 'immutable'
-import _ from 'lodash'
 
 import Adress from 'models/Adress'
 import Client from 'models/Client'
@@ -78,7 +77,7 @@ function checkoutReducer(state = initialState, action) {
         .setIn(['adress', 'loading'], false)
         .setIn(['adress', 'errorMessage'], action.error)
         .setIn(['adress', 'error'], true)
-    case POST_ADRESS_LOADED:
+    case POST_ADRESS_LOADED: {
       return state
         .setIn(['adress', 'loading'], false)
         .setIn(['adress', 'error'], false)
@@ -86,9 +85,15 @@ function checkoutReducer(state = initialState, action) {
           ['adress', action.payload.typeOfAdress],
           Adress(action.payload.adress)
         )
+    }
     case SET_ADRESS_EQUAL: {
-      const adressDelivery = state.getIn(['adress', 'delivery'])
-      return state.setIn(['adress', 'invoice'], new Adress(adressDelivery))
+      const adressDeliveryToInvoice = state
+        .getIn(['adress', 'delivery'])
+        .mergeDeep({ type_adress: 'invoice' })
+      return state.setIn(
+        ['adress', 'invoice'],
+        new Adress(adressDeliveryToInvoice)
+      )
     }
     default:
       return state

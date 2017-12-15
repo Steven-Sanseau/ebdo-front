@@ -1,6 +1,7 @@
 import { Record } from 'immutable'
 
 const Adress = new Record({
+  adress_id: null,
   client_id: 1,
   civility: 'M',
   last_name: null,

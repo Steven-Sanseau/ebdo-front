@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import {
-  makeSelectAdress,
   makeSelectAdressInvoice,
   makeSelectAdressIsLoading,
   makeSelectAdressDelivery
@@ -51,7 +50,7 @@ class DeliveryStep extends React.Component {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
-      this.props.dispatchChangeAdress()
+      this.props.dispatchAdressEqual()
     }
 
     this.props.dispatchPostAdressDelivery()
@@ -100,13 +99,7 @@ class DeliveryStep extends React.Component {
   }
 
   render() {
-    const {
-      currentStep,
-      nextStep,
-      changeStep,
-      stepNumber,
-      adressIsLoading
-    } = this.props
+    const { currentStep, changeStep, stepNumber, adressIsLoading } = this.props
 
     return (
       <ToggleStep
@@ -125,13 +118,11 @@ class DeliveryStep extends React.Component {
 
 DeliveryStep.propTypes = {
   adressIsLoading: PropTypes.bool,
-  adress: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func,
   dispatchPostAdressDelivery: PropTypes.func,
   dispatchPostAdressInvoice: PropTypes.func,
   dispatchAdressEqual: PropTypes.func,
@@ -139,7 +130,6 @@ DeliveryStep.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  adress: makeSelectAdress(),
   adressIsLoading: makeSelectAdressIsLoading(),
   invoice: makeSelectAdressInvoice(),
   delivery: makeSelectAdressDelivery()
