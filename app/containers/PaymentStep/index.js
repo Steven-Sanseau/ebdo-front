@@ -3,13 +3,17 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 
 import { injectStripe } from 'react-stripe-elements'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux'
+
+import { makeSelectTokenIsLoading, makeSelectToken } from 'selectors/token'
+import { postToken, setTokenStripe } from 'actions/token'
 
 import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
-
 import ToggleStep from 'components/ToggleStep/Loadable'
-
 import StripeForm from 'components/StripeForm'
 import SlimpayForm from 'components/SlimpayForm'
 
@@ -24,6 +28,7 @@ class PaymentStep extends React.Component {
 
     this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
     this.handlePaiementInfo = this.handlePaiementInfo.bind(this)
+    this.handleNextStep = this.handleNextStep.bind(this)
   }
 
   handlePaiementMethod(value) {
@@ -33,9 +38,17 @@ class PaymentStep extends React.Component {
   handlePaiementInfo(event) {
     event.preventDefault()
 
-    this.props.stripe.createToken().then(({ token }) => {
-      this.setState({ tokenCard: token })
-    })
+    this.props.stripe
+      .createToken({
+        card: {}
+      })
+      .then(({ token }) => {
+        this.props.dispatchSetTokenStripe(token)
+      })
+  }
+
+  handleNextStep(event) {
+    this.props.nextStep()
   }
 
   contentOpen() {
@@ -116,7 +129,25 @@ PaymentStep.propTypes = {
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func,
-  stripe: PropTypes.object
+  stripe: PropTypes.object,
+  dispatchSetTokenStripe: PropTypes.func,
+  dispatchPostToken: PropTypes.func,
+  token: PropTypes.object,
+  tokenIsLoading: PropTypes.object
 }
 
-export default injectStripe(PaymentStep)
+const mapStateToProps = createStructuredSelector({
+  tokenIsLoading: makeSelectTokenIsLoading(),
+  token: makeSelectToken()
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchSetTokenStripe: token => dispatch(setTokenStripe(token)),
+    dispatchPostToken: () => dispatch(postToken())
+  }
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
+
+export default compose(injectStripe, withConnect)(PaymentStep)

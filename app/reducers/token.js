@@ -13,29 +13,30 @@ const initialState = Immutable.fromJS({
   loading: false,
   error: false,
   errorMessage: null,
-  data: new Client()
+  tokenStripe: {},
+  mandatSepa: null
 })
 
-function clientReducer(state = initialState, action) {
+function tokenReducer(state = initialState, action) {
   switch (action.type) {
-    case POST_CLIENT:
+    case POST_TOKEN:
       return state.set('loading', true).set('errorMessage', null)
-    case SET_CLIENT_EMAIL:
-      return state.setIn(['data', 'email'], action.email)
+    case SET_TOKEN_STRIPE:
+      return state.set('tokenStripe', action.token_stripe)
 
-    case POST_CLIENT_ERROR:
+    case POST_TOKEN_ERROR:
       return state
         .set('loading', false)
         .set('errorMessage', action.error)
         .set('error', true)
-    case POST_CLIENT_LOADED:
+    case POST_TOKEN_LOADED:
       return state
         .set('loading', false)
         .set('error', false)
-        .set('data', Client(action.client))
+        .set('token_id', action.token.token_id)
     default:
       return state
   }
 }
 
-export default clientReducer
+export default tokenReducer

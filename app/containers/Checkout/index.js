@@ -18,6 +18,7 @@ import { nextStep, goToStep } from 'actions/step'
 
 // REDUCERS
 import clientReducer from 'reducers/client'
+import tokenReducer from 'reducers/token'
 import adressReducer from 'reducers/adress'
 import stepReducer from 'reducers/step'
 
@@ -154,6 +155,11 @@ const withReducerStep = injectReducer({
   reducer: stepReducer
 })
 
+const withReducerToken = injectReducer({
+  key: 'token',
+  reducer: tokenReducer
+})
+
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
 const withSagaAdress = injectSaga({ key: 'adress', saga: sagaAdress })
 
@@ -161,6 +167,7 @@ export default compose(
   withReducerClient,
   withReducerAdress,
   withReducerStep,
+  withReducerToken,
   withSagaAdress,
   withSagaClient,
   withConnect
