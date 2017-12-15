@@ -2,6 +2,8 @@ import Immutable from 'immutable'
 import Client from 'models/Client'
 
 import {
+  NEXT_STEP,
+  UPDATE_STEP,
   POST_CLIENT,
   SET_CLIENT_EMAIL,
   POST_CLIENT_LOADED,
@@ -20,11 +22,18 @@ const initialState = Immutable.fromJS({
     delivery: {},
     invoice: {}
   }),
-  token: {}
+  token: {},
+  step: 1
 })
 
 function checkoutReducer(state = initialState, action) {
   switch (action.type) {
+    case NEXT_STEP: {
+      const nextStep = state.get('step') + 1
+      return state.set('step', nextStep)
+    }
+    case UPDATE_STEP:
+      return state.set('step', action.step)
     case POST_CLIENT:
       return state.setIn(['client', 'loading'], true)
     case SET_CLIENT_EMAIL:
@@ -32,7 +41,7 @@ function checkoutReducer(state = initialState, action) {
 
     case POST_CLIENT_ERROR:
       return state
-        .setIn(['client', 'loading'], true)
+        .setIn(['client', 'loading'], false)
         .setIn(['client', 'errorMessage'], action.error)
         .setIn(['client', 'error'], true)
     case POST_CLIENT_LOADED:

@@ -3,16 +3,14 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-
+import idx from 'idx'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import injectSaga from 'utils/injectSaga'
 import injectReducer from 'utils/injectReducer'
-import {
-  makeSelectCheckout,
-  makeSelectClient
-} from 'containers/Checkout/selectors'
+import { makeSelectStep } from 'containers/Checkout/selectors'
+import { nextStep, goToStep } from 'containers/Checkout/actions'
 import reducer from 'containers/Checkout/reducer'
 import saga from 'containers/Checkout/saga'
 
@@ -28,32 +26,23 @@ export class Checkout extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      step: 3
-    }
-
     this.nextStep = this.nextStep.bind(this)
-    this.handleEmailNextStep = this.handleEmailNextStep.bind(this)
     this.changeStep = this.changeStep.bind(this)
   }
 
-  componentDidMount() {}
-
-  handleEmailNextStep(email) {
-    this.nextStep()
-  }
+  // componentDidMount() {}
 
   nextStep() {
-    const { step } = this.state
-    this.setState({ step: step + 1 })
+    this.props.nextStep()
   }
 
-  changeStep(stepElem) {
-    this.setState({ step: stepElem })
+  changeStep(stepNumber) {
+    this.props.goToStep(stepNumber)
   }
 
   render() {
-    const { step } = this.state
+    const { step } = this.props
+
     return (
       <div>
         <Layout>
@@ -79,9 +68,9 @@ export class Checkout extends React.Component {
           <Row>
             <Col xs={12}>
               <EmailStep
-                stepNumber={3}
+                stepNumber={2}
                 changeStep={this.changeStep}
-                nextStep={this.handleEmailNextStep}
+                nextStep={this.nextStep}
                 currentStep={step}
               />
             </Col>
@@ -115,18 +104,23 @@ export class Checkout extends React.Component {
 }
 
 Checkout.propTypes = {
-  checkout: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  client: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  dispatch: PropTypes.func.isRequired
+  // checkout: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  // client: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  nextStep: PropTypes.func,
+  goToStep: PropTypes.func
+  // dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout(),
-  client: makeSelectClient()
+  step: makeSelectStep()
+  // checkout: makeSelectCheckout(),
+  // client: makeSelectClient()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
+    nextStep: () => dispatch(nextStep()),
+    goToStep: step => dispatch(goToStep(step)),
     dispatch
   }
 }

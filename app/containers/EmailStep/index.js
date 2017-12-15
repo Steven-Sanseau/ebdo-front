@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import emailRegex from 'email-regex'
-import idx from 'idx'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import {
-  makeSelectClient,
+  makeSelectClientIsLoading,
   makeSelectClientEmail
 } from 'containers/Checkout/selectors'
 import { setClientEmail, postClient } from 'containers/Checkout/actions'
@@ -21,7 +20,6 @@ class EmailStep extends React.Component {
     super(props)
 
     this.state = {
-      isValidated: null,
       errorEmail: false,
       errorMessage: ''
     }
@@ -31,10 +29,8 @@ class EmailStep extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNextStep() {
-    if (this.state.isValidated) {
-      this.props.nextStep()
-    }
+  handleNextStep(event) {
+    this.handleSubmit(event)
   }
 
   handleEmail(event) {
@@ -71,14 +67,13 @@ class EmailStep extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.validateEmail()
 
     if (this.validateEmail()) {
       this.props.dispatchPostClient()
     }
 
-    if (!this.state.errorEmail) {
-      // this.props.nextStep()
+    if (!this.props.clientIsLoading) {
+      this.props.nextStep()
     }
   }
 
@@ -105,8 +100,8 @@ class EmailStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, client } = this.props
-    // console.log(client.loading)
+    const { currentStep, changeStep, stepNumber, clientIsLoading } = this.props
+
     return (
       <ToggleStep
         title="Je renseigne mon Email"
@@ -116,14 +111,14 @@ class EmailStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
-        isLoadingNextStep={client.loading}
+        isLoadingNextStep={clientIsLoading}
       />
     )
   }
 }
 
 EmailStep.propTypes = {
-  client: PropTypes.object,
+  clientIsLoading: PropTypes.bool,
   email: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
@@ -135,7 +130,7 @@ EmailStep.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  client: makeSelectClient(),
+  clientIsLoading: makeSelectClientIsLoading(),
   email: makeSelectClientEmail()
 })
 

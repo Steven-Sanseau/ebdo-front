@@ -1,9 +1,24 @@
 import {
+  NEXT_STEP,
+  UPDATE_STEP,
   POST_CLIENT,
   POST_CLIENT_LOADED,
   SET_CLIENT_EMAIL,
   POST_CLIENT_ERROR
 } from './constants'
+
+export function nextStep() {
+  return {
+    type: NEXT_STEP
+  }
+}
+
+export function goToStep(step) {
+  return {
+    type: UPDATE_STEP,
+    step
+  }
+}
 
 export function postClient() {
   return {

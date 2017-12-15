@@ -10,6 +10,18 @@ const makeSelectCheckout = () =>
 const makeSelectClientEmail = () =>
   createSelector(selectClient, client => client.get('data').get('email'))
 
+const makeSelectStep = () =>
+  createSelector(selectCheckout, checkout => checkout.get('step'))
+
+const makeSelectClientIsLoading = () =>
+  createSelector(selectClient, client => client.get('loading'))
+
 const makeSelectClient = () => createSelector(selectClient, client => client)
 
-export { makeSelectCheckout, makeSelectClientEmail, makeSelectClient }
+export {
+  makeSelectCheckout,
+  makeSelectClientEmail,
+  makeSelectClient,
+  makeSelectClientIsLoading,
+  makeSelectStep
+}
