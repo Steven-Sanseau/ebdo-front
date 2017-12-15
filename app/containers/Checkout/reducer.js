@@ -14,7 +14,8 @@ import {
   POST_ADRESS,
   POST_ADRESS_LOADED,
   POST_ADRESS_ERROR,
-  SET_ADRESS
+  SET_ADRESS,
+  SET_ADRESS_EQUAL
 } from './constants'
 
 const initialState = Immutable.fromJS({
@@ -85,6 +86,10 @@ function checkoutReducer(state = initialState, action) {
           ['adress', action.payload.typeOfAdress],
           Adress(action.payload.adress)
         )
+    case SET_ADRESS_EQUAL: {
+      const adressDelivery = state.getIn(['adress', 'delivery'])
+      return state.setIn(['adress', 'invoice'], new Adress(adressDelivery))
+    }
     default:
       return state
   }

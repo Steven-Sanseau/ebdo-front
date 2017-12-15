@@ -2,9 +2,15 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 
 import request from 'utils/request'
 import { POST_CLIENT, POST_ADRESS } from 'containers/Checkout/constants'
-import { postClientLoaded, postClientError } from 'containers/Checkout/actions'
 import {
-  makeSelectAdress,
+  postClientLoaded,
+  postClientError,
+  postAdressError,
+  postAdressLoaded,
+  nextStep
+} from 'containers/Checkout/actions'
+import {
+  makeSelectAdressType,
   makeSelectClientEmail
 } from 'containers/Checkout/selectors'
 
@@ -26,21 +32,22 @@ function* postClient() {
   }
 }
 
-function* postAdress() {
-  const paramsApiUrl = 'https://ebdo-api.herokuapp.com/v1/adress'
-  const adress = yield select(makeSelectAdress())
+function* postAdress(action) {
+  const paramsApiUrl = 'http://localhost:1338/v1/adress/'
+  const adress = yield select(makeSelectAdressType(action.typeOfAdress))
 
   try {
-    const adress = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ adress: { adress } }),
+    const adressResponse = yield call(request, paramsApiUrl, {
+      body: JSON.stringify({ adress }),
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postClientLoaded(adress))
+    yield put(postAdressLoaded(adressResponse))
+    yield put(nextStep())
   } catch (err) {
-    yield put(postClientError(err.message))
+    yield put(postAdressError(err.message))
   }
 }
 

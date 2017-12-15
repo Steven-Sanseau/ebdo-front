@@ -8,9 +8,14 @@ import { compose } from 'redux'
 import {
   makeSelectAdress,
   makeSelectAdressInvoice,
+  makeSelectAdressIsLoading,
   makeSelectAdressDelivery
 } from 'containers/Checkout/selectors'
-import { setAdress, postAdress } from 'containers/Checkout/actions'
+import {
+  setAdress,
+  postAdress,
+  setAdressEqual
+} from 'containers/Checkout/actions'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
 import FormDelivery from 'components/FormDelivery'
@@ -27,6 +32,11 @@ class DeliveryStep extends React.Component {
     this.showInvoiceForm = this.showInvoiceForm.bind(this)
     this.handleAdressForm = this.handleAdressForm.bind(this)
     this.handleSubmitAdressForm = this.handleSubmitAdressForm.bind(this)
+    this.handleNextStep = this.handleNextStep.bind(this)
+  }
+
+  handleNextStep(event) {
+    this.handleSubmitAdressForm(event)
   }
 
   showInvoiceForm() {
@@ -39,7 +49,13 @@ class DeliveryStep extends React.Component {
 
   handleSubmitAdressForm(event) {
     event.preventDefault()
-    this.props.dispatchPostAdress()
+
+    if (this.state.isInvoiceSameDelivery) {
+      this.props.dispatchChangeAdress()
+    }
+
+    this.props.dispatchPostAdressDelivery()
+    this.props.dispatchPostAdressInvoice()
   }
 
   contentOpen() {
@@ -84,7 +100,13 @@ class DeliveryStep extends React.Component {
   }
 
   render() {
-    const { currentStep, nextStep, changeStep, stepNumber } = this.props
+    const {
+      currentStep,
+      nextStep,
+      changeStep,
+      stepNumber,
+      adressIsLoading
+    } = this.props
 
     return (
       <ToggleStep
@@ -94,13 +116,15 @@ class DeliveryStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={nextStep}
+        nextStep={this.handleNextStep}
+        isLoadingNextStep={adressIsLoading}
       />
     )
   }
 }
 
 DeliveryStep.propTypes = {
+  adressIsLoading: PropTypes.bool,
   adress: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
@@ -108,12 +132,15 @@ DeliveryStep.propTypes = {
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func,
-  dispatchPostAdress: PropTypes.func,
+  dispatchPostAdressDelivery: PropTypes.func,
+  dispatchPostAdressInvoice: PropTypes.func,
+  dispatchAdressEqual: PropTypes.func,
   dispatchChangeAdress: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
   adress: makeSelectAdress(),
+  adressIsLoading: makeSelectAdressIsLoading(),
   invoice: makeSelectAdressInvoice(),
   delivery: makeSelectAdressDelivery()
 })
@@ -121,7 +148,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchChangeAdress: (type, adress) => dispatch(setAdress(type, adress)),
-    dispatchPostAdress: () => dispatch(postAdress())
+    dispatchAdressEqual: () => dispatch(setAdressEqual()),
+    dispatchPostAdressDelivery: () => dispatch(postAdress('delivery')),
+    dispatchPostAdressInvoice: () => dispatch(postAdress('invoice'))
   }
 }
 

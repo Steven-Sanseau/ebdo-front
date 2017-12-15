@@ -14,11 +14,17 @@ const makeSelectClientEmail = () =>
 
 const makeSelectAdress = () => createSelector(selectAdress, adress => adress)
 
+const makeSelectAdressIsLoading = () =>
+  createSelector(selectAdress, adress => adress.get('loading'))
+
 const makeSelectAdressDelivery = () =>
   createSelector(selectAdress, adress => adress.get('delivery'))
 
 const makeSelectAdressInvoice = () =>
   createSelector(selectAdress, adress => adress.get('invoice'))
+
+const makeSelectAdressType = type =>
+  createSelector(selectAdress, adress => adress.get(type))
 
 const makeSelectStep = () =>
   createSelector(selectCheckout, checkout => checkout.get('step'))
@@ -36,5 +42,7 @@ export {
   makeSelectStep,
   makeSelectAdress,
   makeSelectAdressDelivery,
-  makeSelectAdressInvoice
+  makeSelectAdressInvoice,
+  makeSelectAdressIsLoading,
+  makeSelectAdressType
 }

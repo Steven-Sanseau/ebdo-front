@@ -42,8 +42,7 @@ class FormDelivery extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    this.props.handleSubmit()
+    this.props.handleSubmit(event)
   }
 
   handlePlace(event) {

@@ -8,7 +8,8 @@ import {
   POST_ADRESS,
   POST_ADRESS_LOADED,
   POST_ADRESS_ERROR,
-  SET_ADRESS
+  SET_ADRESS,
+  SET_ADRESS_EQUAL
 } from './constants'
 
 export function nextStep() {
@@ -52,9 +53,10 @@ export function setClientEmail(email) {
 }
 
 // ADRESS
-export function postAdress() {
+export function postAdress(typeOfAdress) {
   return {
-    type: POST_ADRESS
+    type: POST_ADRESS,
+    typeOfAdress
   }
 }
 
@@ -82,5 +84,10 @@ export function setAdress(typeOfAdress, adress) {
       typeOfAdress,
       adress
     }
+  }
+}
+export function setAdressEqual() {
+  return {
+    type: SET_ADRESS_EQUAL
   }
 }
