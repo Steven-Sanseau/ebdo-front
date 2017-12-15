@@ -3,11 +3,11 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import request from 'utils/request'
 import { POST_CLIENT } from 'containers/Checkout/constants'
 import { postClientLoaded, postClientError } from 'containers/Checkout/actions'
-import { makeSelectClient } from 'containers/Checkout/selectors'
+import { makeSelectClientEmail } from 'containers/Checkout/selectors'
 
 function* postClient() {
   const paramsApiUrl = 'https://ebdo-api.herokuapp.com/v1/client'
-  const email = yield select(makeSelectClient())
+  const email = yield select(makeSelectClientEmail())
 
   try {
     const client = yield call(request, paramsApiUrl, {

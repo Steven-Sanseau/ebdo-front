@@ -1,4 +1,6 @@
 import Immutable from 'immutable'
+import Client from 'models/Client'
+
 import {
   POST_CLIENT,
   SET_CLIENT_EMAIL,
@@ -7,26 +9,37 @@ import {
 } from './constants'
 
 const initialState = Immutable.fromJS({
-  loading: false,
-  error: null,
-  client: {}
+  client: Immutable.Map({
+    loading: false,
+    error: false,
+    errorMessage: null,
+    data: new Client()
+  }),
+  offer: Immutable.Map({}),
+  adress: Immutable.Map({
+    delivery: {},
+    invoice: {}
+  }),
+  token: {}
 })
 
 function checkoutReducer(state = initialState, action) {
   switch (action.type) {
     case POST_CLIENT:
-      return state.set('loading', true)
+      return state.setIn(['client', 'loading'], true)
     case SET_CLIENT_EMAIL:
-      return state.set('client', { email: action.email })
+      return state.setIn(['client', 'data', 'email'], action.email)
+
     case POST_CLIENT_ERROR:
       return state
-        .set('loading', false)
-        .set('error', action.error.response.data.message)
+        .setIn(['client', 'loading'], true)
+        .setIn(['client', 'errorMessage'], action.error)
+        .setIn(['client', 'error'], true)
     case POST_CLIENT_LOADED:
       return state
-        .set('loading', false)
-        .set('error', null)
-        .set('data', action.client)
+        .setIn(['client', 'loading'], false)
+        .setIn(['client', 'error'], false)
+        .setIn(['client', 'data'], Client(action.client))
     default:
       return state
   }

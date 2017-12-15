@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import emailRegex from 'email-regex'
+import idx from 'idx'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { makeSelectClient } from 'containers/Checkout/selectors'
+import {
+  makeSelectClient,
+  makeSelectClientEmail
+} from 'containers/Checkout/selectors'
 import { setClientEmail, postClient } from 'containers/Checkout/actions'
 
 import FormEmail from 'components/FormEmail'
@@ -17,7 +21,6 @@ class EmailStep extends React.Component {
     super(props)
 
     this.state = {
-      email: '',
       isValidated: null,
       errorEmail: false,
       errorMessage: ''
@@ -30,7 +33,7 @@ class EmailStep extends React.Component {
 
   handleNextStep() {
     if (this.state.isValidated) {
-      this.props.nextStep({ email: this.state.email })
+      this.props.nextStep()
     }
   }
 
@@ -38,8 +41,7 @@ class EmailStep extends React.Component {
     const email = event.target.value
 
     this.resetEmail()
-    this.setState({ email })
-    this.props.dispatchChangeEmail(this.state.email)
+    this.props.dispatchChangeEmail(email)
   }
 
   resetEmail() {
@@ -47,7 +49,7 @@ class EmailStep extends React.Component {
   }
 
   validateEmail() {
-    const { email } = this.state
+    const { email } = this.props
 
     if (!emailRegex({ exact: true }).test(email)) {
       this.setState({
@@ -72,7 +74,7 @@ class EmailStep extends React.Component {
     this.validateEmail()
 
     if (this.validateEmail()) {
-      this.props.dispatchPostClient(this.state.email)
+      this.props.dispatchPostClient()
     }
 
     if (!this.state.errorEmail) {
@@ -81,7 +83,9 @@ class EmailStep extends React.Component {
   }
 
   contentOpen() {
-    const { email, isValidated, errorEmail, errorMessage } = this.state
+    const { errorEmail, errorMessage } = this.state
+    const { email } = this.props
+
     return (
       <div>
         <FormEmail
@@ -96,13 +100,13 @@ class EmailStep extends React.Component {
   }
 
   contentClose() {
-    const { email } = this.state
+    const { email } = this.props
     return <div>Mon Email est {email}</div>
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber } = this.props
-
+    const { currentStep, changeStep, stepNumber, client } = this.props
+    // console.log(client.loading)
     return (
       <ToggleStep
         title="Je renseigne mon Email"
@@ -112,12 +116,15 @@ class EmailStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
+        isLoadingNextStep={client.loading}
       />
     )
   }
 }
 
 EmailStep.propTypes = {
+  client: PropTypes.object,
+  email: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   // dispatch: PropTypes.func.isRequired,
@@ -128,8 +135,8 @@ EmailStep.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  // checkout: ,
-  client: makeSelectClient()
+  client: makeSelectClient(),
+  email: makeSelectClientEmail()
 })
 
 function mapDispatchToProps(dispatch) {

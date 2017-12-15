@@ -7,6 +7,7 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
+import LoaderNextStep from '../LayoutStep/LoaderNextStep'
 import StepPostviewText from '../LayoutStep/StepPostviewText'
 import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
@@ -31,7 +32,8 @@ class ToggleStep extends React.Component {
       stepNumber,
       title,
       contentOpen,
-      contentClose
+      contentClose,
+      isLoadingNextStep
     } = this.props
 
     return (
@@ -64,7 +66,10 @@ class ToggleStep extends React.Component {
                     <Row start="xs">
                       <Col xs={12}>
                         <NextStep>
-                          <Button handleRoute={nextStep}>Étape Suivante</Button>
+                          <Button handleRoute={nextStep}>
+                            {isLoadingNextStep && <LoaderNextStep />}
+                            {!isLoadingNextStep && <span>Étape Suivante</span>}
+                          </Button>
                         </NextStep>
                       </Col>
                     </Row>
@@ -128,6 +133,7 @@ class ToggleStep extends React.Component {
 ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
+  isLoadingNextStep: PropTypes.bool,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
