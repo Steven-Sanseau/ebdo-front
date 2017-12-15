@@ -1,6 +1,4 @@
 import 'whatwg-fetch'
-import Axios from 'axios'
-const apiUrl = process.env.API_URL || 'https://ebdo-api.herokuapp.com/v1'
 
 /**
  * Parses the JSON returned by a network request
@@ -41,15 +39,9 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export function getRequest(paramsUrl, options = {}) {
-  return Axios.get(apiUrl + paramsUrl, options)
+export default function request(url, options) {
+  return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
 }
 
-export function postRequest(paramsUrl, data, options = {}) {
-  console.log(paramsUrl)
-  return Axios.post(apiUrl + paramsUrl, data, options)
-    .then(checkStatus)
-    .then(parseJSON)
-}

@@ -12,8 +12,8 @@ import {
   makeSelectCheckout,
   makeSelectClient
 } from 'containers/Checkout/selectors'
-import { setClientEmail, postClient } from 'containers/checkout/actions'
-import { POST_CLIENT } from 'containers/checkout/constants'
+import { setClientEmail, postClient } from 'containers/Checkout/actions'
+import { POST_CLIENT } from 'containers/Checkout/constants'
 import reducer from 'containers/Checkout/reducer'
 import saga from 'containers/Checkout/saga'
 
@@ -151,6 +151,5 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
 const withReducer = injectReducer({ key: 'checkout', reducer })
-const withSaga = injectSaga({ key: 'checkout', saga })
 
-export default compose(withReducer, withSaga, withConnect)(EmailStep)
+export default compose(withReducer, withConnect)(EmailStep)
