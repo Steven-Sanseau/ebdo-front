@@ -122,7 +122,6 @@ EmailStep.propTypes = {
   email: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
-  // dispatch: PropTypes.func.isRequired,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
   dispatchChangeEmail: PropTypes.func,

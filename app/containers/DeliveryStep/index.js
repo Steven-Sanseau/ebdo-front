@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ToggleStep from '../ToggleStep/Loadable'
+import ToggleStep from 'components/ToggleStep/Loadable'
 
-import FormDelivery from './FormDelivery'
-import CheckboxShowInvoiceForm from './CheckboxShowInvoiceForm'
+import FormDelivery from 'components/FormDelivery'
+import CheckboxShowInvoiceForm from 'components/FormDelivery/CheckboxShowInvoiceForm'
 
 class DeliveryStep extends React.Component {
   constructor(props) {

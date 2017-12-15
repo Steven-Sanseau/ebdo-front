@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-import idx from 'idx'
+// import idx from 'idx'
+
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
@@ -16,7 +17,7 @@ import saga from 'containers/Checkout/saga'
 
 import FormulaStep from 'components/FormulaStep/Loadable'
 import EmailStep from 'containers/EmailStep/Loadable'
-import DeliveryStep from 'components/DeliveryStep/Loadable'
+import DeliveryStep from 'containers/DeliveryStep/Loadable'
 import PaymentStep from 'components/PaymentStep/Loadable'
 
 import Header from 'components/Header'
@@ -78,7 +79,7 @@ export class Checkout extends React.Component {
           <Row>
             <Col xs={12}>
               <DeliveryStep
-                stepNumber={4}
+                stepNumber={3}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -89,7 +90,7 @@ export class Checkout extends React.Component {
             <Col xs={12}>
               <Elements>
                 <PaymentStep
-                  stepNumber={5}
+                  stepNumber={4}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   currentStep={step}
@@ -104,7 +105,7 @@ export class Checkout extends React.Component {
 }
 
 Checkout.propTypes = {
-  // checkout: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   // client: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
