@@ -6,16 +6,8 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import injectReducer from 'utils/injectReducer'
-import injectSaga from 'utils/injectSaga'
-import {
-  makeSelectCheckout,
-  makeSelectClient
-} from 'containers/Checkout/selectors'
+import { makeSelectClient } from 'containers/Checkout/selectors'
 import { setClientEmail, postClient } from 'containers/Checkout/actions'
-import { POST_CLIENT } from 'containers/Checkout/constants'
-import reducer from 'containers/Checkout/reducer'
-import saga from 'containers/Checkout/saga'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -47,7 +39,7 @@ class EmailStep extends React.Component {
 
     this.resetEmail()
     this.setState({ email })
-    this.props.onChangeEmail(this.state.email)
+    this.props.dispatchChangeEmail(this.state.email)
   }
 
   resetEmail() {
@@ -80,8 +72,7 @@ class EmailStep extends React.Component {
     this.validateEmail()
 
     if (this.validateEmail()) {
-      console.log('postClient')
-      this.props.postClient(this.state.email)
+      this.props.dispatchPostClient(this.state.email)
     }
 
     if (!this.state.errorEmail) {
@@ -132,8 +123,8 @@ EmailStep.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  onChangeEmail: PropTypes.func,
-  postClient: PropTypes.func
+  dispatchChangeEmail: PropTypes.func,
+  dispatchPostClient: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -143,13 +134,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeEmail: email => dispatch(setClientEmail(email)),
-    postClient: e => dispatch(postClient())
+    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
+    dispatchPostClient: () => dispatch(postClient())
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-const withReducer = injectReducer({ key: 'checkout', reducer })
-
-export default compose(withReducer, withConnect)(EmailStep)
+export default compose(withConnect)(EmailStep)
