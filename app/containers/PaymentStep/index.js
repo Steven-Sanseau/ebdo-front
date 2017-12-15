@@ -8,10 +8,10 @@ import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
 
-import ToggleStep from '../ToggleStep/Loadable'
+import ToggleStep from 'components/ToggleStep/Loadable'
 
-import StripeForm from './StripeForm'
-import SlimpayForm from './SlimpayForm'
+import StripeForm from 'components/StripeForm'
+import SlimpayForm from 'components/SlimpayForm'
 
 class PaymentStep extends React.Component {
   constructor(props) {

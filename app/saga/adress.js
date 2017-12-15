@@ -1,14 +1,12 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
-import { POST_ADRESS } from 'containers/Checkout/constants'
-import {
-  postAdressError,
-  postAdressLoaded,
-  nextStep
-} from 'containers/Checkout/actions'
 
-import { makeSelectAdressType } from 'containers/Checkout/selectors'
+import { POST_ADRESS } from 'actions/constants'
+import { postAdressError, postAdressLoaded } from 'actions/adress'
+import { nextStep } from 'actions/step'
+
+import { makeSelectAdressType } from 'selectors/adress'
 
 function* postAdress(action) {
   const paramsApiUrl = 'http://localhost:1338/v1/adress/'
@@ -29,6 +27,6 @@ function* postAdress(action) {
   }
 }
 
-export default function* saga() {
+export default function* sagaAdress() {
   yield takeEvery(POST_ADRESS, postAdress)
 }

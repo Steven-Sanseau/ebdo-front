@@ -5,21 +5,31 @@ import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
 // import idx from 'idx'
 
+// STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import injectSaga from 'utils/injectSaga'
 import injectReducer from 'utils/injectReducer'
-import { makeSelectStep } from 'containers/Checkout/selectors'
-import { nextStep, goToStep } from 'containers/Checkout/actions'
-import reducer from 'containers/Checkout/reducer'
+
+// SELECTOR
+import { makeSelectStep } from 'selectors/step'
+import { nextStep, goToStep } from 'actions/step'
+
+// REDUCERS
+import clientReducer from 'reducers/client'
+import adressReducer from 'reducers/adress'
+import stepReducer from 'reducers/step'
+
+// SAGA
 import sagaAdress from 'saga/adress'
 import sagaClient from 'saga/client'
 
+// COMPONENTS
 import FormulaStep from 'components/FormulaStep/Loadable'
 import EmailStep from 'containers/EmailStep/Loadable'
 import DeliveryStep from 'containers/DeliveryStep/Loadable'
-import PaymentStep from 'components/PaymentStep/Loadable'
+import PaymentStep from 'containers/PaymentStep/Loadable'
 
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
@@ -129,7 +139,29 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-const withReducer = injectReducer({ key: 'checkout', reducer })
-const withSaga = injectSaga({ key: 'checkout', saga })
+const withReducerClient = injectReducer({
+  key: 'client',
+  reducer: clientReducer
+})
 
-export default compose(withReducer, withSaga, withConnect)(Checkout)
+const withReducerAdress = injectReducer({
+  key: 'adress',
+  reducer: adressReducer
+})
+
+const withReducerStep = injectReducer({
+  key: 'step',
+  reducer: stepReducer
+})
+
+const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
+const withSagaAdress = injectSaga({ key: 'adress', saga: sagaAdress })
+
+export default compose(
+  withReducerClient,
+  withReducerAdress,
+  withReducerStep,
+  withSagaAdress,
+  withSagaClient,
+  withConnect
+)(Checkout)

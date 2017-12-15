@@ -9,12 +9,8 @@ import {
   makeSelectAdressInvoice,
   makeSelectAdressIsLoading,
   makeSelectAdressDelivery
-} from 'containers/Checkout/selectors'
-import {
-  setAdress,
-  postAdress,
-  setAdressEqual
-} from 'containers/Checkout/actions'
+} from 'selectors/adress'
+import { setAdress, postAdress, setAdressEqual } from 'actions/adress'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
 import FormDelivery from 'components/FormDelivery'

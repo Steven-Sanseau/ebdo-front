@@ -9,8 +9,8 @@ import { compose } from 'redux'
 import {
   makeSelectClientIsLoading,
   makeSelectClientEmail
-} from 'containers/Checkout/selectors'
-import { setClientEmail, postClient } from 'containers/Checkout/actions'
+} from 'selectors/client'
+import { setClientEmail, postClient } from 'actions/client'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
