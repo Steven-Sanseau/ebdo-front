@@ -36,7 +36,7 @@ class FormDelivery extends React.Component {
   }
 
   handleChange(event) {
-    this.props.handleChange({
+    this.props.handleChange(this.props.typeOfAdress, {
       [event.target.name]: event.target.value
     })
   }
@@ -48,12 +48,14 @@ class FormDelivery extends React.Component {
 
   handlePlace(event) {
     event.preventDefault()
-    this.handleChange('adress', event.target.value)
+    this.props.handleChange(this.props.typeOfAdress, {
+      [event.target.name]: event.target.value
+    })
     this.placesAutocomplete.on('change', e => {
-      this.props.handleChange({
+      this.props.handleChange(this.props.typeOfAdress, {
         adress: e.suggestion.name || '',
-        city: e.suggestion.hit.city || '',
-        postalCode: e.suggestion.postcode || '',
+        city: e.suggestion.hit.city[0] || '',
+        postal_code: e.suggestion.postcode || '',
         country: e.suggestion.country || ''
       })
     })
@@ -156,6 +158,7 @@ class FormDelivery extends React.Component {
 
 FormDelivery.propTypes = {
   adress: PropTypes.object,
+  typeOfAdress: PropTypes.string,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func
 }

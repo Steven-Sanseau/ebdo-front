@@ -9,7 +9,8 @@ const Adress = new Record({
   city: null,
   postal_code: null,
   country: null,
-  company: null
+  company: null,
+  type_adress: null
 })
 
 export default Adress

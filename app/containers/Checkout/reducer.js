@@ -65,10 +65,12 @@ function checkoutReducer(state = initialState, action) {
       const newAdress = state
         .getIn(['adress', action.payload.typeOfAdress])
         .mergeDeep(action.payload.adress)
-      return state.setIn(
-        ['adress', action.payload.typeOfAdress],
-        Adress(newAdress)
-      )
+      return state
+        .setIn(['adress', action.payload.typeOfAdress], Adress(newAdress))
+        .setIn(
+          ['adress', action.payload.typeOfAdress, 'type_adress'],
+          action.payload.typeOfAdress
+        )
     }
     case POST_ADRESS_ERROR:
       return state

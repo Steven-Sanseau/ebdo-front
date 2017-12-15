@@ -31,14 +31,14 @@ function* postAdress() {
   const adress = yield select(makeSelectAdress())
 
   try {
-    const client = yield call(request, paramsApiUrl, {
+    const adress = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ adress: { adress } }),
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postClientLoaded(client))
+    yield put(postClientLoaded(adress))
   } catch (err) {
     yield put(postClientError(err.message))
   }

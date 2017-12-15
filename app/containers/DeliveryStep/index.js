@@ -33,12 +33,13 @@ class DeliveryStep extends React.Component {
     this.setState({ isInvoiceSameDelivery: !this.state.isInvoiceSameDelivery })
   }
 
-  handleAdressForm(adress) {
-    this.props.dispatchChangeAdress('delivery', adress)
+  handleAdressForm(type, adress) {
+    this.props.dispatchChangeAdress(type, adress)
   }
 
   handleSubmitAdressForm(event) {
     event.preventDefault()
+    this.props.dispatchPostAdress()
   }
 
   contentOpen() {
@@ -49,6 +50,7 @@ class DeliveryStep extends React.Component {
       <div>
         <FormDelivery
           adress={delivery}
+          typeOfAdress="delivery"
           handleChange={this.handleAdressForm}
           handleSubmit={this.handleSubmitAdressForm}
         />
@@ -59,6 +61,7 @@ class DeliveryStep extends React.Component {
         {!isInvoiceSameDelivery && (
           <FormDelivery
             adress={invoice}
+            typeOfAdress="invoice"
             handleChange={this.handleAdressForm}
             handleSubmit={this.handleSubmitAdressForm}
           />
