@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+import _ from 'lodash'
 
 import Adress from 'models/Adress'
 import Client from 'models/Client'
@@ -32,7 +33,7 @@ const initialState = Immutable.fromJS({
     invoice: new Adress()
   }),
   token: {},
-  step: 1
+  step: 3
 })
 
 function checkoutReducer(state = initialState, action) {
@@ -60,12 +61,15 @@ function checkoutReducer(state = initialState, action) {
         .setIn(['client', 'data'], Client(action.client))
     case POST_ADRESS:
       return state.setIn(['adress', 'loading'], true)
-    case SET_ADRESS:
+    case SET_ADRESS: {
+      const newAdress = state
+        .getIn(['adress', action.payload.typeOfAdress])
+        .mergeDeep(action.payload.adress)
       return state.setIn(
         ['adress', action.payload.typeOfAdress],
-        Adress(action.payload.adress)
+        Adress(newAdress)
       )
-
+    }
     case POST_ADRESS_ERROR:
       return state
         .setIn(['adress', 'loading'], false)

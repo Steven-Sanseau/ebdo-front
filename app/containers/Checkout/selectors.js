@@ -14,6 +14,12 @@ const makeSelectClientEmail = () =>
 
 const makeSelectAdress = () => createSelector(selectAdress, adress => adress)
 
+const makeSelectAdressDelivery = () =>
+  createSelector(selectAdress, adress => adress.get('delivery'))
+
+const makeSelectAdressInvoice = () =>
+  createSelector(selectAdress, adress => adress.get('invoice'))
+
 const makeSelectStep = () =>
   createSelector(selectCheckout, checkout => checkout.get('step'))
 
@@ -28,5 +34,7 @@ export {
   makeSelectClient,
   makeSelectClientIsLoading,
   makeSelectStep,
-  makeSelectAdress
+  makeSelectAdress,
+  makeSelectAdressDelivery,
+  makeSelectAdressInvoice
 }
