@@ -133,7 +133,7 @@ PaymentStep.propTypes = {
   dispatchSetTokenStripe: PropTypes.func,
   dispatchPostToken: PropTypes.func,
   token: PropTypes.object,
-  tokenIsLoading: PropTypes.object
+  tokenIsLoading: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const NumberIcon = styled.div`
-  font-family: 'FG-B';
+  font-family: 'FG-R';
   color: var(${props => (props.color === 'silver' ? '--silver' : '--black')});
   font-weight: bold;
   font-size: 16px;

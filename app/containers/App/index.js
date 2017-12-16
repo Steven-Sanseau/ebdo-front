@@ -14,7 +14,8 @@ export default function App() {
       </Helmet>
       <Switch>
         <Route exact path="/" component={Checkout} />
-        <Route exact path="/subscribe" component={Checkout} />
+        <Route path="/subscribe" component={Checkout} />
+        <Route path="/abonnement" component={Checkout} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

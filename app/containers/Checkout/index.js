@@ -118,23 +118,18 @@ export class Checkout extends React.Component {
 
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  // client: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
-  // dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
   step: makeSelectStep()
-  // checkout: makeSelectCheckout(),
-  // client: makeSelectClient()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
-    goToStep: step => dispatch(goToStep(step)),
-    dispatch
+    goToStep: step => dispatch(goToStep(step))
   }
 }
 

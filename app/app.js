@@ -17,6 +17,7 @@ import App from 'containers/App'
 /* eslint-disable import/no-webpack-loader-syntax */
 
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Bold.woff'
+import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Medium.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Regular.woff'
 import '!file-loader?name=[name].[ext]!./images/favicon.ico'
 import '!file-loader?name=[name].[ext]!./images/icon-72x72.png'

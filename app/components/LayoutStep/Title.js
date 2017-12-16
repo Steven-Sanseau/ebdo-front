@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Title = styled.div`
-  font-family: 'FG-B';
+  font-family: 'FG-R';
   font-size: 18px;
   font-weight: bold;
   text-align: left;
