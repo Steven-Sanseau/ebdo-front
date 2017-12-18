@@ -20,7 +20,7 @@ const makeSelectAdressType = type =>
   createSelector(selectAdress, adress => adress.get(type))
 
 const makeSelectAdressCountry = () =>
-  createSelector(selectAdress, adress => adress.get('country').toJS())
+  createSelector(selectAdress, adress => adress.get('country'))
 
 export {
   makeSelectAdress,

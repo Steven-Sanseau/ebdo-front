@@ -22,7 +22,6 @@ function clientReducer(state = initialState, action) {
       return state.set('loading', true).set('errorMessage', null)
     case SET_CLIENT_EMAIL:
       return state.setIn(['data', 'email'], action.email)
-
     case POST_CLIENT_ERROR:
       return state
         .set('loading', false)

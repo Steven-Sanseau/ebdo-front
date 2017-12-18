@@ -57,7 +57,7 @@ class DeliveryStep extends React.Component {
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
     const { delivery, invoice, country } = this.props
-    console.log('country', country)
+
     return (
       <div>
         <FormDelivery

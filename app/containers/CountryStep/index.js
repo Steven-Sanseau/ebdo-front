@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { setCountryAdress } from 'actions/adress'
+import { makeSelectAdressCountry } from 'selectors/adress'
 
 import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -19,8 +20,7 @@ class CountryStep extends React.Component {
         { label: 'France', value: 'FR' },
         { label: 'Luxenbourg', value: 'LU' },
         { label: 'Belgique', value: 'BE' }
-      ],
-      country: {}
+      ]
     }
 
     this.handleNextStep = this.handleNextStep.bind(this)
@@ -34,18 +34,17 @@ class CountryStep extends React.Component {
   }
 
   handleCountry(country) {
-    this.setState({ country: { label: country.label, value: country.value } })
-    this.props.dispatchCountryAdress(this.state.country)
+    this.props.dispatchCountryAdress(country)
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     event.preventDefault()
-    this.props.dispatchCountryAdress(this.state.country)
   }
 
   contentOpen() {
-    const { countryList, country } = this.state
-
+    const { countryList } = this.state
+    const { country } = this.props
+    console.log(country)
     return (
       <div>
         La livraison en France est comprise dans notre offre. Vous pouvez à ce
@@ -58,13 +57,27 @@ class CountryStep extends React.Component {
           country={country}
           countryList={countryList}
         />
+        {country.value !== 'FR' && (
+          <span>
+            La livraison en {country.label} ajoute 6€ de frais de livraison tous
+            les mois. Ce changement a été appliqué à votre panier.
+          </span>
+        )}
       </div>
     )
   }
 
   contentClose() {
-    const { email } = this.props
-    return <div>Mon Email est {email}</div>
+    const { country } = this.props
+    return (
+      <div>
+        Je me ferai livrer en {country.label}{' '}
+        {country.value === 'FR' && <span>(aucun frais supplémentaire)</span>}.
+        {country.value !== 'FR' && (
+          <span>(des frais supplémentaires de 6€ ont été appliqués)</span>
+        )}.
+      </div>
+    )
   }
 
   render() {
@@ -87,7 +100,7 @@ class CountryStep extends React.Component {
 
 CountryStep.propTypes = {
   clientIsLoading: PropTypes.bool,
-  email: PropTypes.string,
+  country: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
@@ -95,7 +108,9 @@ CountryStep.propTypes = {
   dispatchCountryAdress: PropTypes.func
 }
 
-const mapStateToProps = createStructuredSelector({})
+const mapStateToProps = createStructuredSelector({
+  country: makeSelectAdressCountry()
+})
 
 function mapDispatchToProps(dispatch) {
   return {
