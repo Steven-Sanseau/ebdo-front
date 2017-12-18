@@ -40,7 +40,10 @@ class PaymentStep extends React.Component {
 
     this.props.stripe
       .createToken({
-        card: {}
+        card: {
+          number: '4242424242424242',
+          CVC: '123'
+        }
       })
       .then(({ token }) => {
         this.props.dispatchSetTokenStripe(token)

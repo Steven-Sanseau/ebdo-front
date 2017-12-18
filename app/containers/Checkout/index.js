@@ -32,6 +32,7 @@ import CountryStep from 'containers/CountryStep/Loadable'
 import EmailStep from 'containers/EmailStep/Loadable'
 import DeliveryStep from 'containers/DeliveryStep/Loadable'
 import PaymentStep from 'containers/PaymentStep/Loadable'
+import ConfirmStep from 'containers/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
@@ -115,6 +116,18 @@ export class Checkout extends React.Component {
               <Elements>
                 <PaymentStep
                   stepNumber={5}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  currentStep={step}
+                />
+              </Elements>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Elements>
+                <ConfirmStep
+                  stepNumber={6}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   currentStep={step}

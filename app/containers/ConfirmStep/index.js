@@ -1,24 +1,104 @@
-/**
-*
-* ConfirmStep
-*
-*/
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import React from 'react';
-// import styled from 'styled-components';
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux'
 
+import { confirmCheckout } from 'actions/checkout'
+import { makeSelectAdressCountry } from 'selectors/checkout'
 
-class ConfirmStep extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
+import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
+import ToggleStep from 'components/ToggleStep/Loadable'
+
+class ConfirmStep extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      countryList: [
+        { label: 'France', value: 'FR' },
+        { label: 'Luxenbourg', value: 'LU' },
+        { label: 'Belgique', value: 'BE' }
+      ]
+    }
+
+    this.handleNextStep = this.handleNextStep.bind(this)
+    this.handleCountry = this.handleCountry.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleNextStep() {
+    this.handleSubmit()
+  }
+
+  handleCountry(country) {
+    this.props.dispatchCountryAdress(country)
+  }
+
+  handleSubmit() {
+    this.props.nextStep()
+  }
+
+  contentOpen() {
+    const { countryList } = this.state
+    const { country } = this.props
+
     return (
       <div>
+        Vérifiez attentivement vos informations avant de confirmer.
+        <CheckboxConfirmCheckout label="J'ai lu et accepte les CGV" />
       </div>
-    );
+    )
+  }
+
+  contentClose() {
+    return <div>Vous avez validé votre commande</div>
+  }
+
+  render() {
+    const {
+      currentStep,
+      changeStep,
+      stepNumber,
+      checkoutIsLoading
+    } = this.props
+
+    return (
+      <ToggleStep
+        title="Je confirme mon abonnement"
+        stepNumber={stepNumber}
+        contentClose={this.contentClose()}
+        contentOpen={this.contentOpen()}
+        currentStep={currentStep}
+        changeStep={changeStep}
+        nextStep={this.handleNextStep}
+        isLoadingNextStep={checkoutIsLoading}
+      />
+    )
   }
 }
 
 ConfirmStep.propTypes = {
+  checkoutIsLoading: PropTypes.bool,
+  country: PropTypes.object,
+  changeStep: PropTypes.func,
+  currentStep: PropTypes.number,
+  nextStep: PropTypes.func,
+  stepNumber: PropTypes.number,
+  dispatchCountryAdress: PropTypes.func
+}
 
-};
+const mapStateToProps = createStructuredSelector({
+  country: makeSelectAdressCountry()
+})
 
-export default ConfirmStep;
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchConfirmCheckout: () => dispatch(confirmCheckout())
+  }
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
+
+export default compose(withConnect)(ConfirmStep)
