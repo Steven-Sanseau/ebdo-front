@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { confirmCheckout } from 'actions/checkout'
-import { makeSelectAdressCountry } from 'selectors/checkout'
+import { makeSelectCheckout } from 'selectors/checkout'
 
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -15,35 +15,14 @@ class ConfirmStep extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      countryList: [
-        { label: 'France', value: 'FR' },
-        { label: 'Luxenbourg', value: 'LU' },
-        { label: 'Belgique', value: 'BE' }
-      ]
-    }
-
     this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleCountry = this.handleCountry.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleNextStep() {
     this.handleSubmit()
   }
 
-  handleCountry(country) {
-    this.props.dispatchCountryAdress(country)
-  }
-
-  handleSubmit() {
-    this.props.nextStep()
-  }
-
   contentOpen() {
-    const { countryList } = this.state
-    const { country } = this.props
-
     return (
       <div>
         Vérifiez attentivement vos informations avant de confirmer.
@@ -81,16 +60,16 @@ class ConfirmStep extends React.Component {
 
 ConfirmStep.propTypes = {
   checkoutIsLoading: PropTypes.bool,
-  country: PropTypes.object,
+  checkout: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchCountryAdress: PropTypes.func
+  dispatchConfirmCheckout: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  country: makeSelectAdressCountry()
+  checkout: makeSelectCheckout()
 })
 
 function mapDispatchToProps(dispatch) {

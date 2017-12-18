@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
-const selectStep = state => state.get('step')
+const selectCheckout = state => state.get('checkout')
 
-const makeSelectStep = () =>
-  createSelector(selectStep, step => step.get('value'))
+const makeSelectCheckout = () =>
+  createSelector(selectCheckout, selectCheckout => selectCheckout)
 
-export { makeSelectStep }
+export { makeSelectCheckout }
