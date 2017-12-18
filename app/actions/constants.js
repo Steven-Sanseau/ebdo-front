@@ -6,6 +6,7 @@ export const POST_ADRESS_ERROR = 'app/Checkout/adress/POST_ADRESS_ERROR'
 export const POST_ADRESS_LOADED = 'app/Checkout/adress/POST_ADRESS_LOADED'
 export const SET_ADRESS = 'app/Checkout/adress/SET_ADRESS'
 export const SET_ADRESS_EQUAL = 'app/Checkout/adress/SET_ADRESS_EQUAL'
+export const SET_COUNTRY_ADRESS = 'app/Checkout/adress/SET_COUNTRY_ADRESS'
 
 export const POST_CLIENT = 'app/Checkout/client/POST_CLIENT'
 export const POST_CLIENT_ERROR = 'app/Checkout/client/POST_CLIENT_ERROR'

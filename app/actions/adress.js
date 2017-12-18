@@ -3,7 +3,8 @@ import {
   POST_ADRESS_LOADED,
   POST_ADRESS_ERROR,
   SET_ADRESS,
-  SET_ADRESS_EQUAL
+  SET_ADRESS_EQUAL,
+  SET_COUNTRY_ADRESS
 } from 'actions/constants'
 
 export function postAdress(typeOfAdress) {
@@ -39,6 +40,16 @@ export function setAdress(typeOfAdress, adress) {
     }
   }
 }
+
+export function setCountryAdress(country) {
+  return {
+    type: SET_COUNTRY_ADRESS,
+    payload: {
+      country
+    }
+  }
+}
+
 export function setAdressEqual() {
   return {
     type: SET_ADRESS_EQUAL

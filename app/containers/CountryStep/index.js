@@ -1,90 +1,62 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import emailRegex from 'email-regex'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import {
-  makeSelectClientIsLoading,
-  makeSelectClientEmail
-} from 'selectors/client'
-import { setClientEmail, postClient } from 'actions/client'
+import { setCountryAdress } from 'actions/adress'
 
-import FormEmail from 'components/FormEmail'
+import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
-class EmailStep extends React.Component {
+class CountryStep extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      errorEmail: false,
-      errorMessage: ''
+      countryList: [
+        { label: 'France', value: 'FR' },
+        { label: 'Luxenbourg', value: 'LU' },
+        { label: 'Belgique', value: 'BE' }
+      ],
+      country: {}
     }
 
     this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
+    this.handleCountry = this.handleCountry.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleNextStep(event) {
     this.handleSubmit(event)
+    this.props.nextStep()
   }
 
-  handleEmail(event) {
-    const email = event.target.value
-
-    this.resetEmail()
-    this.props.dispatchChangeEmail(email)
-  }
-
-  resetEmail() {
-    this.setState({ errorEmail: false, errorMessage: '' })
-  }
-
-  validateEmail() {
-    const { email } = this.props
-
-    if (!emailRegex({ exact: true }).test(email)) {
-      this.setState({
-        errorEmail: true,
-        errorMessage: 'Veuillez entrer une adresse email valide'
-      })
-      return false
-    }
-
-    if (email === '') {
-      this.setState({
-        errorEmail: true,
-        errorMessage: 'Veuillez remplir votre email'
-      })
-      return false
-    }
-    return true
+  handleCountry(country) {
+    this.setState({ country: { label: country.label, value: country.value } })
+    this.props.dispatchCountryAdress(this.state.country)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-
-    if (this.validateEmail()) {
-      this.props.dispatchPostClient()
-    }
+    this.props.dispatchCountryAdress(this.state.country)
   }
 
   contentOpen() {
-    const { errorEmail, errorMessage } = this.state
-    const { email } = this.props
+    const { countryList, country } = this.state
 
     return (
       <div>
-        <FormEmail
-          handleEmail={this.handleEmail}
-          errorEmail={errorEmail}
-          errorMessage={errorMessage}
-          handleSubmitEmail={this.handleSubmit}
-          email={email}
+        La livraison en France est comprise dans notre offre. Vous pouvez à ce
+        stade choisir un pays de livraison différent, nous recalculerons les
+        frais de port qui viendront s’ajouter au prix total. Votre pays n’est
+        pas dans la liste ? Suggérez-le nous.
+        <FormCountry
+          handleCountry={this.handleCountry}
+          handleSubmitCountry={this.handleSubmit}
+          country={country}
+          countryList={countryList}
         />
       </div>
     )
@@ -100,7 +72,7 @@ class EmailStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je renseigne mon Email"
+        title="Je calcule mes frais de livraison"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
@@ -113,29 +85,24 @@ class EmailStep extends React.Component {
   }
 }
 
-EmailStep.propTypes = {
+CountryStep.propTypes = {
   clientIsLoading: PropTypes.bool,
   email: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchChangeEmail: PropTypes.func,
-  dispatchPostClient: PropTypes.func
+  dispatchCountryAdress: PropTypes.func
 }
 
-const mapStateToProps = createStructuredSelector({
-  clientIsLoading: makeSelectClientIsLoading(),
-  email: makeSelectClientEmail()
-})
+const mapStateToProps = createStructuredSelector({})
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient())
+    dispatchCountryAdress: country => dispatch(setCountryAdress(country))
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(EmailStep)
+export default compose(withConnect)(CountryStep)

@@ -28,6 +28,7 @@ import sagaClient from 'saga/client'
 
 // CONTAINERS
 import FormulaStep from 'containers/FormulaStep/Loadable'
+import CountryStep from 'containers/CountryStep/Loadable'
 import EmailStep from 'containers/EmailStep/Loadable'
 import DeliveryStep from 'containers/DeliveryStep/Loadable'
 import PaymentStep from 'containers/PaymentStep/Loadable'
@@ -81,7 +82,7 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <EmailStep
+              <CountryStep
                 stepNumber={2}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -91,8 +92,18 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <DeliveryStep
+              <EmailStep
                 stepNumber={3}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <DeliveryStep
+                stepNumber={4}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -103,7 +114,7 @@ export class Checkout extends React.Component {
             <Col xs={12}>
               <Elements>
                 <PaymentStep
-                  stepNumber={4}
+                  stepNumber={5}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   currentStep={step}

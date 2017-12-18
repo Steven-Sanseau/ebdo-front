@@ -30,6 +30,7 @@ class InputText extends React.Component {
                 ref={this.props.reference || null}
                 type="text"
                 value={this.props.value || ''}
+                disabled={this.props.disabled || false}
               />
             </Col>
           </Row>
@@ -58,7 +59,8 @@ InputText.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   reference: PropTypes.func,
-  value: PropTypes.string
+  value: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default InputText

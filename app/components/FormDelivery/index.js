@@ -18,6 +18,7 @@ class FormDelivery extends React.Component {
 
   componentDidMount() {
     this.adressInput = ReactDOM.findDOMNode(this.adressInput)
+    const allowedCountry = this.props.country.value
 
     this.placesAutocomplete = places({
       container: this.adressInput,
@@ -26,8 +27,8 @@ class FormDelivery extends React.Component {
         value(suggestion) {
           return suggestion.name
         }
-      },
-      countries: ['fr', 'be', 'lu']
+      }
+      // countries: [allowedCountry]
     })
 
     this.placesAutocomplete.on('clear', () => {
@@ -54,8 +55,7 @@ class FormDelivery extends React.Component {
       this.props.handleChange(this.props.typeOfAdress, {
         adress: e.suggestion.name || '',
         city: e.suggestion.city || '',
-        postal_code: e.suggestion.postcode || '',
-        country: e.suggestion.country || ''
+        postal_code: e.suggestion.postcode || ''
       })
     })
   }
@@ -141,8 +141,9 @@ class FormDelivery extends React.Component {
                     label="Pays"
                     name="country"
                     isRequired
-                    value={this.props.adress.country}
-                    onChange={this.handleChange}
+                    disabled
+                    onChange={() => {}}
+                    value={this.props.country.label}
                     placeholder="Pays"
                   />
                 </Col>
@@ -157,6 +158,7 @@ class FormDelivery extends React.Component {
 
 FormDelivery.propTypes = {
   adress: PropTypes.object,
+  country: PropTypes.object.isRequired,
   typeOfAdress: PropTypes.string,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func

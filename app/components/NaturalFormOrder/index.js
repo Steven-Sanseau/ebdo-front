@@ -87,7 +87,7 @@ const valueElem = (title, subtitle) => (
 
 const options1 = [
   {
-    value: 'chez moi',
+    value: 'me',
     label: valueElem(
       'je reçois',
       <span>
@@ -96,7 +96,7 @@ const options1 = [
     )
   },
   {
-    value: 'à un proche',
+    value: 'gift',
     label: valueElem(
       "j'offre",
       <span>
@@ -107,28 +107,28 @@ const options1 = [
 ]
 const options2 = [
   {
-    value: '4 numéros',
+    value: 'inf',
     label: valueElem(
       'Chaque mois',
       <span>Sans engagement, je pourrais me désengager en un clic !</span>
     )
   },
   {
-    value: '12 numéros',
+    value: '12',
     label: valueElem(
       'Pendant 3 mois',
       <span>Régler maintenant et recevez 12 numéros.</span>
     )
   },
   {
-    value: '24 numéros',
+    value: '24',
     label: valueElem(
       'Pendant 6 mois',
       <span>Régler maintenant et recevez 24 numéros.</span>
     )
   },
   {
-    value: '48 numéros',
+    value: '48',
     label: valueElem(
       'Pendant 12 mois',
       <span>Régler maintenant et recevez 48 numéros.</span>
@@ -137,7 +137,7 @@ const options2 = [
 ]
 const options3 = [
   {
-    value: '10€',
+    value: 10,
     label: valueElem(
       <span>
         10€ <sup>/ mois</sup>
@@ -148,7 +148,7 @@ const options3 = [
     )
   },
   {
-    value: '15€',
+    value: 15,
     label: valueElem(
       <span>
         15€ <sup>/ mois</sup>
@@ -159,7 +159,7 @@ const options3 = [
     )
   },
   {
-    value: '20€',
+    value: 20,
     label: valueElem(
       <span>
         20€ <sup>/ mois</sup>
@@ -170,7 +170,7 @@ const options3 = [
     )
   },
   {
-    value: '5€',
+    value: 5,
     label: valueElem(
       <span>
         5€ <sup>/ mois</sup>

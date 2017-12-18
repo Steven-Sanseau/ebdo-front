@@ -1,40 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Slider from 'rc-slider'
 import { Row, Col } from 'react-flexbox-grid'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
+import NaturalFormOrder from 'components/NaturalFormOrder'
 import FormulaText from './FormulaText'
 import BoldText from './BoldText'
-import GreyText from './GreyText'
-
-import Checkbox from 'components/Checkbox'
-import InputCheckbox from 'components/InputCheckbox'
-import NaturalFormOrder from 'components/NaturalFormOrder'
-
-// import 'rc-slider/assets/index.css'
-// import './slider.css'
 
 class FormulaStep extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      formula: true,
-      isChecked: false,
-      price: 12,
-      recurring: 0,
-      target: 'chez moi',
-      time: '4 numéros',
+      price: 15,
+      target: 'me',
+      time: 'inf',
       isNaturalForm: true
     }
 
-    this.handleSlider = this.handleSlider.bind(this)
-    this.handleCheckbox = this.handleCheckbox.bind(this)
-    this.handleCheckboxInput = this.handleCheckboxInput.bind(this)
+    this.handleNextStep = this.handleNextStep.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleRoute = this.handleRoute.bind(this)
     this.switchUI = this.switchUI.bind(this)
+  }
+
+  handleNextStep(event) {
+    event.preventDefault()
+    this.props.nextStep()
   }
 
   handleChange(e, key) {
@@ -49,52 +41,17 @@ class FormulaStep extends React.Component {
     this.setState({ isNaturalForm: !this.state.isNaturalForm })
   }
 
-  handleSlider(choice) {
-    this.setState({ price: choice })
-  }
-
-  handleCheckbox() {
-    this.setState({ isChecked: !this.state.isChecked })
-  }
-
-  handleCheckboxInput(value) {
-    this.setState({ recurring: value })
-  }
-
   contentOpen() {
-    const {
-      formula,
-      isChecked,
-      price,
-      recurring,
-      isNaturalForm,
-      target,
-      time
-    } = this.state
-    const marks = {
-      5: '5€',
-      8: '8€',
-      12: '12€',
-      20: '20€'
-    }
-
-    // const textCheckbox = {
-    //   threemonth: `3 Mois (${3 * price}€)`,
-    //   sixmonth: `6 Mois (${6 * price}€)`,
-    //   twelvemonth: `12 Mois (${12 * price}€)`
-    // }
+    const { price, isNaturalForm, target, time } = this.state
 
     return (
       <div>
         <Row>
           <Col xs={11}>
             <FormulaText>
-              <BoldText>ebdo</BoldText> met en place un abonnement solidaire.
-              Nous vous proposons de choisir le montant de votre abonnement, en
-              fonction de votre engagement et de vos moyens. Avec notre{' '}
-              <BoldText>formule libre</BoldText>, vous êtes prélevés
-              mensuellement et pouvez résilier votre abonnement à tout moment,{' '}
-              <GreyText>très simplement</GreyText>.
+              Les frais de livraison en France (Métropilitaine et outre-mer)
+              sont inclus. Les frais de livraison vers un autre pays seront
+              ajoutés à l’étape suivante.
             </FormulaText>
           </Col>
         </Row>
@@ -108,77 +65,17 @@ class FormulaStep extends React.Component {
             switchUI={this.switchUI}
           />
         </Row>
-        <Row>
-          <Col xs={11}>
-            <FormulaText>
-              Avec un abonnement de <BoldText>12€ par mois</BoldText>, vous
-              participez à hauteur du montant « responsable ». Vous participez
-              aux frais de rédation, d’impression et de distribution d’<BoldText
-              >
-                ebdo
-              </BoldText>.
-            </FormulaText>
-            <FormulaText>
-              <BoldText>Vous êtes allergique aux abonnements ? </BoldText>On
-              vous comprend. Vous pouvez opter pour une formule à durée limitée.
-              Vous règlerez en une fois, à hauteur du montant que vous venez de
-              choisir.
-            </FormulaText>
-          </Col>
-        </Row>
-        <Row start="xs">
-          <Col xs={12}>
-            <Checkbox
-              text="Je veux m'engager pour une durée fixe"
-              onCheck={this.handleCheckbox}
-              isChecked={isChecked}
-            />
-          </Col>
-        </Row>
-        {/* {isChecked && (
-          <Row start="xs">
-            <Col xs={12}>
-              <Row>
-                <Col lg={4} xs={12}>
-                  <InputCheckbox
-                    text={textCheckbox.threemonth}
-                    onCheck={this.handleCheckboxInput}
-                    isChecked={recurring === 3}
-                    valueCheck={3}
-                  />
-                </Col>
-                <Col lg={4} xs={12}>
-                  <InputCheckbox
-                    text={textCheckbox.sixmonth}
-                    onCheck={this.handleCheckboxInput}
-                    isChecked={recurring === 6}
-                    valueCheck={6}
-                  />
-                </Col>
-                <Col lg={4} xs={12}>
-                  <InputCheckbox
-                    text={textCheckbox.twelvemonth}
-                    onCheck={this.handleCheckboxInput}
-                    isChecked={recurring === 12}
-                    valueCheck={12}
-                  />
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        )} */}
       </div>
     )
   }
 
   contentClose() {
-    const { price, recurring } = this.state
+    const { price } = this.state
     return (
       <div>
         Je m{"'"}abonne sans engagement pour un montant de{' '}
         <BoldText>{price}€</BoldText>
         <BoldText>/mois</BoldText>
-        {recurring !== 0 && <BoldText> pendant {recurring} mois</BoldText>}
       </div>
     )
   }
@@ -194,7 +91,7 @@ class FormulaStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={nextStep}
+        nextStep={this.handleNextStep}
       />
     )
   }

@@ -8,7 +8,8 @@ import { compose } from 'redux'
 import {
   makeSelectAdressInvoice,
   makeSelectAdressIsLoading,
-  makeSelectAdressDelivery
+  makeSelectAdressDelivery,
+  makeSelectAdressCountry
 } from 'selectors/adress'
 import { setAdress, postAdress, setAdressEqual } from 'actions/adress'
 
@@ -55,12 +56,13 @@ class DeliveryStep extends React.Component {
 
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
-    const { delivery, invoice } = this.props
-
+    const { delivery, invoice, country } = this.props
+    console.log('country', country)
     return (
       <div>
         <FormDelivery
           adress={delivery}
+          country={country}
           typeOfAdress="delivery"
           handleChange={this.handleAdressForm}
           handleSubmit={this.handleSubmitAdressForm}
@@ -72,6 +74,7 @@ class DeliveryStep extends React.Component {
         {!isInvoiceSameDelivery && (
           <FormDelivery
             adress={invoice}
+            country={country}
             typeOfAdress="invoice"
             handleChange={this.handleAdressForm}
             handleSubmit={this.handleSubmitAdressForm}
@@ -114,6 +117,7 @@ class DeliveryStep extends React.Component {
 
 DeliveryStep.propTypes = {
   adressIsLoading: PropTypes.bool,
+  country: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   stepNumber: PropTypes.number,
@@ -126,6 +130,7 @@ DeliveryStep.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
+  country: makeSelectAdressCountry(),
   adressIsLoading: makeSelectAdressIsLoading(),
   invoice: makeSelectAdressInvoice(),
   delivery: makeSelectAdressDelivery()
