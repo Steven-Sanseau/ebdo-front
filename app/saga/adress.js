@@ -6,12 +6,11 @@ import { POST_ADRESS } from 'actions/constants'
 import { postAdressError, postAdressLoaded } from 'actions/adress'
 import { nextStep } from 'actions/step'
 
-import { makeSelectAdressType, makeSelectAdressId } from 'selectors/adress'
+import { makeSelectAdressType } from 'selectors/adress'
 
 function* postAdress(action) {
   let paramsApiUrl = 'http://localhost:1338/v1/adress'
   const adress = yield select(makeSelectAdressType(action.typeOfAdress))
-  // const id = yield select(makeSelectAdressId())
   let method = 'POST'
 
   try {
@@ -29,7 +28,10 @@ function* postAdress(action) {
       }
     })
     yield put(postAdressLoaded(action.typeOfAdress, adressResponse))
-    yield put(nextStep())
+
+    if (action.typeOfAdress === 'invoice') {
+      yield put(nextStep())
+    }
   } catch (err) {
     yield put(postAdressError(err.message))
   }

@@ -32,6 +32,7 @@ function adressReducer(state = initialState, action) {
         .get(action.payload.typeOfAdress)
         .mergeDeep(action.payload.adress)
       const country = state.getIn(['country', 'value'])
+
       return state
         .set(action.payload.typeOfAdress, Adress(newAdress))
         .setIn(
@@ -61,7 +62,7 @@ function adressReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set('country', action.payload.country)
+        .set('country', Immutable.fromJS(action.payload.country))
     }
     default:
       return state

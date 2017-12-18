@@ -1,4 +1,4 @@
-import { NEXT_STEP, UPDATE_STEP } from 'actions/constants'
+import { SET_OFFER, UPDATE_STEP } from 'actions/constants'
 
 export function nextStep() {
   return {

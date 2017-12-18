@@ -31,6 +31,7 @@ class InputText extends React.Component {
                 type="text"
                 value={this.props.value || ''}
                 disabled={this.props.disabled || false}
+                autocomplete="false"
               />
             </Col>
           </Row>

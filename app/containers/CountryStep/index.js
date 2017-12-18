@@ -28,9 +28,8 @@ class CountryStep extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNextStep(event) {
-    this.handleSubmit(event)
-    this.props.nextStep()
+  handleNextStep() {
+    this.handleSubmit()
   }
 
   handleCountry(country) {
@@ -38,13 +37,13 @@ class CountryStep extends React.Component {
   }
 
   handleSubmit() {
-    event.preventDefault()
+    this.props.nextStep()
   }
 
   contentOpen() {
     const { countryList } = this.state
     const { country } = this.props
-    console.log(country)
+
     return (
       <div>
         La livraison en France est comprise dans notre offre. Vous pouvez à ce

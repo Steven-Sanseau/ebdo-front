@@ -27,8 +27,8 @@ class FormDelivery extends React.Component {
         value(suggestion) {
           return suggestion.name
         }
-      }
-      // countries: [allowedCountry]
+      },
+      countries: [allowedCountry]
     })
 
     this.placesAutocomplete.on('clear', () => {
@@ -65,12 +65,10 @@ class FormDelivery extends React.Component {
       <div>
         <Row>
           <Col xs={12}>
-            <form onSubmit={this.handleSubmit}>
+            <form autoComplete="false" onSubmit={this.handleSubmit}>
               <Row>
                 <Col xs={12} lg={6}>
                   <InputText
-                    error
-                    errorMessage="Veuillez renseigner votre Prénom"
                     label="Prénom"
                     name="first_name"
                     value={this.props.adress.first_name}
@@ -80,13 +78,22 @@ class FormDelivery extends React.Component {
                 </Col>
                 <Col xs={12} lg={6}>
                   <InputText
-                    error
-                    errorMessage="Veuillez renseigner votre Nom"
                     label="Nom"
                     name="last_name"
                     value={this.props.adress.last_name}
                     onChange={this.handleChange}
                     placeholder="Michel"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} lg={6}>
+                  <InputText
+                    label="Téléphone"
+                    name="phone"
+                    value={this.props.adress.phone}
+                    onChange={this.handleChange}
+                    placeholder="Votre numéro de téléphone"
                   />
                 </Col>
                 <Col xs={12} lg={6}>
