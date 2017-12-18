@@ -48,6 +48,9 @@ class PaymentStep extends React.Component {
   }
 
   handleNextStep(event) {
+    event.preventDefault()
+
+    this.props.dispatchPostToken()
     this.props.nextStep()
   }
 

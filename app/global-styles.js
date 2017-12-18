@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components'
+import { injectGlobal, css } from 'styled-components'
 
 // these sizes are arbitrary and you can set them to whatever you wish
 const sizes = {
@@ -7,10 +7,10 @@ const sizes = {
   tablet: 768,
   phone: 376
 }
+
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
-
-@font-face {
+  @font-face {
     font-family: 'FG-R';
     font-style: normal;
     font-weight: 400;
@@ -36,11 +36,6 @@ injectGlobal`
     width: 100%;
     font-family: 'FG-R';
     line-height: 26px;
-    /* letter-spacing: 0.5px; */
-  }
-
-  h1, h2, h3, h4, h5 {
-    margin: 0;
   }
 
   a:hover {
@@ -52,10 +47,6 @@ injectGlobal`
     -webkit-font-smoothing: antialiased;
   }
 
-  /* To round the right part of the Progress Component */
-  .progress-line svg path:last-of-type{
-    stroke-linecap: round;
-  }
     :root {
       --warm-grey: #979797;
       --greyish-brown: #4a4a4a;

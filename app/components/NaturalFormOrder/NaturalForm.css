@@ -1,0 +1,59 @@
+.Dropdown-control p {
+  display: none;
+}
+.Dropdown-root {
+  position: relative;
+}
+.Dropdown-control h3 {
+  line-height: 70px;
+  font-weight: 500;
+}
+
+.Dropdown-root.is-open {
+  border-style: solid;
+  border-color: transparent; 
+  /* position: absolute; */
+  z-index: 10;
+  background-color: white;
+
+}
+.Dropdown-root sup {
+  top: -0.7em;
+  font-size: 50%;
+}
+.Dropdown-root.is-open .Dropdown-control {
+  /* display: none; */
+  visibility: hidden;
+}
+.Dropdown-root.is-open .Dropdown-menu {
+  position: absolute;
+}
+.Dropdown-menu {
+  padding: 30px;
+  letter-spacing: 0;
+}
+.Dropdown-menu .valueWrap h3 {
+  font-size: 22px;
+}
+
+.Dropdown-option:not(.is-selected) .valueWrap h3 {
+  color: #D4DADD;
+}
+.Dropdown-option:not(:last-of-type) {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #D4DADD;
+}
+
+.Dropdown-root:not(.is-open):after {
+  content: '';
+  display: block;
+  border: 9px solid transparent;
+  border-top-color: inherit;
+  position: absolute;
+  right: 20px;
+  top: 50%; 
+}
+.Dropdown-root:not(.is-open):hover:after {
+  border-top-color: white;
+}

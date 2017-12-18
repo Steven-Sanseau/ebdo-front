@@ -18,7 +18,12 @@ export default class StripeForm extends Component {
 
     this.state = {}
 
+    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(event) {
+    console.log(event)
   }
 
   handleSubmit(event) {
@@ -40,7 +45,10 @@ export default class StripeForm extends Component {
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <CardNumberElement className="card-number input-stripe" />
+                    <CardNumberElement
+                      onChange={event => this.handleChange(event)}
+                      className="card-number input-stripe"
+                    />
                   </Col>
                 </Row>
               </Label>

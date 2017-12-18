@@ -26,12 +26,13 @@ import stepReducer from 'reducers/step'
 import sagaAdress from 'saga/adress'
 import sagaClient from 'saga/client'
 
-// COMPONENTS
-import FormulaStep from 'components/FormulaStep/Loadable'
+// CONTAINERS
+import FormulaStep from 'containers/FormulaStep/Loadable'
 import EmailStep from 'containers/EmailStep/Loadable'
 import DeliveryStep from 'containers/DeliveryStep/Loadable'
 import PaymentStep from 'containers/PaymentStep/Loadable'
 
+// COMPONENTS
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
 

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types'
 import Slider from 'rc-slider'
 import { Row, Col } from 'react-flexbox-grid'
 
-import ToggleStep from '../ToggleStep/Loadable'
+import ToggleStep from 'components/ToggleStep/Loadable'
 import FormulaText from './FormulaText'
 import BoldText from './BoldText'
 import GreyText from './GreyText'
 
 import Checkbox from 'components/Checkbox'
 import InputCheckbox from 'components/InputCheckbox'
+import NaturalFormOrder from 'components/NaturalFormOrder'
 
-import 'rc-slider/assets/index.css'
-import './slider.css'
+// import 'rc-slider/assets/index.css'
+// import './slider.css'
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -22,12 +23,30 @@ class FormulaStep extends React.Component {
       formula: true,
       isChecked: false,
       price: 12,
-      recurring: 0
+      recurring: 0,
+      target: 'chez moi',
+      time: '4 numéros',
+      isNaturalForm: true
     }
 
     this.handleSlider = this.handleSlider.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleCheckboxInput = this.handleCheckboxInput.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleRoute = this.handleRoute.bind(this)
+    this.switchUI = this.switchUI.bind(this)
+  }
+
+  handleChange(e, key) {
+    this.setState({ [e]: key.value })
+  }
+
+  handleRoute() {
+    // console.log(e);
+  }
+
+  switchUI() {
+    this.setState({ isNaturalForm: !this.state.isNaturalForm })
   }
 
   handleSlider(choice) {
@@ -43,7 +62,15 @@ class FormulaStep extends React.Component {
   }
 
   contentOpen() {
-    const { formula, isChecked, price, recurring } = this.state
+    const {
+      formula,
+      isChecked,
+      price,
+      recurring,
+      isNaturalForm,
+      target,
+      time
+    } = this.state
     const marks = {
       5: '5€',
       8: '8€',
@@ -51,11 +78,11 @@ class FormulaStep extends React.Component {
       20: '20€'
     }
 
-    const textCheckbox = {
-      threemonth: `3 Mois (${3 * price}€)`,
-      sixmonth: `6 Mois (${6 * price}€)`,
-      twelvemonth: `12 Mois (${12 * price}€)`
-    }
+    // const textCheckbox = {
+    //   threemonth: `3 Mois (${3 * price}€)`,
+    //   sixmonth: `6 Mois (${6 * price}€)`,
+    //   twelvemonth: `12 Mois (${12 * price}€)`
+    // }
 
     return (
       <div>
@@ -72,16 +99,14 @@ class FormulaStep extends React.Component {
           </Col>
         </Row>
         <Row center="xs">
-          <Col lg={6} xs={10}>
-            <Slider
-              min={5}
-              max={20}
-              marks={marks}
-              step={null}
-              onChange={this.handleSlider}
-              defaultValue={price}
-            />
-          </Col>
+          <NaturalFormOrder
+            handleChange={this.handleChange}
+            target={target}
+            time={time}
+            price={price}
+            isNaturalForm={isNaturalForm}
+            switchUI={this.switchUI}
+          />
         </Row>
         <Row>
           <Col xs={11}>
@@ -110,7 +135,7 @@ class FormulaStep extends React.Component {
             />
           </Col>
         </Row>
-        {isChecked && (
+        {/* {isChecked && (
           <Row start="xs">
             <Col xs={12}>
               <Row>
@@ -141,7 +166,7 @@ class FormulaStep extends React.Component {
               </Row>
             </Col>
           </Row>
-        )}
+        )} */}
       </div>
     )
   }
