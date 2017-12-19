@@ -130,14 +130,12 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <Elements>
-                <ConfirmStep
-                  stepNumber={6}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
+              <ConfirmStep
+                stepNumber={6}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
             </Col>
           </Row>
         </Layout>

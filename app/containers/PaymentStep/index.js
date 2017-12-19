@@ -5,8 +5,10 @@ import { Row, Col } from 'react-flexbox-grid'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
+// import { compose } from 'redux'
 
+import { makeSelectPayementMethod } from 'selectors/checkout'
+import { setPayementMethod } from 'actions/checkout'
 import { makeSelectTokenIsLoading, makeSelectToken } from 'selectors/token'
 import { postToken, setTokenStripe } from 'actions/token'
 
@@ -22,38 +24,48 @@ class PaymentStep extends React.Component {
     super(props)
 
     this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
-    this.handlePaiementInfo = this.handlePaiementInfo.bind(this)
+    this.handleSubmitStripeForm = this.handleSubmitStripeForm.bind(this)
+    this.handleChangeStripeForm = this.handleChangeStripeForm.bind(this)
     this.handleNextStep = this.handleNextStep.bind(this)
   }
 
   handlePaiementMethod(value) {
-    this.setState({ paiementMethod: value })
+    this.props.dispatchSetPayementMethod(value)
   }
 
-  handlePaiementInfo(event) {
-    event.preventDefault()
+  handleChangeStripeForm(event) {
+    this.getStripeToken()
+  }
 
-    this.props.stripe
-      .createToken({
-        card: {
-          number: '4242424242424242',
-          CVC: '123'
+  handleSubmitStripeForm(event) {
+    this.props.stripe.createToken(name).then(({ token }) => {
+      this.props.dispatchSetTokenStripe(token)
+    })
+  }
+
+  getStripeToken() {
+    if (!this.props.token.tokenStripe.id) {
+      this.props.stripe.createToken().then(result => {
+        if (result.error) {
+          console.log(result.error)
         }
+
+        this.props.dispatchSetTokenStripe(result.token)
       })
-      .then(({ token }) => {
-        this.props.dispatchSetTokenStripe(token)
-      })
+    }
   }
 
   handleNextStep(event) {
     event.preventDefault()
-
-    this.props.dispatchPostToken()
-    this.props.nextStep()
+    this.getStripeToken()
+    //
+    // this.props.dispatchPostToken()
+    // this.props.nextStep()
   }
 
   contentOpen() {
-    const { paiementMethod } = this.state
+    const { payementMethod, token } = this.props
+    console.log(token)
     return (
       <div>
         <Row start="xs">
@@ -63,7 +75,7 @@ class PaymentStep extends React.Component {
                 <InputCheckbox
                   text="Prélèvement SEPA"
                   onCheck={this.handlePaiementMethod}
-                  isChecked={paiementMethod === 1}
+                  isChecked={payementMethod === 1}
                   icon={<SepaIcon />}
                   valueCheck={1}
                 />
@@ -72,7 +84,7 @@ class PaymentStep extends React.Component {
                 <InputCheckbox
                   text="Carte Banquaire"
                   onCheck={this.handlePaiementMethod}
-                  isChecked={paiementMethod === 2}
+                  isChecked={payementMethod === 2}
                   icon={<CBIcon />}
                   valueCheck={2}
                 />
@@ -80,19 +92,20 @@ class PaymentStep extends React.Component {
             </Row>
           </Col>
         </Row>
-        {paiementMethod === 1 && (
+        {payementMethod === 1 && (
           <Row>
             <Col xs={6}>
               <SlimpayForm />
             </Col>
           </Row>
         )}
-        {paiementMethod === 2 && (
+        {payementMethod === 2 && (
           <Row>
             <Col xs={12}>
-              <form onSubmit={this.handlePaiementInfo}>
-                <StripeForm />
-              </form>
+              <StripeForm
+                handleChange={this.handleChangeStripeForm}
+                handleSubmit={this.handleSubmitStripeForm}
+              />
             </Col>
           </Row>
         )}
@@ -101,15 +114,18 @@ class PaymentStep extends React.Component {
   }
 
   contentClose() {
+    const { payementMethod } = this.props
     return (
       <div>
-        Je souhaite regler mon abonnement par <b>carte bancaire</b>
+        Je souhaite regler mon abonnement par
+        {payementMethod === 1 && <span>prélèvement SEPA</span>}
+        {payementMethod === 2 && <span>carte bancaire</span>}
       </div>
     )
   }
 
   render() {
-    const { currentStep, nextStep, changeStep, stepNumber } = this.props
+    const { currentStep, changeStep, stepNumber } = this.props
 
     return (
       <ToggleStep
@@ -119,7 +135,7 @@ class PaymentStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={nextStep}
+        nextStep={this.handleNextStep}
       />
     )
   }
@@ -133,24 +149,26 @@ PaymentStep.propTypes = {
   stripe: PropTypes.object,
   dispatchSetTokenStripe: PropTypes.func,
   dispatchPostToken: PropTypes.func,
+  dispatchSetPayementMethod: PropTypes.func,
+  payementMethod: PropTypes.number,
   token: PropTypes.object,
-  tokenIsLoading: PropTypes.bool,
-  payementMethod: PropTypes.number
+  tokenIsLoading: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
+  payementMethod: makeSelectPayementMethod(),
   tokenIsLoading: makeSelectTokenIsLoading(),
   token: makeSelectToken()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchSetPayementMethod: method => dispatch(setTokenStripe(method)),
+    dispatchSetPayementMethod: method => dispatch(setPayementMethod(method)),
     dispatchSetTokenStripe: token => dispatch(setTokenStripe(token)),
     dispatchPostToken: () => dispatch(postToken())
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-export default compose(injectStripe, withConnect)(PaymentStep)
+export default injectStripe(
+  connect(mapStateToProps, mapDispatchToProps)(PaymentStep)
+)

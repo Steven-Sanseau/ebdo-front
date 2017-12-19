@@ -3,34 +3,34 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 import request from 'utils/request'
 
 import { POST_TOKEN } from 'actions/constants'
-import { postAdressError, postAdressLoaded } from 'actions/adress'
+import { postTokenLoaded, postTokenError } from 'actions/token'
 import { nextStep } from 'actions/step'
 
-import { makeSelectAdressType } from 'selectors/adress'
+import { makeSelectToken } from 'selectors/token'
 
 function* postToken(action) {
-  let paramsApiUrl = 'http://localhost:1338/v1/adress'
-  const adress = yield select(makeSelectAdressType(action.typeOfAdress))
+  let paramsApiUrl = 'http://localhost:1338/v1/token'
+  const token = yield select(makeSelectToken())
   let method = 'POST'
 
   try {
     // WARNING W/ PATCH
-    if (adress.adress_id !== null) {
+    if (token.token_id !== null) {
       method = 'PATCH'
-      paramsApiUrl = `${paramsApiUrl}/${adress.adress_id}`
+      paramsApiUrl = `${paramsApiUrl}/${token.token_id}`
     }
 
-    const adressResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ adress }),
+    const tokenResponse = yield call(request, paramsApiUrl, {
+      body: JSON.stringify({ token }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postAdressLoaded(action.typeOfAdress, adressResponse))
+    yield put(postTokenLoaded(tokenResponse))
     yield put(nextStep())
   } catch (err) {
-    yield put(postAdressError(err.message))
+    yield put(postTokenError(err.message))
   }
 }
 

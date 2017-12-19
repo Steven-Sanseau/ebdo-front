@@ -5,8 +5,8 @@ import {
   CardNumberElement,
   CardExpiryElement,
   CardCVCElement
-  // CardElement
 } from 'react-stripe-elements'
+
 import Label from 'components/InputText/Label'
 import Required from 'components/InputText/Required'
 
@@ -18,12 +18,7 @@ export default class StripeForm extends Component {
 
     this.state = {}
 
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChange(event) {
-    console.log(event)
   }
 
   handleSubmit(event) {
@@ -36,7 +31,6 @@ export default class StripeForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col lg={6} xs={12}>
-              {/* <CardElement className="card-number input-stripe" /> */}
               <Label>
                 <Row>
                   <Col xs={12}>
@@ -46,7 +40,7 @@ export default class StripeForm extends Component {
                 <Row>
                   <Col xs={12}>
                     <CardNumberElement
-                      onChange={event => this.handleChange(event)}
+                      onChange={this.props.handleChange}
                       className="card-number input-stripe"
                     />
                   </Col>
@@ -62,7 +56,10 @@ export default class StripeForm extends Component {
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <CardExpiryElement className="card-expire input-stripe" />
+                    <CardExpiryElement
+                      onChange={this.props.handleChange}
+                      className="card-expire input-stripe"
+                    />
                   </Col>
                 </Row>
               </Label>
@@ -76,7 +73,10 @@ export default class StripeForm extends Component {
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <CardCVCElement className="card-cvc input-stripe" />
+                    <CardCVCElement
+                      onChange={this.props.handleChange}
+                      className="card-cvc input-stripe"
+                    />
                   </Col>
                 </Row>
               </Label>
@@ -89,5 +89,6 @@ export default class StripeForm extends Component {
 }
 
 StripeForm.propTypes = {
-  submitPayement: PropTypes.func
+  submitPayement: PropTypes.func,
+  handleChange: PropTypes.func
 }

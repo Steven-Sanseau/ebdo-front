@@ -3,7 +3,7 @@ import Immutable from 'immutable'
 import { NEXT_STEP, UPDATE_STEP } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
-  value: 1
+  value: 5
 })
 
 function stepReducer(state = initialState, action) {

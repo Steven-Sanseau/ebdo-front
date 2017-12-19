@@ -28,6 +28,6 @@ export function postTokenLoaded(token) {
 export function setTokenStripe(tokenStripe) {
   return {
     type: SET_TOKEN_STRIPE,
-    token_stripe: tokenStripe
+    tokenStripe
   }
 }

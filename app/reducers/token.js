@@ -13,6 +13,7 @@ const initialState = Immutable.fromJS({
   loading: false,
   error: false,
   errorMessage: null,
+  card: {},
   tokenStripe: {},
   mandatSepa: null
 })
@@ -22,8 +23,7 @@ function tokenReducer(state = initialState, action) {
     case POST_TOKEN:
       return state.set('loading', true).set('errorMessage', null)
     case SET_TOKEN_STRIPE:
-      return state.set('tokenStripe', action.token_stripe)
-
+      return state.set('tokenStripe', action.tokenStripe)
     case POST_TOKEN_ERROR:
       return state
         .set('loading', false)
