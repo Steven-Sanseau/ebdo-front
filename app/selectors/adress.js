@@ -8,10 +8,10 @@ const makeSelectAdressIsLoading = () =>
   createSelector(selectAdress, adress => adress.get('loading'))
 
 const makeSelectAdressDelivery = () =>
-  createSelector(selectAdress, adress => adress.get('delivery'))
+  createSelector(selectAdress, adress => adress.get('delivery').toJS())
 
 const makeSelectAdressInvoice = () =>
-  createSelector(selectAdress, adress => adress.get('invoice'))
+  createSelector(selectAdress, adress => adress.get('invoice').toJS())
 
 const makeSelectAdressId = () =>
   createSelector(selectAdress, adress => adress.get('invoice'))

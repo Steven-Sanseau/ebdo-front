@@ -1,6 +1,6 @@
 import { Record } from 'immutable'
 
-const Adress = new Record({
+const Token = new Record({
   adress_id: null,
   client_id: 1,
   civility: 'M',
@@ -14,4 +14,4 @@ const Adress = new Record({
   type_adress: null
 })
 
-export default Adress
+export default Token

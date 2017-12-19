@@ -30,8 +30,8 @@ class EmailStep extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNextStep() {
-    this.props.dispatchUseClientExist()
+  handleNextStep(event) {
+    this.handleSubmit(event)
   }
 
   handleEmail(event) {
@@ -70,7 +70,9 @@ class EmailStep extends React.Component {
     event.preventDefault()
 
     if (this.validateEmail()) {
-      if (!this.props.clientExist) {
+      if (this.props.clientExist) {
+        this.props.dispatchUseClientExist()
+      } else {
         this.props.dispatchPostClient()
       }
     }

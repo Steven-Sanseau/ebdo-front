@@ -86,13 +86,10 @@ class DeliveryStep extends React.Component {
 
   contentClose() {
     const { delivery, invoice } = this.props
+    console.log(delivery, invoice)
     return (
       <div>
         Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
-        <b>{delivery.name}</b>, {delivery.adress}, ({delivery.company})
-        {delivery.postalCode} {delivery.city} ({delivery.country}) Facturation
-        <b>{invoice.name}</b>, {invoice.adress}, ({invoice.company})
-        {invoice.postalCode} {invoice.city} ({invoice.country})
       </div>
     )
   }
