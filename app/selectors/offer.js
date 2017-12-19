@@ -1,28 +1,13 @@
 import { createSelector } from 'reselect'
 
-const selectAdress = state => state.get('adress')
+const selectOffer = state => state.get('offer')
 
-const makeSelectAdress = () => createSelector(selectAdress, adress => adress)
+const makeSelectOffer = () => createSelector(selectOffer, offer => offer)
 
-const makeSelectAdressIsLoading = () =>
-  createSelector(selectAdress, adress => adress.get('loading'))
+const makeSelectOffers = () =>
+  createSelector(selectOffer, offer => offer.get('data'))
 
-const makeSelectAdressDelivery = () =>
-  createSelector(selectAdress, adress => adress.get('delivery'))
+const makeSelectOffersIsLoading = () =>
+  createSelector(selectOffer, offer => offer.get('loading'))
 
-const makeSelectAdressInvoice = () =>
-  createSelector(selectAdress, adress => adress.get('invoice'))
-
-const makeSelectAdressId = () =>
-  createSelector(selectAdress, adress => adress.get('invoice'))
-
-const makeSelectAdressType = type =>
-  createSelector(selectAdress, adress => adress.get(type))
-
-export {
-  makeSelectAdress,
-  makeSelectAdressDelivery,
-  makeSelectAdressInvoice,
-  makeSelectAdressIsLoading,
-  makeSelectAdressType
-}
+export { makeSelectOffer, makeSelectOffers, makeSelectOffersIsLoading }

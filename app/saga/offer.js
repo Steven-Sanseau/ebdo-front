@@ -1,16 +1,16 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
 import { GET_OFFERS_LIST } from 'actions/constants'
-import { getOffersLoaded, getOffersError, getOfferList } from 'actions/offer'
+import { getOffersLoaded, getOffersError } from 'actions/offer'
 
-function* getOffers(action) {
+function* getOffers() {
   const paramsApiUrl = 'http://localhost:1338/v1/offer'
   const method = 'GET'
 
   try {
-    const offersResponse = yield call(paramsApiUrl, {
+    const offersResponse = yield call(request, paramsApiUrl, {
       method,
       headers: {
         'Content-Type': 'application/json'

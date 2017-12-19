@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import OfferModel from 'models/offer'
+import OfferModel from 'models/Offer'
 
 import {
   GET_OFFERS_LIST,
@@ -22,19 +22,20 @@ function offerReducer(state = initialState, action) {
         .set('errorMessage', '')
         .set('error', false)
     }
-    case GET_OFFERS_LOADED:
-      const offersList = action.payload.data.map(entry => {
-        OfferModel(entry)
-      })
+    case GET_OFFERS_LOADED: {
+      const offersList = action.offers.data.map(entry => new OfferModel(entry))
       return state
         .set('loading', false)
-        .set('data', List(offersList))
+        .set('data', Immutable.List(offersList))
         .set('error', false)
+    }
     case GET_OFFERS_ERROR:
-      return state.set('error', true).set('errorMessage', error.message)
+      return state
+        .set('error', true)
+        .set('errorMessage', action.payload.error.message)
     default:
       return state
   }
 }
 
-export default stepReducer
+export default offerReducer

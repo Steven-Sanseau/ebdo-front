@@ -6,10 +6,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import {
-  makeSelectOffersIsLoading,
-  makeSelectOffers
-} from 'selectors/offer'
+import { makeSelectOffersIsLoading, makeSelectOffers } from 'selectors/offer'
 import { getOffersList, postoffer } from 'actions/offer'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -35,7 +32,7 @@ class FormulaStep extends React.Component {
   }
 
   componentDidMount() {
-    this.props.get
+    this.props.dispatchGetOffersList()
   }
 
   handleNextStep(event) {
@@ -50,7 +47,7 @@ class FormulaStep extends React.Component {
       target: 'me',
       time: 'inf'
     }
-    this.props.dispactSetOfferParams()
+    this.props.dispatchSetOfferParams()
   }
 
   handleRoute() {
@@ -62,8 +59,8 @@ class FormulaStep extends React.Component {
   }
 
   contentOpen() {
-    const { price, isNaturalForm, target, time } = this.state
-
+    const { price, isNaturalForm, target, time, offers } = this.state
+    console.log(offers)
     return (
       <div>
         <Row>
@@ -118,26 +115,28 @@ class FormulaStep extends React.Component {
 }
 
 FormulaStep.propTypes = {
+  offers: PropTypes.array,
+  offersIsLoading: PropTypes.bool,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func
+  nextStep: PropTypes.func,
+  dispatchGetOffersList: PropTypes.func,
+  dispatchPostOffer: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  offersIsLoading: makeSelectOfferIsLoading(),
-  email: makeSelectClientEmail()
+  offersIsLoading: makeSelectOffersIsLoading(),
+  offers: makeSelectOffers()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient())
+    dispatchGetOffersList: () => dispatch(getOffersList()),
+    dispatchPostOffer: () => dispatch(postoffer())
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
 export default compose(withConnect)(FormulaStep)
-
-export default FormulaStep

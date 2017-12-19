@@ -17,12 +17,14 @@ import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 
 // REDUCERS
+import offerReducer from 'reducers/offer'
 import clientReducer from 'reducers/client'
 import tokenReducer from 'reducers/token'
 import adressReducer from 'reducers/adress'
 import stepReducer from 'reducers/step'
 
 // SAGA
+import sagaOffer from 'saga/offer'
 import sagaAdress from 'saga/adress'
 import sagaClient from 'saga/client'
 
@@ -160,6 +162,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
+const withReducerOffer = injectReducer({
+  key: 'offer',
+  reducer: offerReducer
+})
+
 const withReducerClient = injectReducer({
   key: 'client',
   reducer: clientReducer
@@ -180,14 +187,17 @@ const withReducerToken = injectReducer({
   reducer: tokenReducer
 })
 
+const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
 const withSagaAdress = injectSaga({ key: 'adress', saga: sagaAdress })
 
 export default compose(
+  withReducerOffer,
   withReducerClient,
   withReducerAdress,
   withReducerStep,
   withReducerToken,
+  withSagaOffer,
   withSagaAdress,
   withSagaClient,
   withConnect
