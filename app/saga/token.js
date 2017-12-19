@@ -8,7 +8,7 @@ import { nextStep } from 'actions/step'
 
 import { makeSelectAdressType, makeSelectAdressId } from 'selectors/adress'
 
-function* postAdress(action) {
+function* postToken(action) {
   let paramsApiUrl = 'http://localhost:1338/v1/adress'
   const adress = yield select(makeSelectAdressType(action.typeOfAdress))
   // const id = yield select(makeSelectAdressId())
@@ -35,6 +35,6 @@ function* postAdress(action) {
   }
 }
 
-export default function* sagaAdress() {
-  yield takeEvery(POST_ADRESS, postAdress)
+export default function* sagaToken() {
+  yield takeEvery(POST_ADRESS, postToken)
 }

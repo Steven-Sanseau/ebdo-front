@@ -6,7 +6,12 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { makeSelectOffer } from 'selectors/offer'
+import {
+  makeSelectOffer,
+  makeSelectOfferError,
+  makeSelectOffersIsLoading,
+  makeSelectOfferErrorMessage
+} from 'selectors/offer'
 import { setOfferParams, getoffer } from 'actions/offer'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -33,8 +38,22 @@ class FormulaStep extends React.Component {
     this.props.dispatchGetOffer()
   }
 
-  handleChange(e, key) {
-    this.props.dispatchSetOfferParams({ [e]: key.value })
+  handleChange(key, event) {
+    let params = {}
+    if (key === 'is_gift') {
+      params = { [key]: event.value === 1 }
+    }
+
+    if (key === 'duration') {
+      const value = Number(event.value)
+      params = { [key]: value, time_limited: value !== 0 }
+    }
+
+    if (key === 'monthly_price_ttc') {
+      params = { [key]: Number(event.value) }
+    }
+
+    this.props.dispatchSetOfferParams(params)
   }
 
   handleRoute() {
@@ -47,7 +66,7 @@ class FormulaStep extends React.Component {
 
   contentOpen() {
     const { isNaturalForm } = this.state
-    const { offer } = this.props
+    const { offer, offerError, offerErrorMessage } = this.props
 
     return (
       <div>
@@ -66,13 +85,14 @@ class FormulaStep extends React.Component {
               <NaturalFormOrder
                 handleChange={this.handleChange}
                 target={offer.data.is_gift}
-                time={offer.data.time_limited}
+                time={offer.data.duration}
                 price={offer.data.monthly_price_ttc}
                 isNaturalForm={isNaturalForm}
                 switchUI={this.switchUI}
               />
             )}
           </Row>
+          {offerError && <div>{offerErrorMessage}</div>}
         </div>
       </div>
     )
@@ -90,7 +110,13 @@ class FormulaStep extends React.Component {
   }
 
   render() {
-    const { currentStep, nextStep, changeStep, stepNumber } = this.props
+    const {
+      currentStep,
+      nextStep,
+      changeStep,
+      stepNumber,
+      offerIsLoading
+    } = this.props
 
     return (
       <ToggleStep
@@ -101,6 +127,7 @@ class FormulaStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
+        isLoadingNextStep={offerIsLoading}
       />
     )
   }
@@ -113,11 +140,17 @@ FormulaStep.propTypes = {
   nextStep: PropTypes.func,
   dispatchSetOfferParams: PropTypes.func,
   dispatchGetOffer: PropTypes.func,
-  offer: PropTypes.object
+  offer: PropTypes.object,
+  offerError: PropTypes.bool,
+  offerIsLoading: PropTypes.bool,
+  offerErrorMessage: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
-  offer: makeSelectOffer()
+  offer: makeSelectOffer(),
+  offerIsLoading: makeSelectOffersIsLoading(),
+  offerError: makeSelectOfferError(),
+  offerErrorMessage: makeSelectOfferErrorMessage()
 })
 
 function mapDispatchToProps(dispatch) {

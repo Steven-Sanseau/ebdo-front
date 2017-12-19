@@ -4,6 +4,7 @@ import request from 'utils/request'
 
 import { GET_OFFER } from 'actions/constants'
 import { getOfferError, getOfferLoaded } from 'actions/offer'
+import { nextStep } from 'actions/step'
 import { makeSelectOffer } from 'selectors/offer'
 
 function* getOffer() {
@@ -13,7 +14,7 @@ function* getOffer() {
 
   try {
     if (offer) {
-      paramsApiUrl = `${paramsApiUrl}/${offer.data.time_limited}/${
+      paramsApiUrl = `${paramsApiUrl}/${offer.data.duration}/${
         offer.data.monthly_price_ttc
       }/${offer.data.is_gift}`
     }
@@ -24,6 +25,7 @@ function* getOffer() {
       }
     })
     yield put(getOfferLoaded(offersResponse))
+    yield put(nextStep())
   } catch (err) {
     yield put(getOfferError(err.message))
   }
