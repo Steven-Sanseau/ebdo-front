@@ -1,9 +1,8 @@
 import {
   SET_OFFER_PARAMS,
-  // GET_OFFERS_LIST,
-  // GET_OFFERS_LOADED,
-  // GET_OFFERS_ERROR,
-  GET_OFFER
+  GET_OFFER,
+  GET_OFFER_LOADED,
+  GET_OFFER_ERROR
 } from './constants'
 
 export function setOfferParams(params) {
@@ -13,25 +12,19 @@ export function setOfferParams(params) {
   }
 }
 
-// export function getOffersList() {
-//   return {
-//     type: GET_OFFERS_LIST
-//   }
-// }
-//
-// export function getOffersLoaded(offers) {
-//   return {
-//     type: GET_OFFERS_LOADED,
-//     offers
-//   }
-// }
-//
-// export function getOffersError(error) {
-//   return {
-//     type: GET_OFFERS_ERROR,
-//     error
-//   }
-// }
+export function getOfferLoaded(offer) {
+  return {
+    type: GET_OFFER_LOADED,
+    offer
+  }
+}
+
+export function getOfferError(error) {
+  return {
+    type: GET_OFFER_ERROR,
+    error
+  }
+}
 
 export function getoffer() {
   return { type: GET_OFFER }

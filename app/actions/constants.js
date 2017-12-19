@@ -15,8 +15,8 @@ export const SET_CLIENT_EMAIL = 'app/Checkout/client/SET_CLIENT_EMAIL'
 
 export const SET_OFFER_PARAMS = 'app/Checkout/offer/SET_OFFER_PARAMS'
 export const GET_OFFERS_LIST = 'app/Checkout/offer/GET_OFFERS_LIST'
-export const GET_OFFERS_LOADED = 'app/Checkout/offer/GET_OFFERS_LOADED'
-export const GET_OFFERS_ERROR = 'app/Checkout/offer/GET_OFFERS_ERROR'
+export const GET_OFFER_LOADED = 'app/Checkout/offer/GET_OFFER_LOADED'
+export const GET_OFFER_ERROR = 'app/Checkout/offer/GET_OFFER_ERROR'
 export const GET_OFFER = 'app/Checkout/offer/GET_OFFER'
 
 export const POST_TOKEN = 'app/Checkout/token/POST_TOKEN'

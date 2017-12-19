@@ -13,12 +13,11 @@ function* getOffer() {
 
   try {
     if (offer) {
-      paramsApiUrl = `${paramsApiUrl}/${offer.data.monthly_price_ttc}/${
-        offer.data.is_gift
-      }`
+      paramsApiUrl = `${paramsApiUrl}/${offer.data.time_limited}/${
+        offer.data.monthly_price_ttc
+      }/${offer.data.is_gift}`
     }
     const offersResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ offer: { offer } }),
       method,
       headers: {
         'Content-Type': 'application/json'
