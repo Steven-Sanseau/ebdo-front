@@ -3,6 +3,9 @@ import { createSelector } from 'reselect'
 const selectCheckout = state => state.get('checkout')
 
 const makeSelectCheckout = () =>
-  createSelector(selectCheckout, checkout => checkout)
+  createSelector(selectCheckout, checkout => checkout.toJS())
 
-export { makeSelectCheckout }
+const makeSelectPayementMethod = () =>
+  createSelector(selectCheckout, checkout => checkout.get('payementMethod'))
+
+export { makeSelectCheckout, makeSelectPayementMethod }

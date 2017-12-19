@@ -28,4 +28,5 @@ export const POST_TOKEN_ERROR = 'app/Checkout/token/POST_TOKEN_ERROR'
 export const POST_TOKEN_LOADED = 'app/Checkout/token/POST_TOKEN_LOADED'
 export const SET_TOKEN_STRIPE = 'app/Checkout/token/SET_TOKEN_STRIPE'
 
-export const POST_SUBSCRIPTION = 'app/Checkout/subcription/POST_SUBSCRIPTION'
+export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
+export const POST_SUBSCRIPTION = 'app/Checkout/checkout/POST_SUBSCRIPTION'

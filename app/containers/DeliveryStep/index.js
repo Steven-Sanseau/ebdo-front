@@ -94,7 +94,7 @@ class DeliveryStep extends React.Component {
 
   contentClose() {
     const { delivery, invoice } = this.props
-    console.log(delivery, invoice)
+
     return (
       <div>
         Mes numéros seront envoyés à l’adresse suivante : <br />

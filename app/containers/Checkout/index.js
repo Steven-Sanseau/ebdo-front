@@ -17,6 +17,7 @@ import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 
 // REDUCERS
+import checkoutReducer from 'reducers/checkout'
 import offerReducer from 'reducers/offer'
 import clientReducer from 'reducers/client'
 import tokenReducer from 'reducers/token'
@@ -25,6 +26,8 @@ import stepReducer from 'reducers/step'
 
 // SAGA
 import sagaOffer from 'saga/offer'
+import sagaCheckout from 'saga/checkout'
+import sagaToken from 'saga/token'
 import sagaAdress from 'saga/adress'
 import sagaClient from 'saga/client'
 
@@ -187,17 +190,27 @@ const withReducerToken = injectReducer({
   reducer: tokenReducer
 })
 
+const withReducerCheckout = injectReducer({
+  key: 'checkout',
+  reducer: checkoutReducer
+})
+
 const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
+const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
+const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
 const withSagaAdress = injectSaga({ key: 'adress', saga: sagaAdress })
 
 export default compose(
   withReducerOffer,
+  withReducerCheckout,
   withReducerClient,
   withReducerAdress,
   withReducerStep,
   withReducerToken,
   withSagaOffer,
+  withSagaToken,
+  withSagaCheckout,
   withSagaAdress,
   withSagaClient,
   withConnect

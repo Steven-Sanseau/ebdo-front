@@ -21,11 +21,6 @@ class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      paiementMethod: 1,
-      tokenCard: ''
-    }
-
     this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
     this.handlePaiementInfo = this.handlePaiementInfo.bind(this)
     this.handleNextStep = this.handleNextStep.bind(this)
@@ -139,7 +134,8 @@ PaymentStep.propTypes = {
   dispatchSetTokenStripe: PropTypes.func,
   dispatchPostToken: PropTypes.func,
   token: PropTypes.object,
-  tokenIsLoading: PropTypes.bool
+  tokenIsLoading: PropTypes.bool,
+  payementMethod: PropTypes.number
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -149,6 +145,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatchSetPayementMethod: method => dispatch(setTokenStripe(method)),
     dispatchSetTokenStripe: token => dispatch(setTokenStripe(token)),
     dispatchPostToken: () => dispatch(postToken())
   }
