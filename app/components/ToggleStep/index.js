@@ -35,7 +35,8 @@ class ToggleStep extends React.Component {
       contentClose,
       isLoadingNextStep,
       textButtonNextStep,
-      colorButtonNextStep
+      colorButtonNextStep,
+      updateStepHide
     } = this.props
 
     return (
@@ -124,9 +125,11 @@ class ToggleStep extends React.Component {
                   <Col lg={5} xs={10}>
                     <StepPostviewText>
                       <TextSummary>{contentClose}</TextSummary>
-                      <UpdateStep>
-                        <Button onClick={this.change}>Modifier</Button>
-                      </UpdateStep>
+                      {!updateStepHide && (
+                        <UpdateStep>
+                          <Button onClick={this.change}>Modifier</Button>
+                        </UpdateStep>
+                      )}
                     </StepPostviewText>
                   </Col>
                 </Row>
@@ -149,7 +152,8 @@ ToggleStep.propTypes = {
   changeStep: PropTypes.func,
   nextStep: PropTypes.func,
   textButtonNextStep: PropTypes.string,
-  colorButtonNextStep: PropTypes.string
+  colorButtonNextStep: PropTypes.string,
+  updateStepHide: PropTypes.bool
 }
 
 export default ToggleStep

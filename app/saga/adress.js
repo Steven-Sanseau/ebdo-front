@@ -14,7 +14,6 @@ function* postAdress(action) {
   let method = 'POST'
 
   try {
-    // WARNING W/ PATCH
     if (adress.adress_id !== null) {
       method = 'PATCH'
       paramsApiUrl = `${paramsApiUrl}/${adress.adress_id}`

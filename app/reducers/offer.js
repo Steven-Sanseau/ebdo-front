@@ -20,7 +20,10 @@ function offerReducer(state = initialState, action) {
   switch (action.type) {
     case SET_OFFER_PARAMS: {
       const newOffer = state.get('data').mergeDeep(action.params)
-      return state.set('data', newOffer)
+      return state
+        .set('data', newOffer)
+        .set('error', false)
+        .set('errorMessage', '')
     }
     case GET_OFFER:
       return state
@@ -32,6 +35,7 @@ function offerReducer(state = initialState, action) {
         .set('loading', false)
         .set('data', OfferModel(action.offer))
         .set('error', false)
+        .set('errorMessage', '')
     case GET_OFFER_ERROR:
       return state
         .set('error', true)

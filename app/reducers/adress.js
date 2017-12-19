@@ -50,7 +50,7 @@ function adressReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set(action.payload.typeOfAdress, Adress(action.payload.adress))
+        .set(action.payload.typeOfAdress, Adress(action.payload.adress.adress))
     }
     case SET_ADRESS_EQUAL: {
       const adressDeliveryToInvoice = state

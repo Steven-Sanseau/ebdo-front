@@ -14,8 +14,11 @@ import {
 import { setAdress, postAdress, setAdressEqual } from 'actions/adress'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
+import BoldText from 'components/LayoutStep/BoldText'
 import FormDelivery from 'components/FormDelivery'
 import CheckboxShowInvoiceForm from 'components/FormDelivery/CheckboxShowInvoiceForm'
+import UpdateStep from 'components/LayoutStep/UpdateStep'
+import Button from 'components/Button'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
@@ -25,10 +28,15 @@ class DeliveryStep extends React.Component {
       isInvoiceSameDelivery: true
     }
 
+    this.handleChangeStep = this.handleChangeStep.bind(this)
     this.showInvoiceForm = this.showInvoiceForm.bind(this)
     this.handleAdressForm = this.handleAdressForm.bind(this)
     this.handleSubmitAdressForm = this.handleSubmitAdressForm.bind(this)
     this.handleNextStep = this.handleNextStep.bind(this)
+  }
+
+  handleChangeStep() {
+    this.props.changeStep(this.props.stepNumber)
   }
 
   handleNextStep(event) {
@@ -89,7 +97,25 @@ class DeliveryStep extends React.Component {
     console.log(delivery, invoice)
     return (
       <div>
-        Mes numéros seront envoyés à l{"'"}adresse suivante: <br />
+        Mes numéros seront envoyés à l’adresse suivante : <br />
+        <BoldText>
+          {delivery.first_name} {delivery.last_name}
+        </BoldText>,{delivery.adress}, {delivery.postal_code} {delivery.city} ({
+          delivery.country
+        }).
+        <UpdateStep>
+          <Button onClick={this.handleChangeStep}>Modifier</Button>
+        </UpdateStep>{' '}
+        <br />
+        Je serai facturé à l’adresse suivante : <br />
+        <BoldText>
+          {invoice.first_name} {invoice.last_name}
+        </BoldText>, {invoice.adress}, {invoice.postal_code} {invoice.city} ({
+          invoice.country
+        }).
+        <UpdateStep>
+          <Button onClick={this.handleChangeStep}>Modifier</Button>
+        </UpdateStep>
       </div>
     )
   }
@@ -107,6 +133,7 @@ class DeliveryStep extends React.Component {
         changeStep={changeStep}
         nextStep={this.handleNextStep}
         isLoadingNextStep={adressIsLoading}
+        updateStepHide
       />
     )
   }

@@ -92,7 +92,12 @@ class FormulaStep extends React.Component {
               />
             )}
           </Row>
-          {offerError && <div>{offerErrorMessage}</div>}
+          {offerError && (
+            <div>
+              Cette offre n'est pas disponible pour le moment, Veuillez choisir
+              une autre formule
+            </div>
+          )}
         </div>
       </div>
     )
