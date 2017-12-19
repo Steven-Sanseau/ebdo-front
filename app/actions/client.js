@@ -5,12 +5,19 @@ import {
   POST_CLIENT,
   POST_CLIENT_LOADED,
   POST_CLIENT_ERROR,
-  SET_CLIENT_EMAIL
+  SET_CLIENT_EMAIL,
+  USE_CLIENT_EXIST
 } from './constants'
 
 export function getClient() {
   return {
     type: GET_CLIENT
+  }
+}
+
+export function useClientExist() {
+  return {
+    type: USE_CLIENT_EXIST
   }
 }
 

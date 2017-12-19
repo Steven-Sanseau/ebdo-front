@@ -11,7 +11,7 @@ import {
   makeSelectClientEmail,
   makeSelectClientExist
 } from 'selectors/client'
-import { setClientEmail, postClient } from 'actions/client'
+import { setClientEmail, postClient, useClientExist } from 'actions/client'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -30,8 +30,8 @@ class EmailStep extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNextStep(event) {
-    this.handleSubmit(event)
+  handleNextStep() {
+    this.props.dispatchUseClientExist()
   }
 
   handleEmail(event) {
@@ -73,7 +73,6 @@ class EmailStep extends React.Component {
       if (!this.props.clientExist) {
         this.props.dispatchPostClient()
       }
-      this.props.nextStep()
     }
   }
 
@@ -140,6 +139,7 @@ EmailStep.propTypes = {
   stepNumber: PropTypes.number,
   dispatchChangeEmail: PropTypes.func,
   dispatchPostClient: PropTypes.func,
+  dispatchUseClientExist: PropTypes.func,
   clientExist: PropTypes.bool
 }
 
@@ -152,7 +152,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient())
+    dispatchPostClient: () => dispatch(postClient()),
+    dispatchUseClientExist: () => dispatch(useClientExist())
   }
 }
 

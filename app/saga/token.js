@@ -1,4 +1,4 @@
-$import { call, put, select, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
@@ -6,12 +6,11 @@ import { POST_ADRESS } from 'actions/constants'
 import { postAdressError, postAdressLoaded } from 'actions/adress'
 import { nextStep } from 'actions/step'
 
-import { makeSelectAdressType, makeSelectAdressId } from 'selectors/adress'
+import { makeSelectAdressType } from 'selectors/adress'
 
 function* postToken(action) {
   let paramsApiUrl = 'http://localhost:1338/v1/adress'
   const adress = yield select(makeSelectAdressType(action.typeOfAdress))
-  // const id = yield select(makeSelectAdressId())
   let method = 'POST'
 
   try {

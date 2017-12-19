@@ -9,7 +9,8 @@ import {
   GET_CLIENT_ERROR,
   SET_CLIENT_EMAIL,
   POST_CLIENT_LOADED,
-  POST_CLIENT_ERROR
+  POST_CLIENT_ERROR,
+  USE_CLIENT_EXIST
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -17,6 +18,7 @@ const initialState = Immutable.fromJS({
   error: false,
   errorMessage: null,
   clientExist: false,
+  useClientExist: false,
   isNewClient: false,
   data: new Client()
 })
@@ -30,6 +32,8 @@ function clientReducer(state = initialState, action) {
         .set('loading', true)
         .set('errorMessage', null)
         .set('isNewClient', false)
+    case USE_CLIENT_EXIST:
+      return state.set('useClientExist', true).set('isNewClient', false)
     case SET_CLIENT_EMAIL:
       return state
         .setIn(['data', 'email'], action.email)

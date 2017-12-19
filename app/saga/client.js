@@ -2,7 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_CLIENT, GET_CLIENT } from 'actions/constants'
+import { POST_CLIENT, GET_CLIENT, USE_CLIENT_EXIST } from 'actions/constants'
 import {
   postClientLoaded,
   postClientError,
@@ -50,6 +50,10 @@ function* postClient() {
   }
 }
 
+function* next() {
+  yield put(nextStep())
+}
+
 function* getClientApi() {
   let paramsApiUrl = 'http://localhost:1338/v1/client'
   const email = yield select(makeSelectClientEmail())
@@ -75,6 +79,7 @@ function* getClientApi() {
 }
 
 export default function* sagaClient() {
+  yield takeLatest(USE_CLIENT_EXIST, next)
   yield takeLatest(POST_CLIENT, postClient)
   yield takeLatest(GET_CLIENT, getClientApi)
 }

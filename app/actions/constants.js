@@ -9,6 +9,7 @@ export const SET_ADRESS_EQUAL = 'app/Checkout/adress/SET_ADRESS_EQUAL'
 export const SET_COUNTRY_ADRESS = 'app/Checkout/adress/SET_COUNTRY_ADRESS'
 
 export const GET_CLIENT = 'app/Checkout/client/GET_CLIENT'
+export const USE_CLIENT_EXIST = 'app/Checkout/client/USE_CLIENT_EXIST'
 export const GET_CLIENT_LOADED = 'app/Checkout/client/GET_CLIENT_LOADED'
 export const GET_CLIENT_ERROR = 'app/Checkout/client/GET_CLIENT_ERROR'
 export const POST_CLIENT = 'app/Checkout/client/POST_CLIENT'
