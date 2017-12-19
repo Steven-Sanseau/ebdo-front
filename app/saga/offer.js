@@ -1,27 +1,35 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { GET_OFFERS_LIST } from 'actions/constants'
-import { getOffersLoaded, getOffersError } from 'actions/offer'
+import { GET_OFFER } from 'actions/constants'
+import { getOfferError, getOfferLoaded } from 'actions/offer'
+import { makeSelectOffer } from 'selectors/offer'
 
-function* getOffers() {
-  const paramsApiUrl = 'http://localhost:1338/v1/offer'
+function* getOffer() {
+  let paramsApiUrl = 'http://localhost:1338/v1/offer'
   const method = 'GET'
+  const offer = yield select(makeSelectOffer())
 
   try {
+    if (offer) {
+      paramsApiUrl = `${paramsApiUrl}/${offer.data.monthly_price_ttc}/${
+        offer.data.is_gift
+      }`
+    }
     const offersResponse = yield call(request, paramsApiUrl, {
+      body: JSON.stringify({ offer: { offer } }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(getOffersLoaded(offersResponse))
+    yield put(getOfferLoaded(offersResponse))
   } catch (err) {
-    yield put(getOffersError(err.message))
+    yield put(getOfferError(err.message))
   }
 }
 
-export default function* sagaAdress() {
-  yield takeEvery(GET_OFFERS_LIST, getOffers)
+export default function* sagaOffer() {
+  yield takeEvery(GET_OFFER, getOffer)
 }

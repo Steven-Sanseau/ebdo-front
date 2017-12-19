@@ -191,14 +191,14 @@ function NaturalFormOrder(props) {
           options={options2}
           value={options2.find(el => el.value === time)}
           color="--topaz"
-          onChange={handleChange.bind(this, 'time')}
+          onChange={handleChange.bind(this, 'time_limited')}
         />
 
         <DropdownWrap
           options={options1}
           value={options1.find(el => el.value === target)}
           color="--warm-purple"
-          onChange={handleChange.bind(this, 'target')}
+          onChange={handleChange.bind(this, 'is_gift')}
         />
 
         <TextWrap>
@@ -208,7 +208,7 @@ function NaturalFormOrder(props) {
           options={options3}
           value={options3.find(el => el.value === price)}
           color="--turquoise-blue"
-          onChange={handleChange.bind(this, 'price')}
+          onChange={handleChange.bind(this, 'monthly_price_ttc')}
         />
         <Help onClick={switchUI}>?</Help>
       </div>
@@ -231,9 +231,9 @@ function NaturalFormOrder(props) {
 NaturalFormOrder.propTypes = {
   handleChange: PropTypes.func,
   switchUI: PropTypes.func,
-  time: PropTypes.string,
-  price: PropTypes.string,
-  target: PropTypes.string,
+  time: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  target: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   isNaturalForm: PropTypes.bool
 }
 

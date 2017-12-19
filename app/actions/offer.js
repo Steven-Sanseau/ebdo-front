@@ -1,29 +1,38 @@
 import {
-  GET_OFFERS_LIST,
-  GET_OFFERS_LOADED,
-  GET_OFFERS_ERROR
+  SET_OFFER_PARAMS,
+  // GET_OFFERS_LIST,
+  // GET_OFFERS_LOADED,
+  // GET_OFFERS_ERROR,
+  GET_OFFER
 } from './constants'
 
-export function getOffersList() {
+export function setOfferParams(params) {
   return {
-    type: GET_OFFERS_LIST
+    type: SET_OFFER_PARAMS,
+    params
   }
 }
 
-export function getOffersLoaded(offers) {
-  return {
-    type: GET_OFFERS_LOADED,
-    offers
-  }
-}
+// export function getOffersList() {
+//   return {
+//     type: GET_OFFERS_LIST
+//   }
+// }
+//
+// export function getOffersLoaded(offers) {
+//   return {
+//     type: GET_OFFERS_LOADED,
+//     offers
+//   }
+// }
+//
+// export function getOffersError(error) {
+//   return {
+//     type: GET_OFFERS_ERROR,
+//     error
+//   }
+// }
 
-export function getOffersError(error) {
-  return {
-    type: GET_OFFERS_ERROR,
-    error
-  }
-}
-
-export function postoffer() {
-  return { type: POST_OFFER }
+export function getoffer() {
+  return { type: GET_OFFER }
 }
