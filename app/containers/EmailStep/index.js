@@ -8,7 +8,8 @@ import { compose } from 'redux'
 
 import {
   makeSelectClientIsLoading,
-  makeSelectClientEmail
+  makeSelectClientEmail,
+  makeSelectClientExist
 } from 'selectors/client'
 import { setClientEmail, postClient } from 'actions/client'
 
@@ -69,13 +70,16 @@ class EmailStep extends React.Component {
     event.preventDefault()
 
     if (this.validateEmail()) {
-      this.props.dispatchPostClient()
+      if (!this.props.clientExist) {
+        this.props.dispatchPostClient()
+      }
+      this.props.nextStep()
     }
   }
 
   contentOpen() {
     const { errorEmail, errorMessage } = this.state
-    const { email } = this.props
+    const { email, clientExist } = this.props
 
     return (
       <div>
@@ -86,6 +90,12 @@ class EmailStep extends React.Component {
           handleSubmitEmail={this.handleSubmit}
           email={email}
         />
+        {clientExist && (
+          <div>
+            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
+            vouloir passer une nouvelle commande ?
+          </div>
+        )}
       </div>
     )
   }
@@ -96,7 +106,13 @@ class EmailStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, clientIsLoading } = this.props
+    const {
+      currentStep,
+      changeStep,
+      stepNumber,
+      clientIsLoading,
+      clientExist
+    } = this.props
 
     return (
       <ToggleStep
@@ -108,6 +124,8 @@ class EmailStep extends React.Component {
         changeStep={changeStep}
         nextStep={this.handleNextStep}
         isLoadingNextStep={clientIsLoading}
+        textButtonNextStep={clientExist ? 'Je continue !' : null}
+        colorButtonNextStep={clientExist ? 'orange' : 'green'}
       />
     )
   }
@@ -121,11 +139,13 @@ EmailStep.propTypes = {
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
   dispatchChangeEmail: PropTypes.func,
-  dispatchPostClient: PropTypes.func
+  dispatchPostClient: PropTypes.func,
+  clientExist: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectClientIsLoading(),
+  clientExist: makeSelectClientExist(),
   email: makeSelectClientEmail()
 })
 

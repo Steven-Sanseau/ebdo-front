@@ -1,9 +1,32 @@
 import {
+  GET_CLIENT,
+  GET_CLIENT_LOADED,
+  GET_CLIENT_ERROR,
   POST_CLIENT,
   POST_CLIENT_LOADED,
   POST_CLIENT_ERROR,
   SET_CLIENT_EMAIL
 } from './constants'
+
+export function getClient() {
+  return {
+    type: GET_CLIENT
+  }
+}
+
+export function getClientLoaded(client) {
+  return {
+    type: GET_CLIENT_LOADED,
+    client
+  }
+}
+
+export function getClientError(error) {
+  return {
+    type: GET_CLIENT_ERROR,
+    error
+  }
+}
 
 export function postClient() {
   return {
@@ -18,10 +41,11 @@ export function postClientLoaded(client) {
   }
 }
 
-export function postClientError(error) {
+export function postClientError(errorMessage, errorCode) {
   return {
     type: POST_CLIENT_ERROR,
-    error
+    errorMessage,
+    errorCode
   }
 }
 

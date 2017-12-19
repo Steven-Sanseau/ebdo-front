@@ -14,10 +14,18 @@ const makeSelectClientId = () =>
 const makeSelectClientIsLoading = () =>
   createSelector(selectClient, client => client.get('loading'))
 
+const makeSelectClientIsNewClient = () =>
+  createSelector(selectClient, client => client.get('isNewClient'))
+
+const makeSelectClientExist = () =>
+  createSelector(selectClient, client => client.get('clientExist'))
+
 const makeSelectClient = () => createSelector(selectClient, client => client)
 
 export {
   makeSelectClientEmail,
+  makeSelectClientIsNewClient,
+  makeSelectClientExist,
   makeSelectClientId,
   makeSelectClient,
   makeSelectClientIsLoading

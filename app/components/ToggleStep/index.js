@@ -33,7 +33,9 @@ class ToggleStep extends React.Component {
       title,
       contentOpen,
       contentClose,
-      isLoadingNextStep
+      isLoadingNextStep,
+      textButtonNextStep,
+      colorButtonNextStep
     } = this.props
 
     return (
@@ -66,9 +68,16 @@ class ToggleStep extends React.Component {
                     <Row start="xs">
                       <Col xs={12}>
                         <NextStep>
-                          <Button handleRoute={nextStep}>
+                          <Button
+                            handleRoute={nextStep}
+                            color={colorButtonNextStep || 'green'}
+                          >
                             {isLoadingNextStep && <LoaderNextStep />}
-                            {!isLoadingNextStep && <span>Étape Suivante</span>}
+                            {!isLoadingNextStep && (
+                              <span>
+                                {textButtonNextStep || 'Étape Suivante'}
+                              </span>
+                            )}
                           </Button>
                         </NextStep>
                       </Col>
@@ -138,7 +147,9 @@ ToggleStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func
+  nextStep: PropTypes.func,
+  textButtonNextStep: PropTypes.string,
+  colorButtonNextStep: PropTypes.string
 }
 
 export default ToggleStep
