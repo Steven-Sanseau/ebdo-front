@@ -1,19 +1,37 @@
 import Immutable from 'immutable'
+import OfferModel from 'models/offer'
 
-import { NEXT_STEP, UPDATE_STEP } from 'actions/constants'
+import {
+  GET_OFFERS_LIST,
+  GET_OFFERS_LOADED,
+  GET_OFFERS_ERROR
+} from 'actions/constants'
 
 const initialState = Immutable.fromJS({
-  value: 4
+  loading: false,
+  error: false,
+  errorMessage: '',
+  data: Immutable.List()
 })
 
-function stepReducer(state = initialState, action) {
+function offerReducer(state = initialState, action) {
   switch (action.type) {
-    case NEXT_STEP: {
-      const nextStep = state.get('value') + 1
-      return state.set('value', nextStep)
+    case GET_OFFERS_LIST: {
+      return state
+        .set('loading', true)
+        .set('errorMessage', '')
+        .set('error', false)
     }
-    case UPDATE_STEP:
-      return state.set('value', action.step)
+    case GET_OFFERS_LOADED:
+      const offersList = action.payload.data.map(entry => {
+        OfferModel(entry)
+      })
+      return state
+        .set('loading', false)
+        .set('data', List(offersList))
+        .set('error', false)
+    case GET_OFFERS_ERROR:
+      return state.set('error', true).set('errorMessage', error.message)
     default:
       return state
   }

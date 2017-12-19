@@ -13,6 +13,7 @@ function FormCountry(props) {
               <Col xs={12} lg={6}>
                 <DropdownInput
                   name="country"
+                  label="Mon pays de livraison"
                   value={props.country}
                   options={props.countryList}
                   handleChange={props.handleCountry}

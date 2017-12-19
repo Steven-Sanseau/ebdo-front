@@ -1,14 +1,29 @@
-import { SET_OFFER, UPDATE_STEP } from 'actions/constants'
+import {
+  GET_OFFERS_LIST,
+  GET_OFFERS_LOADED,
+  GET_OFFERS_ERROR
+} from './constants'
 
-export function nextStep() {
+export function getOffersList() {
   return {
-    type: NEXT_STEP
+    type: GET_OFFERS_LIST
   }
 }
 
-export function goToStep(step) {
+export function getOffersLoaded(offers) {
   return {
-    type: UPDATE_STEP,
-    step
+    type: GET_OFFERS_LOADED,
+    offers
   }
+}
+
+export function getOffersError(error) {
+  return {
+    type: GET_OFFERS_ERROR,
+    error
+  }
+}
+
+export function postoffer() {
+  return { type: POST_OFFER }
 }

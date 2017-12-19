@@ -1,17 +1,17 @@
 import { Record } from 'immutable'
 
-const Adress = new Record({
-  adress_id: null,
-  client_id: 1,
-  civility: 'M',
-  last_name: null,
-  first_name: null,
-  adress: null,
-  city: null,
-  postal_code: null,
-  country: null,
-  company: null,
-  type_adress: null
+const Offer = new Record({
+  offer_id: null,
+  aboweb_id: null,
+  price_ht: 0,
+  price_ttc: 0,
+  monthly_price_ttc: 0,
+  description: '',
+  ref: null,
+  time_limited: false,
+  duration: 0,
+  shipping_cost: 0,
+  is_gift: false
 })
 
-export default Adress
+export default Offer

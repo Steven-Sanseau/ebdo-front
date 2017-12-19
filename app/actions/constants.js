@@ -13,6 +13,10 @@ export const POST_CLIENT_ERROR = 'app/Checkout/client/POST_CLIENT_ERROR'
 export const POST_CLIENT_LOADED = 'app/Checkout/client/POST_CLIENT_LOADED'
 export const SET_CLIENT_EMAIL = 'app/Checkout/client/SET_CLIENT_EMAIL'
 
+export const GET_OFFERS_LIST = 'app/Checkout/client/GET_OFFERS_LIST'
+export const GET_OFFERS_LOADED = 'app/Checkout/client/GET_OFFERS_LOADED'
+export const GET_OFFERS_ERROR = 'app/Checkout/client/GET_OFFERS_ERROR'
+
 export const POST_TOKEN = 'app/Checkout/client/POST_TOKEN'
 export const POST_TOKEN_ERROR = 'app/Checkout/client/POST_TOKEN_ERROR'
 export const POST_TOKEN_LOADED = 'app/Checkout/client/POST_TOKEN_LOADED'

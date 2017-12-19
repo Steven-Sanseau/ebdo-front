@@ -2,10 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux'
+
+import {
+  makeSelectOffersIsLoading,
+  makeSelectOffers
+} from 'selectors/offer'
+import { getOffersList, postoffer } from 'actions/offer'
+
 import ToggleStep from 'components/ToggleStep/Loadable'
 import NaturalFormOrder from 'components/NaturalFormOrder'
-import FormulaText from './FormulaText'
-import BoldText from './BoldText'
+import FormulaText from 'components/LayoutStep/FormulaText'
+import BoldText from 'components/LayoutStep/BoldText'
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -24,13 +34,23 @@ class FormulaStep extends React.Component {
     this.switchUI = this.switchUI.bind(this)
   }
 
+  componentDidMount() {
+    this.props.get
+  }
+
   handleNextStep(event) {
     event.preventDefault()
-    this.props.nextStep()
+    this.props.dispatchPostOffer()
   }
 
   handleChange(e, key) {
     this.setState({ [e]: key.value })
+    const offer = {
+      price: 15,
+      target: 'me',
+      time: 'inf'
+    }
+    this.props.dispactSetOfferParams()
   }
 
   handleRoute() {
@@ -103,5 +123,21 @@ FormulaStep.propTypes = {
   changeStep: PropTypes.func,
   nextStep: PropTypes.func
 }
+
+const mapStateToProps = createStructuredSelector({
+  offersIsLoading: makeSelectOfferIsLoading(),
+  email: makeSelectClientEmail()
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
+    dispatchPostClient: () => dispatch(postClient())
+  }
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
+
+export default compose(withConnect)(FormulaStep)
 
 export default FormulaStep
