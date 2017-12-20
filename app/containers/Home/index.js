@@ -1,11 +1,10 @@
 import React from 'react'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import injectSaga from 'utils/injectSaga'
 import { ThemeProvider } from 'styled-components'
 
 import HomePage from 'components/HomePage'
@@ -18,17 +17,17 @@ const theme = {
   }
 }
 
-export class Home extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
+class Home extends React.Component {
   render() {
+    const { dispatch } = this.props
     return (
       <div>
         <Helmet>
-          <title>Home</title>
-          <meta name="description" content="Description of Home" />
+          <title>ebdo</title>
+          <meta name="description" content="Homepage Ebdo" />
         </Helmet>
         <ThemeProvider theme={theme}>
-          <HomePage />
+          <HomePage dispatch={dispatch} />
         </ThemeProvider>
       </div>
     )
@@ -36,7 +35,17 @@ export class Home extends React.Component {
 }
 
 Home.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
-export default Home
+const mapStateToProps = createStructuredSelector({})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  }
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
+
+export default compose(withConnect)(Home)
