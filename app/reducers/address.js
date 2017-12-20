@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import Address from 'models/Address'
+import Address from 'models/address'
 
 import {
   POST_ADRESS,

@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import OfferModel from 'models/Offer'
+import OfferModel from 'models/offer'
 
 import {
   SET_OFFER_PARAMS,

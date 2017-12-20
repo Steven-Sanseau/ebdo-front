@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import ClientModel from 'models/Client'
+import ClientModel from 'models/client'
 
 import {
   POST_CLIENT,
