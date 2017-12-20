@@ -1,5 +1,6 @@
 import Immutable from 'immutable'
-import CheckoutModel from 'models/Checkout'
+
+import CheckoutModel from 'models/checkout'
 
 import { SET_PAYMENT_METHOD } from 'actions/constants'
 
