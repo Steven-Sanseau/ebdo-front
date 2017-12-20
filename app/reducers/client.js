@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import Client from 'models/Client'
+import ClientModel from 'models/Client'
 
 import {
   POST_CLIENT,
@@ -20,7 +20,7 @@ const initialState = Immutable.fromJS({
   clientExist: false,
   useClientExist: false,
   isNewClient: false,
-  data: new Client()
+  data: new ClientModel()
 })
 
 function clientReducer(state = initialState, action) {
@@ -57,14 +57,14 @@ function clientReducer(state = initialState, action) {
         .set('error', false)
         .set('isNewClient', true)
         .set('clientExist', false)
-        .set('data', Client(action.client.client))
+        .set('data', ClientModel(action.client.client))
     case GET_CLIENT_LOADED:
       return state
         .set('loading', false)
         .set('error', false)
         .set('isNewClient', false)
         .set('clientExist', true)
-        .set('data', Client(action.client))
+        .set('data', ClientModel(action.client))
     default:
       return state
   }

@@ -8,8 +8,8 @@ import { nextStep } from 'actions/step'
 
 import { makeSelectToken } from 'selectors/token'
 
-function* postToken(action) {
-  let paramsApiUrl = 'http://localhost:1338/v1/token'
+function* postToken() {
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token`
   const token = yield select(makeSelectToken())
   let method = 'POST'
 

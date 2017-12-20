@@ -17,24 +17,16 @@ import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
 class EmailStep extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      errorEmail: false,
-      errorMessage: ''
-    }
-
-    this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+  state = {
+    errorEmail: false,
+    errorMessage: ''
   }
 
-  handleNextStep(event) {
+  handleNextStep = event => {
     this.handleSubmit(event)
   }
 
-  handleEmail(event) {
+  handleEmail = event => {
     const email = event.target.value
 
     this.resetEmail()
@@ -66,7 +58,7 @@ class EmailStep extends React.Component {
     return true
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault()
 
     if (this.validateEmail()) {

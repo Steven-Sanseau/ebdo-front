@@ -19,7 +19,7 @@ import {
 } from 'selectors/client'
 
 function* postClient() {
-  let paramsApiUrl = 'http://localhost:1338/v1/client'
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
   const id = yield select(makeSelectClientId())
   const email = yield select(makeSelectClientEmail())
   const isNewClient = yield select(makeSelectClientIsNewClient())
@@ -55,7 +55,7 @@ function* next() {
 }
 
 function* getClientApi() {
-  let paramsApiUrl = 'http://localhost:1338/v1/client'
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
   const email = yield select(makeSelectClientEmail())
   const method = 'GET'
 

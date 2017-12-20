@@ -19,21 +19,6 @@ import App from 'containers/App'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Bold.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Medium.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Regular.woff'
-import '!file-loader?name=[name].[ext]!./images/favicon.ico'
-import '!file-loader?name=[name].[ext]!./images/icon-72x72.png'
-import '!file-loader?name=[name].[ext]!./images/icon-96x96.png'
-import '!file-loader?name=[name].[ext]!./images/icon-120x120.png'
-import '!file-loader?name=[name].[ext]!./images/icon-128x128.png'
-import '!file-loader?name=[name].[ext]!./images/icon-144x144.png'
-import '!file-loader?name=[name].[ext]!./images/icon-152x152.png'
-import '!file-loader?name=[name].[ext]!./images/icon-167x167.png'
-import '!file-loader?name=[name].[ext]!./images/icon-180x180.png'
-import '!file-loader?name=[name].[ext]!./images/icon-192x192.png'
-import '!file-loader?name=[name].[ext]!./images/icon-384x384.png'
-import '!file-loader?name=[name].[ext]!./images/icon-512x512.png'
-import '!file-loader?name=[name].[ext]!./manifest.json'
-import 'file-loader?name=[name].[ext]!./.htaccess' // eslint-disable-line import/extensions
-/* eslint-enable import/no-webpack-loader-syntax */
 
 import configureStore from './configureStore'
 
@@ -63,11 +48,7 @@ const MOUNT_NODE = document.getElementById('app')
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <StripeProvider
-        apiKey={
-          process.env.STRIPE_KEY_API || 'pk_test_23Oa4S48HIVPGSAYphIe8823'
-        }
-      >
+      <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
         <ConnectedRouter history={history}>
           <App />
         </ConnectedRouter>
@@ -87,12 +68,4 @@ if (module.hot) {
   })
 }
 
-// Chunked polyfill for browsers without Intl support
 render()
-
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install() // eslint-disable-line global-require
-}

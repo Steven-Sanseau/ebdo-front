@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { setCountryAdress } from 'actions/adress'
-import { makeSelectAdressCountry } from 'selectors/adress'
+import { setCountryAddress } from 'actions/address'
+import { makeSelectAddressCountry } from 'selectors/address'
 
 import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -33,7 +33,7 @@ class CountryStep extends React.Component {
   }
 
   handleCountry(country) {
-    this.props.dispatchCountryAdress(country)
+    this.props.dispatchCountryAddress(country)
   }
 
   handleSubmit() {
@@ -104,16 +104,16 @@ CountryStep.propTypes = {
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchCountryAdress: PropTypes.func
+  dispatchCountryAddress: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  country: makeSelectAdressCountry()
+  country: makeSelectAddressCountry()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchCountryAdress: country => dispatch(setCountryAdress(country))
+    dispatchCountryAddress: country => dispatch(setCountryAddress(country))
   }
 }
 

@@ -34,6 +34,7 @@ class PaymentStep extends React.Component {
   }
 
   handleChangeStripeForm(event) {
+    console.log(event)
     this.getStripeToken()
   }
 

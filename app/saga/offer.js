@@ -8,7 +8,7 @@ import { nextStep } from 'actions/step'
 import { makeSelectOffer } from 'selectors/offer'
 
 function* getOffer() {
-  let paramsApiUrl = 'http://localhost:1338/v1/offer'
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/offer`
   const method = 'GET'
   const offer = yield select(makeSelectOffer())
 
