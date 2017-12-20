@@ -10,19 +10,10 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import injectSaga from 'utils/injectSaga'
-import injectReducer from 'utils/injectReducer'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
-
-// REDUCERS
-import checkoutReducer from 'reducers/checkout'
-import offerReducer from 'reducers/offer'
-import clientReducer from 'reducers/client'
-import tokenReducer from 'reducers/token'
-import addressReducer from 'reducers/address'
-import stepReducer from 'reducers/step'
 
 // SAGA
 import sagaOffer from 'saga/offer'
@@ -163,36 +154,6 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-const withReducerOffer = injectReducer({
-  key: 'offer',
-  reducer: offerReducer
-})
-
-const withReducerClient = injectReducer({
-  key: 'client',
-  reducer: clientReducer
-})
-
-const withReducerAddress = injectReducer({
-  key: 'address',
-  reducer: addressReducer
-})
-
-const withReducerStep = injectReducer({
-  key: 'step',
-  reducer: stepReducer
-})
-
-const withReducerToken = injectReducer({
-  key: 'token',
-  reducer: tokenReducer
-})
-
-const withReducerCheckout = injectReducer({
-  key: 'checkout',
-  reducer: checkoutReducer
-})
-
 const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
 const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
 const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
@@ -200,12 +161,6 @@ const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
 const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
 
 export default compose(
-  withReducerOffer,
-  withReducerCheckout,
-  withReducerClient,
-  withReducerAddress,
-  withReducerStep,
-  withReducerToken,
   withSagaOffer,
   withSagaToken,
   withSagaCheckout,

@@ -30,3 +30,6 @@ export const SET_TOKEN_STRIPE = 'app/Checkout/token/SET_TOKEN_STRIPE'
 
 export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
 export const POST_SUBSCRIPTION = 'app/Checkout/checkout/POST_SUBSCRIPTION'
+
+export const CHANGE_NEWSLETTER_STATUS =
+  'app/Home/newsletter/CHANGE_NEWSLETTER_STATUS'
