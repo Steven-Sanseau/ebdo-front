@@ -32,5 +32,6 @@ Button.propTypes = {
   color: PropTypes.string,
   children: PropTypes.node.isRequired
 }
+Button.defaultProps = { color: '--booger' }
 
 export default Button

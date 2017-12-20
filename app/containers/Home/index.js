@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { ThemeProvider } from 'styled-components'
+import CookieBannerWrapper from 'components/CookieBanner'
 
 import HomePage from 'components/HomePage'
 
@@ -29,6 +30,7 @@ class Home extends React.Component {
         <ThemeProvider theme={theme}>
           <HomePage dispatch={dispatch} />
         </ThemeProvider>
+        <CookieBannerWrapper />
       </div>
     )
   }

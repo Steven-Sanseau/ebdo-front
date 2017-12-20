@@ -118,7 +118,7 @@ class EmailStep extends React.Component {
         nextStep={this.handleNextStep}
         isLoadingNextStep={clientIsLoading}
         textButtonNextStep={clientExist ? 'Je continue !' : null}
-        colorButtonNextStep={clientExist ? 'orange' : 'green'}
+        colorButtonNextStep={clientExist ? '--squash' : '--booger'}
       />
     )
   }
