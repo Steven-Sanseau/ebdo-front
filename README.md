@@ -1,6 +1,7 @@
-Front End Ebdo
+Front-End React Ebdo
 
 ```
 yarn install
-yarn start
+
+yarn dev
 ```
