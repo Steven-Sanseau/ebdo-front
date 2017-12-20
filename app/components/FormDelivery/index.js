@@ -17,11 +17,11 @@ class FormDelivery extends React.Component {
   }
 
   componentDidMount() {
-    this.adressInput = ReactDOM.findDOMNode(this.adressInput)
+    this.addressInput = ReactDOM.findDOMNode(this.addressInput)
     const allowedCountry = this.props.country.value
 
     this.placesAutocomplete = places({
-      container: this.adressInput,
+      container: this.addressInput,
       type: 'address',
       templates: {
         value(suggestion) {
@@ -32,12 +32,12 @@ class FormDelivery extends React.Component {
     })
 
     this.placesAutocomplete.on('clear', () => {
-      this.adressInput.value = ''
+      this.addressInput.value = ''
     })
   }
 
   handleChange(event) {
-    this.props.handleChange(this.props.typeOfAdress, {
+    this.props.handleChange(this.props.typeOfAddress, {
       [event.target.name]: event.target.value
     })
   }
@@ -48,12 +48,12 @@ class FormDelivery extends React.Component {
 
   handlePlace(event) {
     event.preventDefault()
-    this.props.handleChange(this.props.typeOfAdress, {
+    this.props.handleChange(this.props.typeOfAddress, {
       [event.target.name]: event.target.value
     })
     this.placesAutocomplete.on('change', e => {
-      this.props.handleChange(this.props.typeOfAdress, {
-        adress: e.suggestion.name || '',
+      this.props.handleChange(this.props.typeOfAddress, {
+        address: e.suggestion.name || '',
         city: e.suggestion.city || '',
         postal_code: e.suggestion.postcode || ''
       })
@@ -71,7 +71,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Prénom"
                     name="first_name"
-                    value={this.props.adress.first_name}
+                    value={this.props.address.first_name}
                     onChange={this.handleChange}
                     placeholder="Henry"
                   />
@@ -80,7 +80,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Nom"
                     name="last_name"
-                    value={this.props.adress.last_name}
+                    value={this.props.address.last_name}
                     onChange={this.handleChange}
                     placeholder="Michel"
                   />
@@ -91,7 +91,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Téléphone"
                     name="phone"
-                    value={this.props.adress.phone}
+                    value={this.props.address.phone}
                     onChange={this.handleChange}
                     placeholder="Votre numéro de téléphone"
                   />
@@ -100,7 +100,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Société"
                     name="company"
-                    value={this.props.adress.company}
+                    value={this.props.address.company}
                     onChange={this.handleChange}
                     placeholder="Nom de la Société"
                   />
@@ -109,16 +109,16 @@ class FormDelivery extends React.Component {
               <Row>
                 <Col xs={12} lg={8}>
                   <InputText
-                    label="Adresse"
+                    label="Addresse"
                     id="address-input"
-                    name="adress"
+                    name="address"
                     isRequired
                     reference={input => {
-                      this.adressInput = input
+                      this.addressInput = input
                     }}
-                    value={this.props.adress.adress}
+                    value={this.props.address.address}
                     onChange={this.handlePlace}
-                    placeholder="Adresse"
+                    placeholder="Addresse"
                   />
                 </Col>
                 <Col lg={4} xs={12}>
@@ -126,7 +126,7 @@ class FormDelivery extends React.Component {
                     label="Code Postal"
                     name="postal_code"
                     isRequired
-                    value={this.props.adress.postal_code}
+                    value={this.props.address.postal_code}
                     onChange={this.handleChange}
                     placeholder="00000"
                   />
@@ -138,7 +138,7 @@ class FormDelivery extends React.Component {
                     label="Ville"
                     name="city"
                     isRequired
-                    value={this.props.adress.city}
+                    value={this.props.address.city}
                     onChange={this.handleChange}
                     placeholder="Paris"
                   />
@@ -164,9 +164,9 @@ class FormDelivery extends React.Component {
 }
 
 FormDelivery.propTypes = {
-  adress: PropTypes.object,
+  address: PropTypes.object,
   country: PropTypes.object.isRequired,
-  typeOfAdress: PropTypes.string,
+  typeOfAddress: PropTypes.string,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func
 }

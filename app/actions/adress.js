@@ -7,41 +7,41 @@ import {
   SET_COUNTRY_ADRESS
 } from 'actions/constants'
 
-export function postAdress(typeOfAdress) {
+export function postAddress(typeOfAddress) {
   return {
     type: POST_ADRESS,
-    typeOfAdress
+    typeOfAddress
   }
 }
 
-export function postAdressLoaded(typeOfAdress, adress) {
+export function postAddressLoaded(typeOfAddress, address) {
   return {
     type: POST_ADRESS_LOADED,
     payload: {
-      typeOfAdress,
-      adress
+      typeOfAddress,
+      address
     }
   }
 }
 
-export function postAdressError(error) {
+export function postAddressError(error) {
   return {
     type: POST_ADRESS_ERROR,
     error
   }
 }
 
-export function setAdress(typeOfAdress, adress) {
+export function setAddress(typeOfAddress, address) {
   return {
     type: SET_ADRESS,
     payload: {
-      typeOfAdress,
-      adress
+      typeOfAddress,
+      address
     }
   }
 }
 
-export function setCountryAdress(country) {
+export function setCountryAddress(country) {
   return {
     type: SET_COUNTRY_ADRESS,
     payload: {
@@ -50,7 +50,7 @@ export function setCountryAdress(country) {
   }
 }
 
-export function setAdressEqual() {
+export function setAddressEqual() {
   return {
     type: SET_ADRESS_EQUAL
   }

@@ -6,12 +6,12 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import {
-  makeSelectAdressInvoice,
-  makeSelectAdressIsLoading,
-  makeSelectAdressDelivery,
-  makeSelectAdressCountry
-} from 'selectors/adress'
-import { setAdress, postAdress, setAdressEqual } from 'actions/adress'
+  makeSelectAddressInvoice,
+  makeSelectAddressIsLoading,
+  makeSelectAddressDelivery,
+  makeSelectAddressCountry
+} from 'selectors/address'
+import { setAddress, postAddress, setAddressEqual } from 'actions/address'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
 import BoldText from 'components/LayoutStep/BoldText'
@@ -30,8 +30,8 @@ class DeliveryStep extends React.Component {
 
     this.handleChangeStep = this.handleChangeStep.bind(this)
     this.showInvoiceForm = this.showInvoiceForm.bind(this)
-    this.handleAdressForm = this.handleAdressForm.bind(this)
-    this.handleSubmitAdressForm = this.handleSubmitAdressForm.bind(this)
+    this.handleAddressForm = this.handleAddressForm.bind(this)
+    this.handleSubmitAddressForm = this.handleSubmitAddressForm.bind(this)
     this.handleNextStep = this.handleNextStep.bind(this)
   }
 
@@ -40,26 +40,26 @@ class DeliveryStep extends React.Component {
   }
 
   handleNextStep(event) {
-    this.handleSubmitAdressForm(event)
+    this.handleSubmitAddressForm(event)
   }
 
   showInvoiceForm() {
     this.setState({ isInvoiceSameDelivery: !this.state.isInvoiceSameDelivery })
   }
 
-  handleAdressForm(type, adress) {
-    this.props.dispatchChangeAdress(type, adress)
+  handleAddressForm(type, address) {
+    this.props.dispatchChangeAddress(type, address)
   }
 
-  handleSubmitAdressForm(event) {
+  handleSubmitAddressForm(event) {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
-      this.props.dispatchAdressEqual()
+      this.props.dispatchAddressEqual()
     }
 
-    this.props.dispatchPostAdressDelivery()
-    this.props.dispatchPostAdressInvoice()
+    this.props.dispatchPostAddressDelivery()
+    this.props.dispatchPostAddressInvoice()
   }
 
   contentOpen() {
@@ -69,11 +69,11 @@ class DeliveryStep extends React.Component {
     return (
       <div>
         <FormDelivery
-          adress={delivery}
+          address={delivery}
           country={country}
-          typeOfAdress="delivery"
-          handleChange={this.handleAdressForm}
-          handleSubmit={this.handleSubmitAdressForm}
+          typeOfAddress="delivery"
+          handleChange={this.handleAddressForm}
+          handleSubmit={this.handleSubmitAddressForm}
         />
         <CheckboxShowInvoiceForm
           isChecked={isInvoiceSameDelivery}
@@ -81,11 +81,11 @@ class DeliveryStep extends React.Component {
         />
         {!isInvoiceSameDelivery && (
           <FormDelivery
-            adress={invoice}
+            address={invoice}
             country={country}
-            typeOfAdress="invoice"
-            handleChange={this.handleAdressForm}
-            handleSubmit={this.handleSubmitAdressForm}
+            typeOfAddress="invoice"
+            handleChange={this.handleAddressForm}
+            handleSubmit={this.handleSubmitAddressForm}
           />
         )}
       </div>
@@ -97,20 +97,20 @@ class DeliveryStep extends React.Component {
 
     return (
       <div>
-        Mes numéros seront envoyés à l’adresse suivante : <br />
+        Mes numéros seront envoyés à l’addresse suivante : <br />
         <BoldText>
           {delivery.first_name} {delivery.last_name}
-        </BoldText>,{delivery.adress}, {delivery.postal_code} {delivery.city} ({
+        </BoldText>,{delivery.address}, {delivery.postal_code} {delivery.city} ({
           delivery.country
         }).
         <UpdateStep>
           <Button onClick={this.handleChangeStep}>Modifier</Button>
         </UpdateStep>{' '}
         <br />
-        Je serai facturé à l’adresse suivante : <br />
+        Je serai facturé à l’addresse suivante : <br />
         <BoldText>
           {invoice.first_name} {invoice.last_name}
-        </BoldText>, {invoice.adress}, {invoice.postal_code} {invoice.city} ({
+        </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city} ({
           invoice.country
         }).
         <UpdateStep>
@@ -121,18 +121,18 @@ class DeliveryStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, adressIsLoading } = this.props
+    const { currentStep, changeStep, stepNumber, addressIsLoading } = this.props
 
     return (
       <ToggleStep
-        title="Je renseigne mon adresse"
+        title="Je renseigne mon addresse"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
-        isLoadingNextStep={adressIsLoading}
+        isLoadingNextStep={addressIsLoading}
         updateStepHide
       />
     )
@@ -140,32 +140,33 @@ class DeliveryStep extends React.Component {
 }
 
 DeliveryStep.propTypes = {
-  adressIsLoading: PropTypes.bool,
+  addressIsLoading: PropTypes.bool,
   country: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  dispatchPostAdressDelivery: PropTypes.func,
-  dispatchPostAdressInvoice: PropTypes.func,
-  dispatchAdressEqual: PropTypes.func,
-  dispatchChangeAdress: PropTypes.func
+  dispatchPostAddressDelivery: PropTypes.func,
+  dispatchPostAddressInvoice: PropTypes.func,
+  dispatchAddressEqual: PropTypes.func,
+  dispatchChangeAddress: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  country: makeSelectAdressCountry(),
-  adressIsLoading: makeSelectAdressIsLoading(),
-  invoice: makeSelectAdressInvoice(),
-  delivery: makeSelectAdressDelivery()
+  country: makeSelectAddressCountry(),
+  addressIsLoading: makeSelectAddressIsLoading(),
+  invoice: makeSelectAddressInvoice(),
+  delivery: makeSelectAddressDelivery()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchChangeAdress: (type, adress) => dispatch(setAdress(type, adress)),
-    dispatchAdressEqual: () => dispatch(setAdressEqual()),
-    dispatchPostAdressDelivery: () => dispatch(postAdress('delivery')),
-    dispatchPostAdressInvoice: () => dispatch(postAdress('invoice'))
+    dispatchChangeAddress: (type, address) =>
+      dispatch(setAddress(type, address)),
+    dispatchAddressEqual: () => dispatch(setAddressEqual()),
+    dispatchPostAddressDelivery: () => dispatch(postAddress('delivery')),
+    dispatchPostAddressInvoice: () => dispatch(postAddress('invoice'))
   }
 }
 

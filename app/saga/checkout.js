@@ -3,39 +3,39 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 import request from 'utils/request'
 
 import { POST_ADRESS } from 'actions/constants'
-import { postAdressError, postAdressLoaded } from 'actions/adress'
+import { postAddressError, postAddressLoaded } from 'actions/address'
 import { nextStep } from 'actions/step'
 
-import { makeSelectAdressType } from 'selectors/adress'
+import { makeSelectAddressType } from 'selectors/address'
 
 function* postCheckout(action) {
-  let paramsApiUrl = 'http://localhost:1338/v1/adress'
-  const adress = yield select(makeSelectAdressType(action.typeOfAdress))
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/checkout`
+  const address = yield select(makeSelectAddressType(action.typeOfAddress))
   let method = 'POST'
 
   try {
     // WARNING W/ PATCH
-    if (adress.adress_id !== null) {
+    if (address.address_id !== null) {
       method = 'PATCH'
-      paramsApiUrl = `${paramsApiUrl}/${adress.adress_id}`
+      paramsApiUrl = `${paramsApiUrl}/${address.address_id}`
     }
 
-    const adressResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ adress }),
+    const addressResponse = yield call(request, paramsApiUrl, {
+      body: JSON.stringify({ address }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postAdressLoaded(action.typeOfAdress, adressResponse))
+    yield put(postAddressLoaded(action.typeOfAddress, addressResponse))
     yield put(nextStep())
   } catch (err) {
-    yield put(postAdressError(err.message))
+    yield put(postAddressError(err.message))
   }
 }
 
 function* getCheckout() {
-  let paramsApiUrl = 'http://localhost:1338/v1/checkout'
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/checkout`
   const cookie = yield select(makeSelectCookieCheckout())
   const method = 'GET'
 

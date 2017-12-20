@@ -23,9 +23,9 @@ export default class CheckboxShowInvoiceForm extends React.Component {
     return (
       <Row>
         <Col lg={5} xs={11}>
-          <Title>Adresse de facturation</Title>
+          <Title>Addresse de facturation</Title>
           <Checkbox
-            text="Utiliser la même adresse"
+            text="Utiliser la même addresse"
             onCheck={this.handleCheckbox}
             isChecked={isChecked}
           />

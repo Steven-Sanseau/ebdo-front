@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-import Adress from 'models/Adress'
+import Address from 'models/Address'
 
 import {
   POST_ADRESS,
@@ -19,27 +19,27 @@ const initialState = Immutable.fromJS({
     value: 'FR',
     label: 'France'
   },
-  delivery: new Adress(),
-  invoice: new Adress()
+  delivery: new Address(),
+  invoice: new Address()
 })
 
-function adressReducer(state = initialState, action) {
+function addressReducer(state = initialState, action) {
   switch (action.type) {
     case POST_ADRESS:
       return state.set('loading', true)
     case SET_ADRESS: {
-      const newAdress = state
-        .get(action.payload.typeOfAdress)
-        .mergeDeep(action.payload.adress)
+      const newAddress = state
+        .get(action.payload.typeOfAddress)
+        .mergeDeep(action.payload.address)
       const country = state.getIn(['country', 'value'])
 
       return state
-        .set(action.payload.typeOfAdress, Adress(newAdress))
+        .set(action.payload.typeOfAddress, Address(newAddress))
         .setIn(
-          [action.payload.typeOfAdress, 'type_adress'],
-          action.payload.typeOfAdress
+          [action.payload.typeOfAddress, 'type_address'],
+          action.payload.typeOfAddress
         )
-        .setIn([action.payload.typeOfAdress, 'country'], country)
+        .setIn([action.payload.typeOfAddress, 'country'], country)
     }
     case POST_ADRESS_ERROR:
       return state
@@ -50,13 +50,16 @@ function adressReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
-        .set(action.payload.typeOfAdress, Adress(action.payload.adress.adress))
+        .set(
+          action.payload.typeOfAddress,
+          Address(action.payload.address.address)
+        )
     }
     case SET_ADRESS_EQUAL: {
-      const adressDeliveryToInvoice = state
+      const addressDeliveryToInvoice = state
         .get('delivery')
-        .mergeDeep({ type_adress: 'invoice' })
-      return state.set('invoice', new Adress(adressDeliveryToInvoice))
+        .mergeDeep({ type_address: 'invoice' })
+      return state.set('invoice', new Address(addressDeliveryToInvoice))
     }
     case SET_COUNTRY_ADRESS: {
       return state
@@ -69,4 +72,4 @@ function adressReducer(state = initialState, action) {
   }
 }
 
-export default adressReducer
+export default addressReducer

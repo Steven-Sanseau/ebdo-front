@@ -1,33 +1,34 @@
 import { createSelector } from 'reselect'
 
-const selectAdress = state => state.get('adress')
+const selectAddress = state => state.get('address')
 
-const makeSelectAdress = () => createSelector(selectAdress, adress => adress)
+const makeSelectAddress = () =>
+  createSelector(selectAddress, address => address)
 
-const makeSelectAdressIsLoading = () =>
-  createSelector(selectAdress, adress => adress.get('loading'))
+const makeSelectAddressIsLoading = () =>
+  createSelector(selectAddress, address => address.get('loading'))
 
-const makeSelectAdressDelivery = () =>
-  createSelector(selectAdress, adress => adress.get('delivery').toJS())
+const makeSelectAddressDelivery = () =>
+  createSelector(selectAddress, address => address.get('delivery').toJS())
 
-const makeSelectAdressInvoice = () =>
-  createSelector(selectAdress, adress => adress.get('invoice').toJS())
+const makeSelectAddressInvoice = () =>
+  createSelector(selectAddress, address => address.get('invoice').toJS())
 
-const makeSelectAdressId = () =>
-  createSelector(selectAdress, adress => adress.get('invoice'))
+const makeSelectAddressId = () =>
+  createSelector(selectAddress, address => address.get('invoice'))
 
-const makeSelectAdressType = type =>
-  createSelector(selectAdress, adress => adress.get(type))
+const makeSelectAddressType = type =>
+  createSelector(selectAddress, address => address.get(type))
 
-const makeSelectAdressCountry = () =>
-  createSelector(selectAdress, adress => adress.get('country').toJS())
+const makeSelectAddressCountry = () =>
+  createSelector(selectAddress, address => address.get('country').toJS())
 
 export {
-  makeSelectAdress,
-  makeSelectAdressId,
-  makeSelectAdressCountry,
-  makeSelectAdressDelivery,
-  makeSelectAdressInvoice,
-  makeSelectAdressIsLoading,
-  makeSelectAdressType
+  makeSelectAddress,
+  makeSelectAddressId,
+  makeSelectAddressCountry,
+  makeSelectAddressDelivery,
+  makeSelectAddressInvoice,
+  makeSelectAddressIsLoading,
+  makeSelectAddressType
 }

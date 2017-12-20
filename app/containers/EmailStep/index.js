@@ -17,24 +17,16 @@ import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
 class EmailStep extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      errorEmail: false,
-      errorMessage: ''
-    }
-
-    this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+  state = {
+    errorEmail: false,
+    errorMessage: ''
   }
 
-  handleNextStep(event) {
+  handleNextStep = event => {
     this.handleSubmit(event)
   }
 
-  handleEmail(event) {
+  handleEmail = event => {
     const email = event.target.value
 
     this.resetEmail()
@@ -51,7 +43,7 @@ class EmailStep extends React.Component {
     if (!emailRegex({ exact: true }).test(email)) {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez entrer une adresse email valide'
+        errorMessage: 'Veuillez entrer une addresse email valide'
       })
       return false
     }
@@ -66,7 +58,7 @@ class EmailStep extends React.Component {
     return true
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault()
 
     if (this.validateEmail()) {
@@ -93,7 +85,7 @@ class EmailStep extends React.Component {
         />
         {clientExist && (
           <div>
-            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
+            Votre addresse est déjà enregistrée chez nous. Etes vous sûr de
             vouloir passer une nouvelle commande ?
           </div>
         )}

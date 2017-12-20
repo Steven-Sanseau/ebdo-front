@@ -21,14 +21,14 @@ import checkoutReducer from 'reducers/checkout'
 import offerReducer from 'reducers/offer'
 import clientReducer from 'reducers/client'
 import tokenReducer from 'reducers/token'
-import adressReducer from 'reducers/adress'
+import addressReducer from 'reducers/address'
 import stepReducer from 'reducers/step'
 
 // SAGA
 import sagaOffer from 'saga/offer'
 import sagaCheckout from 'saga/checkout'
 import sagaToken from 'saga/token'
-import sagaAdress from 'saga/adress'
+import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
@@ -173,9 +173,9 @@ const withReducerClient = injectReducer({
   reducer: clientReducer
 })
 
-const withReducerAdress = injectReducer({
-  key: 'adress',
-  reducer: adressReducer
+const withReducerAddress = injectReducer({
+  key: 'address',
+  reducer: addressReducer
 })
 
 const withReducerStep = injectReducer({
@@ -197,19 +197,19 @@ const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
 const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
 const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAdress = injectSaga({ key: 'adress', saga: sagaAdress })
+const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
 
 export default compose(
   withReducerOffer,
   withReducerCheckout,
   withReducerClient,
-  withReducerAdress,
+  withReducerAddress,
   withReducerStep,
   withReducerToken,
   withSagaOffer,
   withSagaToken,
   withSagaCheckout,
-  withSagaAdress,
+  withSagaAddress,
   withSagaClient,
   withConnect
 )(Checkout)

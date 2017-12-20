@@ -1,18 +1,18 @@
 import { Record } from 'immutable'
 
-const Adress = new Record({
-  adress_id: null,
+const Address = new Record({
+  address_id: null,
   client_id: 1,
   // civility: 'M',
   last_name: null,
   phone: null,
   first_name: null,
-  adress: null,
+  address: null,
   city: null,
   postal_code: null,
   country: null,
   company: null,
-  type_adress: null
+  type_address: null
 })
 
-export default Adress
+export default Address

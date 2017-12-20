@@ -63,11 +63,7 @@ const MOUNT_NODE = document.getElementById('app')
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <StripeProvider
-        apiKey={
-          process.env.STRIPE_KEY_API || 'pk_test_23Oa4S48HIVPGSAYphIe8823'
-        }
-      >
+      <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
         <ConnectedRouter history={history}>
           <App />
         </ConnectedRouter>
