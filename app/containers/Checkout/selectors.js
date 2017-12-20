@@ -1,20 +1,48 @@
 import { createSelector } from 'reselect'
 
-/**
- * Direct selector to the checkout state domain
- */
-const selectCheckoutDomain = state => state.get('checkout')
+const selectCheckout = state => state.get('checkout')
 
-/**
- * Other specific selectors
- */
+const selectClient = state => state.get('checkout').get('client')
 
-/**
- * Default selector used by Checkout
- */
+const selectAdress = state => state.get('checkout').get('adress')
 
 const makeSelectCheckout = () =>
-  createSelector(selectCheckoutDomain, substate => substate.toJS())
+  createSelector(selectCheckout, globalState => globalState.get('checkout'))
 
-export default makeSelectCheckout
-export { selectCheckoutDomain }
+const makeSelectClientEmail = () =>
+  createSelector(selectClient, client => client.get('data').get('email'))
+
+const makeSelectAdress = () => createSelector(selectAdress, adress => adress)
+
+const makeSelectAdressIsLoading = () =>
+  createSelector(selectAdress, adress => adress.get('loading'))
+
+const makeSelectAdressDelivery = () =>
+  createSelector(selectAdress, adress => adress.get('delivery'))
+
+const makeSelectAdressInvoice = () =>
+  createSelector(selectAdress, adress => adress.get('invoice'))
+
+const makeSelectAdressType = type =>
+  createSelector(selectAdress, adress => adress.get(type))
+
+const makeSelectStep = () =>
+  createSelector(selectCheckout, checkout => checkout.get('step'))
+
+const makeSelectClientIsLoading = () =>
+  createSelector(selectClient, client => client.get('loading'))
+
+const makeSelectClient = () => createSelector(selectClient, client => client)
+
+export {
+  makeSelectCheckout,
+  makeSelectClientEmail,
+  makeSelectClient,
+  makeSelectClientIsLoading,
+  makeSelectStep,
+  makeSelectAdress,
+  makeSelectAdressDelivery,
+  makeSelectAdressInvoice,
+  makeSelectAdressIsLoading,
+  makeSelectAdressType
+}
