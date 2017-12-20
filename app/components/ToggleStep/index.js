@@ -71,7 +71,7 @@ class ToggleStep extends React.Component {
                         <NextStep>
                           <Button
                             handleRoute={nextStep}
-                            color={colorButtonNextStep || 'green'}
+                            color={colorButtonNextStep}
                           >
                             {isLoadingNextStep && <LoaderNextStep />}
                             {!isLoadingNextStep && (

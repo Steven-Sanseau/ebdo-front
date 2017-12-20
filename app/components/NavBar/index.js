@@ -1,15 +1,11 @@
-/**
- *
- * NavBar
- *
- */
-
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Col, Row } from 'react-styled-flexboxgrid'
 import { Link } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 import { media } from 'global-styles'
+import { push } from 'react-router-redux'
 
 import Button from 'components/Button'
 import Logo from 'components/Icon/Logo'
@@ -81,7 +77,8 @@ const menuStyle = {
   marginLeft: 'auto',
   maxWidth: '1200px',
   width: 'calc(100% - 80px)',
-  transition: 'transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out'
+  transition:
+    'transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out'
 }
 
 const hidden = {
@@ -98,9 +95,11 @@ class NavBar extends React.Component {
   state = {
     menuFixed: false
   }
-  handleRoute() {
-    console.log('route')
+
+  handleRoute = () => {
+    this.props.dispatch(push('abonnement'))
   }
+
   handleStateChange(status) {
     if (status.status === Sticky.STATUS_FIXED) {
       this.setState({ menuFixed: true })
@@ -114,20 +113,30 @@ class NavBar extends React.Component {
     const { menuFixed } = this.state
     return (
       <Sticky onStateChange={this.handleStateChange} innerZ={1}>
-        <Menu menuFixed={menuFixed} style={menuFixed ? menuFixedStyle : menuStyle}>
+        <Menu
+          menuFixed={menuFixed}
+          style={menuFixed ? menuFixedStyle : menuStyle}
+        >
           <Row>
             <Col xs={12} sm={menuFixed ? 5 : 4}>
               <Title menuFixed={menuFixed}>
-                <Logo width={menuFixed ? 65 : 150} height={menuFixed ? 25 : 56} />
+                <Logo
+                  width={menuFixed ? 65 : 150}
+                  height={menuFixed ? 25 : 56}
+                />
               </Title>
               <Subtitle menuFixed={menuFixed}>
                 À chaque époque <br /> son journal.
               </Subtitle>
             </Col>
-            <Col xs={menuFixed ? false : 12} sm={menuFixed ? 6 : 7} smOffset={1} >
+            <Col
+              xs={menuFixed ? false : 12}
+              sm={menuFixed ? 6 : 7}
+              smOffset={1}
+            >
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap color="--tomato">
-                  <Link to="#">L&apos;équipe</Link>
+                  <Link to="team">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap color="--sunflower">
                   <Link to="#">Pourquoi ?</Link>
@@ -136,7 +145,7 @@ class NavBar extends React.Component {
                   <Link to="#">La Fabrique</Link>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash">
-                  <Link to="#">Connexion</Link>
+                  <Link to="login">Connexion</Link>
                 </LinkWrapMobile>
                 <LinkWrapMobile className="mgr">
                   <Button handleRoute={this.handleRoute} color="--squash">
@@ -157,6 +166,6 @@ class NavBar extends React.Component {
   }
 }
 
-NavBar.propTypes = {}
+NavBar.propTypes = { dispatch: PropTypes.func }
 
 export default NavBar

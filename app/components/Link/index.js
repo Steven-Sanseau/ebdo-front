@@ -1,12 +1,6 @@
-/**
-*
-* Link
-*
-*/
-
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const LinkWrapper = styled.a`
   color: #fff;
@@ -15,22 +9,18 @@ const LinkWrapper = styled.a`
 
   &:hover {
     background: white;
-    color: #5C2A53;
+    color: #5c2a53;
   }
 `
 
 const Link = props => {
   const { to, children } = props
-  return (
-    <LinkWrapper href={to}>
-      {children}
-    </LinkWrapper>
-  );
+  return <LinkWrapper href={to}>{children}</LinkWrapper>
 }
 
 Link.propTypes = {
   to: PropTypes.string,
   children: PropTypes.node
-};
+}
 
-export default Link;
+export default Link

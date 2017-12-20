@@ -1,10 +1,5 @@
-/**
- *
- * HomePage
- *
- */
-
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Row, Col } from 'react-styled-flexboxgrid'
 import Footer from 'components/Footer'
 import styled from 'styled-components'
@@ -66,10 +61,10 @@ const HomeLandingWrap = styled.div`
 `};
 `
 
-function HomePage() {
+function HomePage(props) {
   return (
     <Grid fluid>
-      <NavBar />
+      <NavBar dispatch={props.dispatch} />
       <HomeLandingWrap>
         <HomeLanding />
       </HomeLandingWrap>
@@ -85,7 +80,7 @@ function HomePage() {
               information indépendante, un journal sans pub et sans compromis.
             </TextWrap>
           </Col>
-          <Col xs={12} sm={4} >
+          <Col xs={12} sm={4}>
             <ImageWrap>
               <img src="abo-illu.png" alt="abo illustration" width="100%" />
             </ImageWrap>
@@ -106,6 +101,6 @@ function HomePage() {
   )
 }
 
-HomePage.propTypes = {}
+HomePage.propTypes = { dispatch: PropTypes.func }
 
 export default HomePage
