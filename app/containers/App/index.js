@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 
 import Checkout from 'containers/Checkout/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
-// import { Elements } from 'react-stripe-elements'
 
 export default function App() {
   return (

@@ -1,7 +1,5 @@
 import Immutable from 'immutable'
 
-import Client from 'models/Client'
-
 import {
   POST_TOKEN,
   SET_TOKEN_STRIPE,
