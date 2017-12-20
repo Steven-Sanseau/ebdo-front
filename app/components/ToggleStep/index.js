@@ -7,6 +7,7 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
+import LoaderNextStep from '../LayoutStep/LoaderNextStep'
 import StepPostviewText from '../LayoutStep/StepPostviewText'
 import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
@@ -31,7 +32,11 @@ class ToggleStep extends React.Component {
       stepNumber,
       title,
       contentOpen,
-      contentClose
+      contentClose,
+      isLoadingNextStep,
+      textButtonNextStep,
+      colorButtonNextStep,
+      updateStepHide
     } = this.props
 
     return (
@@ -64,7 +69,17 @@ class ToggleStep extends React.Component {
                     <Row start="xs">
                       <Col xs={12}>
                         <NextStep>
-                          <Button handleRoute={nextStep}>Étape Suivante</Button>
+                          <Button
+                            handleRoute={nextStep}
+                            color={colorButtonNextStep || 'green'}
+                          >
+                            {isLoadingNextStep && <LoaderNextStep />}
+                            {!isLoadingNextStep && (
+                              <span>
+                                {textButtonNextStep || 'Étape Suivante'}
+                              </span>
+                            )}
+                          </Button>
                         </NextStep>
                       </Col>
                     </Row>
@@ -110,9 +125,11 @@ class ToggleStep extends React.Component {
                   <Col lg={5} xs={10}>
                     <StepPostviewText>
                       <TextSummary>{contentClose}</TextSummary>
-                      <UpdateStep>
-                        <Button onClick={this.change}>Modifier</Button>
-                      </UpdateStep>
+                      {!updateStepHide && (
+                        <UpdateStep>
+                          <Button onClick={this.change}>Modifier</Button>
+                        </UpdateStep>
+                      )}
                     </StepPostviewText>
                   </Col>
                 </Row>
@@ -128,11 +145,15 @@ class ToggleStep extends React.Component {
 ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
+  isLoadingNextStep: PropTypes.bool,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func
+  nextStep: PropTypes.func,
+  textButtonNextStep: PropTypes.string,
+  colorButtonNextStep: PropTypes.string,
+  updateStepHide: PropTypes.bool
 }
 
 export default ToggleStep

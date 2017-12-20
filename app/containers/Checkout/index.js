@@ -1,52 +1,60 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { Row, Col } from 'react-flexbox-grid'
+import { Elements } from 'react-stripe-elements'
+// import idx from 'idx'
+
+// STATE
+import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-
-import { Row, Col } from 'react-flexbox-grid'
-import { Elements, injectStripe } from 'react-stripe-elements'
-
 import injectSaga from 'utils/injectSaga'
-import injectReducer from 'utils/injectReducer'
-import makeSelectCheckout from './selectors'
-import reducer from './reducer'
-import saga from './saga'
 
-import FormulaStep from '../../components/FormulaStep/Loadable'
-import StartStep from '../../components/StartStep/Loadable'
-import VoucherStep from '../../components/VoucherStep/Loadable'
-import EmailStep from '../../components/EmailStep/Loadable'
-import DeliveryStep from '../../components/DeliveryStep/Loadable'
-import PaymentStep from '../../components/PaymentStep/Loadable'
+// SELECTOR
+import { makeSelectStep } from 'selectors/step'
+import { nextStep, goToStep } from 'actions/step'
 
-import Header from '../../components/Header'
-import Layout from './Layout'
+// SAGA
+import sagaOffer from 'saga/offer'
+import sagaCheckout from 'saga/checkout'
+import sagaToken from 'saga/token'
+import sagaAddress from 'saga/address'
+import sagaClient from 'saga/client'
+
+// CONTAINERS
+import FormulaStep from 'containers/FormulaStep/Loadable'
+import CountryStep from 'containers/CountryStep/Loadable'
+import EmailStep from 'containers/EmailStep/Loadable'
+import DeliveryStep from 'containers/DeliveryStep/Loadable'
+import PaymentStep from 'containers/PaymentStep/Loadable'
+import ConfirmStep from 'containers/ConfirmStep/Loadable'
+
+// COMPONENTS
+import Header from 'components/Header'
+import Layout from 'containers/Checkout/Layout'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      step: 6
-    }
-
     this.nextStep = this.nextStep.bind(this)
     this.changeStep = this.changeStep.bind(this)
   }
 
+  // componentDidMount() {}
+
   nextStep() {
-    const { step } = this.state
-    this.setState({ step: step + 1 })
+    this.props.nextStep()
   }
 
-  changeStep(stepElem) {
-    this.setState({ step: stepElem })
+  changeStep(stepNumber) {
+    this.props.goToStep(stepNumber)
   }
 
   render() {
-    const { step } = this.state
+    const { step } = this.props
+
     return (
       <div>
         <Layout>
@@ -71,7 +79,7 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <StartStep
+              <CountryStep
                 stepNumber={2}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -81,7 +89,7 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <VoucherStep
+              <EmailStep
                 stepNumber={3}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -91,18 +99,8 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <EmailStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
               <DeliveryStep
-                stepNumber={5}
+                stepNumber={4}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -113,12 +111,22 @@ export class Checkout extends React.Component {
             <Col xs={12}>
               <Elements>
                 <PaymentStep
-                  stepNumber={6}
+                  stepNumber={5}
                   changeStep={this.changeStep}
                   nextStep={this.nextStep}
                   currentStep={step}
                 />
               </Elements>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <ConfirmStep
+                stepNumber={6}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
             </Col>
           </Row>
         </Layout>
@@ -128,22 +136,35 @@ export class Checkout extends React.Component {
 }
 
 Checkout.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  nextStep: PropTypes.func,
+  goToStep: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout()
+  step: makeSelectStep()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    nextStep: () => dispatch(nextStep()),
+    goToStep: step => dispatch(goToStep(step))
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-const withReducer = injectReducer({ key: 'checkout', reducer })
-const withSaga = injectSaga({ key: 'checkout', saga })
+const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
+const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
+const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
+const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
+const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
 
-export default compose(withReducer, withSaga, withConnect)(Checkout)
+export default compose(
+  withSagaOffer,
+  withSagaToken,
+  withSagaCheckout,
+  withSagaAddress,
+  withSagaClient,
+  withConnect
+)(Checkout)

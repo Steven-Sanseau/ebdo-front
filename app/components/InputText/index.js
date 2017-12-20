@@ -6,6 +6,7 @@ import Label from './Label'
 import Input from './Input'
 import InputWrapper from './InputWrapper'
 import Required from './Required'
+import ErrorMessage from './ErrorMessage'
 
 class InputText extends React.Component {
   render() {
@@ -14,8 +15,7 @@ class InputText extends React.Component {
         <Label error={this.props.error || false}>
           <Row>
             <Col xs={12}>
-              {!this.props.error && this.props.label}
-              {this.props.error && this.props.errorMessage}
+              {this.props.label}
               {this.props.isRequired && <Required>*</Required>}
             </Col>
           </Row>
@@ -30,9 +30,20 @@ class InputText extends React.Component {
                 ref={this.props.reference || null}
                 type="text"
                 value={this.props.value || ''}
+                disabled={this.props.disabled || false}
+                autocomplete="false"
               />
             </Col>
           </Row>
+          {this.props.error && (
+            <Row>
+              <Col xs={12}>
+                {this.props.errorMessage && (
+                  <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+                )}
+              </Col>
+            </Row>
+          )}
         </Label>
       </InputWrapper>
     )
@@ -49,7 +60,8 @@ InputText.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   reference: PropTypes.func,
-  value: PropTypes.string
+  value: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 export default InputText
