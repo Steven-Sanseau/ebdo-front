@@ -97,7 +97,7 @@ class DeliveryStep extends React.Component {
 
     return (
       <div>
-        Mes numéros seront envoyés à l’addresse suivante : <br />
+        Mes numéros seront envoyés à l’adresse suivante : <br />
         <BoldText>
           {delivery.first_name} {delivery.last_name}
         </BoldText>,{delivery.address}, {delivery.postal_code} {delivery.city} ({
@@ -107,7 +107,7 @@ class DeliveryStep extends React.Component {
           <Button onClick={this.handleChangeStep}>Modifier</Button>
         </UpdateStep>{' '}
         <br />
-        Je serai facturé à l’addresse suivante : <br />
+        Je serai facturé à l’adresse suivante : <br />
         <BoldText>
           {invoice.first_name} {invoice.last_name}
         </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city} ({
@@ -125,7 +125,7 @@ class DeliveryStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je renseigne mon addresse"
+        title="Je renseigne mon adresse"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}

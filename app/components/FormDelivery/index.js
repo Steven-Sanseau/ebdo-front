@@ -109,7 +109,7 @@ class FormDelivery extends React.Component {
               <Row>
                 <Col xs={12} lg={8}>
                   <InputText
-                    label="Addresse"
+                    label="Adresse"
                     id="address-input"
                     name="address"
                     isRequired
@@ -118,7 +118,7 @@ class FormDelivery extends React.Component {
                     }}
                     value={this.props.address.address}
                     onChange={this.handlePlace}
-                    placeholder="Addresse"
+                    placeholder="Adresse"
                   />
                 </Col>
                 <Col lg={4} xs={12}>

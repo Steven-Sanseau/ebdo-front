@@ -43,7 +43,7 @@ class EmailStep extends React.Component {
     if (!emailRegex({ exact: true }).test(email)) {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez entrer une addresse email valide'
+        errorMessage: 'Veuillez entrer une adresse email valide'
       })
       return false
     }
@@ -85,7 +85,7 @@ class EmailStep extends React.Component {
         />
         {clientExist && (
           <div>
-            Votre addresse est déjà enregistrée chez nous. Etes vous sûr de
+            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
             vouloir passer une nouvelle commande ?
           </div>
         )}
