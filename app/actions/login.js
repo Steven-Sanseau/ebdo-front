@@ -35,9 +35,10 @@ export function loginEmailCode(email, code) {
   }
 }
 
-export function loginEmailCodeSuccess() {
+export function loginEmailCodeSuccess(token) {
   return {
     type: LOGIN_EMAIL_CODE_SUCCESS,
+    token
   }
 }
 
