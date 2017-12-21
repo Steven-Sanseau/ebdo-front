@@ -31,15 +31,16 @@ export const SET_TOKEN_STRIPE_ERROR =
   'app/Checkout/token/SET_TOKEN_STRIPE_ERROR'
 
 export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
+export const SET_CGV_CONFIRM = 'app/Checkout/checkout/SET_CGV_CONFIRM'
 export const POST_SUBSCRIPTION = 'app/Checkout/checkout/POST_SUBSCRIPTION'
 
 export const LOGIN_EMAIL = 'app/Login/LOGIN_EMAIL'
 export const LOGIN_EMAIL_ERROR = 'app/Login/LOGIN_EMAIL_ERROR'
-export const LOGIN_EMAIL_SUCCESS= 'app/Login/LOGIN_EMAIL_SUCCESS'
+export const LOGIN_EMAIL_SUCCESS = 'app/Login/LOGIN_EMAIL_SUCCESS'
 
 export const LOGIN_EMAIL_CODE = 'app/Login/LOGIN_EMAIL_CODE'
 export const LOGIN_EMAIL_CODE_ERROR = 'app/Login/LOGIN_EMAIL_CODE_ERROR'
-export const LOGIN_EMAIL_CODE_SUCCESS= 'app/Login/LOGIN_EMAIL_CODE_SUCCESS'
+export const LOGIN_EMAIL_CODE_SUCCESS = 'app/Login/LOGIN_EMAIL_CODE_SUCCESS'
 
 export const CHANGE_NEWSLETTER_STATUS =
   'app/Home/newsletter/CHANGE_NEWSLETTER_STATUS'

@@ -2,7 +2,7 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_TOKEN } from 'actions/constants'
+import { POST_TOKEN, SET_TOKEN_STRIPE } from 'actions/constants'
 import { postTokenLoaded, postTokenError } from 'actions/token'
 import { nextStep } from 'actions/step'
 
@@ -30,4 +30,5 @@ function* postToken() {
 
 export default function* sagaToken() {
   yield takeEvery(POST_TOKEN, postToken)
+  yield takeEvery(SET_TOKEN_STRIPE, postToken)
 }

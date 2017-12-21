@@ -32,7 +32,7 @@ function* postAddress(action) {
       yield put(nextStep())
     }
   } catch (err) {
-    yield put(postAddressError(err.message))
+    yield put(postAddressError(err, action.typeOfAddress))
   }
 }
 
