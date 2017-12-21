@@ -6,6 +6,7 @@ import Home from 'containers/Home/Loadable'
 import Checkout from 'containers/Checkout/Loadable'
 import Team from 'containers/Team/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
+import Login from 'containers/Login/Loadable'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/abonnement" component={Checkout} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/subscribe" component={Checkout} />
+        <Route exact path="/login" component={Login} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

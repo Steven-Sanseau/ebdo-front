@@ -19,23 +19,13 @@ import {
 } from 'selectors/client'
 
 function* postClient() {
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
   const id = yield select(makeSelectClientId())
   const email = yield select(makeSelectClientEmail())
-  const isNewClient = yield select(makeSelectClientIsNewClient())
-  let method = 'POST'
+
+  const method = 'POST'
 
   try {
-    // WARNING W/ PATCH
-    if (id !== null) {
-      method = 'PATCH'
-      paramsApiUrl = `${paramsApiUrl}/${id}`
-
-      if (!isNewClient) {
-        throw new Error({ error: { message: "You can't update client" } })
-      }
-    }
-
     const client = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ client: { email } }),
       method,
@@ -44,6 +34,7 @@ function* postClient() {
       }
     })
     yield put(postClientLoaded(client))
+    yield put(nextStep())
   } catch (err) {
     yield put(getClient())
     yield put(postClientError(err))
@@ -60,7 +51,6 @@ function* getClientApi() {
   const method = 'GET'
 
   try {
-    // WARNING W/ PATCH
     if (email !== null) {
       paramsApiUrl = `${paramsApiUrl}/${email}`
     }
@@ -72,7 +62,6 @@ function* getClientApi() {
       }
     })
     yield put(getClientLoaded(client))
-    // yield put(nextStep())
   } catch (err) {
     yield put(getClientError(err.message))
   }

@@ -4,13 +4,14 @@ import {
   POST_TOKEN,
   SET_TOKEN_STRIPE,
   POST_TOKEN_LOADED,
-  POST_TOKEN_ERROR
+  POST_TOKEN_ERROR,
+  SET_TOKEN_STRIPE_ERROR
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
   loading: false,
   error: false,
-  errorMessage: null,
+  errorMessage: '',
   card: {},
   tokenStripe: {},
   mandatSepa: null
@@ -19,9 +20,12 @@ const initialState = Immutable.fromJS({
 function tokenReducer(state = initialState, action) {
   switch (action.type) {
     case POST_TOKEN:
-      return state.set('loading', true).set('errorMessage', null)
+      return state.set('loading', true).set('errorMessage', '')
     case SET_TOKEN_STRIPE:
-      return state.set('tokenStripe', action.tokenStripe)
+      return state
+        .set('tokenStripe', action.tokenStripe)
+        .set('error', false)
+        .set('errorMessage', '')
     case POST_TOKEN_ERROR:
       return state
         .set('loading', false)
@@ -32,6 +36,11 @@ function tokenReducer(state = initialState, action) {
         .set('loading', false)
         .set('error', false)
         .set('token_id', action.token.token_id)
+    case SET_TOKEN_STRIPE_ERROR: {
+      return state
+        .set('error', true)
+        .set('errorMessage', action.error.error.message)
+    }
     default:
       return state
   }
