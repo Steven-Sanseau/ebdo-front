@@ -10,9 +10,10 @@ module.exports = function addProdMiddlewares(app, options) {
   // smaller (applies also to assets). You can read more about that technique
   // and other good practices on official Express.js docs http://mxs.is/googmy
   app.use(compression())
-  app.use(publicPath, express.static(outputPath))
+  app.use(publicPath, express.static(outputPath, { maxage: 86400000 }))
 
-  app.get('*', (req, res) =>
+  app.get('*', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=3600')
     res.sendFile(path.resolve(outputPath, 'index.html'))
-  )
+  })
 }
