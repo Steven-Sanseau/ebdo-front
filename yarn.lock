@@ -7132,10 +7132,6 @@ react-progress-bar.js@^0.2.0-dev:
     react "^16.0.0"
     react-dom "^16.0.0"
 
-react-progress-bar@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-progress-bar/-/react-progress-bar-0.1.0.tgz#9f85c3b2a66f145256415793fc4e1c004d6a205e"
-
 react-redux@5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"

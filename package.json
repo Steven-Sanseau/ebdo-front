@@ -244,7 +244,6 @@
     "react-helmet": "5.2.0",
     "react-images": "^0.5.13",
     "react-loadable": "5.3.1",
-    "react-progress-bar": "^0.1.0",
     "react-progress-bar.js": "^0.2.0-dev",
     "react-redux": "5.0.6",
     "react-router-dom": "4.2.2",
