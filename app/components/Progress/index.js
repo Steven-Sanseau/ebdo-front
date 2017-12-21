@@ -1,7 +1,7 @@
 import React from 'react'
 import { Line } from 'react-progress-bar.js'
 import PropTypes from 'prop-types'
-
+import 'components/Progress/Progress.css'
 // import styled from 'styled-components';
 
 const Progress = props => {

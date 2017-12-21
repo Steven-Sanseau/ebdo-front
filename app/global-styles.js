@@ -69,6 +69,7 @@ injectGlobal`
       --background: #fafafa;
       --black: #000000;
       --white-true: #ffffff;
+      --voodoo: #5C2A53;
     }
 `
 
