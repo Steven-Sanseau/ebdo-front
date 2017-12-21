@@ -13,8 +13,9 @@ import Logo from 'components/Icon/Logo'
 const LinkWrap = styled.div`
   flex: 1;
   text-align: center;
+  color: var(--silver);
   a {
-    color: var(--silver);
+    color: inherit;
     text-decoration: none;
     line-height: 26px;
   }
@@ -110,7 +111,10 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const { menuFixed } = this.state
+    let { menuFixed } = this.state
+    const { isFixed, page } = this.props
+    menuFixed = isFixed
+
     return (
       <Sticky onStateChange={this.handleStateChange} innerZ={1}>
         <Menu
@@ -135,20 +139,36 @@ class NavBar extends React.Component {
               smOffset={1}
             >
               <FlexWrap menuFixed={menuFixed}>
-                <LinkWrap color="--tomato">
+                <LinkWrap
+                  color="--tomato"
+                  style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                >
                   <Link to="team">L&apos;équipe</Link>
                 </LinkWrap>
-                <LinkWrap color="--sunflower">
+                <LinkWrap
+                  color="--sunflower"
+                  style={
+                    page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
+                  }
+                >
                   <Link to="#">Pourquoi ?</Link>
                 </LinkWrap>
-                <LinkWrap className="withBorder" color="--topaz">
+                <LinkWrap
+                  className="withBorder"
+                  color="--topaz"
+                  style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                >
                   <Link to="#">La Fabrique</Link>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash">
                   <Link to="login">Connexion</Link>
                 </LinkWrapMobile>
                 <LinkWrapMobile className="mgr">
-                  <Button handleRoute={this.handleRoute} color="--squash">
+                  <Button
+                    minWidth="130px"
+                    handleRoute={this.handleRoute}
+                    color="--squash"
+                  >
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
@@ -166,6 +186,10 @@ class NavBar extends React.Component {
   }
 }
 
-NavBar.propTypes = { dispatch: PropTypes.func }
+NavBar.propTypes = {
+  dispatch: PropTypes.func,
+  isFixed: PropTypes.bool,
+  page: PropTypes.string
+}
 
 export default NavBar
