@@ -64,7 +64,7 @@ class PaymentStep extends React.Component {
 
   contentOpen() {
     const { payementMethod, token, tokenMessageError } = this.props
-
+    console.log(payementMethod)
     return (
       <div>
         <Row start="xs">

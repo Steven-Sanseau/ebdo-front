@@ -6,9 +6,8 @@ const makeSelectCheckout = () =>
   createSelector(selectCheckout, checkout => checkout.toJS())
 
 const makeSelectPayementMethod = () =>
-  createSelector(
-    selectCheckout,
-    checkout => checkout.get('data').payment_method
+  createSelector(selectCheckout, checkout =>
+    checkout.get('data').get('payment_method')
   )
 
 export { makeSelectCheckout, makeSelectPayementMethod }
