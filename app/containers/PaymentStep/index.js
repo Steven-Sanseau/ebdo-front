@@ -61,7 +61,7 @@ class PaymentStep extends React.Component {
 
   contentOpen() {
     const { payementMethod, token, tokenMessageError } = this.props
-    console.log(payementMethod)
+
     return (
       <div>
         <Row start="xs">
@@ -122,7 +122,7 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber } = this.props
+    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
 
     return (
       <ToggleStep
@@ -133,6 +133,7 @@ class PaymentStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
+        isLoadingNextStep={tokenIsLoading}
       />
     )
   }

@@ -6,10 +6,7 @@ const makeSelectClientEmail = () =>
   createSelector(selectClient, client => client.get('data').get('email'))
 
 const makeSelectClientId = () =>
-  createSelector(
-    selectClient,
-    client => client.get('data').get('client_id') || null
-  )
+  createSelector(selectClient, client => client.get('data').get('client_id'))
 
 const makeSelectClientIsLoading = () =>
   createSelector(selectClient, client => client.get('loading'))
