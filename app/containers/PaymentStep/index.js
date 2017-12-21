@@ -9,8 +9,13 @@ import { createStructuredSelector } from 'reselect'
 
 import { makeSelectPayementMethod } from 'selectors/checkout'
 import { setPayementMethod } from 'actions/checkout'
-import { makeSelectTokenIsLoading, makeSelectToken } from 'selectors/token'
-import { postToken, setTokenStripe } from 'actions/token'
+import {
+  makeSelectTokenIsLoading,
+  makeSelectToken,
+  makeSelectTokenIsSetError,
+  makeSelectTokenMessageError
+} from 'selectors/token'
+import { postToken, setTokenStripe, setTokenStripeError } from 'actions/token'
 
 import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
@@ -23,50 +28,43 @@ class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handlePaiementMethod = this.handlePaiementMethod.bind(this)
-    this.handleSubmitStripeForm = this.handleSubmitStripeForm.bind(this)
-    this.handleChangeStripeForm = this.handleChangeStripeForm.bind(this)
     this.handleNextStep = this.handleNextStep.bind(this)
   }
 
-  handlePaiementMethod(value) {
-    this.props.dispatchSetPayementMethod(value)
-  }
-
-  handleChangeStripeForm(event) {
-    console.log(event)
-    this.getStripeToken()
-  }
-
-  handleSubmitStripeForm(event) {
-    this.props.stripe.createToken(name).then(({ token }) => {
-      this.props.dispatchSetTokenStripe(token)
+  getStripeToken = () => {
+    this.props.stripe.createToken().then(result => {
+      if (result.error) {
+        this.props.dispatchSetTokenError(result)
+      }
+      if (result.token) {
+        this.props.dispatchSetTokenStripe(result.token)
+      }
     })
   }
 
-  getStripeToken() {
-    if (!this.props.token.tokenStripe.id) {
-      this.props.stripe.createToken().then(result => {
-        if (result.error) {
-          console.log(result.error)
-        }
+  handleChangeStripeForm = event => {
+    // this.getStripeToken()
+  }
 
-        this.props.dispatchSetTokenStripe(result.token)
-      })
-    }
+  handleSubmitStripeForm = event => {
+    this.getStripeToken()
+  }
+
+  handlePaiementMethod = value => {
+    this.props.dispatchSetPayementMethod(value)
   }
 
   handleNextStep(event) {
     event.preventDefault()
     this.getStripeToken()
-    //
-    // this.props.dispatchPostToken()
-    // this.props.nextStep()
+
+    this.props.dispatchPostToken()
+    this.props.nextStep()
   }
 
   contentOpen() {
-    const { payementMethod, token } = this.props
-    console.log(token)
+    const { payementMethod, token, tokenMessageError } = this.props
+
     return (
       <div>
         <Row start="xs">
@@ -107,6 +105,7 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
+              {tokenMessageError}
             </Col>
           </Row>
         )}
@@ -149,23 +148,29 @@ PaymentStep.propTypes = {
   nextStep: PropTypes.func,
   stripe: PropTypes.object,
   dispatchSetTokenStripe: PropTypes.func,
+  dispatchSetTokenError: PropTypes.func,
   dispatchPostToken: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
   payementMethod: PropTypes.number,
   token: PropTypes.object,
-  tokenIsLoading: PropTypes.bool
+  tokenIsLoading: PropTypes.bool,
+  tokenIsError: PropTypes.bool,
+  tokenMessageError: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
   payementMethod: makeSelectPayementMethod(),
   tokenIsLoading: makeSelectTokenIsLoading(),
-  token: makeSelectToken()
+  token: makeSelectToken(),
+  tokenMessageError: makeSelectTokenMessageError(),
+  tokenIsError: makeSelectTokenIsSetError()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatchSetPayementMethod: method => dispatch(setPayementMethod(method)),
     dispatchSetTokenStripe: token => dispatch(setTokenStripe(token)),
+    dispatchSetTokenError: error => dispatch(setTokenStripeError(error)),
     dispatchPostToken: () => dispatch(postToken())
   }
 }

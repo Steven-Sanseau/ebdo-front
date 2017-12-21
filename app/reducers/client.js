@@ -57,14 +57,14 @@ function clientReducer(state = initialState, action) {
         .set('error', false)
         .set('isNewClient', true)
         .set('clientExist', false)
-        .set('data', ClientModel(action.client.client))
+        .set('data', new ClientModel(action.client))
     case GET_CLIENT_LOADED:
       return state
         .set('loading', false)
         .set('error', false)
         .set('isNewClient', false)
         .set('clientExist', true)
-        .set('data', ClientModel(action.client))
+        .set('data', new ClientModel(action.client))
     default:
       return state
   }

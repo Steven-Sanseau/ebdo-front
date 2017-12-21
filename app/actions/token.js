@@ -2,7 +2,8 @@ import {
   POST_TOKEN,
   POST_TOKEN_ERROR,
   POST_TOKEN_LOADED,
-  SET_TOKEN_STRIPE
+  SET_TOKEN_STRIPE,
+  SET_TOKEN_STRIPE_ERROR
 } from 'actions/constants'
 
 export function postToken() {
@@ -29,5 +30,12 @@ export function setTokenStripe(tokenStripe) {
   return {
     type: SET_TOKEN_STRIPE,
     tokenStripe
+  }
+}
+
+export function setTokenStripeError(error) {
+  return {
+    type: SET_TOKEN_STRIPE_ERROR,
+    error
   }
 }
