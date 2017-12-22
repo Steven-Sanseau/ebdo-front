@@ -21,7 +21,7 @@ function* postCheckout(action) {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postCheckoutLoaded(checkoutResponse))
+    yield put(postCheckoutLoaded(checkoutResponse.checkout))
     yield put(nextStep())
   } catch (err) {
     yield put(postCheckoutError(err.message))

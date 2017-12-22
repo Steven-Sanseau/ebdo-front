@@ -8,6 +8,9 @@ const makeSelectCheckout = () =>
 const makeSelectCheckoutData = () =>
   createSelector(selectCheckout, checkout => checkout.get('data').toJS())
 
+const makeSelectIsCheckoutLoading = () =>
+  createSelector(selectCheckout, checkout => checkout.get('loading'))
+
 const makeSelectPayementMethod = () =>
   createSelector(selectCheckout, checkout =>
     checkout.get('data').get('payment_method')
@@ -20,6 +23,7 @@ const makeSelectIsCGVChecked = () =>
 
 export {
   makeSelectCheckout,
+  makeSelectIsCheckoutLoading,
   makeSelectCheckoutData,
   makeSelectPayementMethod,
   makeSelectIsCGVChecked

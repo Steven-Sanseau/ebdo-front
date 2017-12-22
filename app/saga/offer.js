@@ -24,7 +24,7 @@ function* getOffer() {
         'Content-Type': 'application/json'
       }
     })
-    yield put(getOfferLoaded(offersResponse))
+    yield put(getOfferLoaded(offersResponse.offer))
     yield put(nextStep())
   } catch (err) {
     yield put(getOfferError(err.message))

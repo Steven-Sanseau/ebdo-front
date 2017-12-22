@@ -41,7 +41,7 @@ injectGlobal`
   a:hover {
     color: inherit;
   }
-
+  
   * {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
