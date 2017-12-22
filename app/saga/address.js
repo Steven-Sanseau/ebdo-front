@@ -7,10 +7,12 @@ import { postAddressError, postAddressLoaded } from 'actions/address'
 import { nextStep } from 'actions/step'
 
 import { makeSelectAddressType } from 'selectors/address'
+import { makeSelectClientId } from 'selectors/client'
 
 function* postAddress(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address`
   const address = yield select(makeSelectAddressType(action.typeOfAddress))
+  const clientId = yield select(makeSelectClientId())
   let method = 'POST'
 
   try {
@@ -20,14 +22,14 @@ function* postAddress(action) {
     }
 
     const addressResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ address }),
+      body: JSON.stringify({ address, client: { client_id: clientId } }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
 
-    yield put(postAddressLoaded(action.typeOfAddress, addressResponse))
+    yield put(postAddressLoaded(action.typeOfAddress, addressResponse.address))
 
     if (action.typeOfAddress === 'invoice') {
       yield put(nextStep())

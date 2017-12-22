@@ -26,18 +26,19 @@ function* postClient() {
   const method = 'POST'
 
   try {
-    const client = yield call(request, paramsApiUrl, {
+    const clientResponse = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ client: { email } }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postClientLoaded(client))
+    console.log(clientResponse.client)
+    yield put(postClientLoaded(clientResponse.client))
     yield put(nextStep())
   } catch (err) {
     yield put(getClient())
-    yield put(postClientError(err))
+    yield put(postClientError(err.message))
   }
 }
 
@@ -55,13 +56,13 @@ function* getClientApi() {
       paramsApiUrl = `${paramsApiUrl}/${email}`
     }
 
-    const client = yield call(request, paramsApiUrl, {
+    const clientResponse = yield call(request, paramsApiUrl, {
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(getClientLoaded(client))
+    yield put(getClientLoaded(clientResponse.client))
   } catch (err) {
     yield put(getClientError(err.message))
   }
