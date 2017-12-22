@@ -5,28 +5,44 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { confirmCheckout } from 'actions/checkout'
-import { makeSelectCheckout } from 'selectors/checkout'
+import { postCheckout, setCgvConfirm } from 'actions/checkout'
+import {
+  makeSelectCheckout,
+  makeSelectIsCGVChecked,
+  makeSelectIsCheckoutLoading
+} from 'selectors/checkout'
 
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
 class ConfirmStep extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.handleNextStep = this.handleNextStep.bind(this)
+  state = {
+    errMessage: ''
   }
 
-  handleNextStep() {
-    this.handleSubmit()
+  handleCheckboxCGV = event => {
+    this.props.dispatchConfirmCGV()
+  }
+
+  handleNextStep = () => {
+    if (this.props.isCGVAccepted) {
+      this.props.dispatchConfirmCheckout()
+    } else {
+      this.setState({ errMessage: 'Vous devez acceptez les CGV' })
+    }
   }
 
   contentOpen() {
+    const { errMessage } = this.state
     return (
       <div>
         Vérifiez attentivement vos informations avant de confirmer.
-        <CheckboxConfirmCheckout label="J'ai lu et accepte les CGV" />
+        <CheckboxConfirmCheckout
+          handleConfirmCGV={this.handleCheckboxCGV}
+          isChecked={this.props.isCGVAccepted}
+          label="J'ai lu et accepte les CGV"
+        />
+        {errMessage}
       </div>
     )
   }
@@ -65,16 +81,21 @@ ConfirmStep.propTypes = {
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchConfirmCheckout: PropTypes.func
+  dispatchConfirmCheckout: PropTypes.func,
+  dispatchConfirmCGV: PropTypes.func,
+  isCGVAccepted: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout()
+  checkout: makeSelectCheckout(),
+  isCGVAccepted: makeSelectIsCGVChecked(),
+  checkoutIsLoading: makeSelectIsCheckoutLoading()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchConfirmCheckout: () => dispatch(confirmCheckout())
+    dispatchConfirmCheckout: () => dispatch(postCheckout()),
+    dispatchConfirmCGV: () => dispatch(setCgvConfirm())
   }
 }
 

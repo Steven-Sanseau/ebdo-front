@@ -2,32 +2,29 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_TOKEN } from 'actions/constants'
-import { postTokenLoaded, postTokenError } from 'actions/token'
+import { SET_TOKEN_STRIPE_LOADED } from 'actions/constants'
+import { postToken, postTokenLoaded, postTokenError } from 'actions/token'
 import { nextStep } from 'actions/step'
 
-import { makeSelectToken } from 'selectors/token'
+import { makeSelectTokenData } from 'selectors/token'
+import { makeSelectClientId } from 'selectors/client'
 
-function* postToken() {
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token`
-  const token = yield select(makeSelectToken())
-  let method = 'POST'
+function* postTokenSaga() {
+  yield put(postToken())
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token`
+  const token = yield select(makeSelectTokenData())
+  const clientId = yield select(makeSelectClientId())
+  const method = 'POST'
 
   try {
-    // WARNING W/ PATCH
-    if (token.token_id !== null) {
-      method = 'PATCH'
-      paramsApiUrl = `${paramsApiUrl}/${token.token_id}`
-    }
-
     const tokenResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ token, client: { client_id: clientId } }),
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postTokenLoaded(tokenResponse))
+    yield put(postTokenLoaded(tokenResponse.token))
     yield put(nextStep())
   } catch (err) {
     yield put(postTokenError(err.message))
@@ -35,5 +32,5 @@ function* postToken() {
 }
 
 export default function* sagaToken() {
-  yield takeEvery(POST_TOKEN, postToken)
+  yield takeEvery(SET_TOKEN_STRIPE_LOADED, postTokenSaga)
 }

@@ -1,23 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
-import DropdownInput from 'components/DropdownInput'
+import Checkbox from 'components/Checkbox'
 
-function FormCountry(props) {
+function FormConfirm(props) {
   return (
     <div>
       <Row>
-        <Col xs={12} />
+        <Checkbox
+          text="J'ai lu et accepté les CGV"
+          onCheck={props.handleConfirmCGV}
+          isChecked={props.isChecked}
+        />
       </Row>
     </div>
   )
 }
 
-FormCountry.propTypes = {
-  country: PropTypes.object,
-  countryList: PropTypes.array,
-  handleCountry: PropTypes.func,
-  handleSubmitCountry: PropTypes.func
+FormConfirm.propTypes = {
+  handleConfirmCGV: PropTypes.func,
+  isChecked: PropTypes.bool
 }
 
-export default FormCountry
+export default FormConfirm

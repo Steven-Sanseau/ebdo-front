@@ -15,35 +15,12 @@ const buttonStyles = css`
   cursor: pointer;
   outline: 0;
   color: #fff;
-  background-color: var(
-    ${props => {
-      if (props.color === 'green') {
-        return '--booger'
-      } else if (props.color === 'orange') {
-        return '--squash'
-      } else if (props.color === 'blue') {
-        return '--turquoise-blue'
-      }
-
-      return '--silver'
-    }}
-  );
+  min-width: ${props => props.minWidth};
+  background-color: var(${props => (props.color ? props.color : '--booger')});
   padding: 10px 20px;
 
   &:active {
-    background-color: var(
-      ${props => {
-        if (props.color === 'green') {
-          return '--booger'
-        } else if (props.color === 'orange') {
-          return '--squash'
-        } else if (props.color === 'blue') {
-          return '--turquoise-blue'
-        }
-
-        return '--silver'
-      }}
-    );
+    background-color: var(${props => (props.color ? props.color : '--booger')});
     color: #fff;
   }
 `

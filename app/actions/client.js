@@ -48,11 +48,10 @@ export function postClientLoaded(client) {
   }
 }
 
-export function postClientError(errorMessage, errorCode) {
+export function postClientError(errorMessage) {
   return {
     type: POST_CLIENT_ERROR,
-    errorMessage,
-    errorCode
+    errorMessage
   }
 }
 

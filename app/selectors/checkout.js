@@ -5,10 +5,26 @@ const selectCheckout = state => state.get('checkout')
 const makeSelectCheckout = () =>
   createSelector(selectCheckout, checkout => checkout.toJS())
 
+const makeSelectCheckoutData = () =>
+  createSelector(selectCheckout, checkout => checkout.get('data').toJS())
+
+const makeSelectIsCheckoutLoading = () =>
+  createSelector(selectCheckout, checkout => checkout.get('loading'))
+
 const makeSelectPayementMethod = () =>
-  createSelector(
-    selectCheckout,
-    checkout => checkout.get('data').payment_method
+  createSelector(selectCheckout, checkout =>
+    checkout.get('data').get('payment_method')
   )
 
-export { makeSelectCheckout, makeSelectPayementMethod }
+const makeSelectIsCGVChecked = () =>
+  createSelector(selectCheckout, checkout =>
+    checkout.get('data').get('cgv_accepted')
+  )
+
+export {
+  makeSelectCheckout,
+  makeSelectIsCheckoutLoading,
+  makeSelectCheckoutData,
+  makeSelectPayementMethod,
+  makeSelectIsCGVChecked
+}

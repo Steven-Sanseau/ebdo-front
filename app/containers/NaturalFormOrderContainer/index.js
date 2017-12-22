@@ -19,9 +19,9 @@ export class NaturalFormOrderContainer extends React.Component {
     this.switchUI = this.switchUI.bind(this)
   }
   state = {
-    target: 'chez moi',
-    time: '4 numéros',
-    price: '15€',
+    target: '0',
+    time: '12',
+    price: '15',
     isNaturalForm: true
   }
 

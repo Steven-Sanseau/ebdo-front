@@ -24,10 +24,13 @@ export function postAddressLoaded(typeOfAddress, address) {
   }
 }
 
-export function postAddressError(error) {
+export function postAddressError(error, typeOfAddress) {
   return {
     type: POST_ADRESS_ERROR,
-    error
+    error,
+    payload: {
+      typeOfAddress
+    }
   }
 }
 
