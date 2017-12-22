@@ -4,6 +4,7 @@ import TokenModel from 'models/token'
 import {
   POST_TOKEN,
   SET_TOKEN_STRIPE,
+  SET_TOKEN_STRIPE_LOADED,
   POST_TOKEN_LOADED,
   POST_TOKEN_ERROR,
   SET_TOKEN_STRIPE_ERROR,
@@ -24,6 +25,8 @@ function tokenReducer(state = initialState, action) {
     case POST_TOKEN:
       return state.set('loading', true).set('errorMessage', '')
     case SET_TOKEN_STRIPE:
+      return state.set('loading', true).set('error', false)
+    case SET_TOKEN_STRIPE_LOADED:
       return state
         .set('tokenStripe', action.tokenStripe)
         .set('error', false)
