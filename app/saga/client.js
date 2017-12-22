@@ -33,7 +33,7 @@ function* postClient() {
         'Content-Type': 'application/json'
       }
     })
-    console.log(clientResponse.client)
+
     yield put(postClientLoaded(clientResponse.client))
     yield put(nextStep())
   } catch (err) {
