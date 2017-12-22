@@ -1,0 +1,14 @@
+ /* To round the right part of the Progress Component */
+ .progress-line svg path:last-of-type{
+  stroke-linecap: round;
+}
+.progressbar-text:after {
+  content: '';
+  display: block;
+  border: 15px solid transparent;
+  border-top-color: transparent;
+  border-top-color: #F39625;
+  position: absolute;
+  left: 2.8em;
+  top: 100%;
+}

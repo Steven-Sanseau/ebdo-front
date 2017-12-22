@@ -26,7 +26,10 @@ const initialState = Immutable.fromJS({
 function addressReducer(state = initialState, action) {
   switch (action.type) {
     case POST_ADRESS:
-      return state.set('loading', true)
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('errorMessage', '')
     case SET_ADRESS: {
       const newAddress = state
         .get(action.payload.typeOfAddress)
@@ -41,15 +44,21 @@ function addressReducer(state = initialState, action) {
         )
         .setIn([action.payload.typeOfAddress, 'country'], country)
     }
-    case POST_ADRESS_ERROR:
+    case POST_ADRESS_ERROR: {
+      if (action.error.response.status === 404) {
+        state.setIn([action.payload.typeOfAddress, 'address_id'], null)
+      }
+
       return state
         .set('loading', false)
-        .set('errorMessage', action.error)
+        .set('errorMessage', action.error.message)
         .set('error', true)
+    }
     case POST_ADRESS_LOADED: {
       return state
         .set('loading', false)
         .set('error', false)
+        .set('errorMessage', '')
         .set(
           action.payload.typeOfAddress,
           Address(action.payload.address.address)

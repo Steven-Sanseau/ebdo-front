@@ -26,13 +26,14 @@ function* postAddress(action) {
         'Content-Type': 'application/json'
       }
     })
+
     yield put(postAddressLoaded(action.typeOfAddress, addressResponse))
 
     if (action.typeOfAddress === 'invoice') {
       yield put(nextStep())
     }
   } catch (err) {
-    yield put(postAddressError(err.message))
+    yield put(postAddressError(err, action.typeOfAddress))
   }
 }
 

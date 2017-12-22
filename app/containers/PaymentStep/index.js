@@ -5,7 +5,6 @@ import { Row, Col } from 'react-flexbox-grid'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-// import { compose } from 'redux'
 
 import { makeSelectPayementMethod } from 'selectors/checkout'
 import { setPayementMethod } from 'actions/checkout'
@@ -15,7 +14,12 @@ import {
   makeSelectTokenIsSetError,
   makeSelectTokenMessageError
 } from 'selectors/token'
-import { postToken, setTokenStripe, setTokenStripeError } from 'actions/token'
+import {
+  postToken,
+  setTokenStripe,
+  setTokenStripeLoaded,
+  setTokenStripeError
+} from 'actions/token'
 
 import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
@@ -32,12 +36,13 @@ class PaymentStep extends React.Component {
   }
 
   getStripeToken = () => {
+    this.props.dispatchSetTokenStripe()
     this.props.stripe.createToken().then(result => {
       if (result.error) {
         this.props.dispatchSetTokenError(result)
       }
       if (result.token) {
-        this.props.dispatchSetTokenStripe(result.token)
+        this.props.dispatchSetTokenStripeLoaded(result.token)
       }
     })
   }
@@ -57,14 +62,11 @@ class PaymentStep extends React.Component {
   handleNextStep(event) {
     event.preventDefault()
     this.getStripeToken()
-
-    this.props.dispatchPostToken()
-    this.props.nextStep()
   }
 
   contentOpen() {
     const { payementMethod, token, tokenMessageError } = this.props
-    console.log(payementMethod)
+
     return (
       <div>
         <Row start="xs">
@@ -125,7 +127,7 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber } = this.props
+    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
 
     return (
       <ToggleStep
@@ -136,6 +138,7 @@ class PaymentStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
+        isLoadingNextStep={tokenIsLoading}
       />
     )
   }
@@ -148,6 +151,7 @@ PaymentStep.propTypes = {
   nextStep: PropTypes.func,
   stripe: PropTypes.object,
   dispatchSetTokenStripe: PropTypes.func,
+  dispatchSetTokenStripeLoaded: PropTypes.func,
   dispatchSetTokenError: PropTypes.func,
   dispatchPostToken: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
@@ -169,7 +173,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchSetPayementMethod: method => dispatch(setPayementMethod(method)),
-    dispatchSetTokenStripe: token => dispatch(setTokenStripe(token)),
+    dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
+    dispatchSetTokenStripeLoaded: token =>
+      dispatch(setTokenStripeLoaded(token)),
     dispatchSetTokenError: error => dispatch(setTokenStripeError(error)),
     dispatchPostToken: () => dispatch(postToken())
   }

@@ -33,12 +33,16 @@ function clientReducer(state = initialState, action) {
         .set('errorMessage', null)
         .set('isNewClient', false)
     case USE_CLIENT_EXIST:
-      return state.set('useClientExist', true).set('isNewClient', false)
+      return state
+        .set('useClientExist', true)
+        .set('isNewClient', false)
+        .set('loading', false)
     case SET_CLIENT_EMAIL:
       return state
         .setIn(['data', 'email'], action.email)
         .setIn(['data', 'client_id'], null)
         .set('clientExist', false)
+        .set('loading', false)
         .set('error', false)
         .set('errorMessage', false)
     case POST_CLIENT_ERROR:

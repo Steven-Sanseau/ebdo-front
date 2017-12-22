@@ -2,20 +2,22 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_TOKEN } from 'actions/constants'
+import { POST_TOKEN, SET_TOKEN_STRIPE } from 'actions/constants'
 import { postTokenLoaded, postTokenError } from 'actions/token'
 import { nextStep } from 'actions/step'
 
-import { makeSelectToken } from 'selectors/token'
+import { makeSelectTokenData } from 'selectors/token'
+import { makeSelectClientId } from 'selectors/client'
 
 function* postToken() {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token`
-  const token = yield select(makeSelectToken())
+  const token = yield select(makeSelectTokenData())
+  const clientId = yield select(makeSelectClientId())
   const method = 'POST'
 
   try {
     const tokenResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ token, client: { client_id: clientId } }),
       method,
       headers: {
         'Content-Type': 'application/json'
@@ -30,4 +32,5 @@ function* postToken() {
 
 export default function* sagaToken() {
   yield takeEvery(POST_TOKEN, postToken)
+  yield takeEvery(SET_TOKEN_STRIPE, postToken)
 }
