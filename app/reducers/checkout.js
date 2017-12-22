@@ -38,11 +38,13 @@ function checkoutReducer(state = initialState, action) {
       return state.setIn(['data', 'offer_id'], action.offer.offer_id)
     case POST_TOKEN_LOADED:
       return state.setIn(['data', 'token_id'], action.token.token_id)
-    case POST_ADRESS_LOADED:
+    case POST_ADRESS_LOADED: {
+      console.log(action)
       return state.setIn(
         ['data', `address_${action.payload.typeOfAddress}_id`],
         action.payload.address.address_id
       )
+    }
     case POST_SUBSCRIPTION:
       return state
         .set('loading', true)

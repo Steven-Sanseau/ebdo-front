@@ -6,7 +6,11 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { postCheckout, setCgvConfirm } from 'actions/checkout'
-import { makeSelectCheckout, makeSelectIsCGVChecked } from 'selectors/checkout'
+import {
+  makeSelectCheckout,
+  makeSelectIsCGVChecked,
+  makeSelectIsCheckoutLoading
+} from 'selectors/checkout'
 
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -84,7 +88,8 @@ ConfirmStep.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   checkout: makeSelectCheckout(),
-  isCGVAccepted: makeSelectIsCGVChecked()
+  isCGVAccepted: makeSelectIsCGVChecked(),
+  checkoutIsLoading: makeSelectIsCheckoutLoading()
 })
 
 function mapDispatchToProps(dispatch) {
