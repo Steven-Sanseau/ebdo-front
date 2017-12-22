@@ -47,9 +47,7 @@ class PaymentStep extends React.Component {
     })
   }
 
-  handleChangeStripeForm = event => {
-    // this.getStripeToken()
-  }
+  handleChangeStripeForm = event => {}
 
   handleSubmitStripeForm = event => {
     this.getStripeToken()
@@ -65,7 +63,7 @@ class PaymentStep extends React.Component {
   }
 
   contentOpen() {
-    const { payementMethod, token, tokenMessageError } = this.props
+    const { payementMethod, tokenMessageError } = this.props
 
     return (
       <div>
