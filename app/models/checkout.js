@@ -9,6 +9,7 @@ const Checkout = new Record(
     token_id: null,
     offer_id: null,
     payment_method: 1,
+    cgv_accepted: false,
     status: 'to_finalize'
   },
   'checkout'

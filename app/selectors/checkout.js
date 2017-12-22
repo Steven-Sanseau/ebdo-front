@@ -10,4 +10,9 @@ const makeSelectPayementMethod = () =>
     checkout.get('data').get('payment_method')
   )
 
-export { makeSelectCheckout, makeSelectPayementMethod }
+const makeSelectIsCGVChecked = () =>
+  createSelector(selectCheckout, checkout =>
+    checkout.get('data').get('cgv_accepted')
+  )
+
+export { makeSelectCheckout, makeSelectPayementMethod, makeSelectIsCGVChecked }

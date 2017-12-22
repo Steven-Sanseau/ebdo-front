@@ -33,6 +33,10 @@ export const SET_TOKEN_STRIPE_ERROR =
 export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
 export const SET_CGV_CONFIRM = 'app/Checkout/checkout/SET_CGV_CONFIRM'
 export const POST_SUBSCRIPTION = 'app/Checkout/checkout/POST_SUBSCRIPTION'
+export const POST_SUBSCRIPTION_ERROR =
+  'app/Checkout/checkout/POST_SUBSCRIPTION_ERROR'
+export const POST_SUBSCRIPTION_LOADED =
+  'app/Checkout/checkout/POST_SUBSCRIPTION_LOADED'
 
 export const LOGIN_EMAIL = 'app/Login/LOGIN_EMAIL'
 export const LOGIN_EMAIL_ERROR = 'app/Login/LOGIN_EMAIL_ERROR'
