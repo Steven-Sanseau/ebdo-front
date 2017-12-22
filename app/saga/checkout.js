@@ -6,11 +6,11 @@ import { POST_SUBSCRIPTION } from 'actions/constants'
 import { postCheckoutLoaded, postCheckoutError } from 'actions/checkout'
 import { nextStep } from 'actions/step'
 
-import { makeSelectAddressType } from 'selectors/address'
+import { makeSelectCheckoutData } from 'selectors/checkout'
 
 function* postCheckout(action) {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/checkout`
-  const checkout = yield select(makeSelectAddressType(action.typeOfAddress))
+  const checkout = yield select(makeSelectCheckoutData())
   const method = 'POST'
 
   try {
