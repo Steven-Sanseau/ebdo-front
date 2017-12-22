@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Col, Row } from 'react-styled-flexboxgrid'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 import { media } from 'global-styles'
 import { push } from 'react-router-redux'
@@ -143,22 +143,29 @@ class NavBar extends React.Component {
                   color="--tomato"
                   style={page === 'team' ? { color: 'var(--tomato)' } : {}}
                 >
-                  <Link to="team">L&apos;équipe</Link>
+                  <NavLink
+                    to="team"
+                    activeStyle={{
+                      color: 'var(--tomato)'
+                    }}
+                  >
+                    L&apos;équipe
+                  </NavLink>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
+                    page === 'manifest' ? { color: 'var(--sunflower)' } : {}
                   }
                 >
-                  <Link to="#">Pourquoi ?</Link>
+                  <Link to="manifest">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
                   className="withBorder"
                   color="--topaz"
                   style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
                 >
-                  <Link to="#">La Fabrique</Link>
+                  <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash">
                   <Link to="login">Connexion</Link>

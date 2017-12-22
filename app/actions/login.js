@@ -1,10 +1,11 @@
+import { EventTypes } from 'redux-segment'
 import {
   LOGIN_EMAIL,
   LOGIN_EMAIL_SUCCESS,
   LOGIN_EMAIL_ERROR,
   LOGIN_EMAIL_CODE,
   LOGIN_EMAIL_CODE_SUCCESS,
-  LOGIN_EMAIL_CODE_ERROR,
+  LOGIN_EMAIL_CODE_ERROR
 } from './constants'
 
 export function loginEmail(email) {
@@ -16,7 +17,7 @@ export function loginEmail(email) {
 
 export function loginEmailSuccess() {
   return {
-    type: LOGIN_EMAIL_SUCCESS,
+    type: LOGIN_EMAIL_SUCCESS
   }
 }
 
@@ -31,7 +32,15 @@ export function loginEmailCode(email, code) {
   return {
     type: LOGIN_EMAIL_CODE,
     email,
-    code
+    code,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          email
+        }
+      }
+    }
   }
 }
 

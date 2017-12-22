@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for HeaderMenu
+ * Asynchronously loads the component for Team
  *
  */
 
