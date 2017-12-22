@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import Home from 'containers/Home/Loadable'
 import Checkout from 'containers/Checkout/Loadable'
 import Team from 'containers/Team/Loadable'
+import Manifest from 'containers/Manifest/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import Login from 'containers/Login/Loadable'
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/subscribe" component={Checkout} />
         <Route path="/abonnement" component={Checkout} />
         <Route exact path="/team" component={Team} />
+        <Route exact path="/manifest" component={Manifest} />
         <Route exact path="/subscribe" component={Checkout} />
         <Route exact path="/login" component={Login} />
         <Route component={NotFoundPage} />

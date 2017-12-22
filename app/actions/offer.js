@@ -4,11 +4,23 @@ import {
   GET_OFFER_LOADED,
   GET_OFFER_ERROR
 } from './constants'
+import { EventTypes } from 'redux-segment'
 
 export function setOfferParams(params) {
   return {
     type: SET_OFFER_PARAMS,
-    params
+    params,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+        eventPayload: {
+          event: SET_OFFER_PARAMS,
+          properties: {
+            params
+          }
+        }
+      }
+    }
   }
 }
 

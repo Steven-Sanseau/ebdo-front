@@ -5,12 +5,18 @@ const compression = require('compression')
 module.exports = function addProdMiddlewares(app, options) {
   const publicPath = options.publicPath || '/'
   const outputPath = options.outputPath || path.resolve(process.cwd(), 'build')
-
+  const forceSsl = (req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(['https://', req.get('Host'), req.url].join(''))
+    }
+    return next()
+  }
   // compression middleware compresses your server responses which makes them
   // smaller (applies also to assets). You can read more about that technique
   // and other good practices on official Express.js docs http://mxs.is/googmy
   app.use(compression())
   app.use(publicPath, express.static(outputPath, { maxage: 86400000 }))
+  app.use(forceSsl())
 
   app.get('*', (req, res) => {
     res.set('Cache-Control', 'public, max-age=3600')

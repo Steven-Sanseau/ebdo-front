@@ -16,6 +16,7 @@ import App from 'containers/App'
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
 
+import '!file-loader?name=[name].[ext]!./images/favicon.ico'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Bold.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Medium.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Regular.woff'

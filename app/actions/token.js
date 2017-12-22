@@ -6,6 +6,7 @@ import {
   SET_TOKEN_STRIPE_ERROR,
   SET_TOKEN_STRIPE_LOADED
 } from 'actions/constants'
+import { EventTypes } from 'redux-segment'
 
 export function postToken() {
   return {

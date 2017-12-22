@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment'
 import {
   POST_SUBSCRIPTION,
   SET_PAYMENT_METHOD,
@@ -27,7 +28,12 @@ export function postCheckout() {
 export function postCheckoutLoaded(checkout) {
   return {
     type: POST_SUBSCRIPTION_LOADED,
-    checkout
+    checkout,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track
+      }
+    }
   }
 }
 

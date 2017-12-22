@@ -11,7 +11,8 @@ const initialState = Immutable.fromJS({
   error: false,
   errorMessage: null,
   waitingForCode: false,
-  token: null
+  token: null,
+  isUserConnected: false
 })
 
 function loginReducer(state = initialState, action) {
