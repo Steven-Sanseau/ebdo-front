@@ -13,9 +13,14 @@ import 'sanitize.css/sanitize.css'
 // Import root app
 import App from 'containers/App'
 
+Raven.config(
+  'https://a6e8f04f268944fc8105490037bd30fa@sentry.io/262964'
+).install()
+
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
 
+import '!file-loader?name=[name].[ext]!./images/favicon.ico'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Bold.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Medium.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Regular.woff'
