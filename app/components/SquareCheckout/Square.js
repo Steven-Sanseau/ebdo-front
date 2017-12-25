@@ -13,7 +13,6 @@ const Square = styled.div`
       } else if (props.color === 'background') {
         return '--background'
       }
-
       return '--white-true'
     }}
   );

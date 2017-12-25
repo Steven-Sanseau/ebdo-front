@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 const Icon = styled.div`
   font-family: 'Lucida-grande';
-  color: var(--silver);
+  color: var(
+    ${props => (props.color === 'silver' ? '--silver' : '--white-true')}
+  );
   font-size: 14px;
   line-height: 12px;
   text-align: center;
