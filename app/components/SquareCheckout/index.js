@@ -20,7 +20,7 @@ function SquareCheckout(props) {
   } else if (iconName === 'check') {
     color = 'silver'
   } else {
-    color = 'white'
+    color = 'background'
   }
 
   return (

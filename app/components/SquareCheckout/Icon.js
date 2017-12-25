@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Icon = styled.div`
   font-family: 'Lucida-grande';
-  color: #fff;
+  color: var(--silver);
   font-size: 14px;
   line-height: 12px;
   text-align: center;
@@ -10,7 +10,7 @@ const Icon = styled.div`
   width: 20px;
   height: 20px;
   background-color: var(
-    ${props => (props.color === '--booger' ? '--booger' : '--silver')}
+    ${props => (props.color === '--booger' ? '--booger' : '--background')}
   );
   top: 5px;
   left: 5px;

@@ -10,12 +10,13 @@ const Square = styled.div`
         return '--booger'
       } else if (props.color === 'silver') {
         return '--silver'
+      } else if (props.color === 'background') {
+        return '--background'
       }
 
       return '--white-true'
     }}
   );
-
   position: relative;
   margin-top: 17px;
 `
