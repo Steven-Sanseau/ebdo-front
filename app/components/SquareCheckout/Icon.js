@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Icon = styled.div`
   font-family: 'Lucida-grande';
@@ -9,11 +9,13 @@ const Icon = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
-  background-color: var(--booger);
+  background-color: var(
+    ${props => (props.color === '--booger' ? '--booger' : '--silver')}
+  );
   top: 5px;
   left: 5px;
   padding: 5px;
   border-radius: 5px;
-`;
+`
 
-export default Icon;
+export default Icon

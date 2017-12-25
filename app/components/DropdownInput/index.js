@@ -42,13 +42,15 @@ class DropdownInput extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <Dropdown
-              className="dropdown-input"
-              options={options}
-              value={value}
-              onChange={this.handleSelect}
-              placeholder={placeholder}
-            />
+            <div className="dropdown-wrapper-input">
+              <Dropdown
+                className="dropdown-input"
+                options={options}
+                value={value}
+                onChange={this.handleSelect}
+                placeholder={placeholder}
+              />
+            </div>
           </Col>
         </Row>
       </DropdownWrapper>

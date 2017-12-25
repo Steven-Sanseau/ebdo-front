@@ -193,6 +193,7 @@ function NaturalFormOrder(props) {
     return (
       <div>
         <DropdownWrap
+          className="dropdown-wrap"
           options={options2}
           value={options2.find(el => el.value === String(time))}
           color="--topaz"
@@ -200,6 +201,7 @@ function NaturalFormOrder(props) {
         />
 
         <DropdownWrap
+          className="dropdown-wrap"
           options={options1}
           value={options1.find(el => el.value === (target ? '1' : '0'))}
           color="--warm-purple"
@@ -210,6 +212,7 @@ function NaturalFormOrder(props) {
           {time} {target} pour le prix de{' '}
         </TextWrap>
         <DropdownWrap
+          className="dropdown-wrap"
           options={options3}
           value={options3.find(el => el.value === String(price))}
           color="--turquoise-blue"

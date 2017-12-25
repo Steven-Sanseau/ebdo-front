@@ -30,6 +30,7 @@ class ToggleStep extends React.Component {
       currentStep,
       nextStep,
       stepNumber,
+      iconName,
       title,
       contentOpen,
       contentClose,
@@ -50,7 +51,7 @@ class ToggleStep extends React.Component {
                     <Row>
                       <Col xs={2}>
                         <Row end="xs">
-                          <SquareCheckout number={stepNumber} />
+                          <SquareCheckout iconName={iconName} />
                         </Row>
                       </Col>
                       <Col lg={6} md={11} xs={12}>
@@ -96,7 +97,7 @@ class ToggleStep extends React.Component {
                 <Row>
                   <Col xs={2}>
                     <Row end="xs">
-                      <SquareCheckout number={stepNumber} silver />
+                      <SquareCheckout iconName={iconName} silver />
                     </Row>
                   </Col>
                   <Col xs={7}>
@@ -146,6 +147,7 @@ ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
   isLoadingNextStep: PropTypes.bool,
+  iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,

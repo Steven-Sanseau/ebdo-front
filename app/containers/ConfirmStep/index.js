@@ -63,6 +63,7 @@ class ConfirmStep extends React.Component {
       <ToggleStep
         title="Je confirme mon abonnement"
         stepNumber={stepNumber}
+        iconName="check"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}

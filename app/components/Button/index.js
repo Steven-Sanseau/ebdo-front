@@ -16,7 +16,11 @@ function Button(props) {
   // If the Button has a handleRoute prop, we want to render a button
   if (props.handleRoute) {
     button = (
-      <StyledButton minWidth={props.minWidth} color={props.color} onClick={props.handleRoute}>
+      <StyledButton
+        minWidth={props.minWidth}
+        color={props.color}
+        onClick={props.handleRoute}
+      >
         {Children.toArray(props.children)}
       </StyledButton>
     )

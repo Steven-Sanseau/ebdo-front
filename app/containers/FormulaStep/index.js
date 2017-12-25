@@ -127,6 +127,7 @@ class FormulaStep extends React.Component {
       <ToggleStep
         title="Je choisis ma formule"
         stepNumber={stepNumber}
+        iconName="monnaie"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}

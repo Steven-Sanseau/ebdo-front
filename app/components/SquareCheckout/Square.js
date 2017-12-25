@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Square = styled.div`
   width: 30px;
   height: 30px;
-  border-radius: 10px;
+  border-radius: 13px;
   background-color: var(
     ${props => {
       if (props.color === 'green') {
@@ -12,9 +12,10 @@ const Square = styled.div`
         return '--silver'
       }
 
-      return '--black'
+      return '--white-true'
     }}
   );
+
   position: relative;
   margin-top: 17px;
 `

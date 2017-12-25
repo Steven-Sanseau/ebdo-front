@@ -110,6 +110,7 @@ class EmailStep extends React.Component {
     return (
       <ToggleStep
         title="Je renseigne mon Email"
+        iconName="mail"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}

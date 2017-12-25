@@ -131,6 +131,7 @@ class PaymentStep extends React.Component {
       <ToggleStep
         title="Je choisis mon mode de paiement"
         stepNumber={stepNumber}
+        iconName="card"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}

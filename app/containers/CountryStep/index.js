@@ -86,6 +86,7 @@ class CountryStep extends React.Component {
       <ToggleStep
         title="Je calcule mes frais de livraison"
         stepNumber={stepNumber}
+        iconName="save"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
