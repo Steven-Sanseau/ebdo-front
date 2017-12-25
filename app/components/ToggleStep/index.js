@@ -12,7 +12,6 @@ import StepPostviewText from '../LayoutStep/StepPostviewText'
 import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
 import Title from '../LayoutStep/Title'
-import HR from '../LayoutStep/HR'
 import SquareCheckout from '../SquareCheckout'
 
 class ToggleStep extends React.Component {
@@ -104,11 +103,6 @@ class ToggleStep extends React.Component {
                     <Title color="silver">{title}</Title>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-            <Row center="xs">
-              <Col xs={7}>
-                <HR />
               </Col>
             </Row>
           </StepPreview>
