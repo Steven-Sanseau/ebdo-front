@@ -9,11 +9,12 @@ import { push } from 'react-router-redux'
 
 import Button from 'components/Button'
 import Logo from 'components/Icon/Logo'
+import 'components/NavBar/NavBar.css'
 
 const LinkWrap = styled.div`
   flex: 1;
   text-align: center;
-  color: var(--silver);
+  color: var(--cool-grey);
   a {
     color: inherit;
     text-decoration: none;
@@ -25,6 +26,13 @@ const LinkWrap = styled.div`
   ${media.tablet`
     display: none;
 `};
+`
+const LinkBurger = styled(LinkWrap)`
+  text-align: left;
+  margin-bottom: 10px;
+  ${media.tablet`
+    display: inherit;
+  `};
 `
 
 const LinkWrapMobile = LinkWrap.extend`
@@ -38,6 +46,11 @@ const Title = styled.h1`
   font-size: ${props => (props.menuFixed ? '30px' : '66px')};
   line-height: ${props => (props.menuFixed ? '36px' : '56px')};
   margin-bottom: ${props => (props.menuFixed ? '0' : '10px')};
+  margin-top: 0;
+  line-height: inherit;
+  ${media.tablet`
+    display: ${props => (props.menuFixed ? 'none' : 'inherit')};
+  `};
 `
 
 const Subtitle = styled.h2`
@@ -52,24 +65,42 @@ const FlexWrap = styled.div`
   align-items: center;
 
   .withBorder {
-    border-right: 1px solid var(--silver);
-  }
-  .mgr {
-    margin-right: 19px;
-  }
-
+    border-left: 1px solid var(--silver);
   ${media.tablet`
-    margin: 30px 0;
+    border-right: ${props => (props.menuFixed ? 'none' : '1px solid var(--silver)')}; ;
+    border-left: none;
+    margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
+    padding-right: 20px;
+  `};
+    
+  }
+  
+  ${media.tablet`
+    margin: ${props => (props.menuFixed ? '6px 0' : '30px')}; 0;
 `};
 `
 
-const Menu = styled.div`
+const Menu = styled.nav`
   background: white;
+  ${media.tablet`
+    margin-bottom: 30px;
+  `};
+  
+`
+const Burger = styled(Col)`
+  ${media.tablet`
+    display: ${props => (props.menuFixed ? 'inherit' : 'none')};
+  `};
+
+  .narrowLinks {
+    display: none;
+  }
 `
 
 const menuFixedStyle = {
   borderBottom: '1px solid var(--silver)',
-  padding: '7px 25px'
+  padding: '7px 25px',
+  zIndex: '100'
 }
 
 const menuStyle = {
@@ -91,6 +122,7 @@ class NavBar extends React.Component {
     super(props)
 
     this.handleStateChange = this.handleStateChange.bind(this)
+    this.burgerToggle = this.burgerToggle.bind(this)
   }
 
   state = {
@@ -109,11 +141,21 @@ class NavBar extends React.Component {
       this.setState({ menuFixed: false })
     }
   }
+  burgerToggle() {
+    const linksEl = document.querySelector('.narrowLinks')
+    if (linksEl.style.display === 'block') {
+      linksEl.style.display = 'none'
+    } else {
+      linksEl.style.display = 'block'
+    }
+  }
 
   render() {
     let { menuFixed } = this.state
     const { isFixed, page } = this.props
-    menuFixed = isFixed
+    if (isFixed) {
+      menuFixed = isFixed
+    }
 
     return (
       <Sticky onStateChange={this.handleStateChange} innerZ={1}>
@@ -121,8 +163,8 @@ class NavBar extends React.Component {
           menuFixed={menuFixed}
           style={menuFixed ? menuFixedStyle : menuStyle}
         >
-          <Row>
-            <Col xs={12} sm={menuFixed ? 5 : 4}>
+          <Row between="sm">
+            <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
               <Title menuFixed={menuFixed}>
                 <Logo
                   width={menuFixed ? 65 : 150}
@@ -132,12 +174,35 @@ class NavBar extends React.Component {
               <Subtitle menuFixed={menuFixed}>
                 À chaque époque <br /> son journal.
               </Subtitle>
+              <Burger className="navNarrow" menuFixed={menuFixed} sm={false}>
+                <div className="ctn-hamburger" onClick={this.burgerToggle}>
+                  <div className="hamburger" />
+                </div>
+                <div className="narrowLinks">
+                  <LinkBurger
+                    color="--tomato"
+                    style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                  >
+                    <Link to="team">L&apos;équipe</Link>
+                  </LinkBurger>
+                  <LinkBurger
+                    color="--sunflower"
+                    style={
+                      page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
+                    }
+                  >
+                    <Link to="#">Pourquoi ?</Link>
+                  </LinkBurger>
+                  <LinkBurger
+                    color="--topaz"
+                    style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                  >
+                    <Link to="#">La Fabrique</Link>
+                  </LinkBurger>
+                </div>
+              </Burger>
             </Col>
-            <Col
-              xs={menuFixed ? false : 12}
-              sm={menuFixed ? 6 : 7}
-              smOffset={1}
-            >
+            <Col xs={menuFixed ? 9 : 12} sm={menuFixed ? 8 : 7}>
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
@@ -154,16 +219,15 @@ class NavBar extends React.Component {
                   <Link to="#">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
-                  className="withBorder"
                   color="--topaz"
                   style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
                 >
                   <Link to="#">La Fabrique</Link>
                 </LinkWrap>
-                <LinkWrapMobile color="--squash">
+                <LinkWrapMobile color="--squash" className="withBorder">
                   <Link to="login">Connexion</Link>
                 </LinkWrapMobile>
-                <LinkWrapMobile className="mgr">
+                <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
                     minWidth="130px"
                     handleRoute={this.handleRoute}

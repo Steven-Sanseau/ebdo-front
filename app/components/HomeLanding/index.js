@@ -73,24 +73,37 @@ const Layout = styled.div`
 
 const BlockWrap = styled(Col)`
   min-width: 250px;
+  max-width: 417px;
   margin-top: -100px;
+  margin-left: 50px;
+  padding: 0 50px;
+  text-align: left;
   ${media.tablet`
     margin-top: 0;
+    margin-left: 0;
+    padding: 0;
   `};
 `
 const ImageWrap = styled(Col)`
-  min-width: 280px;
+  max-width: 336px;
+  min-width: 336px;
   position: relative;
+  ${media.tablet`
+    min-width: inherit;
+    max-width: 200px;
+    margin: 0 auto;
+  `};
+
 `
 
 function HomeLanding() {
   return (
     <Layout>
-      <Row>
-        <ImageWrap xs={12} sm={3} smOffset={3}>
+      <Row center="sm">
+        <ImageWrap xs={12} sm={4}>
           <Gallery />
         </ImageWrap>
-        <BlockWrap xs={12} sm={3} smOffset={1}>
+        <BlockWrap xs={12} sm={4}>
           <Title>
             ebdo <span>est un journal</span> papier, indépendant <span>et</span>{' '}
             proche de ses lecteurs.
