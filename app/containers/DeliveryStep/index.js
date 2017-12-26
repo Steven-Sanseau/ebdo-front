@@ -126,6 +126,7 @@ class DeliveryStep extends React.Component {
     return (
       <ToggleStep
         title="Je renseigne mon adresse"
+        iconName="address"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}

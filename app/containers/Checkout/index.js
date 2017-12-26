@@ -34,6 +34,8 @@ import ConfirmStep from 'containers/ConfirmStep/Loadable'
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
 
+import ButtonSticky from 'components/StickyHelpCheckout'
+
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
@@ -52,6 +54,10 @@ export class Checkout extends React.Component {
     this.props.goToStep(stepNumber)
   }
 
+  handleRouteButtonHelp = event => {
+    console.log('HELP CLIC')
+  }
+
   render() {
     const { step } = this.props
 
@@ -63,7 +69,7 @@ export class Checkout extends React.Component {
             <meta name="description" content="Abonnement à ebdo le journal" />
           </Helmet>
           <Row center="xs" start="lg">
-            <Col mdOffset={1} xs={12} md={11}>
+            <Col xs={12}>
               <Header />
             </Col>
           </Row>
@@ -129,6 +135,7 @@ export class Checkout extends React.Component {
               />
             </Col>
           </Row>
+          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )

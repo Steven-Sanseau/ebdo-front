@@ -10,6 +10,7 @@ import { makeSelectAddressCountry } from 'selectors/address'
 
 import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
+import BoldText from 'components/LayoutStep/BoldText'
 
 class CountryStep extends React.Component {
   constructor(props) {
@@ -70,11 +71,11 @@ class CountryStep extends React.Component {
     const { country } = this.props
     return (
       <div>
-        Je me ferai livrer en {country.label}{' '}
-        {country.value === 'FR' && <span>(aucun frais supplémentaire)</span>}.
+        Je me ferai livrer <BoldText>en {country.label}</BoldText>{' '}
+        {country.value === 'FR' && <span>(aucun frais supplémentaire)</span>}
         {country.value !== 'FR' && (
           <span>(des frais supplémentaires de 6€ ont été appliqués)</span>
-        )}.
+        )}
       </div>
     )
   }
@@ -86,6 +87,7 @@ class CountryStep extends React.Component {
       <ToggleStep
         title="Je calcule mes frais de livraison"
         stepNumber={stepNumber}
+        iconName="save"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}

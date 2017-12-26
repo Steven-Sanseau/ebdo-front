@@ -61,6 +61,7 @@ const Subtitle = styled.p`
 const TextWrap = styled.span`
   font-size: 50px;
   line-height: 70px;
+  font-weight: 500;
   letter-spacing: -1.3px;
 `
 const Help = styled.div`
@@ -187,12 +188,15 @@ const options3 = [
   }
 ]
 function NaturalFormOrder(props) {
-  const { handleChange, target, time, price, switchUI, isNaturalForm } = props
+  const {
+    handleChange, target, time, price, switchUI, isNaturalForm
+  } = props
 
   if (isNaturalForm) {
     return (
       <div>
         <DropdownWrap
+          className="dropdown-wrap"
           options={options2}
           value={options2.find(el => el.value === String(time))}
           color="--topaz"
@@ -200,6 +204,7 @@ function NaturalFormOrder(props) {
         />
 
         <DropdownWrap
+          className="dropdown-wrap"
           options={options1}
           value={options1.find(el => el.value === (target ? '1' : '0'))}
           color="--warm-purple"
@@ -207,9 +212,16 @@ function NaturalFormOrder(props) {
         />
 
         <TextWrap>
-          {time} {target} pour le prix de{' '}
+          {time === '0' && <span>4 numéros</span>}
+          {time === '12' && <span>12 numéros</span>}
+          {time === '24' && <span>24 numéros</span>}
+          {time === '48' && <span>48 numéros</span>}
+          {target === '0' && <span> chez moi </span>}
+          {target === '1' && <span> à un proche </span>}
+          pour le prix de {' '}
         </TextWrap>
         <DropdownWrap
+          className="dropdown-wrap"
           options={options3}
           value={options3.find(el => el.value === String(price))}
           color="--turquoise-blue"

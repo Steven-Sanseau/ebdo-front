@@ -3,7 +3,8 @@ import Immutable from 'immutable'
 import {
   LOGIN_EMAIL_ERROR,
   LOGIN_EMAIL_SUCCESS,
-  LOGIN_EMAIL_CODE_SUCCESS
+  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGIN_USER_SUCCESS
 } from '../actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -23,6 +24,8 @@ function loginReducer(state = initialState, action) {
       return state.set('error', action.error)
     case LOGIN_EMAIL_CODE_SUCCESS:
       return state.set('token', action.token)
+    case LOGIN_USER_SUCCESS:
+      return state.set('isUserConnected', true)
     default:
       return state
   }

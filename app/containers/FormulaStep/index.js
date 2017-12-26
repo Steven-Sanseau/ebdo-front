@@ -17,7 +17,18 @@ import { setOfferParams, getoffer } from 'actions/offer'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import NaturalFormOrder from 'components/NaturalFormOrder'
 import FormulaText from 'components/LayoutStep/FormulaText'
-import BoldText from 'components/LayoutStep/BoldText'
+import BigBoldText from 'components/LayoutStep/BigBoldText'
+import VioletText from 'components/LayoutStep/VioletText'
+import BlueText from 'components/LayoutStep/BlueText'
+import GreenText from 'components/LayoutStep/GreenText'
+import SupText from 'components/LayoutStep/SupText'
+import TextFormulae from 'components/LayoutStep/TextFormulae'
+import DeliveryText from 'components/LayoutStep/DeliveryText'
+import NextStep from 'components/LayoutStep/NextStep'
+import Button from 'components/Button'
+import Image from 'components/Image'
+
+import '!file-loader?name=[name].[ext]!images/checkout/PostBox.png'
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -54,6 +65,10 @@ class FormulaStep extends React.Component {
     }
 
     this.props.dispatchSetOfferParams(params)
+  }
+
+  handleGoToStep = () => {
+    this.props.changeStep(this.props.stepNumber)
   }
 
   handleRoute() {
@@ -107,9 +122,43 @@ class FormulaStep extends React.Component {
     const { offer } = this.props
     return (
       <div>
-        Je m{"'"}abonne sans engagement pour un montant de{' '}
-        <BoldText>{offer.data.monthly_price_ttc}€</BoldText>
-        <BoldText>/mois</BoldText>
+        <Row>
+          <Col lg={5} xs={11}>
+            <Image src="PostBox.png" alt="Post box" height={173} />
+          </Col>
+          <Col lg={7} xs={11}>
+            <TextFormulae>
+              {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
+              {offer.data.duration && (
+                <GreenText>Pendant {offer.data.duration / 4} mois</GreenText>
+              )}
+              <BigBoldText>, </BigBoldText>
+              {offer.data.is_gift && <VioletText> j'offre </VioletText>}
+              {!offer.data.is_gift && <VioletText> je reçois </VioletText>}
+              <BigBoldText>
+                {' '}
+                {offer.data.duration} numéros <br /> pour le prix de{' '}
+              </BigBoldText>
+              <BlueText>
+                {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
+              </BlueText>
+            </TextFormulae>
+            <DeliveryText>
+              Les frais de livraison en France (Métropolitaine et outre-mer)
+              sont inclus.
+            </DeliveryText>
+            <NextStep>
+              <Button
+                border
+                colorText="--silver"
+                handleRoute={this.handleGoToStep}
+                color="--background"
+              >
+                Modifier
+              </Button>
+            </NextStep>
+          </Col>
+        </Row>
       </div>
     )
   }
@@ -127,10 +176,12 @@ class FormulaStep extends React.Component {
       <ToggleStep
         title="Je choisis ma formule"
         stepNumber={stepNumber}
+        iconName="monnaie"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
+        updateStepHide
         nextStep={this.handleNextStep}
         isLoadingNextStep={offerIsLoading}
       />

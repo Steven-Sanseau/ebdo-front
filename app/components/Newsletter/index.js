@@ -35,6 +35,7 @@ const Newsletter = props => {
           <InputText
             label="Prénom"
             placeholder="John"
+            color="var(--white-true)"
             value={newsletter.firstname}
             onChange={handleFirstname}
           />
@@ -48,6 +49,7 @@ const Newsletter = props => {
         <InputWrapper>
           <InputText
             label="Adresse mail"
+            color="var(--white-true)"
             placeholder="contact@mail.fr"
             value={newsletter.email}
             onChange={handleEmail}

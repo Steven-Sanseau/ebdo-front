@@ -15,6 +15,8 @@ import { setClientEmail, postClient, useClientExist } from 'actions/client'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
+import TextSummary from 'components/LayoutStep/TextSummary'
+import BoldText from 'components/LayoutStep/BoldText'
 
 class EmailStep extends React.Component {
   state = {
@@ -95,7 +97,12 @@ class EmailStep extends React.Component {
 
   contentClose() {
     const { email } = this.props
-    return <div>Mon Email est {email}</div>
+    return (
+      <div>
+        Toutes les informations concernant mon abonnement seront envoyées à{' '}
+        <BoldText>{email}</BoldText>
+      </div>
+    )
   }
 
   render() {
@@ -110,6 +117,7 @@ class EmailStep extends React.Component {
     return (
       <ToggleStep
         title="Je renseigne mon Email"
+        iconName="mail"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}

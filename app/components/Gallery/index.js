@@ -67,6 +67,8 @@ const CTA = styled.button`
   cursor: pointer;
   height: 40px;
   line-height: 40px;
+  font-size: 16px;
+  font-weight: 400;
   &:hover {
     transform: scale(1.05);
   }
@@ -94,7 +96,6 @@ const Cover = styled.div`
 `
 const Pin = styled.div`
   position: absolute;
-  z-index: 200;
   top: 0;
   left: 0;
   height: 30px;

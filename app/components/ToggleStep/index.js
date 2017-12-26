@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-flexbox-grid'
+import { Row, Col } from 'react-styled-flexboxgrid'
 
 import Button from '../Button'
 import WhiteWrapper from '../LayoutStep/WhiteWrapper'
@@ -12,7 +12,6 @@ import StepPostviewText from '../LayoutStep/StepPostviewText'
 import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
 import Title from '../LayoutStep/Title'
-import HR from '../LayoutStep/HR'
 import SquareCheckout from '../SquareCheckout'
 
 class ToggleStep extends React.Component {
@@ -30,6 +29,7 @@ class ToggleStep extends React.Component {
       currentStep,
       nextStep,
       stepNumber,
+      iconName,
       title,
       contentOpen,
       contentClose,
@@ -46,14 +46,14 @@ class ToggleStep extends React.Component {
             <Col xs={12}>
               <WhiteWrapper>
                 <Row>
-                  <Col xs={8} xsOffset={2}>
+                  <Col xs={7} xsOffset={3}>
                     <Row>
-                      <Col xs={2}>
-                        <Row end="xs">
-                          <SquareCheckout number={stepNumber} />
+                      <Col xs={1}>
+                        <Row start="xs">
+                          <SquareCheckout iconName={iconName} />
                         </Row>
                       </Col>
-                      <Col lg={6} md={11} xs={12}>
+                      <Col lg={11} md={11} xs={12}>
                         <Title>{title}</Title>
                       </Col>
                     </Row>
@@ -96,18 +96,13 @@ class ToggleStep extends React.Component {
                 <Row>
                   <Col xs={2}>
                     <Row end="xs">
-                      <SquareCheckout number={stepNumber} silver />
+                      <SquareCheckout iconName={iconName} silver />
                     </Row>
                   </Col>
                   <Col xs={7}>
                     <Title color="silver">{title}</Title>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-            <Row center="xs">
-              <Col xs={7}>
-                <HR />
               </Col>
             </Row>
           </StepPreview>
@@ -117,19 +112,21 @@ class ToggleStep extends React.Component {
             <Row>
               <Col lg={8} lgOffset={2} xs={12}>
                 <Row>
-                  <Col lg={2} xs={2}>
+                  <Col lg={1} xs={1} lgOffset={1}>
                     <Row end="xs">
                       <SquareCheckout checked />
                     </Row>
                   </Col>
-                  <Col lg={5} xs={10}>
+                  <Col lg={6} xs={10}>
                     <StepPostviewText>
-                      <TextSummary>{contentClose}</TextSummary>
-                      {!updateStepHide && (
-                        <UpdateStep>
-                          <Button onClick={this.change}>Modifier</Button>
-                        </UpdateStep>
-                      )}
+                      <TextSummary>
+                        {contentClose}
+                        {!updateStepHide && (
+                          <UpdateStep>
+                            <Button onClick={this.change}>Modifier</Button>
+                          </UpdateStep>
+                        )}
+                      </TextSummary>
                     </StepPostviewText>
                   </Col>
                 </Row>
@@ -146,6 +143,7 @@ ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
   isLoadingNextStep: PropTypes.bool,
+  iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,

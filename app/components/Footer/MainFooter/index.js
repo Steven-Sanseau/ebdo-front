@@ -70,7 +70,7 @@ const MainFooter = () => (
     <Layout>
       <Row>
         <Col xs={12} sm={3}>
-          <Logo color="--white-true" />
+          <Logo color="var(--white-true)" />
           <LogoWrapper>
             Par les créateurs de <br />
             <Image src="/XXI.png" alt="XXI" height={22} />

@@ -3,16 +3,17 @@ import styled from 'styled-components'
 const Square = styled.div`
   width: 30px;
   height: 30px;
-  border-radius: 10px;
+  border-radius: 13px;
   background-color: var(
     ${props => {
       if (props.color === 'green') {
         return '--booger'
       } else if (props.color === 'silver') {
         return '--silver'
+      } else if (props.color === 'background') {
+        return '--background'
       }
-
-      return '--black'
+      return '--white-true'
     }}
   );
   position: relative;
