@@ -69,6 +69,7 @@ class ConfirmStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
+        textButtonNextStep=">> Je m'abonne !"
         isLoadingNextStep={checkoutIsLoading}
       />
     )

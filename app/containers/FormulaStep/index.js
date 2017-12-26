@@ -123,10 +123,10 @@ class FormulaStep extends React.Component {
     return (
       <div>
         <Row>
-          <Col xs={5}>
+          <Col lg={5} xs={11}>
             <Image src="PostBox.png" alt="Post box" height={173} />
           </Col>
-          <Col xs={7}>
+          <Col lg={7} xs={11}>
             <TextFormulae>
               {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
               {offer.data.duration && (
