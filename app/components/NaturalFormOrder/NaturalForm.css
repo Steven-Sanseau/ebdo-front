@@ -6,6 +6,7 @@
 }
 .dropdown-wrap > .Dropdown-control h3 {
   line-height: 70px;
+  margin: 0;
   font-weight: 500;
 }
 

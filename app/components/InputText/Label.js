@@ -5,7 +5,7 @@ const Label = styled.label`
   font-size: 14px;
   line-height: 14px;
   text-align: left;
-  color: var(${props => (props.error ? '--tomato' : '--black')});
+  color: var(${props => (props.error ? '--tomato' : props.color || '--black')});
 `
 
 export default Label
