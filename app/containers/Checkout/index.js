@@ -69,7 +69,7 @@ export class Checkout extends React.Component {
             <meta name="description" content="Abonnement à ebdo le journal" />
           </Helmet>
           <Row center="xs" start="lg">
-            <Col mdOffset={1} xs={12} md={11}>
+            <Col xs={12}>
               <Header />
             </Col>
           </Row>

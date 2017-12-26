@@ -5,7 +5,6 @@ const Layout = styled.div`
   margin-left: auto;
   margin-right: auto;
   color: white;
-  padding: 80px 0;
   background: var(--background);
 
   ${media.tablet`

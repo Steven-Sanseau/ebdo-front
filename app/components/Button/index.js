@@ -19,6 +19,8 @@ function Button(props) {
       <StyledButton
         minWidth={props.minWidth}
         color={props.color}
+        border={props.border}
+        colorText={props.colorText}
         onClick={props.handleRoute}
       >
         {Children.toArray(props.children)}
@@ -34,9 +36,15 @@ Button.propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.string,
+  colorText: PropTypes.string,
+  border: PropTypes.bool,
   minWidth: PropTypes.string,
   children: PropTypes.node.isRequired
 }
-Button.defaultProps = { color: '--booger' }
+Button.defaultProps = {
+  color: '--booger',
+  colorText: '--white-true',
+  border: false
+}
 
 export default Button
