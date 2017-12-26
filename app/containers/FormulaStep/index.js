@@ -26,6 +26,7 @@ import TextFormulae from 'components/LayoutStep/TextFormulae'
 import DeliveryText from 'components/LayoutStep/DeliveryText'
 import NextStep from 'components/LayoutStep/NextStep'
 import Button from 'components/Button'
+import Image from 'components/Image'
 
 import '!file-loader?name=[name].[ext]!images/checkout/PostBox.png'
 
@@ -121,36 +122,43 @@ class FormulaStep extends React.Component {
     const { offer } = this.props
     return (
       <div>
-        <TextFormulae>
-          {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
-          {offer.data.duration && (
-            <GreenText>Pendant {offer.data.duration / 4} mois</GreenText>
-          )}
-          <BigBoldText>, </BigBoldText>
-          {offer.data.is_gift && <VioletText> j'offre </VioletText>}
-          {!offer.data.is_gift && <VioletText> je reçois </VioletText>}
-          <BigBoldText>
-            {' '}
-            {offer.data.duration} numéros <br /> pour le prix de{' '}
-          </BigBoldText>
-          <BlueText>
-            {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
-          </BlueText>
-        </TextFormulae>
-        <DeliveryText>
-          Les frais de livraison en France (Métropolitaine et outre-mer) sont
-          inclus.
-        </DeliveryText>
-        <NextStep>
-          <Button
-            border
-            colorText="--silver"
-            handleRoute={this.handleGoToStep}
-            color="--background"
-          >
-            Modifier
-          </Button>
-        </NextStep>
+        <Row>
+          <Col xs={5}>
+            <Image src="PostBox.png" alt="Post box" height={173} />
+          </Col>
+          <Col xs={7}>
+            <TextFormulae>
+              {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
+              {offer.data.duration && (
+                <GreenText>Pendant {offer.data.duration / 4} mois</GreenText>
+              )}
+              <BigBoldText>, </BigBoldText>
+              {offer.data.is_gift && <VioletText> j'offre </VioletText>}
+              {!offer.data.is_gift && <VioletText> je reçois </VioletText>}
+              <BigBoldText>
+                {' '}
+                {offer.data.duration} numéros <br /> pour le prix de{' '}
+              </BigBoldText>
+              <BlueText>
+                {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
+              </BlueText>
+            </TextFormulae>
+            <DeliveryText>
+              Les frais de livraison en France (Métropolitaine et outre-mer)
+              sont inclus.
+            </DeliveryText>
+            <NextStep>
+              <Button
+                border
+                colorText="--silver"
+                handleRoute={this.handleGoToStep}
+                color="--background"
+              >
+                Modifier
+              </Button>
+            </NextStep>
+          </Col>
+        </Row>
       </div>
     )
   }

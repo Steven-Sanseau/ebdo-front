@@ -119,12 +119,14 @@ class ToggleStep extends React.Component {
                   </Col>
                   <Col lg={6} xs={10}>
                     <StepPostviewText>
-                      <TextSummary>{contentClose}</TextSummary>
-                      {!updateStepHide && (
-                        <UpdateStep>
-                          <Button onClick={this.change}>Modifier</Button>
-                        </UpdateStep>
-                      )}
+                      <TextSummary>
+                        {contentClose}
+                        {!updateStepHide && (
+                          <UpdateStep>
+                            <Button onClick={this.change}>Modifier</Button>
+                          </UpdateStep>
+                        )}
+                      </TextSummary>
                     </StepPostviewText>
                   </Col>
                 </Row>
