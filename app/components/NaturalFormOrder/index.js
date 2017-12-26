@@ -61,6 +61,7 @@ const Subtitle = styled.p`
 const TextWrap = styled.span`
   font-size: 50px;
   line-height: 70px;
+  font-weight: 500;
   letter-spacing: -1.3px;
 `
 const Help = styled.div`
@@ -187,7 +188,9 @@ const options3 = [
   }
 ]
 function NaturalFormOrder(props) {
-  const { handleChange, target, time, price, switchUI, isNaturalForm } = props
+  const {
+    handleChange, target, time, price, switchUI, isNaturalForm
+  } = props
 
   if (isNaturalForm) {
     return (
@@ -207,7 +210,13 @@ function NaturalFormOrder(props) {
         />
 
         <TextWrap>
-          {time} {target} pour le prix de{' '}
+          {time === '0' && <span>4 numéros</span>}
+          {time === '12' && <span>12 numéros</span>}
+          {time === '24' && <span>24 numéros</span>}
+          {time === '48' && <span>48 numéros</span>}
+          {target === '0' && <span> chez moi </span>}
+          {target === '1' && <span> à un proche </span>}
+          pour le prix de {' '}
         </TextWrap>
         <DropdownWrap
           options={options3}

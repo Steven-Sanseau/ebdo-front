@@ -12,7 +12,7 @@ class InputText extends React.Component {
   render() {
     return (
       <InputWrapper>
-        <Label error={this.props.error || false}>
+        <Label error={this.props.error || false} color={this.props.color}>
           <Row>
             <Col xs={12}>
               {this.props.label}
@@ -53,6 +53,7 @@ class InputText extends React.Component {
 InputText.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  color: PropTypes.string,
   id: PropTypes.string,
   isRequired: PropTypes.bool,
   label: PropTypes.string,

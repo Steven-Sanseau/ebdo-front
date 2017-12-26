@@ -19,9 +19,9 @@ export class NaturalFormOrderContainer extends React.Component {
     this.switchUI = this.switchUI.bind(this)
   }
   state = {
-    target: '0',
-    time: '12',
-    price: '15',
+    is_gift: '0',
+    duration: '12',
+    monthly_price_ttc: '15',
     isNaturalForm: true
   }
 
@@ -37,14 +37,16 @@ export class NaturalFormOrderContainer extends React.Component {
   }
 
   render() {
-    const { target, time, price, isNaturalForm } = this.state
+    const {
+      is_gift, duration, monthly_price_ttc, isNaturalForm
+    } = this.state
     return (
       <div>
         <NaturalFormOrder
           handleChange={this.handleChange}
-          target={target}
-          time={time}
-          price={price}
+          target={is_gift}
+          time={duration}
+          price={monthly_price_ttc}
           isNaturalForm={isNaturalForm}
           switchUI={this.switchUI}
         />
