@@ -14,6 +14,7 @@ import injectSaga from 'utils/injectSaga'
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
+import { newCheckout } from 'actions/checkout'
 
 // SAGA
 import sagaOffer from 'saga/offer'
@@ -44,7 +45,9 @@ export class Checkout extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  // componentDidMount() {}
+  componentDidMount() {
+    this.props.dispatchNewCheckout()
+  }
 
   nextStep() {
     this.props.nextStep()
@@ -144,6 +147,7 @@ export class Checkout extends React.Component {
 
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  dispatchNewCheckout: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
 }
@@ -155,6 +159,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
+    dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

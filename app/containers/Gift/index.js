@@ -14,7 +14,7 @@ import injectSaga from 'utils/injectSaga'
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
-
+import { newCheckout } from 'actions/checkout'
 // SAGA
 import sagaOffer from 'saga/offer'
 import sagaCheckout from 'saga/checkout'
@@ -35,20 +35,15 @@ import Layout from 'containers/Gift/Layout'
 import ButtonSticky from 'components/StickyHelpCheckout'
 
 export class Gift extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.nextStep = this.nextStep.bind(this)
-    this.changeStep = this.changeStep.bind(this)
+  componentDidMount() {
+    this.props.dispatchNewCheckout()
   }
 
-  // componentDidMount() {}
-
-  nextStep() {
+  nextStep = () => {
     this.props.nextStep()
   }
 
-  changeStep(stepNumber) {
+  changeStep = stepNumber => {
     this.props.goToStep(stepNumber)
   }
 
@@ -73,7 +68,7 @@ export class Gift extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <FormulaStep
+              <CodeGiftStep
                 stepNumber={1}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -83,7 +78,7 @@ export class Gift extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <CountryStep
+              <EmailStep
                 stepNumber={2}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -93,7 +88,7 @@ export class Gift extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <EmailStep
+              <DeliveryStep
                 stepNumber={3}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -103,30 +98,8 @@ export class Gift extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <DeliveryStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Elements>
-                <PaymentStep
-                  stepNumber={5}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
               <ConfirmStep
-                stepNumber={6}
+                stepNumber={4}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -143,6 +116,7 @@ export class Gift extends React.Component {
 Gift.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   nextStep: PropTypes.func,
+  dispatchNewCheckout: PropTypes.func,
   goToStep: PropTypes.func
 }
 
@@ -153,6 +127,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
+    dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

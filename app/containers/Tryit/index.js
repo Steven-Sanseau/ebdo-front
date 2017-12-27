@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
-import { Elements } from 'react-stripe-elements'
-// import idx from 'idx'
 
 // STATE
 import { connect } from 'react-redux'
@@ -14,6 +12,7 @@ import injectSaga from 'utils/injectSaga'
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
+import { newCheckout } from 'actions/checkout'
 
 // SAGA
 import sagaAddress from 'saga/address'
@@ -39,7 +38,9 @@ export class Tryit extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  // componentDidMount() {}
+  componentDidMount() {
+    this.props.dispatchNewCheckout()
+  }
 
   nextStep() {
     this.props.nextStep()
@@ -71,6 +72,16 @@ export class Tryit extends React.Component {
           <Row>
             <Col xs={12}>
               <EmailStep
+                stepNumber={1}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <EmailConfirmStep
                 stepNumber={2}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -80,20 +91,8 @@ export class Tryit extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <Elements>
-                <EmailConfirmStep
-                  stepNumber={3}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
               <DeliveryStep
-                stepNumber={4}
+                stepNumber={3}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -103,7 +102,7 @@ export class Tryit extends React.Component {
           <Row>
             <Col xs={12}>
               <ConfirmStep
-                stepNumber={5}
+                stepNumber={4}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -119,6 +118,7 @@ export class Tryit extends React.Component {
 
 Tryit.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  dispatchNewCheckout: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
 }
@@ -130,6 +130,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
+    dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

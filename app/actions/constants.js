@@ -1,3 +1,5 @@
+export const NEW_CHECKOUT = 'app/Checkout/NEW_CHECKOUT'
+
 export const NEXT_STEP = 'app/Checkout/step/NEXT_STEP'
 export const UPDATE_STEP = 'app/Checkout/step/UPDATE_STEP'
 
