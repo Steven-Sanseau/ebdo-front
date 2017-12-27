@@ -88,6 +88,7 @@ function HomePage(props) {
           <Col xs={12} sm={7} smOffset={1}>
             <NaturalFormOrderContainer
               dispatchSetOfferParams={props.dispatchSetOfferParams}
+              offer={props.offer}
             />
           </Col>
         </Row>
@@ -106,6 +107,7 @@ function HomePage(props) {
 HomePage.propTypes = {
   dispatch: PropTypes.func,
   page: PropTypes.string,
+  offer: PropTypes.object,
   dispatchSetOfferParams: PropTypes.func
 }
 

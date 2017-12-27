@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
+
 import NaturalFormOrder from 'components/NaturalFormOrder'
 
 import Button from 'components/Button'
@@ -14,22 +14,36 @@ export class NaturalFormOrderContainer extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleRoute = this.handleRoute.bind(this)
-    this.switchUI = this.switchUI.bind(this)
-  }
-  state = {
-    is_gift: '0',
-    duration: '12',
-    monthly_price_ttc: '15',
-    isNaturalForm: true
+
+    this.state = {
+      is_gift: false,
+      duration: 12,
+      monthly_price_ttc: 15,
+      isNaturalForm: true
+    }
   }
 
-  handleChange(e, key) {
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      is_gift: newProps.offer.data.is_gift,
+      duration: newProps.offer.data.duration,
+      monthly_price_ttc: newProps.offer.data.monthly_price_ttc
+    })
+  }
+
+  componentDidMount() {
+    this.setState({
+      is_gift: this.props.offer.data.is_gift,
+      duration: this.props.offer.data.duration,
+      monthly_price_ttc: this.props.offer.data.monthly_price_ttc
+    })
+  }
+
+  handleChange = (e, key) => {
     this.setState({ [e]: key.value })
   }
 
-  handleRoute() {
+  handleRoute = () => {
     const { duration } = this.state
 
     this.props.dispatchSetOfferParams({
@@ -43,12 +57,13 @@ export class NaturalFormOrderContainer extends React.Component {
     this.props.dispatchSetOfferParams({ is_gift: this.state.is_gift == 1 })
   }
 
-  switchUI() {
+  switchUI = () => {
     this.setState({ isNaturalForm: !this.state.isNaturalForm })
   }
 
   render() {
     const { is_gift, duration, monthly_price_ttc, isNaturalForm } = this.state
+
     return (
       <div>
         <NaturalFormOrder
@@ -79,7 +94,8 @@ export class NaturalFormOrderContainer extends React.Component {
 }
 
 NaturalFormOrderContainer.propTypes = {
-  dispatchSetOfferParams: PropTypes.func
+  dispatchSetOfferParams: PropTypes.func,
+  offer: PropTypes.object
 }
 
 export default NaturalFormOrderContainer

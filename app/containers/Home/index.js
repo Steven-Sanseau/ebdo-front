@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
 
 import { makeSelectPathName } from 'selectors/route'
+import { makeSelectOffer } from 'selectors/offer'
 import { setOfferParams } from 'actions/offer'
 
 import { ThemeProvider } from 'styled-components'
@@ -21,7 +22,8 @@ const theme = {
 
 class Home extends React.Component {
   render() {
-    const { dispatch, page, dispatchSetOfferParams } = this.props
+    const { dispatch, page, dispatchSetOfferParams, offer } = this.props
+    console.log(offer)
     return (
       <div>
         <Helmet>
@@ -33,6 +35,7 @@ class Home extends React.Component {
             dispatch={dispatch}
             page={page}
             dispatchSetOfferParams={dispatchSetOfferParams}
+            offer={offer}
           />
         </ThemeProvider>
         <CookieBannerWrapper />
@@ -44,11 +47,13 @@ class Home extends React.Component {
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
   dispatchSetOfferParams: PropTypes.func,
+  offer: PropTypes.object,
   page: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
-  page: makeSelectPathName()
+  page: makeSelectPathName(),
+  offer: makeSelectOffer()
 })
 
 function mapDispatchToProps(dispatch) {

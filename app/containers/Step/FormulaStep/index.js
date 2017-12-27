@@ -4,7 +4,6 @@ import { Row, Col } from 'react-flexbox-grid'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
 
 import {
   makeSelectOffer,
@@ -216,6 +215,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-export default compose(withConnect)(FormulaStep)
+export default connect(mapStateToProps, mapDispatchToProps)(FormulaStep)
