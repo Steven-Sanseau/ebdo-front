@@ -18,12 +18,16 @@ const buttonStyles = css`
   min-width: ${props => props.minWidth};
   background-color: var(${props => (props.color ? props.color : '--booger')});
   padding: 10px 20px;
-
+  transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
+  
   &:active {
     background-color: var(${props => (props.color ? props.color : '--booger')});
     color: var(
       ${props => (props.colorText ? props.colorText : '--white-true')}
     );
+  }
+  &:hover {
+    transform: scale(1.05);
   }
 `
 
