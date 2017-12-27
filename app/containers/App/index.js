@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import PrivateRoute from 'utils/PrivateRoute'
 
@@ -22,22 +22,32 @@ export default function App() {
       </Helmet>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/subscribe" component={Checkout} />
+
+        <Redirect from="/subscribe" to="/abonnement" />
         <Route path="/abonnement" component={Checkout} />
-        <Route path="/offer" component={Offer} />
+        <Redirect from="/offer" to="/offre" />
         <Route path="/offre" component={Offer} />
-        <Route path="/gift" component={Gift} />
+
+        <Redirect from="/gift" to="/cadeau" />
         <Route path="/cadeau" component={Gift} />
-        <Route path="/try" component={TryIt} />
-        <Route path="/jessaye" component={TryIt} />
+
+        <Redirect from="/try" to="/essai" />
+        <Redirect from="/jessaye" to="/essai" />
         <Route path="/essai" component={TryIt} />
-        <Route exact path="/team" component={Team} />
+
+        <Redirect from="/team" to="/equipe" />
         <Route exact path="/equipe" component={Team} />
-        <Route exact path="/manifest" component={Manifest} />
-        <Route exact path="/pourquoi" component={Manifest} />
+
+        <Redirect from="/manifest" to="/manifeste" />
+        <Redirect from="/pourquoi" to="/manifeste" />
+        <Route exact path="/manifeste" component={Manifest} />
         <PrivateRoute exact path="/source" component={Source} />
-        <Route exact path="/login" component={Login} />
+
+        <Redirect from="/login" to="/connexion" />
+        <Route exact path="/connexion" component={Login} />
+        <Redirect from="/logout" to="/connexion" />
         <Route exact path="/logout" component={Login} />
+
         <Route component={NotFoundPage} />
       </Switch>
     </div>

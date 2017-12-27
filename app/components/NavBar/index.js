@@ -185,17 +185,17 @@ class NavBar extends React.Component {
                 <div className="narrowLinks">
                   <LinkBurger
                     color="--tomato"
-                    style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                    style={page === 'equipe' ? { color: 'var(--tomato)' } : {}}
                   >
-                    <Link to="team">L&apos;équipe</Link>
+                    <Link to="/equipe">L&apos;équipe</Link>
                   </LinkBurger>
                   <LinkBurger
                     color="--sunflower"
                     style={
-                      page === '/manifest' ? { color: 'var(--sunflower)' } : {}
+                      page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                     }
                   >
-                    <Link to="/manifest">Pourquoi ?</Link>
+                    <Link to="/manifeste">Pourquoi ?</Link>
                   </LinkBurger>
                   <LinkBurger
                     color="--peacock-blue"
@@ -217,17 +217,17 @@ class NavBar extends React.Component {
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
-                  style={page === '/team' ? { color: 'var(--tomato)' } : {}}
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}
                 >
-                  <Link to="team">L&apos;équipe</Link>
+                  <Link to="/equipe">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === '/manifest' ? { color: 'var(--sunflower)' } : {}
+                    page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                   }
                 >
-                  <Link to="manifest">Pourquoi ?</Link>
+                  <Link to="/manifeste">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--peacock-blue"
@@ -235,13 +235,13 @@ class NavBar extends React.Component {
                     page === '/source' ? { color: 'var(--peacock-blue)' } : {}
                   }
                 >
-                  <Link to="source">La Source</Link>
+                  <Link to="/source">La Source</Link>
                 </LinkWrap>
                 <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash" className="withBorder">
-                  <Link to="login">Connexion</Link>
+                  <Link to="/connexion">Connexion</Link>
                 </LinkWrapMobile>
                 <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
