@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { StripeProvider } from 'react-stripe-elements'
+import StoreSaga from './stores'
 import FontFaceObserver from 'fontfaceobserver'
 import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
@@ -50,11 +51,13 @@ const MOUNT_NODE = document.getElementById('app')
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </StripeProvider>
+      <StoreSaga store={store}>
+        <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </StripeProvider>
+      </StoreSaga>
     </Provider>,
     MOUNT_NODE
   )

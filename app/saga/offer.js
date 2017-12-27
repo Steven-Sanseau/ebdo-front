@@ -2,7 +2,9 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { GET_OFFER } from 'actions/constants'
+import { push } from 'react-router-redux'
+
+import { GET_OFFER, SET_OFFER_PARAMS } from 'actions/constants'
 import { getOfferError, getOfferLoaded } from 'actions/offer'
 import { nextStep } from 'actions/step'
 import { makeSelectOffer } from 'selectors/offer'
@@ -31,6 +33,16 @@ function* getOffer() {
   }
 }
 
+function* redirectCheckout(action) {
+  if (action.params.is_gift) {
+    yield put(push('/offre'))
+  }
+  if (!action.params.is_gift) {
+    yield put(push('/abonnement'))
+  }
+}
+
 export default function* sagaOffer() {
   yield takeEvery(GET_OFFER, getOffer)
+  yield takeEvery(SET_OFFER_PARAMS, redirectCheckout)
 }

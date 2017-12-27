@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 import NaturalFormOrder from 'components/NaturalFormOrder'
@@ -28,8 +28,19 @@ export class NaturalFormOrderContainer extends React.Component {
   handleChange(e, key) {
     this.setState({ [e]: key.value })
   }
+
   handleRoute() {
-    // console.log(e);
+    const { duration } = this.state
+
+    this.props.dispatchSetOfferParams({
+      monthly_price_ttc: Number(this.state.monthly_price_ttc)
+    })
+
+    this.props.dispatchSetOfferParams({
+      duration: Number(duration),
+      time_limited: Number(duration) !== 0
+    })
+    this.props.dispatchSetOfferParams({ is_gift: this.state.is_gift == 1 })
   }
 
   switchUI() {
@@ -37,9 +48,7 @@ export class NaturalFormOrderContainer extends React.Component {
   }
 
   render() {
-    const {
-      is_gift, duration, monthly_price_ttc, isNaturalForm
-    } = this.state
+    const { is_gift, duration, monthly_price_ttc, isNaturalForm } = this.state
     return (
       <div>
         <NaturalFormOrder
@@ -70,7 +79,7 @@ export class NaturalFormOrderContainer extends React.Component {
 }
 
 NaturalFormOrderContainer.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  dispatchSetOfferParams: PropTypes.func
 }
 
 export default NaturalFormOrderContainer

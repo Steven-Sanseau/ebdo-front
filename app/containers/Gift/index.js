@@ -15,12 +15,6 @@ import injectSaga from 'utils/injectSaga'
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
-// SAGA
-import sagaOffer from 'saga/offer'
-import sagaCheckout from 'saga/checkout'
-import sagaToken from 'saga/token'
-import sagaAddress from 'saga/address'
-import sagaClient from 'saga/client'
 
 // CONTAINERS
 import CodeGiftStep from 'containers/Step/CodeGiftStep/Loadable'

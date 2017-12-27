@@ -52,7 +52,7 @@ class FormulaStep extends React.Component {
   handleChange(key, event) {
     let params = {}
     if (key === 'is_gift') {
-      params = { [key]: event.value === 1 }
+      params = { [key]: event.value == 1 }
     }
 
     if (key === 'duration') {

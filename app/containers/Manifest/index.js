@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
 
 import { makeSelectPathName } from 'selectors/route'
 import ManifestPage from 'components/ManifestPage'
@@ -41,4 +40,4 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(Manifest)
+export default connect(mapStateToProps, mapDispatchToProps)(Manifest)

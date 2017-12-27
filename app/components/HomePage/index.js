@@ -86,7 +86,9 @@ function HomePage(props) {
             </ImageWrap>
           </Col>
           <Col xs={12} sm={7} smOffset={1}>
-            <NaturalFormOrderContainer />
+            <NaturalFormOrderContainer
+              dispatchSetOfferParams={props.dispatchSetOfferParams}
+            />
           </Col>
         </Row>
       </Layout>
@@ -101,6 +103,10 @@ function HomePage(props) {
   )
 }
 
-HomePage.propTypes = { dispatch: PropTypes.func, page: PropTypes.string }
+HomePage.propTypes = {
+  dispatch: PropTypes.func,
+  page: PropTypes.string,
+  dispatchSetOfferParams: PropTypes.func
+}
 
 export default HomePage

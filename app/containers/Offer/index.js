@@ -7,20 +7,11 @@ import { Elements } from 'react-stripe-elements'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import injectSaga from 'utils/injectSaga'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
-
-// SAGA
-import sagaOffer from 'saga/offer'
-import sagaCheckout from 'saga/checkout'
-import sagaToken from 'saga/token'
-import sagaAddress from 'saga/address'
-import sagaClient from 'saga/client'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
@@ -46,7 +37,7 @@ export class Offer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchNewCheckout()
+    // this.props.dispatchNewCheckout()
   }
 
   nextStep() {
@@ -174,19 +165,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
-const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
-const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
-const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
-
-export default compose(
-  withSagaOffer,
-  withSagaToken,
-  withSagaCheckout,
-  withSagaAddress,
-  withSagaClient,
-  withConnect
-)(Offer)
+export default connect(mapStateToProps, mapDispatchToProps)(Offer)

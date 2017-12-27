@@ -42,8 +42,6 @@ function offerReducer(state = initialState, action) {
         .set('error', true)
         .set('errorMessage', action.error)
         .set('loading', false)
-    case NEW_CHECKOUT:
-      return initialState
     default:
       return state
   }

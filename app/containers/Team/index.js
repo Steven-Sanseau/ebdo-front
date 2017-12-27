@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
 
 import { makeSelectPathName } from 'selectors/route'
 
@@ -40,6 +39,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-export default compose(withConnect)(Team)
+export default connect(mapStateToProps, mapDispatchToProps)(Team)

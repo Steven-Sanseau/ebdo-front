@@ -6,17 +6,11 @@ import { Row, Col } from 'react-flexbox-grid'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import injectSaga from 'utils/injectSaga'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
-
-// SAGA
-import sagaAddress from 'saga/address'
-import sagaClient from 'saga/client'
 
 // CONTAINERS
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
@@ -165,9 +159,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
-
-export default compose(withSagaAddress, withSagaClient, withConnect)(Tryit)
+export default connect(mapStateToProps, mapDispatchToProps)(Tryit)

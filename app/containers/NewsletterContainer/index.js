@@ -1,20 +1,11 @@
-/**
- *
- * NewsletterContainer
- *
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
 import _ from 'lodash'
 
 import NewsletterFooter from 'components/Newsletter/NewsletterFooter'
 import NewsletterBlock from 'components/Newsletter/NewsletterBlock'
 import Newsletter from 'components/Newsletter'
-
-import injectSaga from 'utils/injectSaga'
 
 export class NewsletterContainer extends React.Component {
   constructor(props) {
@@ -108,7 +99,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(null, mapDispatchToProps)
-// const withSaga = injectSaga({ key: 'newsletter', saga })
-
-export default compose(withConnect)(NewsletterContainer)
+export default connect(null, mapDispatchToProps)(NewsletterContainer)
