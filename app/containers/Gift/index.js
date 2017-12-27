@@ -23,14 +23,14 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import CodeGiftStep from 'containers/Gift/CodeGiftStep/Loadable'
-import EmailStep from 'containers/Gift/EmailStep/Loadable'
-import DeliveryStep from 'containers/Gift/DeliveryStep/Loadable'
-import ConfirmStep from 'containers/Gift/ConfirmStep/Loadable'
+import CodeGiftStep from 'containers/Step/CodeGiftStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
-import Layout from 'containers/Gift/Layout'
+import Layout from 'containers/Checkout/Layout'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
 

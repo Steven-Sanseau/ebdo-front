@@ -106,7 +106,7 @@ class ConfirmEmailStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je confirme mon abonnement"
+        title="Je confirme mon adresse email"
         stepNumber={stepNumber}
         iconName="check"
         contentClose={this.contentClose()}

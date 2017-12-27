@@ -15,6 +15,7 @@ import '!file-loader?name=[name].[ext]!images/numero-0/3-RER-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/4-fusees-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/5-bd-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/6-cyberguerre-HD.jpg'
+import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
 
 const Undercover = styled.div`
   img {
@@ -22,7 +23,7 @@ const Undercover = styled.div`
     top: 0;
     left: 0;
     z-index: -1;
-    border-top: 1px solid var(--grey-blue); 
+    border-top: 1px solid var(--grey-blue);
   }
   .fond {
     position: absolute;
@@ -87,7 +88,8 @@ const Cover = styled.div`
   &:hover > img {
     transform: translateX(-150px);
   }
-  &:hover div img, &:hover .fond  {
+  &:hover div img,
+  &:hover .fond {
     transform: translateX(50px);
   }
   &:hover button {

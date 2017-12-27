@@ -24,12 +24,12 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import FormulaStep from 'containers/Checkout/FormulaStep/Loadable'
-import CountryStep from 'containers/Checkout/CountryStep/Loadable'
-import EmailStep from 'containers/Checkout/EmailStep/Loadable'
-import DeliveryStep from 'containers/Checkout/DeliveryStep/Loadable'
-import PaymentStep from 'containers/Checkout/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Checkout/ConfirmStep/Loadable'
+import FormulaStep from 'containers/Step/FormulaStep/Loadable'
+import CountryStep from 'containers/Step/CountryStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import PaymentStep from 'containers/Step/PaymentStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'

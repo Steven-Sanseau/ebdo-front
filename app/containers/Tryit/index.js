@@ -19,16 +19,23 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import EmailConfirmStep from 'containers/Tryit/EmailConfirmStep/Loadable'
-import EmailStep from 'containers/Tryit/EmailStep/Loadable'
-import DeliveryStep from 'containers/Tryit/DeliveryStep/Loadable'
-import ConfirmStep from 'containers/Tryit/ConfirmStep/Loadable'
+import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
-import Layout from 'containers/Tryit/Layout'
+import Layout from 'containers/Checkout/Layout'
+import VioletText from 'components/LayoutStep/VioletText'
+import BigBoldText from 'components/LayoutStep/BigBoldText'
+import BoldText from 'components/LayoutStep/BoldText'
+import TextSummary from 'components/LayoutStep/TextSummary'
+import Image from 'components/Image'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
+
+import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
 
 export class Tryit extends React.Component {
   constructor(props) {
@@ -67,6 +74,29 @@ export class Tryit extends React.Component {
           <Row center="xs" start="lg">
             <Col xs={12}>
               <Header />
+            </Col>
+          </Row>
+          <Row center="xs">
+            <Col xs={12}>
+              <Row start="lg" center="xs">
+                <Col lg={2} lgOffset={3} xs={12}>
+                  <Image
+                    src="0-couv.jpg"
+                    alt="ebdo couverture magazine gratuit"
+                    width={174}
+                  />
+                </Col>
+                <Col lg={5} xs={12}>
+                  <BigBoldText>
+                    Vous voulez <VioletText>essayer ebdo ?</VioletText> On vous
+                    offre le prochain numéro.
+                  </BigBoldText>
+                  <TextSummary>
+                    Vous nous laissez vos coordonnées, <BoldText>ebdo</BoldText>{' '}
+                    vous fait parvenir son nouveau numéro vendredi prochain.
+                  </TextSummary>
+                </Col>
+              </Row>
             </Col>
           </Row>
           <Row>

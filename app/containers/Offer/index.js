@@ -23,13 +23,13 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import FormulaStep from 'containers/Offer/FormulaStep/Loadable'
-import InterludeStep from 'containers/Offer/InterludeStep/Loadable'
-import CountryStep from 'containers/Offer/CountryStep/Loadable'
-import EmailStep from 'containers/Offer/EmailStep/Loadable'
-import DeliveryStep from 'containers/Offer/DeliveryStep/Loadable'
-import PaymentStep from 'containers/Offer/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Offer/ConfirmStep/Loadable'
+import FormulaStep from 'containers/Step/FormulaStep/Loadable'
+import InterludeStep from 'containers/Step/InterludeStep/Loadable'
+import CountryStep from 'containers/Step/CountryStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import PaymentStep from 'containers/Step/PaymentStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'

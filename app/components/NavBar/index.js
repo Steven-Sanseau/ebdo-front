@@ -66,15 +66,15 @@ const FlexWrap = styled.div`
 
   .withBorder {
     border-left: 1px solid var(--silver);
-  ${media.tablet`
-    border-right: ${props => (props.menuFixed ? 'none' : '1px solid var(--silver)')}; ;
+    ${media.tablet`
+    border-right: ${props =>
+      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
   `};
-    
   }
-  
+
   ${media.tablet`
     margin: ${props => (props.menuFixed ? '6px 0' : '30px')}; 0;
 `};
@@ -85,7 +85,6 @@ const Menu = styled.nav`
   ${media.tablet`
     margin-bottom: 30px;
   `};
-  
 `
 const Burger = styled(Col)`
   ${media.tablet`
@@ -129,8 +128,11 @@ class NavBar extends React.Component {
     menuFixed: false
   }
 
-  handleRoute = () => {
+  handleRouteSubscribe = () => {
     this.props.dispatch(push('abonnement'))
+  }
+  handleRouteTryit = () => {
+    this.props.dispatch(push('essai'))
   }
 
   handleStateChange(status) {
@@ -237,14 +239,17 @@ class NavBar extends React.Component {
                 <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
                     minWidth="130px"
-                    handleRoute={this.handleRoute}
+                    handleRoute={this.handleRouteSubscribe}
                     color="--squash"
                   >
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
                 <LinkWrap style={menuFixed ? hidden : {}}>
-                  <Button handleRoute={this.handleRoute} color="--warm-purple">
+                  <Button
+                    handleRoute={this.handleRouteTryit}
+                    color="--warm-purple"
+                  >
                     J&apos;essaye
                   </Button>
                 </LinkWrap>
