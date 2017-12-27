@@ -10,13 +10,29 @@ const Input = styled.input`
   font-size: 16px;
   line-height: 40px;
   text-align: left;
-  color: var(${props => (props.error ? '--tomato' : '--cool-grey')});
+  color: var(${props => (props.error ? '--tomato' : '--black')});
   padding: 12px 14px;
   margin-top: 4px;
   width: 100%;
 
   &:focus {
     outline-width: 0;
+  }
+  &::placeholder {
+    color: var(--cool-grey);
+  }
+  &:not(:placeholder-shown) {
+    border: 1px solid var(--black);
+  }
+  &:hover,
+  &:focus {
+    border: 1px solid var(--black);
+  }
+  &.errored {
+    border: 1px solid var(--tomato);
+  }
+  &.validated {
+    border: 1px solid var(--booger);
   }
 `
 

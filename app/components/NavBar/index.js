@@ -12,8 +12,8 @@ import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
 const LinkWrap = styled.div`
-  flex: 1;
   text-align: center;
+  margin-right: 30px;
   color: var(--cool-grey);
   a {
     color: inherit;
@@ -66,9 +66,10 @@ const FlexWrap = styled.div`
 
   .withBorder {
     border-left: 1px solid var(--silver);
+    padding-left: 30px;
     ${media.tablet`
     border-right: ${props =>
-      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
+    props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
@@ -166,7 +167,7 @@ class NavBar extends React.Component {
           style={menuFixed ? menuFixedStyle : menuStyle}
         >
           <Row between="sm">
-            <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
+            <Col>
               <Title menuFixed={menuFixed}>
                 <Link to="/">
                   <Logo
@@ -213,7 +214,7 @@ class NavBar extends React.Component {
                 </div>
               </Burger>
             </Col>
-            <Col xs={menuFixed ? 9 : 12} sm={menuFixed ? 8 : 7}>
+            <Col>
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
@@ -252,14 +253,14 @@ class NavBar extends React.Component {
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <LinkWrap style={menuFixed ? hidden : {}}>
+                <div style={menuFixed ? hidden : {}}>
                   <Button
                     handleRoute={this.handleRouteTryit}
                     color="--warm-purple"
                   >
                     J&apos;essaye
                   </Button>
-                </LinkWrap>
+                </div>
               </FlexWrap>
             </Col>
           </Row>

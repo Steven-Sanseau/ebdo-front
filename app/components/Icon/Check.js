@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.span`
   position: absolute;
-  bottom: 6px;
+  bottom: 8px;
   right: 6px;
   width: 28px;
   height: 28px;

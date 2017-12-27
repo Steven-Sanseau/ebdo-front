@@ -120,7 +120,7 @@ function ManifestoBlock() {
         <Col xs={12} sm={5} smOffset={1}>
           <TextBlock
             title="Un journal qui se construit ensemble..."
-            colorTitle="--squash"
+            colorTitle="--sunflower"
             fontSize="28px"
           >
             Nous sommes atteints d’un mal étrange :{' '}
