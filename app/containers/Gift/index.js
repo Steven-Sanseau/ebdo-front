@@ -8,8 +8,6 @@ import { Elements } from 'react-stripe-elements'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import injectSaga from 'utils/injectSaga'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
@@ -30,7 +28,7 @@ import ButtonSticky from 'components/StickyHelpCheckout'
 
 export class Gift extends React.Component {
   componentDidMount() {
-    this.props.dispatchNewCheckout()
+    // this.props.dispatchNewCheckout()
   }
 
   nextStep = () => {
@@ -126,19 +124,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
-const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
-const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
-const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
-
-export default compose(
-  withSagaOffer,
-  withSagaToken,
-  withSagaCheckout,
-  withSagaAddress,
-  withSagaClient,
-  withConnect
-)(Gift)
+export default connect(mapStateToProps, mapDispatchToProps)(Gift)

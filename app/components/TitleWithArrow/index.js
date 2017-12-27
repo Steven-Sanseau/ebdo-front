@@ -21,7 +21,7 @@ const Title = styled(LinkRouter)`
 const TitleWithArrow = props => {
   const { text, color, textColor } = props
   return (
-    <Title textColor={textColor} to={props.link || '#'}>
+    <Title textColor={textColor || '--white-true'} to={props.link || '#'}>
       {text}
       <ArrowRight color={color} />
     </Title>
@@ -34,6 +34,7 @@ TitleWithArrow.propTypes = {
   link: PropTypes.string,
   color: PropTypes.string
 }
+
 TitleWithArrow.defaultProps = { textColor: '--white-true' }
 
 export default TitleWithArrow
