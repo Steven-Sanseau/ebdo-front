@@ -64,7 +64,7 @@ const HomeLandingWrap = styled.div`
 function HomePage(props) {
   return (
     <Grid fluid>
-      <NavBar dispatch={props.dispatch} />
+      <NavBar page={props.page} dispatch={props.dispatch} />
       <HomeLandingWrap>
         <HomeLanding />
       </HomeLandingWrap>
@@ -101,6 +101,6 @@ function HomePage(props) {
   )
 }
 
-HomePage.propTypes = { dispatch: PropTypes.func }
+HomePage.propTypes = { dispatch: PropTypes.func, page: PropTypes.string }
 
 export default HomePage

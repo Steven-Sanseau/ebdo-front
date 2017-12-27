@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Col, Row } from 'react-styled-flexboxgrid'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 import { media } from 'global-styles'
 import { push } from 'react-router-redux'
@@ -168,10 +168,12 @@ class NavBar extends React.Component {
           <Row between="sm">
             <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
               <Title menuFixed={menuFixed}>
-                <Logo
-                  width={menuFixed ? 65 : 150}
-                  height={menuFixed ? 25 : 56}
-                />
+                <Link to="/">
+                  <Logo
+                    width={menuFixed ? 65 : 150}
+                    height={menuFixed ? 25 : 56}
+                  />
+                </Link>
               </Title>
               <Subtitle menuFixed={menuFixed}>
                 À chaque époque <br /> son journal.
@@ -190,16 +192,23 @@ class NavBar extends React.Component {
                   <LinkBurger
                     color="--sunflower"
                     style={
-                      page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
+                      page === '/manifest' ? { color: 'var(--sunflower)' } : {}
                     }
                   >
                     <Link to="#">Pourquoi ?</Link>
                   </LinkBurger>
                   <LinkBurger
-                    color="--topaz"
-                    style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                    color="--peacock-blue"
+                    style={
+                      page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                    }
                   >
-                    <Link to="#">La Fabrique</Link>
+                    <Link to="source">La source</Link>
+                  </LinkBurger>
+                  <LinkBurger color="--topaz">
+                    <a href="http://fabrique.ebdo-lejournal.com/">
+                      La Fabrique
+                    </a>
                   </LinkBurger>
                 </div>
               </Burger>
@@ -208,29 +217,27 @@ class NavBar extends React.Component {
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
-                  style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                  style={page === '/team' ? { color: 'var(--tomato)' } : {}}
                 >
-                  <NavLink
-                    to="team"
-                    activeStyle={{
-                      color: 'var(--tomato)'
-                    }}
-                  >
-                    L&apos;équipe
-                  </NavLink>
+                  <Link to="team">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === 'manifest' ? { color: 'var(--sunflower)' } : {}
+                    page === '/manifest' ? { color: 'var(--sunflower)' } : {}
                   }
                 >
                   <Link to="manifest">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
-                  color="--topaz"
-                  style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                  color="--peacock-blue"
+                  style={
+                    page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                  }
                 >
+                  <Link to="source">La Source</Link>
+                </LinkWrap>
+                <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash" className="withBorder">

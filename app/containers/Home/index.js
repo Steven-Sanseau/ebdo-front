@@ -5,9 +5,10 @@ import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
+import { makeSelectPathName } from 'selectors/route'
+
 import { ThemeProvider } from 'styled-components'
 import CookieBannerWrapper from 'components/CookieBanner'
-
 import HomePage from 'components/HomePage'
 
 const theme = {
@@ -20,7 +21,7 @@ const theme = {
 
 class Home extends React.Component {
   render() {
-    const { dispatch } = this.props
+    const { dispatch, page } = this.props
     return (
       <div>
         <Helmet>
@@ -28,7 +29,7 @@ class Home extends React.Component {
           <meta name="description" content="Homepage Ebdo" />
         </Helmet>
         <ThemeProvider theme={theme}>
-          <HomePage dispatch={dispatch} />
+          <HomePage dispatch={dispatch} page={page} />
         </ThemeProvider>
         <CookieBannerWrapper />
       </div>
@@ -37,10 +38,13 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  page: PropTypes.string
 }
 
-const mapStateToProps = createStructuredSelector({})
+const mapStateToProps = createStructuredSelector({
+  page: makeSelectPathName()
+})
 
 function mapDispatchToProps(dispatch) {
   return {
