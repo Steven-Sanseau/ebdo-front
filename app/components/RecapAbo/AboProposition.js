@@ -7,7 +7,6 @@ import { push } from 'react-router-redux'
 import Button from 'components/Button'
 
 const AboPropositionWrapper = styled.div`
-  max-width: 220px;
 `
 const ButtonWrapper = styled.div``
 const Title = styled.h2`
@@ -19,6 +18,7 @@ const Title = styled.h2`
 
 const TextWrapper = styled.div`
   margin-top: 10px;
+  font-size: 18px;
 `
 
 const Wrapper = styled.div`
