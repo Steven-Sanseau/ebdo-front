@@ -247,6 +247,7 @@
     "react-redux": "5.0.6",
     "react-router-dom": "4.2.2",
     "react-router-redux": "5.0.0-alpha.9",
+    "react-router-scroll-memory": "^1.0.1",
     "react-stickynode": "^1.4.0",
     "react-stripe-elements": "^1.2.1",
     "react-styled-flexboxgrid": "^2.1.1",

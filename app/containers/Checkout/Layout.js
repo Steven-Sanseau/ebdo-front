@@ -4,7 +4,7 @@ import { media } from 'global-styles'
 const Layout = styled.div`
   margin-left: auto;
   margin-right: auto;
-  color: white;
+
   background: var(--background);
 
   ${media.tablet`

@@ -11,8 +11,10 @@ import StoreSaga from './stores'
 import FontFaceObserver from 'fontfaceobserver'
 import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
+
 // Import root app
 import App from 'containers/App'
+import ScrollMemory from 'react-router-scroll-memory'
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
@@ -54,7 +56,10 @@ const render = () => {
       <StoreSaga store={store}>
         <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
           <ConnectedRouter history={history}>
-            <App />
+            <div>
+              <ScrollMemory />
+              <App />
+            </div>
           </ConnectedRouter>
         </StripeProvider>
       </StoreSaga>

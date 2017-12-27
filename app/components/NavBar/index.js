@@ -195,7 +195,7 @@ class NavBar extends React.Component {
                       page === '/manifest' ? { color: 'var(--sunflower)' } : {}
                     }
                   >
-                    <Link to="#">Pourquoi ?</Link>
+                    <Link to="/manifest">Pourquoi ?</Link>
                   </LinkBurger>
                   <LinkBurger
                     color="--peacock-blue"
