@@ -1,4 +1,4 @@
-.dropdown-wrapper-input > .Dropdown-root {
+.dropdown-input.Dropdown-root {
   color: var(--silver);
   font-family: 'FG-R';
   font-size: 16px;
@@ -7,12 +7,12 @@
   margin-top: 20px;
 }
 
-.dropdown-wrapper-input > .Dropdown-control {
+.dropdown-input > .Dropdown-control {
   border-radius: 6px;
   border: 1px solid var(--silver);
 }
 
-.dropdown-wrapper-input > .is-open .Dropdown-control {
+.dropdown-input.is-open > .Dropdown-control {
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 0;
@@ -21,34 +21,34 @@
   border-color: var(--greyish-brown);
 }
 
-.dropdown-wrapper-input > .is-open .Dropdown-placeholder {
+.dropdown-input.is-open > .Dropdown-placeholder {
   color: var(--black);
 }
 
-.dropdown-wrapper-input > .Dropdown-placeholder {
+.dropdown-input .Dropdown-placeholder {
   padding: 12px 15px;
 }
 
-.dropdown-wrapper-input > .Dropdown-option {
+.dropdown-input .Dropdown-option {
   margin-bottom: 13px;
 }
 
-.dropdown-wrapper-input > .Dropdown-option:last-child {
+.dropdown-input .Dropdown-option:last-child {
   margin-bottom: 0;
 }
 
-.dropdown-wrapper-input > .Dropdown-option:hover {
+.Dropdown-option:hover {
   color: var(--greyish-brown);
 }
 
-.dropdown-wrapper-input > .Dropdown-menu {
+.dropdown-input .Dropdown-menu {
   padding: 13px 15px;
   border: 1px solid var(--greyish-brown);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 }
 
-.dropdown-wrapper-input > .Dropdown-arrow {
+.dropdown-input .Dropdown-arrow {
   border-color: var(--silver) transparent transparent;
   border-style: solid;
   border-width: 5px 5px 0;
@@ -62,7 +62,7 @@
   width: 0;
 }
 
-.dropdown-wrapper-input > .is-open .Dropdown-arrow {
+.dropdown-input.is-open .Dropdown-arrow {
   border-color: transparent transparent var(--black);
   border-width: 0 5px 5px;
 }

@@ -2,10 +2,12 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { GET_OFFER } from 'actions/constants'
+import { push } from 'react-router-redux'
+
+import { GET_OFFER, SET_OFFER_PARAMS, NEW_CHECKOUT } from 'actions/constants'
 import { getOfferError, getOfferLoaded } from 'actions/offer'
 import { nextStep } from 'actions/step'
-import { makeSelectOffer } from 'selectors/offer'
+import { makeSelectOffer, makeSelectOfferIsGift } from 'selectors/offer'
 
 function* getOffer() {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/offer`
@@ -31,6 +33,19 @@ function* getOffer() {
   }
 }
 
+function* redirectCheckout() {
+  const isGift = yield select(makeSelectOfferIsGift())
+
+  if (isGift) {
+    yield put(push('/offre'))
+  }
+  if (!isGift) {
+    yield put(push('/abonnement'))
+  }
+}
+
 export default function* sagaOffer() {
   yield takeEvery(GET_OFFER, getOffer)
+  yield takeEvery(SET_OFFER_PARAMS, redirectCheckout)
+  yield takeEvery(NEW_CHECKOUT, redirectCheckout)
 }

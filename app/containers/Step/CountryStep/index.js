@@ -11,6 +11,7 @@ import { makeSelectAddressCountry } from 'selectors/address'
 import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import BoldText from 'components/LayoutStep/BoldText'
+import TextSummary from 'components/LayoutStep/TextSummary'
 
 class CountryStep extends React.Component {
   constructor(props) {
@@ -47,10 +48,12 @@ class CountryStep extends React.Component {
 
     return (
       <div>
-        La livraison en France est comprise dans notre offre. Vous pouvez à ce
-        stade choisir un pays de livraison différent, nous recalculerons les
-        frais de port qui viendront s’ajouter au prix total. Votre pays n’est
-        pas dans la liste ? Suggérez-le nous.
+        <TextSummary>
+          La livraison en France est comprise dans notre offre. Vous pouvez à ce
+          stade choisir un pays de livraison différent, nous recalculerons les
+          frais de port qui viendront s’ajouter au prix total. Votre pays n’est
+          pas dans la liste ? Suggérez-le nous.
+        </TextSummary>
         <FormCountry
           handleCountry={this.handleCountry}
           handleSubmitCountry={this.handleSubmit}
@@ -58,10 +61,10 @@ class CountryStep extends React.Component {
           countryList={countryList}
         />
         {country.value !== 'FR' && (
-          <span>
+          <TextSummary>
             La livraison en {country.label} ajoute 6€ de frais de livraison tous
             les mois. Ce changement a été appliqué à votre panier.
-          </span>
+          </TextSummary>
         )}
       </div>
     )
@@ -107,6 +110,10 @@ CountryStep.propTypes = {
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
   dispatchCountryAddress: PropTypes.func
+}
+
+CountryStep.defaultProps = {
+  country: { value: 'FR' }
 }
 
 const mapStateToProps = createStructuredSelector({

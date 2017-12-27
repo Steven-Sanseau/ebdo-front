@@ -23,7 +23,7 @@ function loginReducer(state = initialState, action) {
     case LOGIN_EMAIL_ERROR:
       return state.set('error', action.error)
     case LOGIN_EMAIL_CODE_SUCCESS:
-      return state.set('token', action.token)
+      return state.set('token', action.token).set('isUserConnected', true)
     case LOGIN_USER_SUCCESS:
       return state.set('isUserConnected', true)
     default:

@@ -1,8 +1,13 @@
 import { createSelector } from 'reselect'
 
-const selectStep = state => state.get('step')
+const selectLogin = state => state.get('login')
 
-const makeSelectStep = () =>
-  createSelector(selectStep, step => step.get('value'))
+const makeSelectLogin = () => createSelector(selectLogin, login => login.toJS())
 
-export { makeSelectStep }
+const makeSelectToken = () =>
+  createSelector(selectLogin, login => login.get('token'))
+
+const makeIsLoggedIn = () =>
+  createSelector(selectLogin, login => login.get('isUserConnected'))
+
+export { makeSelectToken, makeIsLoggedIn, makeSelectLogin }

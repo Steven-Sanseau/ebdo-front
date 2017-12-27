@@ -4,7 +4,9 @@ import {
   SET_PAYMENT_METHOD,
   SET_CGV_CONFIRM,
   POST_SUBSCRIPTION_LOADED,
-  POST_SUBSCRIPTION_ERROR
+  POST_SUBSCRIPTION_ERROR,
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY
 } from 'actions/constants'
 
 export function setPayementMethod(method) {
@@ -42,5 +44,17 @@ export function postCheckoutError(errorMessage, errorCode) {
     type: POST_SUBSCRIPTION_ERROR,
     errorMessage,
     errorCode
+  }
+}
+
+export function newCheckout() {
+  return {
+    type: NEW_CHECKOUT
+  }
+}
+
+export function newCheckoutTry() {
+  return {
+    type: NEW_CHECKOUT_TRY
   }
 }

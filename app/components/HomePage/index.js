@@ -64,7 +64,7 @@ const HomeLandingWrap = styled.div`
 function HomePage(props) {
   return (
     <Grid fluid>
-      <NavBar dispatch={props.dispatch} />
+      <NavBar page={props.page} dispatch={props.dispatch} />
       <HomeLandingWrap>
         <HomeLanding />
       </HomeLandingWrap>
@@ -86,7 +86,10 @@ function HomePage(props) {
             </ImageWrap>
           </Col>
           <Col xs={12} sm={7} smOffset={1}>
-            <NaturalFormOrderContainer />
+            <NaturalFormOrderContainer
+              dispatchSetOfferParams={props.dispatchSetOfferParams}
+              offer={props.offer}
+            />
           </Col>
         </Row>
       </Layout>
@@ -96,11 +99,16 @@ function HomePage(props) {
         </Col>
       </ProgressWrap>
       <ManifestoBlock />
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </Grid>
   )
 }
 
-HomePage.propTypes = { dispatch: PropTypes.func }
+HomePage.propTypes = {
+  dispatch: PropTypes.func,
+  page: PropTypes.string,
+  offer: PropTypes.object,
+  dispatchSetOfferParams: PropTypes.func
+}
 
 export default HomePage

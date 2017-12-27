@@ -6,7 +6,8 @@ import {
   SET_OFFER_PARAMS,
   GET_OFFER,
   GET_OFFER_LOADED,
-  GET_OFFER_ERROR
+  GET_OFFER_ERROR,
+  NEW_CHECKOUT
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({

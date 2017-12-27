@@ -27,6 +27,17 @@ const LinkWrapper = styled(Link)`
     color: var(--white-true);
   }
 `
+
+const AWrapper = styled.a`
+  color: var(--grey-blue);
+  border-bottom: 1px solid var(--grey-blue);
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--grey-blue);
+    color: var(--white-true);
+  }
+`
 const Title = styled.h2`
   font-size: 24px;
   line-height: 26px;
@@ -93,7 +104,6 @@ const ImageWrap = styled(Col)`
     max-width: 200px;
     margin: 0 auto;
   `};
-
 `
 
 function HomeLanding() {
@@ -114,9 +124,9 @@ function HomeLanding() {
             <img src="/6mois-black.png" alt="6 mois" height="18" /> grâce au
             soutien des 5 960 lecteurs qui nous ont fait confiance et soutenu
             lors de{' '}
-            <LinkWrapper to="#">
+            <AWrapper href="https://www.kisskissbankbank.com/ebdo-un-journal-independant-et-inspirant">
               notre campagne de financement participatif.
-            </LinkWrapper>
+            </AWrapper>
           </Text>
           <Discover>
             <img src="illu-test.jpg" alt="illustration cover" width="100%" />

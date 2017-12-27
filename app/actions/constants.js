@@ -1,3 +1,6 @@
+export const NEW_CHECKOUT = 'app/Checkout/NEW_CHECKOUT'
+export const NEW_CHECKOUT_TRY = 'app/Checkout/NEW_CHECKOUT_TRY'
+
 export const NEXT_STEP = 'app/Checkout/step/NEXT_STEP'
 export const UPDATE_STEP = 'app/Checkout/step/UPDATE_STEP'
 
@@ -43,6 +46,7 @@ export const POST_SUBSCRIPTION_LOADED =
 export const LOGIN_EMAIL = 'app/Login/LOGIN_EMAIL'
 export const LOGIN_EMAIL_ERROR = 'app/Login/LOGIN_EMAIL_ERROR'
 export const LOGIN_EMAIL_SUCCESS = 'app/Login/LOGIN_EMAIL_SUCCESS'
+export const LOGIN_USER_SUCCESS = 'app/Login/LOGIN_USER_SUCCESS'
 
 export const LOGIN_EMAIL_CODE = 'app/Login/LOGIN_EMAIL_CODE'
 export const LOGIN_EMAIL_CODE_ERROR = 'app/Login/LOGIN_EMAIL_CODE_ERROR'

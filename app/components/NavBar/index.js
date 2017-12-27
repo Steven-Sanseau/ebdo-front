@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Col, Row } from 'react-styled-flexboxgrid'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 import { media } from 'global-styles'
 import { push } from 'react-router-redux'
@@ -66,15 +66,15 @@ const FlexWrap = styled.div`
 
   .withBorder {
     border-left: 1px solid var(--silver);
-  ${media.tablet`
-    border-right: ${props => (props.menuFixed ? 'none' : '1px solid var(--silver)')}; ;
+    ${media.tablet`
+    border-right: ${props =>
+      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
   `};
-    
   }
-  
+
   ${media.tablet`
     margin: ${props => (props.menuFixed ? '6px 0' : '30px')}; 0;
 `};
@@ -85,7 +85,6 @@ const Menu = styled.nav`
   ${media.tablet`
     margin-bottom: 30px;
   `};
-  
 `
 const Burger = styled(Col)`
   ${media.tablet`
@@ -129,8 +128,11 @@ class NavBar extends React.Component {
     menuFixed: false
   }
 
-  handleRoute = () => {
+  handleRouteSubscribe = () => {
     this.props.dispatch(push('abonnement'))
+  }
+  handleRouteTryit = () => {
+    this.props.dispatch(push('essai'))
   }
 
   handleStateChange(status) {
@@ -166,10 +168,12 @@ class NavBar extends React.Component {
           <Row between="sm">
             <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
               <Title menuFixed={menuFixed}>
-                <Logo
-                  width={menuFixed ? 65 : 150}
-                  height={menuFixed ? 25 : 56}
-                />
+                <Link to="/">
+                  <Logo
+                    width={menuFixed ? 65 : 150}
+                    height={menuFixed ? 25 : 56}
+                  />
+                </Link>
               </Title>
               <Subtitle menuFixed={menuFixed}>
                 À chaque époque <br /> son journal.
@@ -188,16 +192,23 @@ class NavBar extends React.Component {
                   <LinkBurger
                     color="--sunflower"
                     style={
-                      page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
+                      page === '/manifest' ? { color: 'var(--sunflower)' } : {}
                     }
                   >
-                    <Link to="#">Pourquoi ?</Link>
+                    <Link to="/manifest">Pourquoi ?</Link>
                   </LinkBurger>
                   <LinkBurger
-                    color="--topaz"
-                    style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                    color="--peacock-blue"
+                    style={
+                      page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                    }
                   >
-                    <Link to="#">La Fabrique</Link>
+                    <Link to="source">La source</Link>
+                  </LinkBurger>
+                  <LinkBurger color="--topaz">
+                    <a href="http://fabrique.ebdo-lejournal.com/">
+                      La Fabrique
+                    </a>
                   </LinkBurger>
                 </div>
               </Burger>
@@ -206,29 +217,27 @@ class NavBar extends React.Component {
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
-                  style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                  style={page === '/team' ? { color: 'var(--tomato)' } : {}}
                 >
-                  <NavLink
-                    to="team"
-                    activeStyle={{
-                      color: 'var(--tomato)'
-                    }}
-                  >
-                    L&apos;équipe
-                  </NavLink>
+                  <Link to="team">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === 'manifest' ? { color: 'var(--sunflower)' } : {}
+                    page === '/manifest' ? { color: 'var(--sunflower)' } : {}
                   }
                 >
                   <Link to="manifest">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
-                  color="--topaz"
-                  style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
+                  color="--peacock-blue"
+                  style={
+                    page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                  }
                 >
+                  <Link to="source">La Source</Link>
+                </LinkWrap>
+                <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash" className="withBorder">
@@ -237,14 +246,17 @@ class NavBar extends React.Component {
                 <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
                     minWidth="130px"
-                    handleRoute={this.handleRoute}
+                    handleRoute={this.handleRouteSubscribe}
                     color="--squash"
                   >
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
                 <LinkWrap style={menuFixed ? hidden : {}}>
-                  <Button handleRoute={this.handleRoute} color="--warm-purple">
+                  <Button
+                    handleRoute={this.handleRouteTryit}
+                    color="--warm-purple"
+                  >
                     J&apos;essaye
                   </Button>
                 </LinkWrap>

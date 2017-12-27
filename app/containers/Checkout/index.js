@@ -8,27 +8,19 @@ import { Elements } from 'react-stripe-elements'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import injectSaga from 'utils/injectSaga'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
-
-// SAGA
-import sagaOffer from 'saga/offer'
-import sagaCheckout from 'saga/checkout'
-import sagaToken from 'saga/token'
-import sagaAddress from 'saga/address'
-import sagaClient from 'saga/client'
+import { newCheckout } from 'actions/checkout'
 
 // CONTAINERS
-import FormulaStep from 'containers/FormulaStep/Loadable'
-import CountryStep from 'containers/CountryStep/Loadable'
-import EmailStep from 'containers/EmailStep/Loadable'
-import DeliveryStep from 'containers/DeliveryStep/Loadable'
-import PaymentStep from 'containers/PaymentStep/Loadable'
-import ConfirmStep from 'containers/ConfirmStep/Loadable'
+import FormulaStep from 'containers/Step/FormulaStep/Loadable'
+import CountryStep from 'containers/Step/CountryStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import PaymentStep from 'containers/Step/PaymentStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
@@ -44,7 +36,9 @@ export class Checkout extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  // componentDidMount() {}
+  componentDidMount() {
+    this.props.dispatchNewCheckout()
+  }
 
   nextStep() {
     this.props.nextStep()
@@ -144,6 +138,7 @@ export class Checkout extends React.Component {
 
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  dispatchNewCheckout: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
 }
@@ -155,23 +150,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
+    dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step))
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
-const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
-const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
-const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
-
-export default compose(
-  withSagaOffer,
-  withSagaToken,
-  withSagaCheckout,
-  withSagaAddress,
-  withSagaClient,
-  withConnect
-)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

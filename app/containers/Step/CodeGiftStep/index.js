@@ -1,24 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import emailRegex from 'email-regex'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
+import { postCheckout, setCgvConfirm } from 'actions/checkout'
 import {
-  makeSelectClientIsLoading,
-  makeSelectClientEmail,
-  makeSelectClientExist
-} from 'selectors/client'
-import { setClientEmail, postClient, useClientExist } from 'actions/client'
+  makeSelectCheckout,
+  makeSelectIsCGVChecked,
+  makeSelectIsCheckoutLoading
+} from 'selectors/checkout'
 
-import FormEmail from 'components/FormEmail'
+import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
-import TextSummary from 'components/LayoutStep/TextSummary'
-import BoldText from 'components/LayoutStep/BoldText'
+import FormGiftCode from 'components/FormGiftCode'
 
-class EmailStep extends React.Component {
+class CodeGiftStep extends React.Component {
   state = {
     errorEmail: false,
     errorMessage: ''
@@ -71,14 +69,13 @@ class EmailStep extends React.Component {
       }
     }
   }
-
   contentOpen() {
     const { errorEmail, errorMessage } = this.state
     const { email, clientExist } = this.props
 
     return (
       <div>
-        <FormEmail
+        <FormGiftCode
           handleEmail={this.handleEmail}
           errorEmail={errorEmail}
           errorMessage={errorMessage}
@@ -96,13 +93,7 @@ class EmailStep extends React.Component {
   }
 
   contentClose() {
-    const { email } = this.props
-    return (
-      <div>
-        Toutes les informations concernant mon abonnement seront envoyées à{' '}
-        <BoldText>{email}</BoldText>
-      </div>
-    )
+    return <div>Vous avez validé votre commande</div>
   }
 
   render() {
@@ -110,55 +101,51 @@ class EmailStep extends React.Component {
       currentStep,
       changeStep,
       stepNumber,
-      clientIsLoading,
-      clientExist
+      checkoutIsLoading
     } = this.props
 
     return (
       <ToggleStep
-        title="Je renseigne mon Email"
-        iconName="mail"
+        title="Je confirme mon abonnement"
         stepNumber={stepNumber}
+        iconName="check"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
-        isLoadingNextStep={clientIsLoading}
-        textButtonNextStep={clientExist ? 'Je continue !' : null}
-        colorButtonNextStep={clientExist ? '--squash' : '--booger'}
+        textButtonNextStep=">> Je m'abonne !"
+        isLoadingNextStep={checkoutIsLoading}
       />
     )
   }
 }
 
-EmailStep.propTypes = {
-  clientIsLoading: PropTypes.bool,
-  email: PropTypes.string,
+CodeGiftStep.propTypes = {
+  checkoutIsLoading: PropTypes.bool,
+  checkout: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchChangeEmail: PropTypes.func,
-  dispatchPostClient: PropTypes.func,
-  dispatchUseClientExist: PropTypes.func,
-  clientExist: PropTypes.bool
+  dispatchConfirmCheckout: PropTypes.func,
+  dispatchConfirmCGV: PropTypes.func,
+  isCGVAccepted: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  clientIsLoading: makeSelectClientIsLoading(),
-  clientExist: makeSelectClientExist(),
-  email: makeSelectClientEmail()
+  checkout: makeSelectCheckout(),
+  isCGVAccepted: makeSelectIsCGVChecked(),
+  checkoutIsLoading: makeSelectIsCheckoutLoading()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient()),
-    dispatchUseClientExist: () => dispatch(useClientExist())
+    dispatchConfirmCheckout: () => dispatch(postCheckout()),
+    dispatchConfirmCGV: () => dispatch(setCgvConfirm())
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(EmailStep)
+export default compose(withConnect)(CodeGiftStep)

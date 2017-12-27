@@ -188,9 +188,7 @@ const options3 = [
   }
 ]
 function NaturalFormOrder(props) {
-  const {
-    handleChange, target, time, price, switchUI, isNaturalForm
-  } = props
+  const { handleChange, target, time, price, switchUI, isNaturalForm } = props
 
   if (isNaturalForm) {
     return (
@@ -218,7 +216,7 @@ function NaturalFormOrder(props) {
           {time === '48' && <span>48 numéros</span>}
           {target === '0' && <span> chez moi </span>}
           {target === '1' && <span> à un proche </span>}
-          pour le prix de {' '}
+          pour le prix de{' '}
         </TextWrap>
         <DropdownWrap
           className="dropdown-wrap"

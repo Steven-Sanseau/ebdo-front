@@ -69,7 +69,7 @@ const Profile = styled(Col)`
 function ManifestPage(props) {
   return (
     <div>
-      <NavBar dispatch={props.dispatch} isFixed page="team" />
+      <NavBar dispatch={props.dispatch} isFixed page={props.page} />
       <IntroWrap>
         <Layout>
           <Row>
@@ -102,6 +102,6 @@ function ManifestPage(props) {
   )
 }
 
-ManifestPage.propTypes = { dispatch: PropTypes.func }
+ManifestPage.propTypes = { dispatch: PropTypes.func, page: PropTypes.string }
 
 export default ManifestPage

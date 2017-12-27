@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
+
+import { makeSelectPathName } from 'selectors/route'
+import { makeSelectOffer } from 'selectors/offer'
+import { setOfferParams } from 'actions/offer'
 
 import { ThemeProvider } from 'styled-components'
 import CookieBannerWrapper from 'components/CookieBanner'
-
 import HomePage from 'components/HomePage'
 
 const theme = {
@@ -20,7 +22,8 @@ const theme = {
 
 class Home extends React.Component {
   render() {
-    const { dispatch } = this.props
+    const { dispatch, page, dispatchSetOfferParams, offer } = this.props
+
     return (
       <div>
         <Helmet>
@@ -28,7 +31,12 @@ class Home extends React.Component {
           <meta name="description" content="Homepage Ebdo" />
         </Helmet>
         <ThemeProvider theme={theme}>
-          <HomePage dispatch={dispatch} />
+          <HomePage
+            dispatch={dispatch}
+            page={page}
+            dispatchSetOfferParams={dispatchSetOfferParams}
+            offer={offer}
+          />
         </ThemeProvider>
         <CookieBannerWrapper />
       </div>
@@ -37,17 +45,22 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  dispatchSetOfferParams: PropTypes.func,
+  offer: PropTypes.object,
+  page: PropTypes.string
 }
 
-const mapStateToProps = createStructuredSelector({})
+const mapStateToProps = createStructuredSelector({
+  page: makeSelectPathName(),
+  offer: makeSelectOffer()
+})
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatchSetOfferParams: params => dispatch(setOfferParams(params)),
     dispatch
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-export default compose(withConnect)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

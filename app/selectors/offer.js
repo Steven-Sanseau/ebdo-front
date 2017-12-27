@@ -7,6 +7,9 @@ const makeSelectOffer = () => createSelector(selectOffer, offer => offer.toJS())
 const makeSelectOfferData = () =>
   createSelector(selectOffer, offer => offer.get('data'))
 
+const makeSelectOfferIsGift = () =>
+  createSelector(selectOffer, offer => offer.get('data').get('is_gift'))
+
 const makeSelectOffersIsLoading = () =>
   createSelector(selectOffer, offer => offer.get('loading'))
 
@@ -21,5 +24,6 @@ export {
   makeSelectOfferData,
   makeSelectOffersIsLoading,
   makeSelectOfferErrorMessage,
+  makeSelectOfferIsGift,
   makeSelectOfferError
 }
