@@ -11,6 +11,7 @@ import { media } from 'global-styles'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 import TextBlock from 'components/TextBlock'
+import ColCustom from 'components/Grid/Col'
 
 import NewsletterContainer from 'containers/NewsletterContainer'
 import { Link } from 'react-router-dom'
@@ -138,13 +139,13 @@ function ManifestoBlock() {
         </Col>
       </SectionWrapper>
       <SectionWrapperBig>
-        <Col xs={12} sm={4}>
+        <ColCustom w={7} m={13}> 
           <TextBlock title="La Fabrique" colorTitle="--topaz">
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
             <LinkWrapper to="#">la Fabrique</LinkWrapper>.
           </TextBlock>
           <NewsletterContainer />
-        </Col>
+        </ColCustom>
         <Col xs={12} sm={7} smOffset={1}>
           <img src="fabrique.png" alt="la fabrique" width="100%" />
         </Col>

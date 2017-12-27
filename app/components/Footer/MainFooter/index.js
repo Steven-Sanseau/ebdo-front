@@ -15,6 +15,7 @@ import Image from 'components/Image'
 import SocialIcons from 'components/Icon/SocialIcons'
 import Logo from 'components/Icon/Logo'
 import { media } from 'global-styles'
+import ColCustom from 'components/Grid/Col'
 
 import '!file-loader?name=[name].[ext]!images/logos/6mois-white.png'
 import '!file-loader?name=[name].[ext]!images/logos/XXI.png'
@@ -33,6 +34,7 @@ const Layout = styled.div`
 `
 const MainFooterWrapper = styled.section`
   background-color: var(--warm-purple);
+  position: relative;
 `
 
 const NewsletterWrapper = styled.div`
@@ -68,8 +70,8 @@ const MobileWrapper = styled.div`
 const MainFooter = () => (
   <MainFooterWrapper>
     <Layout>
-      <Row>
-        <Col xs={12} sm={3}>
+      <Row between="sm">
+        <ColCustom w={5} m={13}>
           <Logo color="var(--white-true)" />
           <LogoWrapper>
             Par les créateurs de <br />
@@ -77,8 +79,8 @@ const MainFooter = () => (
             <EtWrapper>et</EtWrapper>
             <Image src="/6mois-white.png" alt="6 mois" height={22} />
           </LogoWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
             <TitleWithArrow text="Besoin d'aide ?" link="/" color="--topaz" />
             <TitleWithArrow
@@ -88,8 +90,8 @@ const MainFooter = () => (
             />
             <TitleWithArrow text="L'équipe" link="/team" color="--tomato" />
           </MobileWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
             <TitleWithArrow
               text="La source"
@@ -101,26 +103,27 @@ const MainFooter = () => (
               rejoignez-les !
             </Col>
           </MobileWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
             <TextBlock title="Réseaux sociaux" type="footer">
               Tous les jours, du contenu exclusif sur nos réseaux
             </TextBlock>
             <SocialIcons />
           </MobileWrapper>
-        </Col>
+        </ColCustom>
       </Row>
       <NewsletterWrapper>
-        <Row>
-          <Col xs={12} sm={3} smOffset={3}>
+        <Row between="sm">
+          <ColCustom w={5} m={13}></ColCustom>
+          <ColCustom w={5} m={13}>
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
                 Ebdo est présent dans plus de 10 000 kiosques en France.
                 N’hésitez pas à vous renseigner auprès de vos bureau de presse.
               </TextBlock>
             </MobileWrapper>
-          </Col>
+          </ColCustom>
           <NewsletterContainer type="footer" />
         </Row>
       </NewsletterWrapper>

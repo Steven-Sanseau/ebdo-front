@@ -11,6 +11,7 @@ import { media } from 'global-styles'
 
 import styled from 'styled-components'
 import TextBlock from 'components/TextBlock'
+import ColCustom from 'components/Grid/Col'
 
 const MobileWrapper = styled.div`
   ${media.tablet`
@@ -21,7 +22,7 @@ const MobileWrapper = styled.div`
 const NewsletterFooter = props => {
   const { children } = props
   return (
-    <Col xs={12} sm={6}>
+    <ColCustom w={11} m={13}>
       <MobileWrapper>
         <TextBlock title="Newsletter" type="footer">
           Inscrivez-vous pour ne rien manquer de nos actualités (nous ne vous
@@ -29,7 +30,7 @@ const NewsletterFooter = props => {
         </TextBlock>
         {children}
       </MobileWrapper>
-    </Col>
+    </ColCustom>
   )
 }
 

@@ -1,24 +1,4 @@
 @media (min-width: 769px) {
-  .columned {
-    position: relative;
-    width: calc(100% - 80px);
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .mobile-columned {
-    position: relative;
-    width: calc(100% - 20px) !important;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (min-width: 769px) {
   .w-1 {
     width: calc(100% / 23 * 1);
   }

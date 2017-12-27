@@ -6,6 +6,7 @@ import { media } from 'global-styles'
 
 import AboProposition from 'components/RecapAbo/AboProposition'
 import Image from 'components/Image'
+import ColCustom from 'components/Grid/Col'
 
 import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
 
@@ -15,22 +16,24 @@ const Layout = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 60px 0;
+  padding-bottom: 0;
 
   ${media.tablet`
     padding: 40px 0;
     border: none;
   `};
 `
-const ColStyled = styled(Col)`
+const ColStyled = styled(ColCustom)`
   ${media.tablet`
     order: 2;
   `};
 `
 const ImageWrapper = styled.div`
-  display: flex;
+  ${'' /* display: flex;
   align-content: center;
   justify-content: center;
-  margin-bottom: -60px;
+  margin-bottom: -60px; */}
+  margin-bottom: -94px;
 
   ${media.tablet`
     img {
@@ -42,13 +45,13 @@ const ImageWrapper = styled.div`
 
 const RecapAbo = props => (
   <Layout>
-    <Row>
-      <ColStyled xs={12} sm={3}>
+    <Row between="sm">
+      <ColStyled w={5} m={13}>
         <ImageWrapper>
-          <Image src="/0-couv.jpg" alt="Couv" width={200} height={284} />
+          <Image src="/0-couv.jpg" alt="Couv" width="100%" />
         </ImageWrapper>
       </ColStyled>
-      <Col xs={12} sm={3}>
+      <ColCustom w={5} m={13}>
         <AboProposition
           title="Vous voulez essayer ebdo ?"
           buttonText="Je commande"
@@ -58,8 +61,8 @@ const RecapAbo = props => (
         >
           Le prochain numéro chez vous, gratuitement.
         </AboProposition>
-      </Col>
-      <Col xs={12} sm={3}>
+      </ColCustom>
+      <ColCustom w={5} m={13}>
         <AboProposition
           title="Déjà convaincu ?"
           buttonText="Je m'abonne"
@@ -70,8 +73,8 @@ const RecapAbo = props => (
           Rejoignez notre communauté de lecteurs, et recevez ebdo chez vous tous
           les vendredi.
         </AboProposition>
-      </Col>
-      <Col xs={12} sm={3}>
+      </ColCustom>
+      <ColCustom w={5} m={13}>
         <AboProposition
           title="Déjà abonné ?"
           buttonText="La source"
@@ -82,7 +85,7 @@ const RecapAbo = props => (
           Accédez à La Source pour participer, gérer votre abonnement, offrir
           ebdo...
         </AboProposition>
-      </Col>
+      </ColCustom>
     </Row>
   </Layout>
 )
