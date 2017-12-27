@@ -23,12 +23,12 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import FormulaStep from 'containers/Checkout/FormulaStep/Loadable'
-import CountryStep from 'containers/Checkout/CountryStep/Loadable'
-import EmailStep from 'containers/Checkout/EmailStep/Loadable'
-import DeliveryStep from 'containers/Checkout/DeliveryStep/Loadable'
-import PaymentStep from 'containers/Checkout/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Checkout/ConfirmStep/Loadable'
+import FormulaStep from 'containers/Offer/FormulaStep/Loadable'
+import CountryStep from 'containers/Offer/CountryStep/Loadable'
+import EmailStep from 'containers/Offer/EmailStep/Loadable'
+import DeliveryStep from 'containers/Offer/DeliveryStep/Loadable'
+import PaymentStep from 'containers/Offer/PaymentStep/Loadable'
+import ConfirmStep from 'containers/Offer/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
@@ -36,7 +36,7 @@ import Layout from 'containers/Checkout/Layout'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
 
-export class Checkout extends React.Component {
+export class Offer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -142,7 +142,7 @@ export class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
+Offer.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
@@ -174,4 +174,4 @@ export default compose(
   withSagaAddress,
   withSagaClient,
   withConnect
-)(Checkout)
+)(Offer)

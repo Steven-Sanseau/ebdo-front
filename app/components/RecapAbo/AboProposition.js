@@ -1,13 +1,8 @@
-/**
- *
- * AboProposition
- *
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from 'global-styles'
+import { push } from 'react-router-redux'
 
 import Button from 'components/Button'
 
@@ -38,12 +33,12 @@ const Wrapper = styled.div`
 `
 
 const AboProposition = props => {
-  const {
-    to, buttonText, children, buttonColor, title
-  } = props
+  const { to, buttonText, children, buttonColor, title, dispatch } = props
+
   const handleRoute = () => {
-    console.log(to)
+    props.dispatch(push(to))
   }
+
   return (
     <Wrapper>
       <AboPropositionWrapper>
@@ -61,6 +56,7 @@ const AboProposition = props => {
 
 AboProposition.propTypes = {
   to: PropTypes.string,
+  dispatch: PropTypes.func,
   title: PropTypes.string,
   children: PropTypes.node,
   buttonText: PropTypes.string,

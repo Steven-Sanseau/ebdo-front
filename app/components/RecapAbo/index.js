@@ -1,10 +1,5 @@
-/**
- *
- * RecapAbo
- *
- */
-
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import styled from 'styled-components'
 import { media } from 'global-styles'
@@ -24,7 +19,7 @@ const Layout = styled.div`
   ${media.tablet`
     padding: 40px 0;
     border: none;
-  `}
+  `};
 `
 const ColStyled = styled(Col)`
   ${media.tablet`
@@ -45,7 +40,7 @@ const ImageWrapper = styled.div`
   `};
 `
 
-const RecapAbo = () => (
+const RecapAbo = props => (
   <Layout>
     <Row>
       <ColStyled xs={12} sm={3}>
@@ -58,7 +53,8 @@ const RecapAbo = () => (
           title="Vous voulez essayer ebdo ?"
           buttonText="Je commande"
           buttonColor="--warm-purple"
-          to="/checkout"
+          to="/essai"
+          dispatch={props.dispatch}
         >
           Le prochain numéro chez vous, gratuitement.
         </AboProposition>
@@ -68,7 +64,8 @@ const RecapAbo = () => (
           title="Déjà convaincu ?"
           buttonText="Je m'abonne"
           buttonColor="--squash"
-          to="/checkout"
+          to="/abonnement"
+          dispatch={props.dispatch}
         >
           Rejoignez notre communauté de lecteurs, et recevez ebdo chez vous tous
           les vendredi.
@@ -79,7 +76,8 @@ const RecapAbo = () => (
           title="Déjà abonné ?"
           buttonText="La source"
           buttonColor="--turquoise-blue"
-          to="/checkout"
+          to="/login"
+          dispatch={props.dispatch}
         >
           Accédez à La Source pour participer, gérer votre abonnement, offrir
           ebdo...
@@ -89,6 +87,8 @@ const RecapAbo = () => (
   </Layout>
 )
 
-RecapAbo.propTypes = {}
+RecapAbo.propTypes = {
+  dispatch: PropTypes.func
+}
 
 export default RecapAbo

@@ -23,20 +23,18 @@ import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import FormulaStep from 'containers/Checkout/FormulaStep/Loadable'
-import CountryStep from 'containers/Checkout/CountryStep/Loadable'
-import EmailStep from 'containers/Checkout/EmailStep/Loadable'
-import DeliveryStep from 'containers/Checkout/DeliveryStep/Loadable'
-import PaymentStep from 'containers/Checkout/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Checkout/ConfirmStep/Loadable'
+import CodeGiftStep from 'containers/Gift/CodeGiftStep/Loadable'
+import EmailStep from 'containers/Gift/EmailStep/Loadable'
+import DeliveryStep from 'containers/Gift/DeliveryStep/Loadable'
+import ConfirmStep from 'containers/Gift/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
-import Layout from 'containers/Checkout/Layout'
+import Layout from 'containers/Gift/Layout'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
 
-export class Checkout extends React.Component {
+export class Gift extends React.Component {
   constructor(props) {
     super(props)
 
@@ -142,7 +140,7 @@ export class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
+Gift.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
@@ -174,4 +172,4 @@ export default compose(
   withSagaAddress,
   withSagaClient,
   withConnect
-)(Checkout)
+)(Gift)

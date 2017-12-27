@@ -29,7 +29,7 @@ const Layout = styled.div`
 
   ${media.tablet`
     padding: 40px 0;
-  `}
+  `};
 `
 const MainFooterWrapper = styled.section`
   background-color: var(--warm-purple);
@@ -40,7 +40,7 @@ const NewsletterWrapper = styled.div`
 
   ${media.tablet`
     margin-top: 0;
-  `}
+  `};
 `
 
 const LogoWrapper = styled.div`
@@ -49,7 +49,7 @@ const LogoWrapper = styled.div`
   ${media.tablet`
     padding-bottom: 35px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  `}
+  `};
 `
 const EtWrapper = styled.span`
   margin-top: 10px;
@@ -62,7 +62,7 @@ const MobileWrapper = styled.div`
     padding-bottom: 35px;
     padding-top: 35px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  `}
+  `};
 `
 
 const MainFooter = () => (
@@ -80,14 +80,22 @@ const MainFooter = () => (
         </Col>
         <Col xs={12} sm={3}>
           <MobileWrapper>
-            <TitleWithArrow text="Besoin d'aide ?" color="--topaz" />
-            <TitleWithArrow text="Manifeste" color="--sunflower" />
-            <TitleWithArrow text="L'équipe" color="--tomato" />
+            <TitleWithArrow text="Besoin d'aide ?" link="/" color="--topaz" />
+            <TitleWithArrow
+              text="Manifeste"
+              link="/manifest"
+              color="--sunflower"
+            />
+            <TitleWithArrow text="L'équipe" link="/team" color="--tomato" />
           </MobileWrapper>
         </Col>
         <Col xs={12} sm={3}>
           <MobileWrapper>
-            <TitleWithArrow text="La source" color="--turquoise-blue" />
+            <TitleWithArrow
+              text="La source"
+              link="/source"
+              color="--turquoise-blue"
+            />
             <Col xs={12} sm={8}>
               Des centaines d’abonnés ont déjà contribué à la source,
               rejoignez-les !

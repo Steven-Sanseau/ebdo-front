@@ -16,27 +16,22 @@ import { makeSelectStep } from 'selectors/step'
 import { nextStep, goToStep } from 'actions/step'
 
 // SAGA
-import sagaOffer from 'saga/offer'
-import sagaCheckout from 'saga/checkout'
-import sagaToken from 'saga/token'
 import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
 
 // CONTAINERS
-import FormulaStep from 'containers/Checkout/FormulaStep/Loadable'
-import CountryStep from 'containers/Checkout/CountryStep/Loadable'
-import EmailStep from 'containers/Checkout/EmailStep/Loadable'
-import DeliveryStep from 'containers/Checkout/DeliveryStep/Loadable'
-import PaymentStep from 'containers/Checkout/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Checkout/ConfirmStep/Loadable'
+import EmailConfirmStep from 'containers/Tryit/EmailConfirmStep/Loadable'
+import EmailStep from 'containers/Tryit/EmailStep/Loadable'
+import DeliveryStep from 'containers/Tryit/DeliveryStep/Loadable'
+import ConfirmStep from 'containers/Tryit/ConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
-import Layout from 'containers/Checkout/Layout'
+import Layout from 'containers/Tryit/Layout'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
 
-export class Checkout extends React.Component {
+export class Tryit extends React.Component {
   constructor(props) {
     super(props)
 
@@ -75,17 +70,7 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <FormulaStep
-                stepNumber={1}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CountryStep
+              <EmailStep
                 stepNumber={2}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
@@ -95,12 +80,14 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <EmailStep
-                stepNumber={3}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
+              <Elements>
+                <EmailConfirmStep
+                  stepNumber={3}
+                  changeStep={this.changeStep}
+                  nextStep={this.nextStep}
+                  currentStep={step}
+                />
+              </Elements>
             </Col>
           </Row>
           <Row>
@@ -115,20 +102,8 @@ export class Checkout extends React.Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <Elements>
-                <PaymentStep
-                  stepNumber={5}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
               <ConfirmStep
-                stepNumber={6}
+                stepNumber={5}
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
@@ -142,7 +117,7 @@ export class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
+Tryit.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
@@ -161,17 +136,7 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
-const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
-const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
 const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
 
-export default compose(
-  withSagaOffer,
-  withSagaToken,
-  withSagaCheckout,
-  withSagaAddress,
-  withSagaClient,
-  withConnect
-)(Checkout)
+export default compose(withSagaAddress, withSagaClient, withConnect)(Tryit)

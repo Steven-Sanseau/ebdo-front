@@ -66,7 +66,7 @@ function ManifestoBlock() {
             </span>, favoriser les forces créatives de la société française,
             dans toutes les couches sociales et tous les territoires. <br />
             <br />
-            <LinkWrapper to="#">Découvrir l&apos;équipe</LinkWrapper>
+            <LinkWrapper to="/team">Découvrir l&apos;équipe</LinkWrapper>
           </TextBlock>
         </Col>
         <Col xs={12} sm={3}>
@@ -106,7 +106,7 @@ function ManifestoBlock() {
             <span>Ils sont au même niveau que l&apos;équipe,</span> sans eux
             nous ne sommes rien : nos abonnés, ceux qui nous hébergent, ceux qui
             nous irriguent de leur idées{' '}
-            <LinkWrapper to="#">via La Source</LinkWrapper>, ceux qui nous
+            <LinkWrapper to="/login">via La Source</LinkWrapper>, ceux qui nous
             rencontrent lors de nos événements, ceux qui participent à faire
             connaître <strong>ebdo</strong>, ceux qui sont heureux de lire{' '}
             <strong>ebdo</strong> tout simplement.
@@ -133,7 +133,7 @@ function ManifestoBlock() {
             Mais au lieu de nous donner des clés de compréhension, l’information
             nous noie (…)<br />
             <br />
-            <LinkWrapper to="#">Lire la suite du Manifeste</LinkWrapper>
+            <LinkWrapper to="/manifest">Lire la suite du Manifeste</LinkWrapper>
           </TextBlock>
         </Col>
       </SectionWrapper>

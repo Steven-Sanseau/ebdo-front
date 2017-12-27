@@ -96,7 +96,7 @@ function HomePage(props) {
         </Col>
       </ProgressWrap>
       <ManifestoBlock />
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </Grid>
   )
 }
