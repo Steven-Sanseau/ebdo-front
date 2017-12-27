@@ -1,51 +1,51 @@
-.dropdown-wrap > .Dropdown-control p {
+.dropdown-wrap.Dropdown-control p {
   display: none;
 }
-.dropdown-wrap > .Dropdown-root {
+.dropdown-wrap.Dropdown-root {
   position: relative;
 }
-.dropdown-wrap > .Dropdown-control h3 {
+.dropdown-wrap.Dropdown-control h3 {
   line-height: 70px;
   margin: 0;
   font-weight: 500;
 }
 
-.dropdown-wrap > .Dropdown-root.is-open {
+.dropdown-wrap.Dropdown-root.is-open {
   border-style: solid;
   border-color: transparent;
   /* position: absolute; */
   z-index: 10;
   background-color: white;
 }
-.dropdown-wrap > .Dropdown-root sup {
+.dropdown-wrap.Dropdown-root sup {
   top: -0.7em;
   font-size: 50%;
 }
-.dropdown-wrap > .Dropdown-root.is-open .Dropdown-control {
+.dropdown-wrap.Dropdown-root.is-open .Dropdown-control {
   /* display: none; */
   visibility: hidden;
 }
-.dropdown-wrap > .Dropdown-root.is-open .Dropdown-menu {
+.dropdown-wrap.Dropdown-root.is-open .Dropdown-menu {
   position: absolute;
 }
-.dropdown-wrap > .Dropdown-menu {
+.dropdown-wrap.Dropdown-menu {
   padding: 30px;
   letter-spacing: 0;
 }
-.dropdown-wrap > .Dropdown-menu .valueWrap h3 {
+.dropdown-wrap.Dropdown-menu .valueWrap h3 {
   font-size: 22px;
 }
 
-.dropdown-wrap > .Dropdown-option:not(.is-selected) .valueWrap h3 {
+.dropdown-wrap.Dropdown-option:not(.is-selected) .valueWrap h3 {
   color: #d4dadd;
 }
-.dropdown-wrap > .Dropdown-option:not(:last-of-type) {
+.dropdown-wrap.Dropdown-option:not(:last-of-type) {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #d4dadd;
 }
 
-.dropdown-wrap > .Dropdown-root:not(.is-open):after {
+.dropdown-wrap.Dropdown-root:not(.is-open):after {
   content: '';
   display: block;
   border: 9px solid transparent;
@@ -54,6 +54,6 @@
   right: 20px;
   top: 50%;
 }
-.dropdown-wrap > .Dropdown-root:not(.is-open):hover:after {
+.dropdown-wrap.Dropdown-root:not(.is-open):hover:after {
   border-top-color: white;
 }
