@@ -114,10 +114,10 @@ function ManifestoBlock() {
         </Col>
       </SectionWrapperBig>
       <SectionWrapper>
-        <Col xs={12} sm={6}>
+        <Col xs={12} sm={7}>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
         </Col>
-        <Col xs={12} sm={5} smOffset={1}>
+        <Col xs={12} sm={4} smOffset={1}>
           <TextBlock
             title="Un journal qui se construit ensemble..."
             colorTitle="--sunflower"
@@ -145,7 +145,7 @@ function ManifestoBlock() {
           </TextBlock>
           <NewsletterContainer />
         </Col>
-        <Col xs={12} sm={6} smOffset={1}>
+        <Col xs={12} sm={7} smOffset={1}>
           <img src="fabrique.png" alt="la fabrique" width="100%" />
         </Col>
       </SectionWrapperBig>
