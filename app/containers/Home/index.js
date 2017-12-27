@@ -23,7 +23,7 @@ const theme = {
 class Home extends React.Component {
   render() {
     const { dispatch, page, dispatchSetOfferParams, offer } = this.props
-    console.log(offer)
+
     return (
       <div>
         <Helmet>

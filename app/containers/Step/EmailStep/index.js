@@ -87,8 +87,8 @@ class EmailStep extends React.Component {
         />
         {clientExist && (
           <div>
-            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
-            vouloir passer une nouvelle commande ?
+            <BoldText>Votre adresse est déjà enregistrée chez nous.</BoldText>
+            Etes vous sûr de vouloir passer une nouvelle commande ?
           </div>
         )}
       </div>
