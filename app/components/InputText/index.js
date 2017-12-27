@@ -28,7 +28,7 @@ class InputText extends React.Component {
                 onChange={this.props.onChange || null}
                 placeholder={this.props.placeholder || ''}
                 ref={this.props.reference || null}
-                type="text"
+                type={this.props.type || 'text'}
                 value={this.props.value || ''}
                 disabled={this.props.disabled || false}
                 autocomplete="false"
@@ -57,6 +57,7 @@ InputText.propTypes = {
   id: PropTypes.string,
   isRequired: PropTypes.bool,
   label: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,

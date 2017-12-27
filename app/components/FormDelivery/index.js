@@ -91,6 +91,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Téléphone"
                     name="phone"
+                    type="tel"
                     value={this.props.address.phone}
                     onChange={this.handleChange}
                     placeholder="Votre numéro de téléphone"
@@ -126,6 +127,7 @@ class FormDelivery extends React.Component {
                     label="Code Postal"
                     name="postal_code"
                     isRequired
+                    type="number"
                     value={this.props.address.postal_code}
                     onChange={this.handleChange}
                     placeholder="00000"
