@@ -13,7 +13,8 @@ import {
   POST_SUBSCRIPTION,
   POST_SUBSCRIPTION_LOADED,
   POST_SUBSCRIPTION_ERROR,
-  NEW_CHECKOUT
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -62,6 +63,8 @@ function checkoutReducer(state = initialState, action) {
         .set('error', true)
         .set('errorMessage', action.error)
     case NEW_CHECKOUT:
+      return initialState
+    case NEW_CHECKOUT_TRY:
       return initialState
     default:
       return state

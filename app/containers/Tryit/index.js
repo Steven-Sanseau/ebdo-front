@@ -6,11 +6,8 @@ import { Row, Col } from 'react-flexbox-grid'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-
-// SELECTOR
 import { makeSelectStep } from 'selectors/step'
-import { nextStep, goToStep } from 'actions/step'
-import { newCheckout } from 'actions/checkout'
+import { newCheckoutTry } from 'actions/checkout'
 
 // CONTAINERS
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
@@ -40,7 +37,7 @@ export class Tryit extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchNewCheckout()
+    this.props.dispatchNewCheckoutTry()
   }
 
   nextStep() {
@@ -142,7 +139,7 @@ export class Tryit extends React.Component {
 
 Tryit.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  dispatchNewCheckout: PropTypes.func,
+  dispatchNewCheckoutTry: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func
 }
@@ -154,7 +151,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
-    dispatchNewCheckout: () => dispatch(newCheckout()),
+    dispatchNewCheckoutTry: () => dispatch(newCheckoutTry()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

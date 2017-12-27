@@ -35,7 +35,7 @@ function* getOffer() {
 
 function* redirectCheckout() {
   const isGift = yield select(makeSelectOfferIsGift())
-  console.log(isGift)
+
   if (isGift) {
     yield put(push('/offre'))
   }

@@ -9,7 +9,8 @@ import {
   POST_TOKEN_ERROR,
   SET_TOKEN_STRIPE_ERROR,
   SET_PAYMENT_METHOD,
-  NEW_CHECKOUT
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -56,6 +57,8 @@ function tokenReducer(state = initialState, action) {
         action.method === 2 ? 'stripe' : 'sepa'
       )
     case NEW_CHECKOUT:
+      return initialState
+    case NEW_CHECKOUT_TRY:
       return initialState
     default:
       return state

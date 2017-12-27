@@ -12,16 +12,16 @@ import { Link as LinkRouter } from 'react-router-dom'
 
 const Title = styled(LinkRouter)`
   font-size: 18px;
-  color: white;
+  color: var(${props => props.textColor});
   font-weight: bold;
   margin-bottom: 20px;
   text-decoration: none;
   display: block;
 `
 const TitleWithArrow = props => {
-  const { text, color } = props
+  const { text, color, textColor } = props
   return (
-    <Title to={props.link || '#'}>
+    <Title textColor={textColor} to={props.link || '#'}>
       {text}
       <ArrowRight color={color} />
     </Title>
@@ -30,8 +30,10 @@ const TitleWithArrow = props => {
 
 TitleWithArrow.propTypes = {
   text: PropTypes.string,
+  textColor: PropTypes.string,
   link: PropTypes.string,
   color: PropTypes.string
 }
+TitleWithArrow.defaultProps = { textColor: '--white-true' }
 
 export default TitleWithArrow

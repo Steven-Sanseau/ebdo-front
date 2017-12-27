@@ -9,7 +9,8 @@ import {
   SET_ADRESS,
   SET_ADRESS_EQUAL,
   SET_COUNTRY_ADRESS,
-  NEW_CHECKOUT
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -75,6 +76,8 @@ function addressReducer(state = initialState, action) {
         .set('country', Immutable.fromJS(action.payload.country))
     }
     case NEW_CHECKOUT:
+      return initialState
+    case NEW_CHECKOUT_TRY:
       return initialState
     default:
       return state
