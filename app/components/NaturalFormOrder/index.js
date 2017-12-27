@@ -94,7 +94,7 @@ const options1 = [
   {
     value: '0',
     label: valueElem(
-      'je reçois',
+      'Je reçois',
       <span>
         <strong>ebdo</strong> chez moi
       </span>
@@ -103,7 +103,7 @@ const options1 = [
   {
     value: '1',
     label: valueElem(
-      "j'offre",
+      "J'offre",
       <span>
         <strong>ebdo</strong> à un proche
       </span>
@@ -114,28 +114,28 @@ const options2 = [
   {
     value: '0',
     label: valueElem(
-      'Chaque mois',
+      'chaque mois',
       <span>Sans engagement, je pourrais me désengager en un clic !</span>
     )
   },
   {
     value: '12',
     label: valueElem(
-      'Pendant 3 mois',
+      'pendant 3 mois',
       <span>Régler maintenant et recevez 12 numéros.</span>
     )
   },
   {
     value: '24',
     label: valueElem(
-      'Pendant 6 mois',
+      'pendant 6 mois',
       <span>Régler maintenant et recevez 24 numéros.</span>
     )
   },
   {
     value: '48',
     label: valueElem(
-      'Pendant 12 mois',
+      'pendant 12 mois',
       <span>Régler maintenant et recevez 48 numéros.</span>
     )
   }
@@ -195,18 +195,18 @@ function NaturalFormOrder(props) {
       <div>
         <DropdownWrap
           className="dropdown-wrap"
-          options={options2}
-          value={options2.find(el => el.value === String(time))}
-          color="--topaz"
-          onChange={handleChange.bind(this, 'duration')}
-        />
-
-        <DropdownWrap
-          className="dropdown-wrap"
           options={options1}
           value={options1.find(el => el.value === (target ? '1' : '0'))}
           color="--warm-purple"
           onChange={handleChange.bind(this, 'is_gift')}
+        />
+
+        <DropdownWrap
+          className="dropdown-wrap"
+          options={options2}
+          value={options2.find(el => el.value === String(time))}
+          color="--topaz"
+          onChange={handleChange.bind(this, 'duration')}
         />
 
         <TextWrap>

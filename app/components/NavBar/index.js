@@ -12,8 +12,8 @@ import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
 const LinkWrap = styled.div`
-  flex: 1;
   text-align: center;
+  margin-right: 30px;
   color: var(--cool-grey);
   a {
     color: inherit;
@@ -66,9 +66,10 @@ const FlexWrap = styled.div`
 
   .withBorder {
     border-left: 1px solid var(--silver);
+    padding-left: 30px;
     ${media.tablet`
     border-right: ${props =>
-      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
+    props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
@@ -166,7 +167,7 @@ class NavBar extends React.Component {
           style={menuFixed ? menuFixedStyle : menuStyle}
         >
           <Row between="sm">
-            <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
+            <Col>
               <Title menuFixed={menuFixed}>
                 <Link to="/">
                   <Logo
@@ -185,17 +186,17 @@ class NavBar extends React.Component {
                 <div className="narrowLinks">
                   <LinkBurger
                     color="--tomato"
-                    style={page === 'team' ? { color: 'var(--tomato)' } : {}}
+                    style={page === 'equipe' ? { color: 'var(--tomato)' } : {}}
                   >
-                    <Link to="team">L&apos;équipe</Link>
+                    <Link to="/equipe">L&apos;équipe</Link>
                   </LinkBurger>
                   <LinkBurger
                     color="--sunflower"
                     style={
-                      page === '/manifest' ? { color: 'var(--sunflower)' } : {}
+                      page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                     }
                   >
-                    <Link to="/manifest">Pourquoi ?</Link>
+                    <Link to="/manifeste">Pourquoi ?</Link>
                   </LinkBurger>
                   <LinkBurger
                     color="--peacock-blue"
@@ -213,21 +214,21 @@ class NavBar extends React.Component {
                 </div>
               </Burger>
             </Col>
-            <Col xs={menuFixed ? 9 : 12} sm={menuFixed ? 8 : 7}>
+            <Col>
               <FlexWrap menuFixed={menuFixed}>
                 <LinkWrap
                   color="--tomato"
-                  style={page === '/team' ? { color: 'var(--tomato)' } : {}}
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}
                 >
-                  <Link to="team">L&apos;équipe</Link>
+                  <Link to="/equipe">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === '/manifest' ? { color: 'var(--sunflower)' } : {}
+                    page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                   }
                 >
-                  <Link to="manifest">Pourquoi ?</Link>
+                  <Link to="/manifeste">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--peacock-blue"
@@ -235,13 +236,13 @@ class NavBar extends React.Component {
                     page === '/source' ? { color: 'var(--peacock-blue)' } : {}
                   }
                 >
-                  <Link to="source">La Source</Link>
+                  <Link to="/source">La Source</Link>
                 </LinkWrap>
                 <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
                 <LinkWrapMobile color="--squash" className="withBorder">
-                  <Link to="login">Connexion</Link>
+                  <Link to="/connexion">Connexion</Link>
                 </LinkWrapMobile>
                 <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
@@ -252,14 +253,14 @@ class NavBar extends React.Component {
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <LinkWrap style={menuFixed ? hidden : {}}>
+                <div style={menuFixed ? hidden : {}}>
                   <Button
                     handleRoute={this.handleRouteTryit}
                     color="--warm-purple"
                   >
                     J&apos;essaye
                   </Button>
-                </LinkWrap>
+                </div>
               </FlexWrap>
             </Col>
           </Row>

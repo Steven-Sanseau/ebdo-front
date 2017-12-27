@@ -9,6 +9,7 @@ import NavBar from 'components/NavBar'
 import ProgressContainer from 'containers/ProgressContainer'
 import ManifestoBlock from 'components/ManifestoBlock'
 import HomeLanding from 'components/HomeLanding'
+import ColCustom from 'components/Grid/Col'
 
 import { NaturalFormOrderContainer } from 'containers/NaturalFormOrderContainer'
 import '!file-loader?name=[name].[ext]!../../images/home/abo-illu.png'
@@ -80,17 +81,19 @@ function HomePage(props) {
               information indépendante, un journal sans pub et sans compromis.
             </TextWrap>
           </Col>
-          <Col xs={12} sm={4}>
-            <ImageWrap>
-              <img src="abo-illu.png" alt="abo illustration" width="100%" />
-            </ImageWrap>
-          </Col>
-          <Col xs={12} sm={7} smOffset={1}>
-            <NaturalFormOrderContainer
-              dispatchSetOfferParams={props.dispatchSetOfferParams}
-              offer={props.offer}
-            />
-          </Col>
+          <Row between="sm">
+            <ColCustom w={8}>
+              <ImageWrap>
+                <img src="abo-illu.png" alt="abo illustration" width="100%" />
+              </ImageWrap>
+            </ColCustom>
+            <ColCustom w={14}>
+              <NaturalFormOrderContainer
+                dispatchSetOfferParams={props.dispatchSetOfferParams}
+                offer={props.offer}
+              />
+            </ColCustom>
+          </Row>
         </Row>
       </Layout>
       <ProgressWrap>

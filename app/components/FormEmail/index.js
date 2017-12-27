@@ -16,6 +16,7 @@ function FormEmail(props) {
                   error={props.errorEmail}
                   label="Email"
                   name="email"
+                  type="email"
                   value={props.email}
                   onChange={props.handleEmail}
                   placeholder="monemail@gmail.com"

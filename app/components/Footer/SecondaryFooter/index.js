@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import Link from 'components/Link'
 import { media } from 'global-styles'
+import ColCustom from 'components/Grid/Col'
 
 const Layout = styled.div`
   width: calc(100% - 80px);
@@ -39,11 +40,13 @@ const LinkWrapper = styled.div`
 const SecondaryFooter = () => (
   <SecondaryFooterWrapper>
     <Layout>
-      <Row>
-        <Col smOffset={3} xs={12} sm={3}>
+      <Row between="sm">
+        <ColCustom w={5} m={13}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <Title>Mentions légales</Title>
-        </Col>
-        <Col xs={12} sm={6}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <LinkWrapper>
             <Title>Contacter la rédaction</Title>
             <Link to="mailto:redaction@ebdo-lejournal.com">
@@ -56,7 +59,9 @@ const SecondaryFooter = () => (
               service-lecteurs@ebdo-lejournal.com
             </Link>
           </LinkWrapper>
-        </Col>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
+        </ColCustom>
       </Row>
     </Layout>
   </SecondaryFooterWrapper>
