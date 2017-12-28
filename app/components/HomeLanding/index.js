@@ -70,7 +70,6 @@ const Discover = styled.div`
 const Layout = styled.div`
   width: calc(100% - 80px);
   max-width: 1200px;
-  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
