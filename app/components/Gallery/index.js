@@ -9,6 +9,8 @@ import Lightbox from 'react-images'
 import styled from 'styled-components'
 import { media } from 'global-styles'
 
+import 'components/Gallery/Gallery.css'
+
 import '!file-loader?name=[name].[ext]!images/numero-0/1-sommaire-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/2-infographie-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/3-RER-HD.jpg'

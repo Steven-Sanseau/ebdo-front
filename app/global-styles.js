@@ -46,6 +46,10 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
   }
+  
+  .hidden {
+    display: none;
+  }
 
     :root {
       --warm-grey: #979797;

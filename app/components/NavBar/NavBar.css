@@ -1,3 +1,7 @@
+.sticky-outer-wrapper {
+  position: absolute;
+  width: 100%;
+}
 nav .hamburger {
   background: #D4DADD;
   width: 23px;
