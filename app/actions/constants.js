@@ -25,6 +25,8 @@ export const GET_OFFERS_LIST = 'app/Checkout/offer/GET_OFFERS_LIST'
 export const GET_OFFER_LOADED = 'app/Checkout/offer/GET_OFFER_LOADED'
 export const GET_OFFER_ERROR = 'app/Checkout/offer/GET_OFFER_ERROR'
 export const GET_OFFER = 'app/Checkout/offer/GET_OFFER'
+export const SET_COUNTRY_ADRESS_OFFER_VALID =
+  'app/Checkout/offer/SET_COUNTRY_ADRESS_OFFER_VALID'
 
 export const POST_TOKEN = 'app/Checkout/token/POST_TOKEN'
 export const POST_TOKEN_ERROR = 'app/Checkout/token/POST_TOKEN_ERROR'

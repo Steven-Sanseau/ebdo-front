@@ -4,12 +4,23 @@ import request from 'utils/request'
 
 import { push } from 'react-router-redux'
 
-import { GET_OFFER, SET_OFFER_PARAMS, NEW_CHECKOUT } from 'actions/constants'
+import {
+  GET_OFFER,
+  SET_OFFER_PARAMS,
+  NEW_CHECKOUT,
+  SET_COUNTRY_ADRESS,
+  SET_PAYMENT_METHOD,
+  SET_COUNTRY_ADRESS_OFFER_VALID
+} from 'actions/constants'
 import { getOfferError, getOfferLoaded } from 'actions/offer'
 import { nextStep } from 'actions/step'
-import { makeSelectOffer, makeSelectOfferIsGift } from 'selectors/offer'
+import {
+  makeSelectOffer,
+  makeSelectOfferIsGift,
+  makeSelectOfferError
+} from 'selectors/offer'
 
-function* getOffer() {
+function* getOffer(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/offer`
   const method = 'GET'
   const offer = yield select(makeSelectOffer())
@@ -18,7 +29,9 @@ function* getOffer() {
     if (offer) {
       paramsApiUrl = `${paramsApiUrl}/${offer.data.duration}/${
         offer.data.monthly_price_ttc
-      }/${offer.data.is_gift}`
+      }/${offer.data.is_gift}/${offer.data.country_shipping}/${
+        offer.data.payment_method
+      }`
     }
     const offersResponse = yield call(request, paramsApiUrl, {
       method,
@@ -27,7 +40,9 @@ function* getOffer() {
       }
     })
     yield put(getOfferLoaded(offersResponse.offer))
-    yield put(nextStep())
+    if (action.type === GET_OFFER) {
+      yield put(nextStep())
+    }
   } catch (err) {
     yield put(getOfferError(err.message))
   }
@@ -44,8 +59,18 @@ function* redirectCheckout() {
   }
 }
 
+function* nextStepSaga() {
+  const offerError = yield select(makeSelectOfferError())
+  if (!offerError) {
+    yield put(nextStep())
+  }
+}
+
 export default function* sagaOffer() {
+  yield takeEvery(SET_COUNTRY_ADRESS, getOffer)
+  yield takeEvery(SET_PAYMENT_METHOD, getOffer)
   yield takeEvery(GET_OFFER, getOffer)
   yield takeEvery(SET_OFFER_PARAMS, redirectCheckout)
   yield takeEvery(NEW_CHECKOUT, redirectCheckout)
+  yield takeEvery(SET_COUNTRY_ADRESS_OFFER_VALID, nextStepSaga)
 }

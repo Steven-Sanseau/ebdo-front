@@ -6,7 +6,12 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
 import { setCountryAddress } from 'actions/address'
+import { setCountryAddressOfferValid } from 'actions/offer'
 import { makeSelectAddressCountry } from 'selectors/address'
+import {
+  makeSelectOfferError,
+  makeSelectOfferErrorMessage
+} from 'selectors/offer'
 
 import FormCountry from 'components/FormCountry'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -39,12 +44,12 @@ class CountryStep extends React.Component {
   }
 
   handleSubmit() {
-    this.props.nextStep()
+    this.props.dispatchValidCountry()
   }
 
   contentOpen() {
     const { countryList } = this.state
-    const { country } = this.props
+    const { country, offerError, offerErrorMessage } = this.props
 
     return (
       <div>
@@ -65,6 +70,13 @@ class CountryStep extends React.Component {
             La livraison en {country.label} ajoute 6€ de frais de livraison tous
             les mois. Ce changement a été appliqué à votre panier.
           </TextSummary>
+        )}
+        {offerError && (
+          <div>
+            Cette offre n'est pas disponible pour le moment, Veuillez choisir
+            une autre formule
+            {offerErrorMessage}
+          </div>
         )}
       </div>
     )
@@ -107,9 +119,11 @@ CountryStep.propTypes = {
   country: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
-  nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchCountryAddress: PropTypes.func
+  dispatchCountryAddress: PropTypes.func,
+  dispatchValidCountry: PropTypes.func,
+  offerError: PropTypes.bool,
+  offerErrorMessage: PropTypes.string
 }
 
 CountryStep.defaultProps = {
@@ -117,12 +131,15 @@ CountryStep.defaultProps = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  country: makeSelectAddressCountry()
+  country: makeSelectAddressCountry(),
+  offerError: makeSelectOfferError(),
+  offerErrorMessage: makeSelectOfferErrorMessage()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchCountryAddress: country => dispatch(setCountryAddress(country))
+    dispatchCountryAddress: country => dispatch(setCountryAddress(country)),
+    dispatchValidCountry: () => dispatch(setCountryAddressOfferValid())
   }
 }
 

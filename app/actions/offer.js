@@ -1,10 +1,12 @@
+import { EventTypes } from 'redux-segment'
+
 import {
   SET_OFFER_PARAMS,
   GET_OFFER,
   GET_OFFER_LOADED,
-  GET_OFFER_ERROR
+  GET_OFFER_ERROR,
+  SET_COUNTRY_ADRESS_OFFER_VALID
 } from './constants'
-import { EventTypes } from 'redux-segment'
 
 export function setOfferParams(params) {
   return {
@@ -40,4 +42,8 @@ export function getOfferError(error) {
 
 export function getoffer() {
   return { type: GET_OFFER }
+}
+
+export function setCountryAddressOfferValid() {
+  return { type: SET_COUNTRY_ADRESS_OFFER_VALID }
 }

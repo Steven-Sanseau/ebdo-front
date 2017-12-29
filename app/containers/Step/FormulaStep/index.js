@@ -141,11 +141,30 @@ class FormulaStep extends React.Component {
               <BlueText>
                 {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
               </BlueText>
+              <br />
+              <BigBoldText>
+                soit{' '}
+                {offer.data.monthly_price_ttc + offer.data.shipping_cost * 4}
+                {'€'}
+                /mois au total
+              </BigBoldText>
             </TextFormulae>
-            <DeliveryText>
-              Les frais de livraison en France (Métropolitaine et outre-mer)
-              sont inclus.
-            </DeliveryText>
+            {offer.data.country_shipping === 'FR' && (
+              <DeliveryText>
+                Les frais de livraison en France (Métropolitaine et outre-mer)
+                sont inclus.
+              </DeliveryText>
+            )}
+            {offer.data.country_shipping === 'LU' && (
+              <DeliveryText>
+                Les frais de livraison au Luxembourg sont de 2€ par numéro.
+              </DeliveryText>
+            )}
+            {offer.data.country_shipping === 'BE' && (
+              <DeliveryText>
+                Les frais de livraison en Belgique sont de 1,5€ par numéro.
+              </DeliveryText>
+            )}
             <NextStep>
               <Button
                 border
