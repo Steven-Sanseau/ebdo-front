@@ -1,0 +1,18 @@
+#lightboxBackdrop {
+  background-color: rgba(232, 238, 241, 0.9);
+}
+
+#lightboxBackdrop button {
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  background: #ffffff;
+  border-radius: 22px;
+  width: 60px;
+  height: 60px;
+}
+
+#lightboxBackdrop button:hover {
+  transform: scale(1.1);
+}
+#lightboxBackdrop button svg {
+  fill: var(--cool-grey);
+}
