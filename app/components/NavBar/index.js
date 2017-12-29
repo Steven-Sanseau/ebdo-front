@@ -75,6 +75,11 @@ const FlexWrap = styled.div`
     padding-right: 20px;
   `};
   }
+  .hidden-xs {
+    ${media.tablet`
+      display: none;
+    `};
+  }
 
   ${media.tablet`
     margin: ${props => (props.menuFixed ? '6px 0' : '30px')}; 0;
@@ -105,6 +110,7 @@ const menuFixedStyle = {
 
 const menuStyle = {
   padding: '40px 0',
+  paddingBottom: '0',
   marginRight: 'auto',
   marginLeft: 'auto',
   maxWidth: '1200px',
@@ -253,7 +259,7 @@ class NavBar extends React.Component {
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <div style={menuFixed ? hidden : {}}>
+                <div style={menuFixed ? hidden : {}} className="hidden-xs">
                   <Button
                     handleRoute={this.handleRouteTryit}
                     color="--warm-purple"

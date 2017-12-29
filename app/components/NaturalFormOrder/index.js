@@ -58,7 +58,7 @@ const Subtitle = styled.p`
   margin: 0;
 `
 
-const TextWrap = styled.span`
+const TextWrap = styled.div`
   font-size: 50px;
   line-height: 70px;
   font-weight: 500;
@@ -92,7 +92,7 @@ const valueElem = (title, subtitle) => (
 
 const options1 = [
   {
-    value: '0',
+    value: 'false',
     label: valueElem(
       'Je reçois',
       <span>
@@ -101,7 +101,7 @@ const options1 = [
     )
   },
   {
-    value: '1',
+    value: 'true',
     label: valueElem(
       "J'offre",
       <span>
@@ -189,14 +189,13 @@ const options3 = [
 ]
 function NaturalFormOrder(props) {
   const { handleChange, target, time, price, switchUI, isNaturalForm } = props
-
-  if (isNaturalForm) {
-    return (
-      <div>
+  return (
+    <div>
+      <div className={isNaturalForm ? '' : 'hidden'}>
         <DropdownWrap
           className="dropdown-wrap"
           options={options1}
-          value={options1.find(el => el.value === (target ? '1' : '0'))}
+          value={options1.find(el => el.value === String(target))}
           color="--warm-purple"
           onChange={handleChange.bind(this, 'is_gift')}
         />
@@ -210,12 +209,12 @@ function NaturalFormOrder(props) {
         />
 
         <TextWrap>
-          {time === '0' && <span>4 numéros</span>}
-          {time === '12' && <span>12 numéros</span>}
-          {time === '24' && <span>24 numéros</span>}
-          {time === '48' && <span>48 numéros</span>}
-          {target === '0' && <span> chez moi </span>}
-          {target === '1' && <span> à un proche </span>}
+          {String(time) === '0' && <span>4 numéros</span>}
+          {String(time) === '12' && <span>12 numéros</span>}
+          {String(time) === '24' && <span>24 numéros</span>}
+          {String(time) === '48' && <span>48 numéros</span>}
+          {String(target) === 'false' && <span> chez moi </span>}
+          {String(target) === 'true' && <span> à un proche </span>}
           pour le prix de{' '}
         </TextWrap>
         <DropdownWrap
@@ -227,18 +226,16 @@ function NaturalFormOrder(props) {
         />
         <Help onClick={switchUI}>?</Help>
       </div>
-    )
-  }
-  return (
-    <div>
-      <iframe
-        width="560"
-        height="315"
-        title="video explicative"
-        src="https://www.youtube.com/embed/8w0U_-j1eBI"
-        frameBorder="0"
-        allowFullScreen
-      />
+      <div className={isNaturalForm ? 'hidden' : ''}>
+        <iframe
+          width="560"
+          height="315"
+          title="video explicative"
+          src="https://www.youtube.com/embed/8w0U_-j1eBI"
+          frameBorder="0"
+          allowFullScreen
+        />
+      </div>
     </div>
   )
 }
