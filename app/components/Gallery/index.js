@@ -60,6 +60,7 @@ const Undercover = styled.div`
 `
 const CTA = styled.button`
   color: var(--cool-grey);
+  font-family: FG-R;
   border: 1px solid var(--cool-grey);
   border-radius: 16px;
   background-color: var(--white-true);
@@ -83,6 +84,7 @@ const Cover = styled.div`
   cursor: pointer;
   img {
     transition: transform 0.3s ease-out;
+    border: 1px solid var(--grey-blue);
   }
   button {
     transition: opacity 0.2s ease-out;

@@ -44,6 +44,7 @@ const Title = styled.h3`
   color: var(--squash);
   font-size: 28px;
   margin-bottom: 30px;
+  max-width: 450px;
 
   span {
     color: var(--black);
@@ -53,6 +54,7 @@ const Title = styled.h3`
 const TextWrap = styled.div`
   margin-bottom: 50px;
   font-size: 18px;
+  max-width: 450px;
 `
 const HomeLandingWrap = styled.div`
   margin-bottom: 100px;
@@ -71,17 +73,19 @@ function HomePage(props) {
         <HomeLanding />
       </HomeLandingWrap>
       <Layout>
-        <Row>
-          <Col xs={12} sm={5} smOffset={6}>
+        <Row between="sm">
+          <ColCustom w={8}>
+          </ColCustom>
+          <ColCustom w={14}>
             <Title>
-              <span>L’expérience ebdo,</span> chez vous,<br /> au prix que vous
+              <span>L’expérience ebdo,</span> chez vous, au prix que vous
               souhaitez
             </Title>
             <TextWrap>
               S'offrir <strong>ebdo</strong> chaque semaine, c'est choisir une
               information indépendante, un journal sans pub et sans compromis.
             </TextWrap>
-          </Col>
+          </ColCustom>
           <Row between="sm">
             <ColCustom w={8}>
               <ImageWrap>

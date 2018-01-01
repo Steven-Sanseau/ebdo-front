@@ -49,6 +49,10 @@ const LinkWrapper = styled(Link)`
     color: var(--white-true);
   }
 `
+const Legend = styled.legend`
+  margin-top: 20px;
+  font-size: 18px;
+`
 
 function ManifestoBlock() {
   return (
@@ -117,6 +121,7 @@ function ManifestoBlock() {
       <SectionWrapper>
         <Col xs={12} sm={7}>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
+          <Legend>Photo issue de la tournée d'<strong>ebdo</strong> en minibus</Legend>
         </Col>
         <Col xs={12} sm={4} smOffset={1}>
           <TextBlock
@@ -139,7 +144,7 @@ function ManifestoBlock() {
         </Col>
       </SectionWrapper>
       <SectionWrapperBig>
-        <ColCustom w={7} m={13}> 
+        <ColCustom w={7} m={13}>
           <TextBlock title="La Fabrique" colorTitle="--topaz">
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
             <LinkWrapper to="#">la Fabrique</LinkWrapper>.

@@ -252,7 +252,6 @@ class NavBar extends React.Component {
                 </LinkWrapMobile>
                 <LinkWrapMobile style={{ marginRight: '19px' }}>
                   <Button
-                    minWidth="130px"
                     handleRoute={this.handleRouteSubscribe}
                     color="--squash"
                   >

@@ -36,7 +36,9 @@
 .dropdown-wrap .Dropdown-menu .valueWrap h3 {
   font-size: 22px;
 }
-
+.dropdown-wrap .Dropdown-option h3 {
+  margin: 0;
+}
 .dropdown-wrap .Dropdown-option:not(.is-selected) .valueWrap h3 {
   color: #d4dadd;
 }

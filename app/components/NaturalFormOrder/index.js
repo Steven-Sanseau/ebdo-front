@@ -21,7 +21,6 @@ const DropdownWrap = styled(Dropdown)`
   font-size: 50px;
   margin-right: 10px;
   margin-top: 10px;
-  margin-bottom: 20px;
   cursor: pointer;
 
   &:not(.is-open):hover {

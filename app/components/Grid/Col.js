@@ -6,7 +6,7 @@ import 'components/Grid/Col.css'
 
 function Col(props) {
   return (
-    <div className={props.w ? `w-${props.w} ${props.m ? `w-m-${props.m}` : ''}` : `${props.m ? `w-m-${props.m}` : ''}`}>
+    <div className={props.w ? `${props.className || ''} w-${props.w} ${props.m ? `w-m-${props.m}` : ''}` : `${props.m ? `${props.className} w-m-${props.m}` : ''}`}>
       {props.children}
     </div>
   )

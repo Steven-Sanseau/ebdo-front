@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import NaturalFormOrder from 'components/NaturalFormOrder'
 
@@ -8,6 +9,19 @@ import Button from 'components/Button'
 
 const ButtonWrap = styled.div`
   margin-top: 30px;
+  & > div {
+    display: inline-block;
+  }
+  button {
+    font-size: 18px;
+  }
+`
+const LinkWrapper = styled(Link)`
+  color: var(--grey-blue);
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 20px;
+
 `
 
 export class NaturalFormOrderContainer extends React.Component {
@@ -79,6 +93,7 @@ export class NaturalFormOrderContainer extends React.Component {
             <Button handleRoute={this.handleRoute} color="--squash">
               Commander
             </Button>
+            <LinkWrapper to="#">J'ai un code cadeau</LinkWrapper>
           </ButtonWrap>
         )}
         {!isNaturalForm && (

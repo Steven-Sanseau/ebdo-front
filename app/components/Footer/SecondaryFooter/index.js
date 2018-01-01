@@ -37,10 +37,18 @@ const LinkWrapper = styled.div`
   margin-bottom: 20px;
 `
 
+const RowSimpleBorder = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
+
 const SecondaryFooter = () => (
   <SecondaryFooterWrapper>
     <Layout>
-      <Row between="sm">
+      <RowSimpleBorder between="sm">
         <ColCustom w={5} m={13}>
         </ColCustom>
         <ColCustom w={5} m={13}>
@@ -62,7 +70,7 @@ const SecondaryFooter = () => (
         </ColCustom>
         <ColCustom w={5} m={13}>
         </ColCustom>
-      </Row>
+      </RowSimpleBorder>
     </Layout>
   </SecondaryFooterWrapper>
 )

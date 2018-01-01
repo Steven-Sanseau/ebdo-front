@@ -16,6 +16,7 @@ import '!file-loader?name=[name].[ext]!images/home/illu-test.jpg'
 
 import { media } from 'global-styles'
 import ArrowDown from 'components/Icon/ArrowDown'
+import ColCustom from 'components/Grid/Col'
 
 const LinkWrapper = styled(Link)`
   color: var(--grey-blue);
@@ -50,7 +51,6 @@ const Title = styled.h2`
 `
 const Text = styled.p`
   font-size: 18px;
-  max-width: 450px;
 
   img {
     margin-top: -7px;
@@ -81,12 +81,12 @@ const Layout = styled.div`
   `};
 `
 
-const BlockWrap = styled(Col)`
+const BlockWrap = styled(ColCustom)`
   min-width: 250px;
   max-width: 417px;
-  margin-top: -100px;
-  margin-left: 50px;
-  padding: 0 50px;
+  margin-top: -120px;
+  margin-left: 100px;
+  padding: 0 40px;
   text-align: left;
   ${media.tablet`
     margin-top: 0;
@@ -94,7 +94,7 @@ const BlockWrap = styled(Col)`
     padding: 0;
   `};
 `
-const ImageWrap = styled(Col)`
+const ImageWrap = styled(ColCustom)`
   max-width: 336px;
   min-width: 336px;
   position: relative;
@@ -109,10 +109,10 @@ function HomeLanding() {
   return (
     <Layout>
       <Row center="sm">
-        <ImageWrap xs={12} sm={4}>
+        <ImageWrap w={8}>
           <Gallery />
         </ImageWrap>
-        <BlockWrap xs={12} sm={4}>
+        <BlockWrap w={8}>
           <Title>
             ebdo <span>est un journal</span> papier, indépendant <span>et</span>{' '}
             proche de ses lecteurs.
