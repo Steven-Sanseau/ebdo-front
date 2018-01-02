@@ -16,13 +16,13 @@ function Header() {
       <Wrapper>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <LogoWrapper>
-            <Logo width={120} height={46} />
+            <Logo width={175} height={66} />
           </LogoWrapper>
           <SubTitle>
             <IconHome>
               <HomeIcon />
             </IconHome>
-            Retourner à l'accueil
+            <span>Retourner à l'accueil</span>
           </SubTitle>
         </Link>
       </Wrapper>

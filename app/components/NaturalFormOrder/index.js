@@ -88,6 +88,9 @@ const Help = styled.div`
   cursor: pointer;
   background-color: var(--turquoise-blue);
   color: white;
+  ${media.tablet`
+    margin-top: -20px;
+  `}
   &:hover {
     transform: scale(1.1);
   }
