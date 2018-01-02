@@ -15,9 +15,8 @@ import { NaturalFormOrderContainer } from 'containers/NaturalFormOrderContainer'
 import '!file-loader?name=[name].[ext]!../../images/home/abo-illu.png'
 
 const ProgressWrap = styled(Row)`
-  padding-top: 80px;
-  padding-bottom: 20px;
-  margin-top: 120px;
+  padding-top: 60px;
+  margin-top: 100px;
 
   ${media.tablet`
     margin-top: 60px;
@@ -57,7 +56,7 @@ const TextWrap = styled.div`
   max-width: 450px;
 `
 const HomeLandingWrap = styled.div`
-  margin-bottom: 100px;
+  margin-bottom: 140px;
   padding-top: 327px;
   border-bottom: 1px solid var(--silver);
   ${media.tablet`

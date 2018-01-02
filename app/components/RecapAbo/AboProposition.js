@@ -8,7 +8,9 @@ import Button from 'components/Button'
 
 const AboPropositionWrapper = styled.div`
 `
-const ButtonWrapper = styled.div``
+const ButtonWrapper = styled.div`
+  margin-top: 40px;
+`
 const Title = styled.h2`
   font-size: 28px;
   font-weight: 700;
@@ -46,7 +48,7 @@ const AboProposition = props => {
         <TextWrapper>{children}</TextWrapper>
       </AboPropositionWrapper>
       <ButtonWrapper>
-        <Button handleRoute={handleRoute} color={buttonColor}>
+        <Button handleRoute={handleRoute} color={buttonColor} className="big">
           {buttonText}
         </Button>
       </ButtonWrapper>

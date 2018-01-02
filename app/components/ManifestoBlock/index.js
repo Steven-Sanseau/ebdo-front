@@ -28,13 +28,18 @@ const Layout = styled.div`
   `};
 `
 const SectionWrapper = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+
+  .no-p {
+    padding: 0;
+  }
   ${media.tablet`
     padding: 40px 0;
   `};
 `
 const SectionWrapperBig = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+  padding-bottom: 120px;
   ${media.tablet`
     padding: 40px 0;
   `};
@@ -118,16 +123,17 @@ function ManifestoBlock() {
           </TextBlock>
         </Col>
       </SectionWrapperBig>
-      <SectionWrapper>
-        <Col xs={12} sm={7}>
+      <SectionWrapper between="sm">
+        <ColCustom w={14} m={13}>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
           <Legend>Photo issue de la tournée d'<strong>ebdo</strong> en minibus</Legend>
-        </Col>
-        <Col xs={12} sm={4} smOffset={1}>
+        </ColCustom>
+        <ColCustom w={7} m={13}>
           <TextBlock
             title="Un journal qui se construit ensemble..."
             colorTitle="--sunflower"
             fontSize="28px"
+            className="no-p"
           >
             Nous sommes atteints d’un mal étrange :{' '}
             <strong>la sur-information.</strong> Chaque possesseur d’un
@@ -141,9 +147,9 @@ function ManifestoBlock() {
             <br />
             <LinkWrapper to="/manifest">Lire la suite du Manifeste</LinkWrapper>
           </TextBlock>
-        </Col>
+        </ColCustom>
       </SectionWrapper>
-      <SectionWrapperBig>
+      <SectionWrapperBig between="sm">
         <ColCustom w={7} m={13}>
           <TextBlock title="La Fabrique" colorTitle="--topaz">
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
@@ -151,9 +157,9 @@ function ManifestoBlock() {
           </TextBlock>
           <NewsletterContainer />
         </ColCustom>
-        <Col xs={12} sm={7} smOffset={1}>
+        <ColCustom w={14} m={13}>
           <img src="fabrique.png" alt="la fabrique" width="100%" />
-        </Col>
+        </ColCustom>
       </SectionWrapperBig>
     </Layout>
   )

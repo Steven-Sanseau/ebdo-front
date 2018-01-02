@@ -8,7 +8,7 @@ import NaturalFormOrder from 'components/NaturalFormOrder'
 import Button from 'components/Button'
 
 const ButtonWrap = styled.div`
-  margin-top: 30px;
+  margin-top: 40px;
   & > div {
     display: inline-block;
   }
@@ -90,7 +90,7 @@ export class NaturalFormOrderContainer extends React.Component {
         />
         {isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.handleRoute} color="--squash">
+            <Button handleRoute={this.handleRoute} color="--squash" className="big">
               Commander
             </Button>
             <LinkWrapper to="#">J'ai un code cadeau</LinkWrapper>
@@ -98,7 +98,7 @@ export class NaturalFormOrderContainer extends React.Component {
         )}
         {!isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.switchUI} color="--squash">
+            <Button handleRoute={this.switchUI} color="--squash" className="big">
               Revenir au formulaire
             </Button>
           </ButtonWrap>

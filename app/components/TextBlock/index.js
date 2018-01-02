@@ -15,9 +15,8 @@ const Title = styled.h2`
   margin-bottom: 10px;
 `
 const TitleBlock = styled.h2`
-  font-size: ${props => props.fontSize ? props.fontSize : '22px'};  
+  font-size: ${props => props.fontSize ? props.fontSize : '22px'};
   margin: 0;
-  margin-bottom: 20px;
   line-height: 26px;
   color: var(${props => props.color ? props.color : 'inherit'});
 `
@@ -27,11 +26,11 @@ const Hr = styled.hr`
   height: 10px;
   background-color: var(${props => props.color ? props.color : 'inherit'});
   border: none;
-  border-radius: 0;  
+  border-radius: 0;
 `
 
-const ColPad = styled(Col)`
-  padding: 15px 25px;
+const ColPad = styled.div`
+  padding: 15px;
 `
 const TextWrap = styled.p`
   font-size: 18px;
@@ -42,24 +41,35 @@ const TextWrap = styled.p`
     font-weight: 700;
   }
 `
+const Wrap = styled.div`
+  padding: 10px 0;
+  h2 {
+    margin: 0;
+  }
+  p {
+    max-width: 450px;
+    width: 80%;
+    line-height: 24px;
+    margin: 0;
+    margin-top: 10px;
+  }
+`
 const TextBlock = props => {
   const {
-    title, children, type, colorTitle, colorSpan, colorHr, fontSize
+    title, children, type, colorTitle, colorSpan, colorHr, fontSize, className
   } = props
 
   if (type === 'footer') {
     return (
-      <div>
-        <Col xs={12} md={8}>
+      <Wrap>
           {title && <Title>{title}</Title>}
-          <div>{children}</div>
-        </Col>
-      </div>
+          <p>{children}</p>
+      </Wrap>
     )
   }
   return (
     <div>
-      <ColPad>
+      <ColPad className={className}>
         {title && <TitleBlock fontSize={fontSize} color={colorTitle}>{title}</TitleBlock>}
         {colorHr && <Hr color={colorHr}></Hr>}
         <TextWrap color={colorSpan}>{children}</TextWrap>
@@ -74,6 +84,7 @@ TextBlock.propTypes = {
   colorHr: PropTypes.string,
   colorSpan: PropTypes.string,
   type: PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.node
 }
 

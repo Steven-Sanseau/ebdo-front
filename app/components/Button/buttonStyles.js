@@ -17,9 +17,18 @@ const buttonStyles = css`
   outline: 0;
   min-width: ${props => props.minWidth};
   background-color: var(${props => (props.color ? props.color : '--booger')});
-  padding: 10px 20px;
+  padding: 0 20px;
+  height: 32px;
+  line-height: 32px;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
-  
+
+  &.big {
+    height: 45px;
+    line-height: 45px;
+    border-radius: 18px;
+    font-size: 18px;
+  }
+
   &:active {
     background-color: var(${props => (props.color ? props.color : '--booger')});
     color: var(
