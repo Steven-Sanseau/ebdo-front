@@ -96,11 +96,12 @@ const Menu = styled.nav`
 
   .nav-menu {
     width: calc(100% - 80px);
-    padding: 0 10px;
+    padding: 10px;
     transition: transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out;
     ${props => (props.menuFixed ? 'height: 50px;' : '')}
     overflow: hidden;
     ${media.tablet`
+      padding: 0 10px;
       margin-left: auto;
       margin-right: auto;
       width: calc(100% - 20px) !important;
@@ -112,7 +113,7 @@ const Menu = styled.nav`
   }
 `
 const Burger = styled.div`
-  display: ${props => (props.menuFixed ? 'block' : 'none')};
+  display: none;
   ${media.tablet`
     display: ${props => (props.menuFixed ? 'inherit' : 'none')};
   `};
@@ -158,6 +159,7 @@ class NavBar extends React.Component {
   handleStateChange(status) {
     if (status.status === Sticky.STATUS_FIXED) {
       this.setState({ menuFixed: true })
+      document.querySelector('.nav-menu').style.height = '50px'
     }
     if (status.status === Sticky.STATUS_ORIGINAL) {
       this.setState({ menuFixed: false })

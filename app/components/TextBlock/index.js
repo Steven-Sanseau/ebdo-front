@@ -8,6 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Col } from 'react-styled-flexboxgrid'
 import styled from 'styled-components'
+import { media } from 'global-styles'
 
 const Title = styled.h2`
   font-size: 18px;
@@ -19,6 +20,10 @@ const TitleBlock = styled.h2`
   margin: 0;
   line-height: 26px;
   color: var(${props => props.color ? props.color : 'inherit'});
+  ${media.tablet`
+    font-size: 22px;
+    line-height: 24px;
+  `};
 `
 const Hr = styled.hr`
   margin: 20px 0;
@@ -35,6 +40,12 @@ const ColPad = styled.div`
 const TextWrap = styled.p`
   font-size: 18px;
   line-height: 26px;
+
+  ${media.tablet`
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 20px;
+  `};
 
   span {
     color: var(${props => props.color ? props.color : 'inherit'});

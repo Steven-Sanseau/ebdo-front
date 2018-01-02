@@ -39,23 +39,33 @@ const AWrapper = styled.a`
     color: var(--white-true);
   }
 `
-const Title = styled.h2`
-  font-size: 24px;
-  line-height: 26px;
-  span {
-    font-weight: 400;
+const Title = styled(ColCustom)`
+  h2 {
+    font-size: 24px;
+    line-height: 26px;
+    span {
+      font-weight: 400;
+    }
+    ${media.tablet`
+      margin-top: 80px;
+      margin-bottom: 30px;
+      max-width: 450px;
+    `};
   }
-  ${media.tablet`
-    margin-top: 40px;
-  `};
 `
-const Text = styled.p`
-  font-size: 18px;
+const Text = styled(ColCustom)`
+  p {
+    font-size: 18px;
+    ${media.tablet`
+      font-size: 16px;
+    `};
+  }
 
   img {
     margin-top: -7px;
     margin-left: 5px;
     margin-right: 5px;
+    width: auto;
   }
 `
 
@@ -114,19 +124,19 @@ function HomeLanding() {
           <Gallery />
         </ImageWrap>
         <BlockWrap w={8}>
-          <Title>
-            ebdo <span>est un journal</span> papier, indépendant <span>et</span>{' '}
-            proche de ses lecteurs.
+          <Title mc m={13}>
+            <h2>ebdo <span>est un journal</span> papier, indépendant <span>et</span>{' '}
+            proche de ses lecteurs.</h2>
           </Title>
-          <Text>
-            Un projet par les créateurs de{' '}
+          <Text mc m={13}>
+            <p>Un projet par les créateurs de{' '}
             <img src="/XXI.png" alt="XXI" height="22" /> et
             <img src="/6mois-black.png" alt="6 mois" height="18" /> grâce au
             soutien des 5 960 lecteurs qui nous ont fait confiance et soutenu
             lors de{' '}
             <AWrapper href="https://www.kisskissbankbank.com/ebdo-un-journal-independant-et-inspirant">
               notre campagne de financement participatif.
-            </AWrapper>
+            </AWrapper></p>
           </Text>
           <Discover>
             <img src="illu-test.jpg" alt="illustration cover" width="100%" />

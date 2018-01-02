@@ -60,3 +60,16 @@
 .dropdown-wrap.Dropdown-root:not(.is-open):hover:after {
   border-top-color: white;
 }
+@media (max-width: 768px) {
+  .dropdown-wrap .Dropdown-menu .valueWrap h3 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+  .dropdown-wrap.Dropdown-root.is-open .Dropdown-menu {
+    width: 100%;
+    left: 0;
+  }
+  .dropdown-wrap.Dropdown-root.is-open {
+    width: 100%;
+  }
+}

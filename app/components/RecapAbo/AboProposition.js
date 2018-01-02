@@ -10,17 +10,29 @@ const AboPropositionWrapper = styled.div`
 `
 const ButtonWrapper = styled.div`
   margin-top: 40px;
+  ${media.tablet`
+    margin-top: 30px;
+  `};
 `
 const Title = styled.h2`
   font-size: 28px;
   font-weight: 700;
   line-height: 26px;
   margin: 0;
+
+  ${media.tablet`
+    font-size: 22px;
+    line-height: 24px;
+  `};
 `
 
 const TextWrapper = styled.div`
   margin-top: 10px;
   font-size: 18px;
+
+  ${media.tablet`
+    font-size: 16px;
+  `};
 `
 
 const Wrapper = styled.div`
@@ -31,6 +43,7 @@ const Wrapper = styled.div`
 
   ${media.tablet`
     margin-bottom: 45px;
+    height: auto;
   `};
 `
 

@@ -32,6 +32,7 @@ const Layout = styled.div`
 
   ${media.tablet`
     padding: 40px 0;
+    width: calc(100% - 20px);
   `};
 `
 const ImageWrap = styled.div`
@@ -43,17 +44,25 @@ const Title = styled.h3`
   color: var(--squash);
   font-size: 28px;
   margin-bottom: 30px;
+  margin-top: 0;
   max-width: 450px;
 
   span {
     color: var(--black);
   }
+  ${media.tablet`
+    font-size: 22px;
+    line-height: 24px;
+  `};
 `
 
 const TextWrap = styled.div`
   margin-bottom: 50px;
   font-size: 18px;
   max-width: 450px;
+  ${media.tablet`
+    font-size: 16px;
+  `};
 `
 const HomeLandingWrap = styled.div`
   margin-bottom: 140px;
@@ -75,7 +84,7 @@ function HomePage(props) {
         <Row between="sm">
           <ColCustom w={8}>
           </ColCustom>
-          <ColCustom w={14}>
+          <ColCustom w={14} m={13} mc>
             <Title>
               <span>L’expérience ebdo,</span> chez vous, au prix que vous
               souhaitez
@@ -91,7 +100,7 @@ function HomePage(props) {
                 <img src="abo-illu.png" alt="abo illustration" width="100%" />
               </ImageWrap>
             </ColCustom>
-            <ColCustom w={14}>
+            <ColCustom w={14} m={13} mc>
               <NaturalFormOrderContainer
                 dispatchSetOfferParams={props.dispatchSetOfferParams}
                 offer={props.offer}
