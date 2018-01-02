@@ -86,10 +86,10 @@ const FlexWrap = styled.div`
       display: none;
     `};
   }
-
   ${media.tablet`
     margin: ${props => (props.menuFixed ? '0' : '30px')}; 0;
 `};
+
 `
 
 const Menu = styled.nav`
@@ -103,9 +103,10 @@ const Menu = styled.nav`
     transition: transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out;
     ${props => (props.menuFixed ? 'height: 50px;' : '')}
     overflow: hidden;
+
     ${media.tablet`
-      padding: 0 10px;
       width: calc(100% - 20px) !important;
+      padding: 0;
     `};
 
     .narrowLinks {
