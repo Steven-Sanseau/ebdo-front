@@ -96,14 +96,14 @@ const Menu = styled.nav`
 
   .nav-menu {
     width: calc(100% - 80px);
-    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    ${props => (props.menuFixed ? 'padding: 10px 0;' : '')}
     transition: transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out;
     ${props => (props.menuFixed ? 'height: 50px;' : '')}
     overflow: hidden;
     ${media.tablet`
       padding: 0 10px;
-      margin-left: auto;
-      margin-right: auto;
       width: calc(100% - 20px) !important;
     `};
 
@@ -129,8 +129,7 @@ const menuStyle = {
   padding: '40px 0',
   paddingBottom: '0',
   marginRight: 'auto',
-  marginLeft: 'auto',
-  maxWidth: '1200px',
+  marginLeft: 'auto'
 }
 
 const hidden = {
