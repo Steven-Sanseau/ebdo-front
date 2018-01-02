@@ -78,6 +78,7 @@ const Layout = styled.div`
     padding: 0;
     padding-bottom: 40px;
     margin-top: 0;
+    width: calc(100% - 20px);
   `};
 `
 

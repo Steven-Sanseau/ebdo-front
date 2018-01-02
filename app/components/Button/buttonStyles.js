@@ -15,6 +15,7 @@ const buttonStyles = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
+  white-space: nowrap;
   min-width: ${props => props.minWidth};
   background-color: var(${props => (props.color ? props.color : '--booger')});
   padding: 0 20px;
