@@ -68,6 +68,7 @@ const Subtitle = styled.h2`
 const FlexWrap = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 3px;
 
   .withBorder {
     border-left: 1px solid var(--silver);
@@ -95,10 +96,10 @@ const Menu = styled.nav`
   background: white;
 
   .nav-menu {
-    width: calc(100% - 80px);
+    width: ${props => (props.menuFixed ? 'calc(100% - 50px)' : 'calc(100% - 80px)')};
     margin-left: auto;
     margin-right: auto;
-    ${props => (props.menuFixed ? 'padding: 10px 0;' : '')}
+    ${props => (props.menuFixed ? 'padding: 6px 0;' : '')}
     transition: transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out;
     ${props => (props.menuFixed ? 'height: 50px;' : '')}
     overflow: hidden;
@@ -109,6 +110,7 @@ const Menu = styled.nav`
 
     .narrowLinks {
       display: ${props => (props.menuFixed ? 'block' : 'none')};
+      ${props => (props.page !== '/' ? 'display: none;' : '')}
     }
   }
 `
@@ -187,6 +189,7 @@ class NavBar extends React.Component {
         <Menu
           menuFixed={menuFixed}
           style={menuFixed ? menuFixedStyle : menuStyle}
+          page={page}
         >
           <Row between="sm" className="nav-menu">
             <Col m={13} mc>
@@ -238,7 +241,7 @@ class NavBar extends React.Component {
                 <LinkWrapMobile color="--squash" className="withBorder">
                   <Link to="/connexion">Connexion</Link>
                 </LinkWrapMobile>
-                <LinkWrapMobile style={{ marginRight: '19px' }}>
+                <LinkWrapMobile style={menuFixed ? { marginRight: '0' } : {}}>
                   <Button
                     handleRoute={this.handleRouteSubscribe}
                     color="--squash"
