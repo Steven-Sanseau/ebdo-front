@@ -4,7 +4,7 @@ const Input = styled.input`
   font-family: 'FG-R';
   height: 40px;
   background-color: var(--white-true);
-  border: solid 0.5px;
+  border: solid 1px;
   border-radius: 6px;
   border-color: var(${props => (props.error ? '--tomato' : '--cool-grey')});
   font-size: 16px;

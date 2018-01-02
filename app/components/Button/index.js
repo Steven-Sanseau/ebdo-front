@@ -22,6 +22,7 @@ function Button(props) {
         border={props.border}
         colorText={props.colorText}
         onClick={props.handleRoute}
+        className={props.className}
       >
         {Children.toArray(props.children)}
       </StyledButton>

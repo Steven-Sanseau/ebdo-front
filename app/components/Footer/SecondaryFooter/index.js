@@ -26,27 +26,54 @@ const Layout = styled.div`
 
 const SecondaryFooterWrapper = styled.section`
   background-color: var(--voodoo);
+
+  .m-up {
+    ${media.tablet`
+      order: -1;
+    `}
+  }
+  .m-border {
+    ${media.tablet`
+      padding: 40px 0;
+      margin: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    `}
+  }
 `
 const Title = styled.h2`
   font-size: 18px;
   margin: 0;
   line-height: 26px;
+  ${media.tablet`
+    font-size: 16px;
+    line-height: 22px;
+  `}
 `
 
 const LinkWrapper = styled.div`
   margin-bottom: 20px;
 `
 
+const RowSimpleBorder = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
+
 const SecondaryFooter = () => (
   <SecondaryFooterWrapper>
     <Layout>
-      <Row between="sm">
+      <RowSimpleBorder between="sm">
         <ColCustom w={5} m={13}>
         </ColCustom>
-        <ColCustom w={5} m={13}>
+        <ColCustom w={5} m={13} className="m-border">
           <Title>Mentions légales</Title>
         </ColCustom>
-        <ColCustom w={5} m={13}>
+        <ColCustom w={5} m={13} className="m-up">
           <LinkWrapper>
             <Title>Contacter la rédaction</Title>
             <Link to="mailto:redaction@ebdo-lejournal.com">
@@ -62,7 +89,7 @@ const SecondaryFooter = () => (
         </ColCustom>
         <ColCustom w={5} m={13}>
         </ColCustom>
-      </Row>
+      </RowSimpleBorder>
     </Layout>
   </SecondaryFooterWrapper>
 )

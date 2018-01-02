@@ -66,11 +66,25 @@ const MobileWrapper = styled.div`
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   `};
 `
+const RowFirstLine = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2), .w-5:nth-of-type(3) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
+const RowSimpleBorder = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
 
 const MainFooter = () => (
   <MainFooterWrapper>
     <Layout>
-      <Row between="sm">
+      <RowFirstLine between="sm">
         <ColCustom w={5} m={13}>
           <Logo color="var(--white-true)" />
           <LogoWrapper>
@@ -112,9 +126,9 @@ const MainFooter = () => (
             <SocialIcons />
           </MobileWrapper>
         </ColCustom>
-      </Row>
+      </RowFirstLine>
       <NewsletterWrapper>
-        <Row between="sm">
+        <RowSimpleBorder between="sm">
           <ColCustom w={5} m={13}></ColCustom>
           <ColCustom w={5} m={13}>
             <MobileWrapper>
@@ -125,7 +139,7 @@ const MainFooter = () => (
             </MobileWrapper>
           </ColCustom>
           <NewsletterContainer type="footer" />
-        </Row>
+        </RowSimpleBorder>
       </NewsletterWrapper>
     </Layout>
   </MainFooterWrapper>

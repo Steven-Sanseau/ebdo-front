@@ -21,7 +21,6 @@ const DropdownWrap = styled(Dropdown)`
   font-size: 50px;
   margin-right: 10px;
   margin-top: 10px;
-  margin-bottom: 20px;
   cursor: pointer;
 
   &:not(.is-open):hover {
@@ -47,8 +46,12 @@ const DropdownWrap = styled(Dropdown)`
   }
 
   ${media.tablet`
+    padding: 0 40px 5px 20px;
+    margin-top: 5px;
+
     .valueWrap h3 {
-      font-size: 44px;
+      font-size: 35px;
+      line-height: 50px;
     }
 `};
 `
@@ -56,6 +59,9 @@ const Subtitle = styled.p`
   font-size: 16px;
   color: #000;
   margin: 0;
+  ${media.tablet`
+    line-height: 22px;
+  `}
 `
 
 const TextWrap = styled.div`
@@ -63,6 +69,10 @@ const TextWrap = styled.div`
   line-height: 70px;
   font-weight: 500;
   letter-spacing: -1.3px;
+    ${media.tablet`
+      font-size: 35px;
+      line-height: 50px;
+    `}
 `
 const Help = styled.div`
   display: inline-block;
@@ -228,6 +238,7 @@ function NaturalFormOrder(props) {
       </div>
       <div className={isNaturalForm ? 'hidden' : ''}>
         <iframe
+          style={{maxWidth: '100%'}}
           width="560"
           height="315"
           title="video explicative"

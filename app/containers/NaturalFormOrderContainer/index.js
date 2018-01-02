@@ -1,13 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import NaturalFormOrder from 'components/NaturalFormOrder'
 
 import Button from 'components/Button'
 
 const ButtonWrap = styled.div`
-  margin-top: 30px;
+  margin-top: 40px;
+  & > div {
+    display: inline-block;
+  }
+  button {
+    font-size: 18px;
+  }
+`
+const LinkWrapper = styled(Link)`
+  color: var(--grey-blue);
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 20px;
+
 `
 
 export class NaturalFormOrderContainer extends React.Component {
@@ -76,14 +90,15 @@ export class NaturalFormOrderContainer extends React.Component {
         />
         {isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.handleRoute} color="--squash">
+            <Button handleRoute={this.handleRoute} color="--squash" className="big">
               Commander
             </Button>
+            <LinkWrapper to="#">J'ai un code cadeau</LinkWrapper>
           </ButtonWrap>
         )}
         {!isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.switchUI} color="--squash">
+            <Button handleRoute={this.switchUI} color="--squash" className="big">
               Revenir au formulaire
             </Button>
           </ButtonWrap>
