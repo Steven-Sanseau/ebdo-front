@@ -113,6 +113,7 @@ const ImageWrap = styled(ColCustom)`
     min-width: inherit;
     max-width: 200px;
     margin: 0 auto;
+    height: 100%;
   `};
 `
 
