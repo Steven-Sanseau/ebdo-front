@@ -20,7 +20,11 @@ const MobileWrapper = styled.div`
 const BlockWrapper = styled.div`
   background-color: var(--background);
   border-radius: 28px;
-  padding: 30px 50px;
+  padding: 30px 40px;
+  ${media.tablet`
+    margin-top: 100px;
+    margin-bottom: 120px;
+  `};
 `
 
 const NewsletterBlock = props => {

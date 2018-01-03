@@ -6,7 +6,7 @@ import Progress from 'components/Progress'
 export class ProgressContainer extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   state = {
-    rate: 0.44,
+    rate: 0.40,
     number: 6349
   }
   render() {

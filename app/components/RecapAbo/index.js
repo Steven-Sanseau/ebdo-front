@@ -21,6 +21,7 @@ const Layout = styled.div`
   ${media.tablet`
     padding: 40px 0;
     border: none;
+    width: calc(100% - 20px);
   `};
 `
 const ColStyled = styled(ColCustom)`
@@ -46,12 +47,12 @@ const ImageWrapper = styled.div`
 const RecapAbo = props => (
   <Layout>
     <Row between="sm">
-      <ColStyled w={5} m={13}>
+      <ColStyled w={5} m={13} mc>
         <ImageWrapper>
           <Image src="/0-couv.jpg" alt="Couv" width="100%" />
         </ImageWrapper>
       </ColStyled>
-      <ColCustom w={5} m={13}>
+      <ColCustom w={5} m={13} mc>
         <AboProposition
           title="Vous voulez essayer ebdo ?"
           buttonText="Je commande"
@@ -62,7 +63,7 @@ const RecapAbo = props => (
           Le prochain numéro chez vous, gratuitement.
         </AboProposition>
       </ColCustom>
-      <ColCustom w={5} m={13}>
+      <ColCustom w={5} m={13} mc>
         <AboProposition
           title="Déjà convaincu ?"
           buttonText="Je m'abonne"
@@ -74,7 +75,7 @@ const RecapAbo = props => (
           les vendredi.
         </AboProposition>
       </ColCustom>
-      <ColCustom w={5} m={13}>
+      <ColCustom w={5} m={13} mc>
         <AboProposition
           title="Déjà abonné ?"
           buttonText="La source"

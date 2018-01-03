@@ -5,7 +5,7 @@ import 'components/Grid/Row.css'
 
 function Row(props) {
   return (
-    <div className={props.w ? `columned ${props.m ? 'mobile-columned' : ''}` : `${props.m ? 'mobile-columned' : ''}`}>
+    <div className={props.w ? `${props.className || ''} columned ${props.m ? 'mobile-columned' : ''}` : `${props.m ? `${props.className || ''} mobile-columned` : ''}`}>
       {props.children}
     </div>
   )

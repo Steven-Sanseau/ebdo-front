@@ -25,16 +25,40 @@ const Layout = styled.div`
   margin-right: auto;
 
   ${media.tablet`
+    width: calc(100% - 20px);
   `};
 `
 const SectionWrapper = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+
+  .no-p {
+    padding: 0;
+  }
   ${media.tablet`
-    padding: 40px 0;
+    // padding: 40px 0;
   `};
 `
 const SectionWrapperBig = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+  padding-bottom: 120px;
+  .no-p {
+    padding: 0;
+  }
+  .hidden-xs {
+    ${media.tablet`
+      display: none;
+    `};
+  }
+  .m-b-60 {
+    ${media.tablet`
+      margin-bottom: 60px;
+    `};
+  }
+  .m-up {
+    ${media.tablet`
+      order: -1;
+    `};
+  }
   ${media.tablet`
     padding: 40px 0;
   `};
@@ -49,11 +73,19 @@ const LinkWrapper = styled(Link)`
     color: var(--white-true);
   }
 `
+const Legend = styled.legend`
+  margin-top: 20px;
+  font-size: 18px;
+  ${media.tablet`
+    font-size: 16px;
+    margin-bottom: 60px;
+  `};
+`
 
 function ManifestoBlock() {
   return (
     <Layout>
-      <SectionWrapperBig>
+      <SectionWrapperBig className="hidden-xs">
         <Col xs={12} sm={3}>
           <TextBlock
             title="Une équipe aux profils multiples"
@@ -114,15 +146,17 @@ function ManifestoBlock() {
           </TextBlock>
         </Col>
       </SectionWrapperBig>
-      <SectionWrapper>
-        <Col xs={12} sm={7}>
+      <SectionWrapper between="sm">
+        <ColCustom w={14} m={13} mc>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
-        </Col>
-        <Col xs={12} sm={4} smOffset={1}>
+          <Legend>Photo issue de la tournée d'<strong>ebdo</strong> en minibus</Legend>
+        </ColCustom>
+        <ColCustom w={7} m={13} mc>
           <TextBlock
             title="Un journal qui se construit ensemble..."
             colorTitle="--sunflower"
             fontSize="28px"
+            className="no-p"
           >
             Nous sommes atteints d’un mal étrange :{' '}
             <strong>la sur-information.</strong> Chaque possesseur d’un
@@ -136,19 +170,19 @@ function ManifestoBlock() {
             <br />
             <LinkWrapper to="/manifest">Lire la suite du Manifeste</LinkWrapper>
           </TextBlock>
-        </Col>
+        </ColCustom>
       </SectionWrapper>
-      <SectionWrapperBig>
-        <ColCustom w={7} m={13}> 
-          <TextBlock title="La Fabrique" colorTitle="--topaz">
+      <SectionWrapperBig between="sm">
+        <ColCustom w={7} m={13} mc>
+          <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p" >
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
             <LinkWrapper to="#">la Fabrique</LinkWrapper>.
           </TextBlock>
           <NewsletterContainer />
         </ColCustom>
-        <Col xs={12} sm={7} smOffset={1}>
+        <ColCustom w={14} m={13} mc className="m-up m-b-60">
           <img src="fabrique.png" alt="la fabrique" width="100%" />
-        </Col>
+        </ColCustom>
       </SectionWrapperBig>
     </Layout>
   )
