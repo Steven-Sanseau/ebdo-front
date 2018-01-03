@@ -254,6 +254,7 @@
     "react-stickynode": "^1.4.0",
     "react-stripe-elements": "^1.2.1",
     "react-styled-flexboxgrid": "^2.1.1",
+    "react-waypoint": "^7.3.4",
     "redux": "3.7.2",
     "redux-immutable": "4.0.0",
     "redux-persist-immutable": "^4.3.1",

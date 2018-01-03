@@ -5,7 +5,7 @@ import 'components/Progress/Progress.css'
 // import styled from 'styled-components';
 
 const Progress = props => {
-  const { rate, number } = props
+  const { rate, number, initialAnimate } = props
   const options = {
     strokeWidth: 2,
     color: 'var(--squash)',
@@ -13,6 +13,8 @@ const Progress = props => {
     svgStyle: {
       strokeLineCap: 'round'
     },
+    easing: 'easeInOut',
+    duration: 1400,
     text: {
       style: {
         border: '2px solid var(--squash)',
@@ -30,17 +32,21 @@ const Progress = props => {
   const textNumber = `${number} abonnés`
 
   return (
-    <Line
-      options={options}
-      progress={rate}
-      text={textNumber}
-      className="progress-line"
-    />
+    <div>
+      <Line
+        options={options}
+        progress={rate}
+        initialAnimate={initialAnimate}
+        text={textNumber}
+        className="progress-line"
+      />
+    </div>
   )
 }
 
 Progress.propTypes = {
   rate: PropTypes.number,
+  initialAnimate: PropTypes.bool,
   number: PropTypes.number
 }
 
