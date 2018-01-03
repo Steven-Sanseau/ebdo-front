@@ -7,18 +7,20 @@ import { postToken, postTokenLoaded, postTokenError } from 'actions/token'
 import { nextStep } from 'actions/step'
 
 import { makeSelectTokenData } from 'selectors/token'
+import { makeSelectOfferData } from 'selectors/offer'
 import { makeSelectClientId } from 'selectors/client'
 
 function* postTokenSaga() {
   yield put(postToken())
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token`
   const token = yield select(makeSelectTokenData())
+  const offer = yield select(makeSelectOfferData())
   const clientId = yield select(makeSelectClientId())
   const method = 'POST'
 
   try {
     const tokenResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ token, client: { client_id: clientId } }),
+      body: JSON.stringify({ token, offer, client: { client_id: clientId } }),
       method,
       headers: {
         'Content-Type': 'application/json'

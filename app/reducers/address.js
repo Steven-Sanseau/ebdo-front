@@ -10,7 +10,8 @@ import {
   SET_ADRESS_EQUAL,
   SET_COUNTRY_ADRESS,
   NEW_CHECKOUT,
-  NEW_CHECKOUT_TRY
+  NEW_CHECKOUT_TRY,
+  POST_CLIENT_LOADED
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -64,10 +65,12 @@ function addressReducer(state = initialState, action) {
         .set(action.payload.typeOfAddress, Address(action.payload.address))
     }
     case SET_ADRESS_EQUAL: {
-      const addressDeliveryToInvoice = state
-        .get('delivery')
+      const addressDeliveryToInvoice = state.get('delivery')
+      const newAddressInvoice = addressDeliveryToInvoice
         .mergeDeep({ type_address: 'invoice' })
-      return state.set('invoice', new Address(addressDeliveryToInvoice))
+        .mergeDeep({ address_id: state.getIn(['invoice', 'address_id']) })
+
+      return state.set('invoice', new Address(newAddressInvoice))
     }
     case SET_COUNTRY_ADRESS: {
       return state
@@ -75,6 +78,8 @@ function addressReducer(state = initialState, action) {
         .set('error', false)
         .set('country', Immutable.fromJS(action.payload.country))
     }
+    case POST_CLIENT_LOADED:
+      return initialState
     case NEW_CHECKOUT:
       return initialState
     case NEW_CHECKOUT_TRY:
