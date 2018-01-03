@@ -10,12 +10,13 @@ import { makeSelectPayementMethod } from 'selectors/checkout'
 import { setPayementMethod } from 'actions/checkout'
 import {
   makeSelectTokenIsLoading,
-  makeSelectToken,
   makeSelectTokenIsSetError,
   makeSelectTokenMessageError
 } from 'selectors/token'
+
+import { makeSelectOffer } from 'selectors/offer'
+
 import {
-  postToken,
   setTokenStripe,
   setTokenStripeLoaded,
   setTokenStripeError
@@ -47,9 +48,9 @@ class PaymentStep extends React.Component {
     })
   }
 
-  handleChangeStripeForm = event => {}
+  handleChangeStripeForm = () => {}
 
-  handleSubmitStripeForm = event => {
+  handleSubmitStripeForm = () => {
     this.getStripeToken()
   }
 
@@ -57,28 +58,30 @@ class PaymentStep extends React.Component {
     this.props.dispatchSetPayementMethod(value)
   }
 
-  handleNextStep(event) {
+  handleNextStep = event => {
     event.preventDefault()
     this.getStripeToken()
   }
 
   contentOpen() {
-    const { payementMethod, tokenMessageError } = this.props
+    const { payementMethod, tokenMessageError, offer } = this.props
 
     return (
       <div>
         <Row start="xs">
           <Col xs={12}>
             <Row>
-              <Col lg={6} xs={12}>
-                <InputCheckbox
-                  text="Prélèvement SEPA"
-                  onCheck={this.handlePaiementMethod}
-                  isChecked={payementMethod === 1}
-                  icon={<SepaIcon />}
-                  valueCheck={1}
-                />
-              </Col>
+              {!offer.time_limited && (
+                <Col lg={6} xs={12}>
+                  <InputCheckbox
+                    text="Prélèvement SEPA"
+                    onCheck={this.handlePaiementMethod}
+                    isChecked={payementMethod === 1}
+                    icon={<SepaIcon />}
+                    valueCheck={1}
+                  />
+                </Col>
+              )}
               <Col lg={6} xs={12}>
                 <InputCheckbox
                   text="Carte Banquaire"
@@ -91,13 +94,14 @@ class PaymentStep extends React.Component {
             </Row>
           </Col>
         </Row>
-        {payementMethod === 1 && (
-          <Row>
-            <Col xs={6}>
-              <SlimpayForm />
-            </Col>
-          </Row>
-        )}
+        {payementMethod === 1 &&
+          !offer.time_limited && (
+            <Row>
+              <Col xs={6}>
+                <SlimpayForm />
+              </Col>
+            </Row>
+          )}
         {payementMethod === 2 && (
           <Row>
             <Col xs={12}>
@@ -147,26 +151,24 @@ PaymentStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func,
   stripe: PropTypes.object,
   dispatchSetTokenStripe: PropTypes.func,
   dispatchSetTokenStripeLoaded: PropTypes.func,
   dispatchSetTokenError: PropTypes.func,
-  dispatchPostToken: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
   payementMethod: PropTypes.number,
-  token: PropTypes.object,
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
-  tokenMessageError: PropTypes.string
+  tokenMessageError: PropTypes.string,
+  offer: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
   payementMethod: makeSelectPayementMethod(),
   tokenIsLoading: makeSelectTokenIsLoading(),
-  token: makeSelectToken(),
   tokenMessageError: makeSelectTokenMessageError(),
-  tokenIsError: makeSelectTokenIsSetError()
+  tokenIsError: makeSelectTokenIsSetError(),
+  offer: makeSelectOffer()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -175,8 +177,7 @@ function mapDispatchToProps(dispatch) {
     dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
     dispatchSetTokenStripeLoaded: token =>
       dispatch(setTokenStripeLoaded(token)),
-    dispatchSetTokenError: error => dispatch(setTokenStripeError(error)),
-    dispatchPostToken: () => dispatch(postToken())
+    dispatchSetTokenError: error => dispatch(setTokenStripeError(error))
   }
 }
 
