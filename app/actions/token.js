@@ -4,9 +4,12 @@ import {
   POST_TOKEN_LOADED,
   SET_TOKEN_STRIPE,
   SET_TOKEN_STRIPE_ERROR,
-  SET_TOKEN_STRIPE_LOADED
+  SET_TOKEN_STRIPE_LOADED,
+  GET_TOKEN_SLIMPAY_ERROR,
+  GET_TOKEN_SLIMPAY_LOADED,
+  GET_TOKEN_SLIMPAY
 } from 'actions/constants'
-import { EventTypes } from 'redux-segment'
+// import { EventTypes } from 'redux-segment'
 
 export function postToken() {
   return {
@@ -25,6 +28,27 @@ export function postTokenLoaded(token) {
   return {
     type: POST_TOKEN_LOADED,
     token
+  }
+}
+
+export function getTokenSlimpay() {
+  return {
+    type: GET_TOKEN_SLIMPAY
+  }
+}
+
+export function getTokenSlimpayLoaded(tokenSlimpay, iframeContent) {
+  return {
+    type: GET_TOKEN_SLIMPAY_LOADED,
+    tokenSlimpay,
+    iframeContent
+  }
+}
+
+export function getTokenSlimpayError(error) {
+  return {
+    type: GET_TOKEN_SLIMPAY_ERROR,
+    error
   }
 }
 

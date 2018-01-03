@@ -54,20 +54,19 @@ export class Login extends React.Component {
   handleCode = event => {
     this.setState({ code: event.target.value })
   }
-  handleRoute() {
-
-  }
+  handleRoute() {}
 
   render() {
     return (
       <div>
         <Helmet>
-          <title>Soutenir ebdo</title>
+          <title>connexion à mon espace abonné ebdo</title>
           <meta name="description" content="Abonnement à ebdo le journal" />
         </Helmet>
 
         <ThemeProvider theme={theme}>
-          <LoginPage {...this.props}
+          <LoginPage
+            {...this.props}
             handleSubmit={this.handleSubmit}
             handleEmail={this.handleEmail}
             handleCode={this.handleCode}

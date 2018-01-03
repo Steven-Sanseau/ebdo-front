@@ -11,7 +11,8 @@ import { setPayementMethod } from 'actions/checkout'
 import {
   makeSelectTokenIsLoading,
   makeSelectTokenIsSetError,
-  makeSelectTokenMessageError
+  makeSelectTokenMessageError,
+  makeSelectIframeContent
 } from 'selectors/token'
 
 import { makeSelectOffer } from 'selectors/offer'
@@ -63,8 +64,19 @@ class PaymentStep extends React.Component {
     this.getStripeToken()
   }
 
+  componentDidMount() {
+    window.addEventListener('message', message => {
+      console.log(message)
+    })
+  }
+
   contentOpen() {
-    const { payementMethod, tokenMessageError, offer } = this.props
+    const {
+      payementMethod,
+      tokenMessageError,
+      offer,
+      slimpayIframe
+    } = this.props
 
     return (
       <div>
@@ -98,7 +110,7 @@ class PaymentStep extends React.Component {
           !offer.time_limited && (
             <Row>
               <Col xs={6}>
-                <SlimpayForm />
+                <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} />
               </Col>
             </Row>
           )}
@@ -160,7 +172,8 @@ PaymentStep.propTypes = {
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
   tokenMessageError: PropTypes.string,
-  offer: PropTypes.object
+  offer: PropTypes.object,
+  slimpayIframe: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -168,7 +181,8 @@ const mapStateToProps = createStructuredSelector({
   tokenIsLoading: makeSelectTokenIsLoading(),
   tokenMessageError: makeSelectTokenMessageError(),
   tokenIsError: makeSelectTokenIsSetError(),
-  offer: makeSelectOffer()
+  offer: makeSelectOffer(),
+  slimpayIframe: makeSelectIframeContent()
 })
 
 function mapDispatchToProps(dispatch) {

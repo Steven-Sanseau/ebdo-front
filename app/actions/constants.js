@@ -36,6 +36,11 @@ export const SET_TOKEN_STRIPE_LOADED =
   'app/Checkout/token/SET_TOKEN_STRIPE_LOADED'
 export const SET_TOKEN_STRIPE_ERROR =
   'app/Checkout/token/SET_TOKEN_STRIPE_ERROR'
+export const GET_TOKEN_SLIMPAY = 'app/Checkout/token/GET_TOKEN_SLIMPAY'
+export const GET_TOKEN_SLIMPAY_LOADED =
+  'app/Checkout/token/GET_TOKEN_SLIMPAY_LOADED'
+export const GET_TOKEN_SLIMPAY_ERROR =
+  'app/Checkout/token/GET_TOKEN_SLIMPAY_ERROR'
 
 export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
 export const SET_CGV_CONFIRM = 'app/Checkout/checkout/SET_CGV_CONFIRM'
