@@ -24,20 +24,20 @@ const LinkWrap = styled.div`
   a:hover {
     color: var(${props => (props.color ? props.color : 'inherit')});
   }
-  ${media.tablet`
+  ${media.desktop`
     display: none;
 `};
 `
 const LinkBurger = styled(LinkWrap)`
   text-align: left;
   margin-bottom: 10px;
-  ${media.tablet`
+  ${media.desktop`
     display: inherit;
   `};
 `
 
 const LinkWrapMobile = LinkWrap.extend`
-  ${media.tablet`
+  ${media.desktop`
     display: inherit;
     justify-content: center;
 `};
@@ -49,7 +49,7 @@ const Title = styled.h1`
   margin-bottom: ${props => (props.menuFixed ? '0' : '10px')};
   margin-top: 0;
   line-height: inherit;
-  ${media.tablet`
+  ${media.desktop`
     display: ${props => (props.menuFixed ? 'none' : 'inherit')};
     svg {
       width: 100px;
@@ -73,7 +73,7 @@ const FlexWrap = styled.div`
   .withBorder {
     border-left: 1px solid var(--silver);
     padding-left: 30px;
-    ${media.tablet`
+    ${media.desktop`
     border-right: ${props =>
     props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
@@ -82,11 +82,11 @@ const FlexWrap = styled.div`
   `};
   }
   .hidden-xs {
-    ${media.tablet`
+    ${media.desktop`
       display: none;
     `};
   }
-  ${media.tablet`
+  ${media.desktop`
     margin: ${props => (props.menuFixed ? '0' : '30px')}; 0;
 `};
 
@@ -104,9 +104,10 @@ const Menu = styled.nav`
     ${props => (props.menuFixed ? 'height: 50px;' : '')}
     overflow: hidden;
 
-    ${media.tablet`
+    ${media.desktop`
       width: calc(100% - 20px) !important;
       padding: 0;
+      justify-content: end;
     `};
 
     .narrowLinks {
@@ -117,7 +118,7 @@ const Menu = styled.nav`
 `
 const Burger = styled.div`
   display: none;
-  ${media.tablet`
+  ${media.desktop`
     display: ${props => (props.menuFixed ? 'inherit' : 'none')};
   `};
 

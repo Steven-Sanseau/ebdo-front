@@ -18,7 +18,8 @@ const Layout = styled.div`
   margin-right: auto;
 
   ${media.tablet`
-    padding: 40px 0;
+    padding: 0;
+    width: calc(100% - 20px);    
   `};
 `
 const TextLogin = styled.div`
@@ -39,6 +40,13 @@ const ColStyled = styled(Col)`
   background-color: white;
   padding: 50px;
   font-size: 18px;
+  
+  ${media.tablet`
+    margin-bottom: 30px;
+    font-size: 16px;
+    padding: 30px;
+    line-height: 22px;
+  `};
 
   .laSource {
     max-width: 200px;
@@ -46,6 +54,9 @@ const ColStyled = styled(Col)`
     margin-right: auto;
     margin-bottom: 40px;
     display: block;
+    ${media.tablet`
+      max-width: 100%;
+    `};
   }
   a {
     margin: 0;
@@ -65,6 +76,9 @@ const ColStyled = styled(Col)`
 
   &.mgr {
     margin-right: calc(100% / 23);
+    ${media.tablet`
+      margin-right: auto;
+    `};
   }
 `
 
@@ -79,7 +93,15 @@ const RowStyled = styled(Row)`
     font-size: 18px;
     margin: 0;
     margin-bottom: 30px;
+    ${media.tablet`
+      font-size: 16px;
+      line-height: 22px;
+  `};
   }
+  ${media.tablet`
+    padding-top: 50px;
+    padding-bottom: 140px;
+  `};
 `
 
 const TitleColor = styled.h2`
@@ -91,6 +113,9 @@ const TitleColor = styled.h2`
   margin-right: auto;
   text-align: center;
   width: 75%;
+  ${media.tablet`
+    font-size: 20px;
+  `};
 `
 const Title = styled.h2`
   font-size: 18px;
@@ -107,7 +132,7 @@ function LoginPage(props) {
     <LoginWrap>
         <Layout>
           <Row>
-            <Col xs={12}>
+            <Col m={13} mc>
               <Header />
             </Col>
           </Row>
