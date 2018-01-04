@@ -13,13 +13,13 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectStep } from 'selectors/step'
 import { makeSelectPathName } from 'selectors/route'
 import { nextStep, goToStep } from 'actions/step'
+import { newValidTokenSlimpay } from 'actions/token'
 import { newCheckout } from 'actions/checkout'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
 import CountryStep from 'containers/Step/CountryStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
-// import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
 import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
@@ -40,7 +40,11 @@ export class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatchNewCheckout()
+    if (this.props.pathName.indexOf('slimpay/valid') !== '') {
+      this.props.dispatchSlimpayTokenValid()
+    } else {
+      this.props.dispatchNewCheckout()
+    }
     // TODO Check if subscriptions
   }
 
@@ -141,6 +145,7 @@ export class Checkout extends React.Component {
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   dispatchNewCheckout: PropTypes.func,
+  dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
   pathName: PropTypes.object
@@ -148,13 +153,15 @@ Checkout.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   step: makeSelectStep(),
-  clientExist: makeSelectClientExist()
+  clientExist: makeSelectClientExist(),
+  pathName: makeSelectPathName()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
     dispatchNewCheckout: () => dispatch(newCheckout()),
+    dispatchSlimpayTokenValid: () => dispatch(newValidTokenSlimpay()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

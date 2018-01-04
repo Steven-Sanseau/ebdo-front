@@ -12,6 +12,8 @@ import Col from 'components/Grid/Col'
 import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
+import { logout } from 'actions/login'
+
 const LinkWrap = styled.div`
   text-align: center;
   margin-right: 30px;
@@ -157,8 +159,13 @@ class NavBar extends React.Component {
   handleRouteSubscribe = () => {
     this.props.dispatch(push('abonnement'))
   }
+
   handleRouteTryit = () => {
     this.props.dispatch(push('essai'))
+  }
+
+  handleRouteLogout = () => {
+    this.props.dispatch(logout())
   }
 
   handleStateChange(status) {
@@ -171,6 +178,7 @@ class NavBar extends React.Component {
       document.querySelector('.nav-menu').style.height = 'inherit'
     }
   }
+
   burgerToggle() {
     const linksEl = document.querySelector('.nav-menu')
     if (linksEl.style.height === '') linksEl.style.height = '50px'
@@ -242,6 +250,15 @@ class NavBar extends React.Component {
                     <Link to="/connexion">Connexion</Link>
                   </LinkWrapMobile>
                 )}
+                {this.props.isLoggedIn && (
+                  <LinkWrapMobile color="--squash" className="withBorder">
+                    <Button
+                      handleRoute={this.handleRouteLogout}
+                      color="--squash">
+                      Se déconnecter
+                    </Button>
+                  </LinkWrapMobile>
+                )}
                 <LinkWrapMobile style={menuFixed ? { marginRight: '0' } : {}}>
                   <Button
                     handleRoute={this.handleRouteSubscribe}
@@ -260,7 +277,7 @@ class NavBar extends React.Component {
               <div className="narrowLinks">
                 <LinkBurger
                   color="--tomato"
-                  style={page === 'equipe' ? { color: 'var(--tomato)' } : {}}>
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
                   <Link to="/equipe">L&apos;équipe</Link>
                 </LinkBurger>
                 <LinkBurger
@@ -275,7 +292,7 @@ class NavBar extends React.Component {
                   style={
                     page === '/source' ? { color: 'var(--peacock-blue)' } : {}
                   }>
-                  <Link to="source">La source</Link>
+                  <Link to="/source">La source</Link>
                 </LinkBurger>
                 <LinkBurger color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>

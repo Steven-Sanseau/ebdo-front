@@ -25,7 +25,9 @@ export default function App() {
         <Route exact path="/" component={Home} />
 
         <Redirect from="/subscribe" to="/abonnement" />
-        <Route path="/abonnement" component={Checkout} />
+        <Route exact path="/abonnement" component={Checkout} />
+        <Route exact path="/abonnement/slimpay/valid" component={Checkout} />
+
         <Redirect from="/offer" to="/offre" />
         <Route path="/offre" component={Offer} />
 

@@ -7,7 +7,10 @@ import {
   SET_TOKEN_STRIPE_LOADED,
   GET_TOKEN_SLIMPAY_ERROR,
   GET_TOKEN_SLIMPAY_LOADED,
-  GET_TOKEN_SLIMPAY
+  GET_TOKEN_SLIMPAY,
+  GET_VALID_TOKEN_SLIMPAY,
+  GET_VALID_TOKEN_SLIMPAY_LOADED,
+  GET_VALID_TOKEN_SLIMPAY_ERROR
 } from 'actions/constants'
 // import { EventTypes } from 'redux-segment'
 
@@ -69,5 +72,24 @@ export function setTokenStripeError(error) {
   return {
     type: SET_TOKEN_STRIPE_ERROR,
     error
+  }
+}
+
+export function getValidTokenSlimpay() {
+  return {
+    type: GET_VALID_TOKEN_SLIMPAY
+  }
+}
+
+export function getValidTokenSlimpayError(error) {
+  return {
+    type: GET_VALID_TOKEN_SLIMPAY_ERROR
+  }
+}
+
+export function getValidTokenSlimpayLoaded(tokenSlipay) {
+  return {
+    type: GET_VALID_TOKEN_SLIMPAY_LOADED,
+    tokenSlipay
   }
 }

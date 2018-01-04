@@ -9,57 +9,43 @@ import { media } from 'global-styles'
 
 import NavBar from 'components/NavBar'
 
-const TextWrap = styled(Col)`
-  padding-top: 100px;
-  padding-bottom: 100px;
-  p {
-    font-weight: 700;
-    font-size: 18px;
-  }
-`
-const Layout = styled.div`
-  width: calc(100% - 80px);
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-
-  ${media.tablet`
-    padding: 40px 0;
-  `};
-`
 const StyledIframe = styled(Iframe)`
   position: relative;
   min-height: 800px;
 `
 
 function SourcePage(props) {
+  const { client } = props
   return (
     <div>
       <NavBar
         dispatch={props.dispatch}
         isFixed
-        page="source"
+        page="/source"
         isLoggedIn={props.isLoggedIn}
       />
-      <Layout>
-        <Row>
-          <TextWrap xs={12}>
-            {props.isLoggedIn && (
-              <StyledIframe
-                url="https://ebdo.typeform.com/to/Et1CiO?prenom=xxxxx&email=xxxxx"
-                display="initial"
-                position="relative"
-              />
-            )}
-            {!props.isLoggedIn && 'La source publique'}
-          </TextWrap>
-        </Row>
-      </Layout>
-      <Footer />
+      <Row>
+        <Col xs={12}>
+          {props.isLoggedIn && (
+            <StyledIframe
+              url={`https://ebdo.typeform.com/to/Et1CiO?prenom=${
+                client.first_name
+              }&email=${client.email}`}
+              display="initial"
+              position="relative"
+            />
+          )}
+          {!props.isLoggedIn && 'La source publique'}
+        </Col>
+      </Row>
     </div>
   )
 }
 
-SourcePage.propTypes = { dispatch: PropTypes.func, isLoggedIn: PropTypes.bool }
+SourcePage.propTypes = {
+  dispatch: PropTypes.func,
+  isLoggedIn: PropTypes.bool,
+  client: PropTypes.object
+}
 
 export default SourcePage

@@ -172,8 +172,8 @@ function LoginPage(props) {
                     type="number"
                     value={code}
                     onChange={handleCode}
-                    placeholder="557590"
-                    label="Code reçu par email"
+                    placeholder="1234"
+                    label="Votre code reçu par email"
                   />
                 </div>
               )}

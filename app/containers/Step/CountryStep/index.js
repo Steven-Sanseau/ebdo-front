@@ -25,8 +25,9 @@ class CountryStep extends React.Component {
     this.state = {
       countryList: [
         { label: 'France', value: 'FR' },
-        { label: 'Luxenbourg', value: 'LU' },
-        { label: 'Belgique', value: 'BE' }
+        { label: 'Belgique', value: 'BE' },
+        { label: 'Suisse', value: 'CH' },
+        { label: 'Luxenbourg', value: 'LU' }
       ]
     }
 
