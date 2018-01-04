@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 
 import { makeSelectPathName } from 'selectors/route'
 import { makeSelectOffer } from 'selectors/offer'
+import { makeIsLoggedIn } from 'selectors/login'
 import { setOfferParams } from 'actions/offer'
 
 import { ThemeProvider } from 'styled-components'
@@ -22,7 +23,13 @@ const theme = {
 
 class Home extends React.Component {
   render() {
-    const { dispatch, page, dispatchSetOfferParams, offer } = this.props
+    const {
+      dispatch,
+      page,
+      dispatchSetOfferParams,
+      offer,
+      isLoggedIn
+    } = this.props
 
     return (
       <div>
@@ -36,6 +43,7 @@ class Home extends React.Component {
             page={page}
             dispatchSetOfferParams={dispatchSetOfferParams}
             offer={offer}
+            isLoggedIn={isLoggedIn}
           />
         </ThemeProvider>
         <CookieBannerWrapper />
@@ -48,12 +56,14 @@ Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
   dispatchSetOfferParams: PropTypes.func,
   offer: PropTypes.object,
-  page: PropTypes.string
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   page: makeSelectPathName(),
-  offer: makeSelectOffer()
+  offer: makeSelectOffer(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {

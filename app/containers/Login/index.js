@@ -4,14 +4,18 @@ import { Row } from 'react-flexbox-grid'
 import styled from 'styled-components'
 
 import Helmet from 'react-helmet'
+import { ThemeProvider } from 'styled-components'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { makeSelectLogin } from 'selectors/login'
-import { loginEmail, loginEmailCode } from '../../actions/login'
+import {
+  makeSelectLogin,
+  makeSelectWaitingForCode,
+  makeIsLoadingLogin
+} from 'selectors/login'
+import { loginEmail, loginEmailCode } from 'actions/login'
 
 import Layout from 'containers/Checkout/Layout'
-import { ThemeProvider } from 'styled-components'
 import LoginPage from 'components/LoginPage'
 
 const theme = {
@@ -39,6 +43,7 @@ export class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    const { waitingForCode } = this.props
 
     if (waitingForCode && this.state.code !== '') {
       this.props.dispatchLoginEmailCode(this.state.email, this.state.code)
@@ -54,9 +59,12 @@ export class Login extends React.Component {
   handleCode = event => {
     this.setState({ code: event.target.value })
   }
-  handleRoute() {}
+  handleRoute = event => {
+    this.handleSubmit(event)
+  }
 
   render() {
+    const { isLoadingLogin } = this.props
     return (
       <div>
         <Helmet>
@@ -73,6 +81,7 @@ export class Login extends React.Component {
             handleRoute={this.handleRoute}
             code={this.state.code}
             email={this.state.email}
+            isLoadingLogin={isLoadingLogin}
           />
         </ThemeProvider>
       </div>
@@ -81,11 +90,15 @@ export class Login extends React.Component {
 }
 Login.propTypes = {
   dispatchLoginEmail: PropTypes.func,
-  dispatchLoginEmailCode: PropTypes.func
+  dispatchLoginEmailCode: PropTypes.func,
+  waitingForCode: PropTypes.bool,
+  isLoadingLogin: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectLogin()
+  login: makeSelectLogin(),
+  waitingForCode: makeSelectWaitingForCode(),
+  isLoadingLogin: makeIsLoadingLogin()
 })
 
 function mapDispatchToProps(dispatch) {

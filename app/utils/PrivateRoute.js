@@ -7,10 +7,6 @@ import { createStructuredSelector } from 'reselect'
 import { makeIsLoggedIn } from 'selectors/login'
 
 class PrivateRoute extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {}
 
   render() {
@@ -40,8 +36,6 @@ class PrivateRoute extends Component {
 
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
-  dispatch: PropTypes.func,
-  isAuthenticated: PropTypes.bool,
   isLoggedIn: PropTypes.bool
 }
 
@@ -53,11 +47,4 @@ const mapStateToProps = createStructuredSelector({
   isLoggedIn: makeIsLoggedIn()
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    nextStep: () => dispatch(nextStep()),
-    dispatch
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)
+export default connect(mapStateToProps, {})(PrivateRoute)

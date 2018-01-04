@@ -8,6 +8,21 @@ const makeSelectToken = () =>
   createSelector(selectLogin, login => login.get('token'))
 
 const makeIsLoggedIn = () =>
-  createSelector(selectLogin, login => login.get('isUserConnected'))
+  createSelector(
+    selectLogin,
+    login => login.get('isUserConnected') && login.get('token') !== null
+  )
 
-export { makeSelectToken, makeIsLoggedIn, makeSelectLogin }
+const makeIsLoadingLogin = () =>
+  createSelector(selectLogin, login => login.get('loading'))
+
+const makeSelectWaitingForCode = () =>
+  createSelector(selectLogin, login => login.get('waitingForCode'))
+
+export {
+  makeSelectToken,
+  makeIsLoggedIn,
+  makeSelectLogin,
+  makeSelectWaitingForCode,
+  makeIsLoadingLogin
+}

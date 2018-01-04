@@ -126,18 +126,25 @@ function HomeLanding() {
         </ImageWrap>
         <BlockWrap w={8}>
           <Title mc m={13}>
-            <h2>ebdo <span>est un journal</span> papier, indépendant <span>et</span>{' '}
-            proche de ses lecteurs.</h2>
+            <h2>
+              ebdo <span>est un journal</span> papier, indépendant{' '}
+              <span>et</span> proche de ses lecteurs.
+            </h2>
           </Title>
           <Text mc m={13}>
-            <p>Un projet par les créateurs de{' '}
-            <img src="/XXI.png" alt="XXI" height="22" /> et
-            <img src="/6mois-black.png" alt="6 mois" height="18" /> grâce au
-            soutien des 5 960 lecteurs qui nous ont fait confiance et soutenu
-            lors de{' '}
-            <AWrapper href="https://www.kisskissbankbank.com/ebdo-un-journal-independant-et-inspirant">
-              notre campagne de financement participatif.
-            </AWrapper></p>
+            <p>
+              Un projet par les créateurs de{' '}
+              <img src="/XXI.png" alt="XXI" height="15" /> et
+              <img src="/6mois-black.png" alt="6 mois" height="15" /> grâce au
+              soutien des 5 960 lecteurs qui nous ont fait confiance et soutenu
+              lors de{' '}
+              <AWrapper
+                target="_blank"
+                rel="noopener"
+                href="https://www.kisskissbankbank.com/ebdo-un-journal-independant-et-inspirant">
+                notre campagne de financement participatif.
+              </AWrapper>
+            </p>
           </Text>
           <Discover>
             <img src="illu-test.jpg" alt="illustration cover" width="100%" />

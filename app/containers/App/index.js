@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import PrivateRoute from 'utils/PrivateRoute'
+import PublicRoute from 'utils/PublicRoute'
 
 import Home from 'containers/Home/Loadable'
 import Checkout from 'containers/Checkout/Loadable'
@@ -41,12 +42,15 @@ export default function App() {
         <Redirect from="/manifest" to="/manifeste" />
         <Redirect from="/pourquoi" to="/manifeste" />
         <Route exact path="/manifeste" component={Manifest} />
+
+        <Redirect from="/lasource" to="/source" />
         <PrivateRoute exact path="/source" component={Source} />
 
         <Redirect from="/login" to="/connexion" />
-        <Route exact path="/connexion" component={Login} />
+        <PublicRoute exact path="/connexion" component={Login} />
+
         <Redirect from="/logout" to="/connexion" />
-        <Route exact path="/logout" component={Login} />
+        {/* <Route exact path="/logout" component={Login} /> */}
 
         <Route component={NotFoundPage} />
       </Switch>

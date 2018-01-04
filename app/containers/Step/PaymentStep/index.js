@@ -64,12 +64,6 @@ class PaymentStep extends React.Component {
     this.getStripeToken()
   }
 
-  componentDidMount() {
-    window.addEventListener('message', message => {
-      console.log(message)
-    })
-  }
-
   contentOpen() {
     const {
       payementMethod,

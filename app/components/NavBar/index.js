@@ -75,7 +75,7 @@ const FlexWrap = styled.div`
     padding-left: 30px;
     ${media.desktop`
     border-right: ${props =>
-    props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
+      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
@@ -89,20 +89,23 @@ const FlexWrap = styled.div`
   ${media.desktop`
     margin: ${props => (props.menuFixed ? '0' : '30px')}; 0;
 `};
-
 `
 
 const Menu = styled.nav`
   background: white;
 
   .nav-menu {
-    width: ${props => (props.menuFixed ? 'calc(100% - 50px)' : 'calc(100% - 80px)')};
+    width: ${props =>
+      props.menuFixed ? 'calc(100% - 50px)' : 'calc(100% - 80px)'};
     margin-left: auto;
     margin-right: auto;
-    ${props => (props.menuFixed ? 'padding: 6px 0;' : '')}
-    transition: transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out;
-    ${props => (props.menuFixed ? 'height: 50px;' : '')}
-    overflow: hidden;
+    ${props =>
+      props.menuFixed
+        ? 'padding: 6px 0;'
+        : ''} transition: transform 0.2s ease-out,
+      height 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+      -webkit-transform 0.2s ease-out;
+    ${props => (props.menuFixed ? 'height: 50px;' : '')} overflow: hidden;
 
     ${media.desktop`
       width: calc(100% - 20px) !important;
@@ -112,7 +115,7 @@ const Menu = styled.nav`
 
     .narrowLinks {
       display: ${props => (props.menuFixed ? 'block' : 'none')};
-      ${props => (props.page !== '/' ? 'display: none;' : '')}
+      ${props => (props.page !== '/' ? 'display: none;' : '')};
     }
   }
 `
@@ -121,7 +124,6 @@ const Burger = styled.div`
   ${media.desktop`
     display: ${props => (props.menuFixed ? 'inherit' : 'none')};
   `};
-
 `
 
 const menuFixedStyle = {
@@ -171,7 +173,7 @@ class NavBar extends React.Component {
   }
   burgerToggle() {
     const linksEl = document.querySelector('.nav-menu')
-    if(linksEl.style.height === '') linksEl.style.height = '50px'
+    if (linksEl.style.height === '') linksEl.style.height = '50px'
     if (linksEl.style.height === '50px') {
       linksEl.style.height = '194px'
     } else {
@@ -191,8 +193,7 @@ class NavBar extends React.Component {
         <Menu
           menuFixed={menuFixed}
           style={menuFixed ? menuFixedStyle : menuStyle}
-          page={page}
-        >
+          page={page}>
           <Row between="sm" className="nav-menu">
             <Col m={13} mc>
               <Title menuFixed={menuFixed}>
@@ -209,53 +210,49 @@ class NavBar extends React.Component {
             </Col>
             <Col m={13}>
               <FlexWrap menuFixed={menuFixed}>
-
-              <Burger className="navNarrow" menuFixed={menuFixed} sm={false}>
-                <div className="ctn-hamburger" onClick={this.burgerToggle}>
-                  <div className="hamburger" />
-                </div>
-              </Burger>
+                <Burger className="navNarrow" menuFixed={menuFixed} sm={false}>
+                  <div className="ctn-hamburger" onClick={this.burgerToggle}>
+                    <div className="hamburger" />
+                  </div>
+                </Burger>
                 <LinkWrap
                   color="--tomato"
-                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}
-                >
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
                   <Link to="/equipe">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
                     page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
-                  }
-                >
+                  }>
                   <Link to="/manifeste">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--peacock-blue"
                   style={
                     page === '/source' ? { color: 'var(--peacock-blue)' } : {}
-                  }
-                >
+                  }>
                   <Link to="/source">La Source</Link>
                 </LinkWrap>
                 <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
-                <LinkWrapMobile color="--squash" className="withBorder">
-                  <Link to="/connexion">Connexion</Link>
-                </LinkWrapMobile>
+                {!this.props.isLoggedIn && (
+                  <LinkWrapMobile color="--squash" className="withBorder">
+                    <Link to="/connexion">Connexion</Link>
+                  </LinkWrapMobile>
+                )}
                 <LinkWrapMobile style={menuFixed ? { marginRight: '0' } : {}}>
                   <Button
                     handleRoute={this.handleRouteSubscribe}
-                    color="--squash"
-                  >
+                    color="--squash">
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
                 <div style={menuFixed ? hidden : {}} className="hidden-xs">
                   <Button
                     handleRoute={this.handleRouteTryit}
-                    color="--warm-purple"
-                  >
+                    color="--warm-purple">
                     J&apos;essaye
                   </Button>
                 </div>
@@ -263,30 +260,25 @@ class NavBar extends React.Component {
               <div className="narrowLinks">
                 <LinkBurger
                   color="--tomato"
-                  style={page === 'equipe' ? { color: 'var(--tomato)' } : {}}
-                >
+                  style={page === 'equipe' ? { color: 'var(--tomato)' } : {}}>
                   <Link to="/equipe">L&apos;équipe</Link>
                 </LinkBurger>
                 <LinkBurger
                   color="--sunflower"
                   style={
                     page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
-                  }
-                >
+                  }>
                   <Link to="/manifeste">Pourquoi ?</Link>
                 </LinkBurger>
                 <LinkBurger
                   color="--peacock-blue"
                   style={
                     page === '/source' ? { color: 'var(--peacock-blue)' } : {}
-                  }
-                >
+                  }>
                   <Link to="source">La source</Link>
                 </LinkBurger>
                 <LinkBurger color="--topaz">
-                  <a href="http://fabrique.ebdo-lejournal.com/">
-                    La Fabrique
-                  </a>
+                  <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkBurger>
               </div>
             </Col>
@@ -300,7 +292,8 @@ class NavBar extends React.Component {
 NavBar.propTypes = {
   dispatch: PropTypes.func,
   isFixed: PropTypes.bool,
-  page: PropTypes.string
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 }
 
 export default NavBar
