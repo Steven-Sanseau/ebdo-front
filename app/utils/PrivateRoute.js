@@ -17,7 +17,7 @@ class PrivateRoute extends Component {
           {...rest}
           render={props =>
             isLoggedIn ? (
-              React.createElement(props, React.createElement(component, props))
+              React.createElement(component, props)
             ) : (
               <Redirect
                 to={{

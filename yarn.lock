@@ -7273,6 +7273,10 @@ react-helmet@5.2.0:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
+react-iframe@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.1.0.tgz#fe0ac2eee934750ddd3fce1993fc97a967711d69"
+
 react-images@^0.5.13:
   version "0.5.13"
   resolved "https://registry.yarnpkg.com/react-images/-/react-images-0.5.13.tgz#e9702aeb29042d14e5545f92d705851dac60db7e"
