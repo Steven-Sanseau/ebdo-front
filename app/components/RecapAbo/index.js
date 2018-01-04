@@ -30,17 +30,18 @@ const ColStyled = styled(ColCustom)`
   `};
 `
 const ImageWrapper = styled.div`
-  ${'' /* display: flex;
-  align-content: center;
-  justify-content: center;
-  margin-bottom: -60px; */} margin-bottom: -94px;
+  margin-bottom: -94px;
 
   ${media.tablet`
     img {
       z-index: -1;
       margin-bottom: -100px;
     }
+
   `};
+  img {
+    width: 100%;
+  }
 `
 
 const RecapAbo = props => (
@@ -48,7 +49,7 @@ const RecapAbo = props => (
     <Row between="sm">
       <ColStyled w={5} m={13} mc>
         <ImageWrapper>
-          <Image src="/0-couv.jpg" alt="Couv" width="100%" />
+          <Image src="/0-couv.jpg" alt="Couv" />
         </ImageWrapper>
       </ColStyled>
       <ColCustom w={5} m={13} mc>
