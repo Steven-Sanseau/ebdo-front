@@ -59,5 +59,6 @@ export const LOGIN_EMAIL_CODE = 'app/Login/LOGIN_EMAIL_CODE'
 export const LOGIN_EMAIL_CODE_ERROR = 'app/Login/LOGIN_EMAIL_CODE_ERROR'
 export const LOGIN_EMAIL_CODE_SUCCESS = 'app/Login/LOGIN_EMAIL_CODE_SUCCESS'
 
-export const CHANGE_NEWSLETTER_STATUS =
-  'app/Home/newsletter/CHANGE_NEWSLETTER_STATUS'
+export const POST_NEWSLETTER = 'app/Home/Newsletter/POST_NEWSLETTER'
+export const POST_NEWSLETTER_SUCCESS = 'app/Home/Newsletter/POST_NEWSLETTER_SUCCESS'
+export const POST_NEWSLETTER_ERROR = 'app/Home/Newsletter/POST_NEWSLETTER_ERROR'

@@ -1,8 +1,21 @@
-import { CHANGE_NEWSLETTER_STATUS } from './constants'
+import { POST_NEWSLETTER, POST_NEWSLETTER_SUCCESS, POST_NEWSLETTER_ERROR } from './constants'
 
-export function changeNewsletterStatus(status) {
+export function postNewsletter(newsletter) {
   return {
-    type: CHANGE_NEWSLETTER_STATUS,
-    status
+    type: POST_NEWSLETTER,
+    newsletter
+  }
+}
+
+export function postNewsletterSuccess() {
+  return {
+    type: POST_NEWSLETTER_SUCCESS
+  }
+}
+
+export function postNewsletterError(error) {
+  return {
+    type: POST_NEWSLETTER_ERROR,
+    error
   }
 }
