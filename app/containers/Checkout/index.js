@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-// import idx from 'idx'
 
 // STATE
 import { connect } from 'react-redux'
@@ -11,6 +10,7 @@ import { createStructuredSelector } from 'reselect'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
+import { makeSelectPathName } from 'selectors/route'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
 
@@ -18,6 +18,7 @@ import { newCheckout } from 'actions/checkout'
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
 import CountryStep from 'containers/Step/CountryStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
+// import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
 import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
@@ -97,6 +98,16 @@ export class Checkout extends React.Component {
               />
             </Col>
           </Row>
+          {/* <Row>
+            <Col xs={12}>
+              <EmailConfirmStep
+                stepNumber={4}
+                changeStep={this.changeStep}
+                nextStep={this.nextStep}
+                currentStep={step}
+              />
+            </Col>
+          </Row> */}
           <Row>
             <Col xs={12}>
               <DeliveryStep
@@ -140,11 +151,13 @@ Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   dispatchNewCheckout: PropTypes.func,
   nextStep: PropTypes.func,
-  goToStep: PropTypes.func
+  goToStep: PropTypes.func,
+  pathName: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep()
+  step: makeSelectStep(),
+  pathName: makeSelectPathName()
 })
 
 function mapDispatchToProps(dispatch) {

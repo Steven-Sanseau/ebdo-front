@@ -61,7 +61,6 @@ function* getTokenSlimpaySaga() {
       }
     })
     yield put(getTokenSlimpayLoaded(tokenResponse.token, tokenResponse.iframe))
-    yield put(nextStep())
   } catch (err) {
     yield put(getTokenSlimpayError(err.message))
   }
