@@ -28,11 +28,12 @@ export function loginEmailError(error) {
   }
 }
 
-export function loginEmailCode(email, code) {
+export function loginEmailCode(email, code, isCheckout = false) {
   return {
     type: LOGIN_EMAIL_CODE,
     email,
     code,
+    isCheckout,
     meta: {
       analytics: {
         eventType: EventTypes.identify,
