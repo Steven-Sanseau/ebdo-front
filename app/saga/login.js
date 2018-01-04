@@ -8,6 +8,7 @@ import {
   loginEmailCodeSuccess,
   loginEmailCodeError
 } from '../actions/login'
+import { nextStep } from '../actions/step'
 
 function* loginEmailSaga(action) {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/code/${
@@ -36,6 +37,10 @@ function* loginEmailCodeSaga(action) {
       headers: { 'Content-Type': 'application/json' }
     })
     yield put(loginEmailCodeSuccess(response.token))
+
+    // TODO Condition only during checkout
+    // TODO Check if client has subscription and fetch address
+    yield put(nextStep())
   } catch (err) {
     yield put(loginEmailCodeError(err.message))
   }

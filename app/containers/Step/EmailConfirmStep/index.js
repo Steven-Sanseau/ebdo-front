@@ -1,99 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 
-import { postCheckout, setCgvConfirm } from 'actions/checkout'
 import {
-  makeSelectCheckout,
-  makeSelectIsCGVChecked,
-  makeSelectIsCheckoutLoading
-} from 'selectors/checkout'
-
-import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
+  makeSelectLogin,
+  makeSelectWaitingForCode,
+  makeIsLoadingLogin
+} from 'selectors/login'
+import {
+  makeSelectClientEmail,
+} from 'selectors/client'
+import { loginEmailCode } from 'actions/login'
+import InputText from 'components/InputText'
 import ToggleStep from 'components/ToggleStep/Loadable'
-import FormGiftCode from 'components/FormGiftCode'
 
-class ConfirmEmailStep extends React.Component {
+class EmailConfirmStep extends React.Component {
   state = {
-    errorEmail: false,
-    errorMessage: ''
+    code: ""
   }
 
   handleNextStep = event => {
-    this.handleSubmit(event)
+    this.props.loginEmailCode(this.props.email, this.state.code)
+    // TODO Handle wrong code
   }
 
-  handleEmail = event => {
-    const email = event.target.value
-
-    this.resetEmail()
-    this.props.dispatchChangeEmail(email)
+  handleCode = event => {
+    this.setState({ code: event.target.value })
   }
 
-  resetEmail() {
-    this.setState({ errorEmail: false, errorMessage: '' })
-  }
-
-  validateEmail() {
-    const { email } = this.props
-
-    if (!emailRegex({ exact: true }).test(email)) {
-      this.setState({
-        errorEmail: true,
-        errorMessage: 'Veuillez entrer une adresse email valide'
-      })
-      return false
-    }
-
-    if (email === '') {
-      this.setState({
-        errorEmail: true,
-        errorMessage: 'Veuillez remplir votre email'
-      })
-      return false
-    }
-    return true
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-
-    if (this.validateEmail()) {
-      if (this.props.clientExist) {
-        this.props.dispatchUseClientExist()
-      } else {
-        this.props.dispatchPostClient()
-      }
-    }
-  }
   contentOpen() {
-    const { errorEmail, errorMessage } = this.state
-    const { email, clientExist } = this.props
-
     return (
       <div>
-        <FormGiftCode
-          handleEmail={this.handleEmail}
-          errorEmail={errorEmail}
-          errorMessage={errorMessage}
-          handleSubmitEmail={this.handleSubmit}
-          email={email}
+        <p>Veuillez rentrer le code reçu par email pour valider la connexion</p>
+        <InputText
+          name="code"
+          type="number"
+          value={this.state.code}
+          onChange={this.handleCode}
+          placeholder="557590"
+          label="Code reçu par email"
         />
-        {clientExist && (
-          <div>
-            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
-            vouloir passer une nouvelle commande ?
-          </div>
-        )}
       </div>
     )
   }
 
   contentClose() {
-    return <div>Vous avez validé votre commande</div>
+    return <div>Email validé</div>
   }
 
   render() {
@@ -114,38 +68,27 @@ class ConfirmEmailStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
-        textButtonNextStep=">> Je m'abonne !"
+        textButtonNextStep="Valider le code"
         isLoadingNextStep={checkoutIsLoading}
+        updateStepHide={true}
       />
     )
   }
 }
 
-ConfirmEmailStep.propTypes = {
-  checkoutIsLoading: PropTypes.bool,
-  checkout: PropTypes.object,
+EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchConfirmCheckout: PropTypes.func,
-  dispatchConfirmCGV: PropTypes.func,
-  isCGVAccepted: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout(),
-  isCGVAccepted: makeSelectIsCGVChecked(),
-  checkoutIsLoading: makeSelectIsCheckoutLoading()
+  email: makeSelectClientEmail()
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchConfirmCheckout: () => dispatch(postCheckout()),
-    dispatchConfirmCGV: () => dispatch(setCgvConfirm())
-  }
-}
+const mapDispatchToProps = { loginEmailCode }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(ConfirmEmailStep)
+export default compose(withConnect)(EmailConfirmStep)

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-// import idx from 'idx'
+import {
+  makeSelectClientExist
+} from 'selectors/client'
 
 // STATE
 import { connect } from 'react-redux'
@@ -21,6 +23,7 @@ import EmailStep from 'containers/Step/EmailStep/Loadable'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
 import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
+import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
@@ -38,6 +41,7 @@ export class Checkout extends React.Component {
 
   componentDidMount() {
     this.props.dispatchNewCheckout()
+    // TODO Check if subscriptions
   }
 
   nextStep() {
@@ -53,7 +57,62 @@ export class Checkout extends React.Component {
   }
 
   render() {
-    const { step } = this.props
+    const { step, clientExist } = this.props
+    let steps = [
+      <FormulaStep
+        stepNumber={1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <CountryStep
+        stepNumber={2}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <EmailStep
+        stepNumber={3}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ];
+
+    if (clientExist) {
+      steps.push(
+        <EmailConfirmStep
+          stepNumber={4}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      )
+    }
+
+    // TODO Remove delivery step if the user already has an address
+    steps = steps.concat([
+      <DeliveryStep
+        stepNumber={steps.length+1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <Elements>
+        <PaymentStep
+          stepNumber={steps.length+2}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      </Elements>,
+      <ConfirmStep
+        stepNumber={steps.length+3}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ])
 
     return (
       <div>
@@ -67,68 +126,11 @@ export class Checkout extends React.Component {
               <Header />
             </Col>
           </Row>
-          <Row>
+          {steps.map((step, index) => <Row key={index}>
             <Col xs={12}>
-              <FormulaStep
-                stepNumber={1}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
+              {step}
             </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CountryStep
-                stepNumber={2}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailStep
-                stepNumber={3}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <DeliveryStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Elements>
-                <PaymentStep
-                  stepNumber={5}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <ConfirmStep
-                stepNumber={6}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
+          </Row>)}
           <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
@@ -144,7 +146,8 @@ Checkout.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep()
+  step: makeSelectStep(),
+  clientExist: makeSelectClientExist()
 })
 
 function mapDispatchToProps(dispatch) {
