@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row } from 'react-flexbox-grid'
 import styled from 'styled-components'
 
 import Helmet from 'react-helmet'
@@ -15,7 +14,6 @@ import {
 } from 'selectors/login'
 import { loginEmail, loginEmailCode } from 'actions/login'
 
-import Layout from 'containers/Checkout/Layout'
 import LoginPage from 'components/LoginPage'
 
 const theme = {
