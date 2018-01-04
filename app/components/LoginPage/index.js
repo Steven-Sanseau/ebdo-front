@@ -128,8 +128,6 @@ const ButtonWrap = styled(Button)`
 `
 function LoginPage(props) {
   const {
-    loginEmail,
-    loginEmailCode,
     waitingForCode,
     handleSubmit,
     handleEmail,
