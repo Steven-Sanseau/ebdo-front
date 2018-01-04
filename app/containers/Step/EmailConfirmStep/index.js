@@ -22,7 +22,7 @@ class EmailConfirmStep extends React.Component {
   }
 
   handleNextStep = event => {
-    this.props.loginEmailCode(this.props.email, this.state.code)
+    this.props.loginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
   }
 
