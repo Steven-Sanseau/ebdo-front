@@ -27,21 +27,26 @@ const Layout = styled.div`
     padding: 40px 0;
   `};
 `
+const StyledIframe = styled(Iframe)`
+  position: relative;
+  min-height: 800px;
+`
 
 function SourcePage(props) {
   return (
     <div>
-      <NavBar dispatch={props.dispatch} isFixed page="source" />
+      <NavBar
+        dispatch={props.dispatch}
+        isFixed
+        page="source"
+        isLoggedIn={props.isLoggedIn}
+      />
       <Layout>
         <Row>
-          <TextWrap xs={12} sm={6} smOffset={3}>
+          <TextWrap xs={12}>
             {props.isLoggedIn && (
-              <Iframe
+              <StyledIframe
                 url="https://ebdo.typeform.com/to/Et1CiO?prenom=xxxxx&email=xxxxx"
-                width="450px"
-                height="450px"
-                id="ebdo-conencted-typeform"
-                className="ebdo-connected"
                 display="initial"
                 position="relative"
               />

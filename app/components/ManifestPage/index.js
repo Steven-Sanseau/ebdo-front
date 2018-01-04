@@ -69,7 +69,12 @@ const Profile = styled(Col)`
 function ManifestPage(props) {
   return (
     <div>
-      <NavBar dispatch={props.dispatch} isFixed page={props.page} />
+      <NavBar
+        dispatch={props.dispatch}
+        isFixed
+        page={props.page}
+        isLoggedIn={props.isLoggedIn}
+      />
       <IntroWrap>
         <Layout>
           <Row>
@@ -136,6 +141,10 @@ function ManifestPage(props) {
   )
 }
 
-ManifestPage.propTypes = { dispatch: PropTypes.func, page: PropTypes.string }
+ManifestPage.propTypes = {
+  dispatch: PropTypes.func,
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
+}
 
 export default ManifestPage
