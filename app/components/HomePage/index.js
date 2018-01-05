@@ -11,7 +11,7 @@ import ManifestoBlock from 'components/ManifestoBlock'
 import HomeLanding from 'components/HomeLanding'
 import ColCustom from 'components/Grid/Col'
 
-import { NaturalFormOrderContainer } from 'containers/NaturalFormOrderContainer'
+import NaturalFormOrderContainer from 'containers/NaturalFormOrderContainer/Loadable'
 import '!file-loader?name=[name].[ext]!../../images/home/abo-illu.png'
 
 const ProgressWrap = styled(Row)`
@@ -105,10 +105,7 @@ function HomePage(props) {
               </ImageWrap>
             </ColCustom>
             <ColCustom w={14} m={13} mc>
-              <NaturalFormOrderContainer
-                dispatchSetOfferParams={props.dispatchSetOfferParams}
-                offer={props.offer}
-              />
+              <NaturalFormOrderContainer />
             </ColCustom>
           </Row>
         </Row>

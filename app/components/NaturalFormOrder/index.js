@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import 'components/NaturalFormOrder/NaturalForm.css'
 import { media } from 'global-styles'
+import Youtube from 'react-youtube'
 
 import Dropdown from 'react-dropdown'
 import 'components/NaturalFormOrder/NaturalForm.css'
-// import { media } from 'global-styles'
-// import DropdownWrapper from 'components/FormFormulae'
 
 const DropdownWrap = styled(Dropdown)`
   display: inline-block;
@@ -61,7 +60,7 @@ const Subtitle = styled.p`
   margin: 0;
   ${media.tablet`
     line-height: 22px;
-  `}
+  `};
 `
 
 const TextWrap = styled.div`
@@ -69,10 +68,10 @@ const TextWrap = styled.div`
   line-height: 70px;
   font-weight: 500;
   letter-spacing: -1.3px;
-    ${media.tablet`
+  ${media.tablet`
       font-size: 35px;
       line-height: 50px;
-    `}
+    `};
 `
 const Help = styled.div`
   display: inline-block;
@@ -90,168 +89,212 @@ const Help = styled.div`
   color: white;
   ${media.tablet`
     margin-top: -20px;
-  `}
-  &:hover {
+  `} &:hover {
     transform: scale(1.1);
   }
 `
 
-const valueElem = (title, subtitle) => (
-  <div className="valueWrap">
-    <h3>{title}</h3>
-    <Subtitle>{subtitle}</Subtitle>
-  </div>
-)
-
-const options1 = [
-  {
-    value: 'false',
-    label: valueElem(
-      'Je reçois',
-      <span>
-        <strong>ebdo</strong> chez moi
-      </span>
-    )
-  },
-  {
-    value: 'true',
-    label: valueElem(
-      "J'offre",
-      <span>
-        <strong>ebdo</strong> à un proche
-      </span>
-    )
-  }
-]
-const options2 = [
-  {
-    value: '0',
-    label: valueElem(
-      'chaque mois',
-      <span>Sans engagement, je pourrais me désengager en un clic !</span>
-    )
-  },
-  {
-    value: '12',
-    label: valueElem(
-      'pendant 3 mois',
-      <span>Régler maintenant et recevez 12 numéros.</span>
-    )
-  },
-  {
-    value: '24',
-    label: valueElem(
-      'pendant 6 mois',
-      <span>Régler maintenant et recevez 24 numéros.</span>
-    )
-  },
-  {
-    value: '48',
-    label: valueElem(
-      'pendant 12 mois',
-      <span>Régler maintenant et recevez 48 numéros.</span>
-    )
-  }
-]
-const options3 = [
-  {
-    value: '10',
-    label: valueElem(
-      <span>
-        10€ <sup>/ mois</sup>
-      </span>,
-      <span>
-        <strong>ebdo</strong> sera presque à l'équilibre !
-      </span>
-    )
-  },
-  {
-    value: '15',
-    label: valueElem(
-      <span>
-        15€ <sup>/ mois</sup>
-      </span>,
-      <span>
-        <strong>ebdo</strong> sera à l'équilibre !
-      </span>
-    )
-  },
-  {
-    value: '20',
-    label: valueElem(
-      <span>
-        20€ <sup>/ mois</sup>
-      </span>,
-      <span>
-        Vous aiderez d'autres abonnés à s'offrir <strong>ebdo</strong> !
-      </span>
-    )
-  },
-  {
-    value: '5',
-    label: valueElem(
-      <span>
-        5€ <sup>/ mois</sup>
-      </span>,
-      <span>
-        Vous bénéficierez de la solidarité d'autres abonnés d'
-        <strong>ebdo</strong>
-      </span>
-    )
-  }
-]
-function NaturalFormOrder(props) {
-  const { handleChange, target, time, price, switchUI, isNaturalForm } = props
-  return (
-    <div>
-      <div className={isNaturalForm ? '' : 'hidden'}>
-        <DropdownWrap
-          className="dropdown-wrap"
-          options={options1}
-          value={options1.find(el => el.value === String(target))}
-          color="--warm-purple"
-          onChange={handleChange.bind(this, 'is_gift')}
-        />
-
-        <DropdownWrap
-          className="dropdown-wrap"
-          options={options2}
-          value={options2.find(el => el.value === String(time))}
-          color="--topaz"
-          onChange={handleChange.bind(this, 'duration')}
-        />
-
-        <TextWrap>
-          {String(time) === '0' && <span>4 numéros</span>}
-          {String(time) === '12' && <span>12 numéros</span>}
-          {String(time) === '24' && <span>24 numéros</span>}
-          {String(time) === '48' && <span>48 numéros</span>}
-          {String(target) === 'false' && <span> chez moi </span>}
-          {String(target) === 'true' && <span> à un proche </span>}
-          pour le prix de{' '}
-        </TextWrap>
-        <DropdownWrap
-          className="dropdown-wrap"
-          options={options3}
-          value={options3.find(el => el.value === String(price))}
-          color="--turquoise-blue"
-          onChange={handleChange.bind(this, 'monthly_price_ttc')}
-        />
-        <Help onClick={switchUI}>?</Help>
-      </div>
-      <div className={isNaturalForm ? 'hidden' : ''}>
-        <iframe
-          style={{maxWidth: '100%'}}
-          width="560"
-          height="315"
-          title="video explicative"
-          src="https://www.youtube.com/embed/8w0U_-j1eBI"
-          frameBorder="0"
-          allowFullScreen
-        />
-      </div>
+export class NaturalFormOrder extends React.Component {
+  valueElem = (title, subtitle) => (
+    <div className="valueWrap">
+      <h3>{title}</h3>
+      <Subtitle>{subtitle}</Subtitle>
     </div>
   )
+
+  render() {
+    const {
+      handleChange,
+      target,
+      time,
+      price,
+      switchUI,
+      isNaturalForm
+    } = this.props
+
+    const opts = {
+      height: '315',
+      width: '560',
+      playerVars: {
+        autoplay: 1
+      }
+    }
+    const options1 = [
+      {
+        value: '0',
+        label: this.valueElem(
+          'Je reçois',
+          <span>
+            <strong>ebdo</strong> chez moi
+          </span>
+        )
+      },
+      {
+        value: '1',
+        label: this.valueElem(
+          "J'offre",
+          <span>
+            <strong>ebdo</strong> à un proche
+          </span>
+        )
+      }
+    ]
+    const options2 = !target
+      ? [
+          {
+            value: '0',
+            label: this.valueElem(
+              'chaque mois',
+              <span>
+                Sans engagement, je pourrais me désengager en un clic !
+              </span>
+            )
+          },
+          {
+            value: '12',
+            label: this.valueElem(
+              'pendant 3 mois',
+              <span>Régler maintenant et recevez 12 numéros.</span>
+            )
+          },
+          {
+            value: '24',
+            label: this.valueElem(
+              'pendant 6 mois',
+              <span>Régler maintenant et recevez 24 numéros.</span>
+            )
+          },
+          {
+            value: '48',
+            label: this.valueElem(
+              'pendant 12 mois',
+              <span>Régler maintenant et recevez 48 numéros.</span>
+            )
+          }
+        ]
+      : [
+          {
+            value: '12',
+            label: this.valueElem(
+              'pendant 3 mois',
+              <span>Régler maintenant et recevez 12 numéros.</span>
+            )
+          },
+          {
+            value: '24',
+            label: this.valueElem(
+              'pendant 6 mois',
+              <span>Régler maintenant et recevez 24 numéros.</span>
+            )
+          },
+          {
+            value: '48',
+            label: this.valueElem(
+              'pendant 12 mois',
+              <span>Régler maintenant et recevez 48 numéros.</span>
+            )
+          }
+        ]
+
+    const options3 = [
+      {
+        value: '10',
+        label: this.valueElem(
+          <span>
+            10€ <sup>/ mois</sup>
+          </span>,
+          <span>
+            <strong>ebdo</strong> sera presque à l'équilibre !
+          </span>
+        )
+      },
+      {
+        value: '15',
+        label: this.valueElem(
+          <span>
+            15€ <sup>/ mois</sup>
+          </span>,
+          <span>
+            <strong>ebdo</strong> sera à l'équilibre !
+          </span>
+        )
+      },
+      {
+        value: '20',
+        label: this.valueElem(
+          <span>
+            20€ <sup>/ mois</sup>
+          </span>,
+          <span>
+            Vous aiderez d'autres abonnés à s'offrir <strong>ebdo</strong> !
+          </span>
+        )
+      },
+      {
+        value: '5',
+        label: this.valueElem(
+          <span>
+            5€ <sup>/ mois</sup>
+          </span>,
+          <span>
+            Vous bénéficierez de la solidarité d'autres abonnés d'
+            <strong>ebdo</strong>
+          </span>
+        )
+      }
+    ]
+    return (
+      <div>
+        <div className={isNaturalForm ? '' : 'hidden'}>
+          <DropdownWrap
+            className="dropdown-wrap"
+            options={options1}
+            value={options1.find(el => el.value === (target ? '1' : '0'))}
+            color="--warm-purple"
+            onChange={handleChange.bind(this, 'is_gift')}
+          />
+
+          <DropdownWrap
+            className="dropdown-wrap"
+            options={options2}
+            value={options2.find(
+              el => el.value === (target && time === 0 ? '24' : String(time))
+            )}
+            color="--topaz"
+            onChange={handleChange.bind(this, 'duration')}
+          />
+
+          <TextWrap>
+            {String(time) === '0' && <span>4 numéros</span>}
+            {String(time) === '12' && <span>12 numéros</span>}
+            {String(time) === '24' && <span>24 numéros</span>}
+            {String(time) === '48' && <span>48 numéros</span>}
+            {String(target) === 'false' && <span> chez moi </span>}
+            {String(target) === 'true' && <span> à un proche </span>}
+            pour le prix de{' '}
+          </TextWrap>
+          <DropdownWrap
+            className="dropdown-wrap"
+            options={options3}
+            value={options3.find(el => el.value === String(price))}
+            color="--turquoise-blue"
+            onChange={handleChange.bind(this, 'monthly_price_ttc')}
+          />
+          <Help onClick={switchUI}>?</Help>
+        </div>
+        <div className={isNaturalForm ? 'hidden' : ''}>
+          <Youtube
+            videoId="L6lRmAYFI9U"
+            id="L6lRmAYFI9U"
+            className={isNaturalForm ? 'hidden' : ''}
+            onReady={this.onReadyYoutube}
+            style={{ maxWidth: '100%' }}
+            title="Nos tarifs expliqués"
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
 NaturalFormOrder.propTypes = {
