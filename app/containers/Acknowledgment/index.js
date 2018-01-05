@@ -40,9 +40,9 @@ export class Acknowledgment extends React.Component {
               <div>
                 Vous possédez déjà un abonnement il est donc impossible de vous réabonner.
                 <div>
-                  {subscriptions.map(subscription => {
+                  {subscriptions.map((subscription, key) => {
                     if (subscription.status === "01") {
-                      return <Subscription>
+                      return <Subscription key={key}>
                         <p>Abonnement du {new Date(subscription.begin_at).toLocaleDateString()} au {new Date(subscription.end_at).toLocaleDateString()}</p>
                         <p>Dernier numéro reçu n°{subscription.last_number_delivered}</p>
                       </Subscription>
