@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectStep } from 'selectors/step'
 import { makeSelectPathName } from 'selectors/route'
 import { nextStep, goToStep } from 'actions/step'
-import { newValidTokenSlimpay } from 'actions/token'
+import { getValidTokenSlimpay } from 'actions/token'
 import { newCheckout } from 'actions/checkout'
 
 // CONTAINERS
@@ -40,7 +40,8 @@ export class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.pathName.indexOf('slimpay/valid') !== '') {
+    console.log(this.props.pathName)
+    if (this.props.pathName.indexOf('slimpay/valid') !== -1) {
       this.props.dispatchSlimpayTokenValid()
     } else {
       this.props.dispatchNewCheckout()
@@ -148,7 +149,7 @@ Checkout.propTypes = {
   dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
-  pathName: PropTypes.object
+  pathName: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -161,7 +162,7 @@ function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
     dispatchNewCheckout: () => dispatch(newCheckout()),
-    dispatchSlimpayTokenValid: () => dispatch(newValidTokenSlimpay()),
+    dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
     goToStep: step => dispatch(goToStep(step))
   }
 }

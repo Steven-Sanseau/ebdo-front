@@ -11,7 +11,8 @@ const Address = new Record(
     postal_code: null,
     country: null,
     company: null,
-    type_address: null
+    type_address: null,
+    address_equal: false
   },
   'address'
 )

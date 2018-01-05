@@ -104,7 +104,12 @@ class PaymentStep extends React.Component {
           !offer.time_limited && (
             <Row>
               <Col xs={6}>
-                <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} />
+                {/* // IFRAME SLIMPAY TRANSFORMED TO LINK */}
+                {/* <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} /> */}
+                {slimpayIframe &&
+                  slimpayIframe.href && (
+                    <a href={slimpayIframe.href}>Enregistrer mon mandat</a>
+                  )}
               </Col>
             </Row>
           )}

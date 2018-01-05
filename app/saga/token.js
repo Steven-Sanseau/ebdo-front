@@ -5,7 +5,8 @@ import request from 'utils/request'
 import {
   SET_TOKEN_STRIPE_LOADED,
   GET_TOKEN_SLIMPAY,
-  SET_PAYMENT_METHOD
+  SET_PAYMENT_METHOD,
+  GET_VALID_TOKEN_SLIMPAY
 } from 'actions/constants'
 import {
   postToken,
@@ -13,7 +14,9 @@ import {
   postTokenError,
   getTokenSlimpay,
   getTokenSlimpayError,
-  getTokenSlimpayLoaded
+  getTokenSlimpayLoaded,
+  getValidTokenSlimpayError,
+  getValidTokenSlimpayLoaded
 } from 'actions/token'
 import { nextStep } from 'actions/step'
 
@@ -66,6 +69,27 @@ function* getTokenSlimpaySaga() {
   }
 }
 
+function* getValidTokenSlimpaySaga() {
+  const token = yield select(makeSelectTokenData())
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token/slimpay/valid/${
+    token.token_id
+  }`
+  const method = 'GET'
+
+  try {
+    const tokenResponse = yield call(request, paramsApiUrl, {
+      method,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    yield put(getValidTokenSlimpay(tokenResponse.token))
+    yield put(nextStep())
+  } catch (err) {
+    yield put(getValidTokenSlimpay(err.message))
+  }
+}
+
 function* dispatchGetTokenSlimpay(action) {
   if (action.method === 1) {
     yield put(getTokenSlimpay())
@@ -76,4 +100,5 @@ export default function* sagaToken() {
   yield takeEvery(SET_PAYMENT_METHOD, dispatchGetTokenSlimpay)
   yield takeEvery(SET_TOKEN_STRIPE_LOADED, postTokenStripeSaga)
   yield takeEvery(GET_TOKEN_SLIMPAY, getTokenSlimpaySaga)
+  yield takeEvery(GET_VALID_TOKEN_SLIMPAY, getValidTokenSlimpaySaga)
 }

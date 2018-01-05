@@ -8,6 +8,9 @@ const makeSelectAddress = () =>
 const makeSelectAddressIsLoading = () =>
   createSelector(selectAddress, address => address.get('loading'))
 
+const makeSelectAddressIsEqual = () =>
+  createSelector(selectAddress, address => address.get('addressIsEqual'))
+
 const makeSelectAddressDelivery = () =>
   createSelector(selectAddress, address => address.get('delivery').toJS())
 
@@ -25,6 +28,7 @@ const makeSelectAddressCountry = () =>
 
 export {
   makeSelectAddress,
+  makeSelectAddressIsEqual,
   makeSelectAddressId,
   makeSelectAddressCountry,
   makeSelectAddressDelivery,

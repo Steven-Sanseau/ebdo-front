@@ -14,7 +14,10 @@ import {
   NEW_CHECKOUT_TRY,
   GET_TOKEN_SLIMPAY_LOADED,
   GET_TOKEN_SLIMPAY_ERROR,
-  GET_TOKEN_SLIMPAY
+  GET_TOKEN_SLIMPAY,
+  GET_VALID_TOKEN_SLIMPAY,
+  GET_VALID_TOKEN_SLIMPAY_LOADED,
+  GET_VALID_TOKEN_SLIMPAY_ERROR
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -62,13 +65,12 @@ function tokenReducer(state = initialState, action) {
         action.method === 2 ? 'stripe' : 'sepa'
       )
     case GET_TOKEN_SLIMPAY_LOADED: {
-      console.log(action)
       return state
         .set('error', false)
         .set('loading', false)
         .set('errorMessage', null)
         .set('data', new TokenModel(action.tokenSlimpay))
-        .set('slimpay_iframe_content', base64.decode(action.iframeContent))
+        .set('slimpay_iframe_content', action.iframeContent)
     }
     case GET_TOKEN_SLIMPAY_ERROR:
       return state
@@ -80,6 +82,22 @@ function tokenReducer(state = initialState, action) {
         .set('error', false)
         .set('loading', true)
         .set('errorMessage', null)
+    case GET_VALID_TOKEN_SLIMPAY:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('errorMessage', null)
+    case GET_VALID_TOKEN_SLIMPAY_ERROR:
+      return state
+        .set('loading', true)
+        .set('error', true)
+        .set('errorMessage', action.error)
+    case GET_VALID_TOKEN_SLIMPAY_LOADED:
+      return state
+        .set('loading', false)
+        .set('error', false)
+        .set('errorMessage', null)
+        .set('token', new TokenModel(action.tokenSlimpay))
     case NEW_CHECKOUT:
       return initialState
     case NEW_CHECKOUT_TRY:
