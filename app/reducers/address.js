@@ -46,7 +46,8 @@ function addressReducer(state = initialState, action) {
           action.payload.typeOfAddress
         )
         .setIn([action.payload.typeOfAddress, 'country'], country)
-        .setIn([action.payload.typeOfAddress, 'address_equal'], false)
+        .setIn(['invoice', 'address_equal'], false)
+        .setIn(['delivery', 'address_equal'], false)
     }
     case POST_ADRESS_ERROR: {
       if (action.error.response.status === 404) {

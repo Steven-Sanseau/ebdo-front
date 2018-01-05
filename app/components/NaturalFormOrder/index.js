@@ -37,7 +37,7 @@ const DropdownWrap = styled(Dropdown)`
   .Dropdown-option.is-selected h3 {
     color: var(${props => (props.color ? props.color : '--black')});
   }
-  .Dropdown-option .valueWrap:hover h3 {
+  .Dropdown-option:hover .valueWrap .title {
     color: var(${props => (props.color ? props.color : '--black')});
   }
   .Dropdown-root:not(.is-open):after {
@@ -97,7 +97,7 @@ const Help = styled.div`
 export class NaturalFormOrder extends React.Component {
   valueElem = (title, subtitle) => (
     <div className="valueWrap">
-      <h3>{title}</h3>
+      <h3 className="title">{title}</h3>
       <Subtitle>{subtitle}</Subtitle>
     </div>
   )
@@ -252,6 +252,9 @@ export class NaturalFormOrder extends React.Component {
             value={options1.find(el => el.value === (target ? '1' : '0'))}
             color="--warm-purple"
             onChange={handleChange.bind(this, 'is_gift')}
+            onClick={() => {
+              console.log('clic')
+            }}
           />
 
           <DropdownWrap

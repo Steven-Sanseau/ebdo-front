@@ -40,6 +40,7 @@ const LinkWrapper = styled(Link)`
 
 class NaturalFormOrderContainer extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
+
   state = { isNaturalForm: true }
 
   handleChange = (key, event) => {
@@ -70,7 +71,8 @@ class NaturalFormOrderContainer extends React.Component {
 
   render() {
     const { isNaturalForm } = this.state
-    const { offer } = this.props
+
+    const { offer, isFormOpen } = this.props
 
     return (
       <div>
@@ -80,7 +82,8 @@ class NaturalFormOrderContainer extends React.Component {
           time={offer.data.duration}
           price={offer.data.monthly_price_ttc}
           isNaturalForm={isNaturalForm}
-          switchUI={this.switchUI}
+          switchUI={this.props.switchUI}
+          isFormOpen={isFormOpen}
         />
         {isNaturalForm && (
           <ButtonWrap>
