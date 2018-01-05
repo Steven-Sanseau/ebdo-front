@@ -70,3 +70,6 @@ export const POST_NEWSLETTER = 'app/Home/Newsletter/POST_NEWSLETTER'
 export const POST_NEWSLETTER_SUCCESS =
   'app/Home/Newsletter/POST_NEWSLETTER_SUCCESS'
 export const POST_NEWSLETTER_ERROR = 'app/Home/Newsletter/POST_NEWSLETTER_ERROR'
+
+export const GET_SUBSCRIPTIONS_LOADED = 'app/Checkout/subscriptions/GET_SUBSCRIPTIONS_LOADED'
+

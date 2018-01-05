@@ -3,8 +3,7 @@ import Immutable from 'immutable'
 import {
   NEXT_STEP,
   UPDATE_STEP,
-  NEW_CHECKOUT,
-  NEW_CHECKOUT_TRY
+  NEW_CHECKOUT
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -20,8 +19,6 @@ function stepReducer(state = initialState, action) {
     case UPDATE_STEP:
       return state.set('value', action.step)
     case NEW_CHECKOUT:
-      return initialState
-    case NEW_CHECKOUT_TRY:
       return initialState
     default:
       return state

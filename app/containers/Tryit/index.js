@@ -7,7 +7,10 @@ import { Row, Col } from 'react-flexbox-grid'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectStep } from 'selectors/step'
+import { makeSelectLogin } from 'selectors/login'
 import { newCheckoutTry } from 'actions/checkout'
+import { makeSelectSubscriptionData } from 'selectors/subscription'
+import { nextStep, goToStep } from 'actions/step'
 
 // CONTAINERS
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
@@ -36,7 +39,7 @@ export class Tryit extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatchNewCheckoutTry()
   }
 
@@ -117,6 +120,7 @@ export class Tryit extends React.Component {
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
+                displayInvoiceAddress={false}
               />
             </Col>
           </Row>

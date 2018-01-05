@@ -76,10 +76,12 @@ function clientReducer(state = initialState, action) {
     case LOGIN_EMAIL_CODE_SUCCESS:
       return state
         .set('data', new ClientModel(jwtDecode(action.token)))
+    /* This is commented because it remove the data from the logged user, why ?
     case NEW_CHECKOUT:
       return initialState
     case NEW_CHECKOUT_TRY:
       return initialState
+    */
     default:
       return state
   }

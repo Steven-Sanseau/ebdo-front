@@ -18,6 +18,8 @@ import {
   NEW_CHECKOUT,
   NEW_CHECKOUT_TRY
 } from 'actions/constants'
+import jwtDecode from "jwt-decode";
+import {LOGIN_EMAIL_CODE_SUCCESS} from "../actions/constants";
 
 const initialState = Immutable.fromJS({
   loading: false,
@@ -38,6 +40,9 @@ function checkoutReducer(state = initialState, action) {
       return state.setIn(['data', 'client_id'], action.client.client_id)
     case POST_CLIENT_LOADED:
       return state.setIn(['data', 'client_id'], action.client.client_id)
+    case LOGIN_EMAIL_CODE_SUCCESS:
+      const clientData = jwtDecode(action.token)
+      return state.setIn(['data', 'client_id'], clientData.client_id)
     case GET_OFFER_LOADED:
       return state
         .setIn(['data', 'offer_id'], action.offer.offer_id)
