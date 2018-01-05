@@ -28,7 +28,7 @@ export default function App() {
         <Redirect from="/subscribe" to="/abonnement" />
         <Route path="/abonnement" component={Checkout} />
 
-        <Route exact path="/abo/merci" component={Acknowledgment} />
+        <Route exact path="/abo/:type" component={Acknowledgment} />
 
         <Redirect from="/offer" to="/offre" />
         <Route exact path="/offre" component={Offer} />

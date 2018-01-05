@@ -15,6 +15,8 @@ import Header from 'components/Header'
 
 export class Acknowledgment extends React.Component {
   render() {
+    const { match } = this.props
+
     return (
       <div>
         <Row center="xs" start="lg">
@@ -24,7 +26,8 @@ export class Acknowledgment extends React.Component {
         </Row>
         <Row center="xs">
           <Col xs={12}>
-            Nous sommes ravis de vous compter parmi les abonnés d’ebdo !
+            {match.params.type == 'merci' &&
+              'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
           </Col>
         </Row>
       </div>
@@ -33,7 +36,8 @@ export class Acknowledgment extends React.Component {
 }
 
 Acknowledgment.propTypes = {
-  pathName: PropTypes.string
+  pathName: PropTypes.string,
+  match: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
