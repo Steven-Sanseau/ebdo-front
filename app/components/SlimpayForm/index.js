@@ -9,7 +9,7 @@ export default class SlimpayForm extends Component {
   }
 
   render() {
-    return <div>SlimpayForm form</div>
+    return <div />
   }
 }
 

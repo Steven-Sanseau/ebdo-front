@@ -5,7 +5,8 @@ import {
   LOGIN_EMAIL_ERROR,
   LOGIN_EMAIL_CODE,
   LOGIN_EMAIL_CODE_SUCCESS,
-  LOGIN_EMAIL_CODE_ERROR
+  LOGIN_EMAIL_CODE_ERROR,
+  LOGOUT
 } from './constants'
 
 export function loginEmail(email) {
@@ -28,11 +29,12 @@ export function loginEmailError(error) {
   }
 }
 
-export function loginEmailCode(email, code) {
+export function loginEmailCode(email, code, isCheckout = false) {
   return {
     type: LOGIN_EMAIL_CODE,
     email,
     code,
+    isCheckout,
     meta: {
       analytics: {
         eventType: EventTypes.identify,
@@ -55,5 +57,11 @@ export function loginEmailCodeError(error) {
   return {
     type: LOGIN_EMAIL_CODE_ERROR,
     error
+  }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT
   }
 }

@@ -89,7 +89,8 @@ const Cover = styled.div`
   button {
     transition: opacity 0.2s ease-out;
   }
-  &:hover > img {
+  &:hover > img,
+  &:hover .pin {
     transform: translateX(-150px);
   }
   &:hover div img,
@@ -189,7 +190,7 @@ class Gallery extends React.Component {
     return (
       <Cover onClick={this.openLightbox}>
         <img src="0-couv.jpg" alt="couv" width="100%" />
-        <Pin>En kiosque cette semaine</Pin>
+        <Pin className="pin">En kiosque cette semaine</Pin>
         <Undercover>
           <img src="sommaire-droite.png" alt="sommaire" width="100%" />
           <div className="fond" />

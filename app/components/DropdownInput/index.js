@@ -12,17 +12,9 @@ class DropdownInput extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { value: null }
+    this.state = { value: this.props.value }
 
     this.handleSelect = this.handleSelect.bind(this)
-  }
-
-  componentDidMount() {
-    this.state.value = this.props.value
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.state.value = nextProps.value
   }
 
   handleSelect(value) {

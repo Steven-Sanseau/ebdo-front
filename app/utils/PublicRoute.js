@@ -2,50 +2,31 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
+import { createStructuredSelector } from 'reselect'
 
-import { isLoggedIn } from 'modules/auth/AuthActions'
+import { makeIsLoggedIn } from 'selectors/login'
 
 class PublicRoute extends Component {
-  static propTypes = {
-    component: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-    layout: PropTypes.func.isRequired,
-    isLoggedIn: PropTypes.func
-  }
-
-  static defaultProps = {
-    isAuthenticated: false,
-    isLoggedIn: () => {}
-  }
-
-  constructor(props) {
-    super(props)
-    if (!props.isAuthenticated) {
-      setTimeout(() => {
-        props.isLoggedIn()
-      }, 5)
-    }
-  }
+  componentDidMount() {}
 
   render() {
-    const { isAuthenticated, component, layout, ...rest } = this.props
-    if (isAuthenticated !== null) {
+    const { isLoggedIn, component, ...rest } = this.props
+    if (isLoggedIn !== null) {
       return (
         <Route
           {...rest}
           render={props =>
-            !isAuthenticated
-              ? React.createElement(
-                  layout,
-                  props,
-                  React.createElement(component, props)
-                )
-              : <Redirect
+            !isLoggedIn ? (
+              React.createElement(component, props)
+            ) : (
+              <Redirect
                 to={{
-                  pathname: '/projects',
+                  pathname: '/',
                   state: { from: props.location }
                 }}
-              />}
+              />
+            )
+          }
         />
       )
     }
@@ -53,12 +34,17 @@ class PublicRoute extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  isLoggedIn
+PublicRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+PublicRoute.defaultProps = {
+  isLoggedIn: false
+}
+
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: makeIsLoggedIn()
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PublicRoute)
+export default connect(mapStateToProps, {})(PublicRoute)

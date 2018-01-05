@@ -6,18 +6,19 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { makeSelectPathName } from 'selectors/route'
+import { makeIsLoggedIn } from 'selectors/login'
 import ManifestPage from 'components/ManifestPage'
 
 export class Manifest extends React.Component {
   render() {
-    const { dispatch, page } = this.props
+    const { dispatch, page, isLoggedIn } = this.props
     return (
       <div>
         <Helmet>
           <title>Manifest</title>
           <meta name="description" content="manifest ebdo" />
         </Helmet>
-        <ManifestPage dispatch={dispatch} page={page} />
+        <ManifestPage dispatch={dispatch} page={page} isLoggedIn={isLoggedIn} />
       </div>
     )
   }
@@ -25,11 +26,13 @@ export class Manifest extends React.Component {
 
 Manifest.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  page: PropTypes.string
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  page: makeSelectPathName()
+  page: makeSelectPathName(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {

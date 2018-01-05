@@ -18,13 +18,22 @@ const Wrapper = styled.div`
 `
 const SocialIcons = () => (
   <Wrapper>
-    <IconWrapper href="https://www.facebook.com/ebdolejournal/">
+    <IconWrapper
+      rel="noopener"
+      target="_blank"
+      href="https://www.facebook.com/ebdolejournal/">
       <Facebook />
     </IconWrapper>
-    <IconWrapper href="https://www.instagram.com/ebdolejournal/">
+    <IconWrapper
+      rel="noopener"
+      target="_blank"
+      href="https://www.instagram.com/ebdolejournal/">
       <Instagram />
     </IconWrapper>
-    <IconWrapper href="https://twitter.com/ebdolejournal/">
+    <IconWrapper
+      rel="noopener"
+      target="_blank"
+      href="https://twitter.com/ebdolejournal/">
       <Twitter />
     </IconWrapper>
   </Wrapper>

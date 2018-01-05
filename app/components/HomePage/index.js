@@ -11,7 +11,7 @@ import ManifestoBlock from 'components/ManifestoBlock'
 import HomeLanding from 'components/HomeLanding'
 import ColCustom from 'components/Grid/Col'
 
-import { NaturalFormOrderContainer } from 'containers/NaturalFormOrderContainer'
+import NaturalFormOrderContainer from 'containers/NaturalFormOrderContainer/Loadable'
 import '!file-loader?name=[name].[ext]!../../images/home/abo-illu.png'
 
 const ProgressWrap = styled(Row)`
@@ -76,22 +76,26 @@ const HomeLandingWrap = styled.div`
 function HomePage(props) {
   return (
     <Grid fluid>
-      <NavBar page={props.page} dispatch={props.dispatch} />
+      <NavBar
+        page={props.page}
+        dispatch={props.dispatch}
+        isLoggedIn={props.isLoggedIn}
+      />
       <HomeLandingWrap>
         <HomeLanding />
       </HomeLandingWrap>
       <Layout>
         <Row between="sm">
-          <ColCustom w={8}>
-          </ColCustom>
+          <ColCustom w={8} />
           <ColCustom w={14} m={13} mc>
             <Title>
               <span>L’expérience ebdo,</span> chez vous, au prix que vous
               souhaitez
             </Title>
             <TextWrap>
-              S'offrir <strong>ebdo</strong> chaque semaine, c'est choisir une
-              information indépendante, un journal sans pub et sans compromis.
+              S{"'"}offrir <strong>ebdo</strong> chaque semaine, c{"'"}est
+              choisir une information indépendante, un journal sans pub et sans
+              compromis.
             </TextWrap>
           </ColCustom>
           <Row between="sm">
@@ -101,10 +105,7 @@ function HomePage(props) {
               </ImageWrap>
             </ColCustom>
             <ColCustom w={14} m={13} mc>
-              <NaturalFormOrderContainer
-                dispatchSetOfferParams={props.dispatchSetOfferParams}
-                offer={props.offer}
-              />
+              <NaturalFormOrderContainer />
             </ColCustom>
           </Row>
         </Row>
@@ -124,7 +125,8 @@ HomePage.propTypes = {
   dispatch: PropTypes.func,
   page: PropTypes.string,
   offer: PropTypes.object,
-  dispatchSetOfferParams: PropTypes.func
+  dispatchSetOfferParams: PropTypes.func,
+  isLoggedIn: PropTypes.bool
 }
 
 export default HomePage

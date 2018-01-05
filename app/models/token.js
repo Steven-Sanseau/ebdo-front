@@ -3,7 +3,7 @@ import { Record } from 'immutable'
 const Token = new Record(
   {
     token_id: null,
-    token_type: null,
+    token_type: 'stripe',
     stripe_token_id: null,
     stripe_card_id: null,
     slimpay_rum_id: null,

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import emailRegex from 'email-regex'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-
 import { postCheckout, setCgvConfirm } from 'actions/checkout'
 import {
   makeSelectCheckout,
@@ -12,7 +12,6 @@ import {
   makeSelectIsCheckoutLoading
 } from 'selectors/checkout'
 
-import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import FormGiftCode from 'components/FormGiftCode'
 

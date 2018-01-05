@@ -4,9 +4,12 @@ import _ from 'lodash'
 import ReactDOM from 'react-dom'
 import places from 'places.js'
 import { Row, Col } from 'react-flexbox-grid'
+import Phone from 'react-phone-number-input'
+
+import 'react-phone-number-input/rrui.css'
+import 'react-phone-number-input/style.css'
 
 import InputText from '../InputText'
-
 class FormDelivery extends React.Component {
   constructor(props) {
     super(props)
@@ -39,6 +42,11 @@ class FormDelivery extends React.Component {
   handleChange(event) {
     this.props.handleChange(this.props.typeOfAddress, {
       [event.target.name]: event.target.value
+    })
+  }
+  handlePhone = tel => {
+    this.props.handleChange(this.props.typeOfAddress, {
+      phone: tel
     })
   }
 
@@ -88,13 +96,12 @@ class FormDelivery extends React.Component {
               </Row>
               <Row>
                 <Col xs={12} lg={6}>
-                  <InputText
-                    label="Téléphone"
-                    name="phone"
-                    type="tel"
-                    value={this.props.address.phone}
-                    onChange={this.handleChange}
+                  <Phone
+                    country="FR"
                     placeholder="Votre numéro de téléphone"
+                    value={this.props.address.phone}
+                    onChange={this.handlePhone}
+                    convertToNational
                   />
                 </Col>
                 <Col xs={12} lg={6}>

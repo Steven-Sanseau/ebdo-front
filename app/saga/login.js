@@ -2,10 +2,19 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 import { LOGIN_EMAIL, LOGIN_EMAIL_CODE } from '../actions/constants'
-import { loginEmailSuccess, loginEmailError, loginEmailCodeSuccess, loginEmailCodeError } from '../actions/login'
+import {
+  loginEmailSuccess,
+  loginEmailError,
+  loginEmailCodeSuccess,
+  loginEmailCodeError
+} from '../actions/login'
+import { nextStep } from '../actions/step'
+import {push} from "react-router-redux";
 
 function* loginEmailSaga(action) {
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/code/${action.email}`
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/code/${
+    action.email
+  }`
 
   try {
     yield call(request, paramsApiUrl, {
@@ -19,7 +28,7 @@ function* loginEmailSaga(action) {
 }
 
 function* loginEmailCodeSaga(action) {
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/${action.code}/${action.email}`
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/${action.code}/${action.email}`
 
   try {
     const response = yield call(request, paramsApiUrl, {
@@ -27,6 +36,23 @@ function* loginEmailCodeSaga(action) {
       headers: { 'Content-Type': 'application/json' }
     })
     yield put(loginEmailCodeSuccess(response.token))
+
+    if (action.isCheckout) {
+      const subscriptions = yield call(request, `${process.env.EBDO_API_URL}/v1/subscription`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${response.token}`,
+        }
+      })
+
+      if (subscriptions.subscriptions.length > 0) {
+        // TODO Redirect to error page
+        yield put(push('/'))
+      }
+
+      yield put(nextStep())
+    }
   } catch (err) {
     yield put(loginEmailCodeError(err.message))
   }

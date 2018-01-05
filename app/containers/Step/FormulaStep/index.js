@@ -1,6 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
+import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -28,6 +30,22 @@ import Button from 'components/Button'
 import Image from 'components/Image'
 
 import '!file-loader?name=[name].[ext]!images/checkout/PostBox.png'
+const ButtonWrap = styled.div`
+  margin-top: 40px;
+  & > div {
+    display: inline-block;
+  }
+  button {
+    font-size: 18px;
+  }
+`
+
+const LinkWrapper = styled(Link)`
+  color: var(--grey-blue);
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 20px;
+`
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -63,7 +81,7 @@ class FormulaStep extends React.Component {
       params = { [key]: Number(event.value) }
     }
 
-    this.props.dispatchSetOfferParams(params)
+    this.props.dispatchSetOfferParams(params, true)
   }
 
   handleGoToStep = () => {
@@ -96,14 +114,32 @@ class FormulaStep extends React.Component {
           </Row>
           <Row center="xs">
             {offer.data && (
-              <NaturalFormOrder
-                handleChange={this.handleChange}
-                target={offer.data.is_gift}
-                time={offer.data.duration}
-                price={offer.data.monthly_price_ttc}
-                isNaturalForm={isNaturalForm}
-                switchUI={this.switchUI}
-              />
+              <div>
+                <NaturalFormOrder
+                  handleChange={this.handleChange}
+                  target={offer.data.is_gift}
+                  time={offer.data.duration}
+                  price={offer.data.monthly_price_ttc}
+                  isNaturalForm={isNaturalForm}
+                  switchUI={this.switchUI}
+                />
+
+                {isNaturalForm && (
+                  <ButtonWrap>
+                    <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
+                  </ButtonWrap>
+                )}
+                {!isNaturalForm && (
+                  <ButtonWrap>
+                    <Button
+                      handleRoute={this.switchUI}
+                      color="--squash"
+                      className="big">
+                      Revenir au formulaire
+                    </Button>
+                  </ButtonWrap>
+                )}
+              </div>
             )}
           </Row>
           {offerError && (
@@ -170,8 +206,7 @@ class FormulaStep extends React.Component {
                 border
                 colorText="--silver"
                 handleRoute={this.handleGoToStep}
-                color="--background"
-              >
+                color="--background">
                 Modifier
               </Button>
             </NextStep>
@@ -229,7 +264,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchSetOfferParams: params => dispatch(setOfferParams(params)),
+    dispatchSetOfferParams: (params, isRedirect) =>
+      dispatch(setOfferParams(params, isRedirect)),
     dispatchGetOffer: () => dispatch(getoffer())
   }
 }

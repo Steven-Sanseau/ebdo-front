@@ -8,21 +8,11 @@ import {
   SET_COUNTRY_ADRESS_OFFER_VALID
 } from './constants'
 
-export function setOfferParams(params) {
+export function setOfferParams(params, isRedirect) {
   return {
     type: SET_OFFER_PARAMS,
     params,
-    meta: {
-      analytics: {
-        eventType: EventTypes.track,
-        eventPayload: {
-          event: SET_OFFER_PARAMS,
-          properties: {
-            params
-          }
-        }
-      }
-    }
+    isRedirect
   }
 }
 

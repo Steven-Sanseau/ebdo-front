@@ -6,6 +6,10 @@ import _ from 'lodash'
 import NewsletterFooter from 'components/Newsletter/NewsletterFooter'
 import NewsletterBlock from 'components/Newsletter/NewsletterBlock'
 import Newsletter from 'components/Newsletter'
+import { createStructuredSelector } from 'reselect'
+
+import { makeSelectNewsletter } from 'selectors/newsletter'
+import { postNewsletter } from '../../actions/newsletter'
 
 export class NewsletterContainer extends React.Component {
   constructor(props) {
@@ -46,14 +50,7 @@ export class NewsletterContainer extends React.Component {
   }
 
   handleClick() {
-    this.sendRequest()
-  }
-
-  sendRequest() {
-    const { email, firstname } = this.state.newsletter
-    const NewsletterURL = 'https://ebdo-api.herokuapp.com/v1/newsletter/'
-    if (email && firstname) {
-    }
+    this.props.dispatchNewsletter(this.state.newsletter)
   }
 
   render() {
@@ -90,13 +87,19 @@ export class NewsletterContainer extends React.Component {
 }
 
 NewsletterContainer.propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
+  dispatchNewsletter: PropTypes.func
 }
+
+const mapStateToProps = createStructuredSelector({
+  newsletter: makeSelectNewsletter()
+})
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatchNewsletter: newsletter => dispatch(postNewsletter(newsletter)),
     dispatch
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewsletterContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(NewsletterContainer)

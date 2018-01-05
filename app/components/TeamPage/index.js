@@ -87,7 +87,12 @@ const Profile = styled(Col)`
 function TeamPage(props) {
   return (
     <div>
-      <NavBar dispatch={props.dispatch} isFixed page={props.page} />
+      <NavBar
+        dispatch={props.dispatch}
+        isFixed
+        page={props.page}
+        isLoggedIn={props.isLoggedIn}
+      />
       <ImageWrap />
       <IntroWrap>
         <Layout>
@@ -183,6 +188,10 @@ function TeamPage(props) {
   )
 }
 
-TeamPage.propTypes = { dispatch: PropTypes.func, page: PropTypes.string }
+TeamPage.propTypes = {
+  dispatch: PropTypes.func,
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
+}
 
 export default TeamPage

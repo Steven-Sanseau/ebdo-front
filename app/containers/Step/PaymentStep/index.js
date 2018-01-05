@@ -10,12 +10,14 @@ import { makeSelectPayementMethod } from 'selectors/checkout'
 import { setPayementMethod } from 'actions/checkout'
 import {
   makeSelectTokenIsLoading,
-  makeSelectToken,
   makeSelectTokenIsSetError,
-  makeSelectTokenMessageError
+  makeSelectTokenMessageError,
+  makeSelectIframeContent
 } from 'selectors/token'
+
+import { makeSelectOffer } from 'selectors/offer'
+
 import {
-  postToken,
   setTokenStripe,
   setTokenStripeLoaded,
   setTokenStripeError
@@ -47,9 +49,9 @@ class PaymentStep extends React.Component {
     })
   }
 
-  handleChangeStripeForm = event => {}
+  handleChangeStripeForm = () => {}
 
-  handleSubmitStripeForm = event => {
+  handleSubmitStripeForm = () => {
     this.getStripeToken()
   }
 
@@ -57,28 +59,43 @@ class PaymentStep extends React.Component {
     this.props.dispatchSetPayementMethod(value)
   }
 
-  handleNextStep(event) {
+  handleNextStep = event => {
     event.preventDefault()
     this.getStripeToken()
   }
 
+  handleGoToSlimpay = () => {
+    const { slimpayIframe } = this.props
+
+    if (slimpayIframe && slimpayIframe.href) {
+      window.location.href = slimpayIframe.href
+    }
+  }
+
   contentOpen() {
-    const { payementMethod, tokenMessageError } = this.props
+    const {
+      payementMethod,
+      tokenMessageError,
+      offer,
+      slimpayIframe
+    } = this.props
 
     return (
       <div>
         <Row start="xs">
           <Col xs={12}>
             <Row>
-              <Col lg={6} xs={12}>
-                <InputCheckbox
-                  text="Prélèvement SEPA"
-                  onCheck={this.handlePaiementMethod}
-                  isChecked={payementMethod === 1}
-                  icon={<SepaIcon />}
-                  valueCheck={1}
-                />
-              </Col>
+              {!offer.time_limited && (
+                <Col lg={6} xs={12}>
+                  <InputCheckbox
+                    text="Prélèvement SEPA"
+                    onCheck={this.handlePaiementMethod}
+                    isChecked={payementMethod === 1}
+                    icon={<SepaIcon />}
+                    valueCheck={1}
+                  />
+                </Col>
+              )}
               <Col lg={6} xs={12}>
                 <InputCheckbox
                   text="Carte Banquaire"
@@ -91,13 +108,22 @@ class PaymentStep extends React.Component {
             </Row>
           </Col>
         </Row>
-        {payementMethod === 1 && (
-          <Row>
-            <Col xs={6}>
-              <SlimpayForm />
-            </Col>
-          </Row>
-        )}
+        {payementMethod === 1 &&
+          !offer.time_limited && (
+            <Row>
+              <Col xs={6}>
+                Vous allez être redirigé vers notr site partenaire sécurisé pour
+                valider votre Mandat de prélèvement
+                {/* // IFRAME SLIMPAY TRANSFORMED TO LINK */}
+                {/* <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} /> */}
+                {/* {slimpayIframe &&
+                  slimpayIframe.href && (
+                    <a href={slimpayIframe.href}>Enregistrer mon mandat</a>
+                  )} */}
+                {tokenMessageError}
+              </Col>
+            </Row>
+          )}
         {payementMethod === 2 && (
           <Row>
             <Col xs={12}>
@@ -125,7 +151,14 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
+    const {
+      currentStep,
+      changeStep,
+      stepNumber,
+      tokenIsLoading,
+      payementMethod,
+      offer
+    } = this.props
 
     return (
       <ToggleStep
@@ -136,8 +169,17 @@ class PaymentStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={this.handleNextStep}
+        nextStep={
+          payementMethod === 1 && !offer.time_limited
+            ? this.handleGoToSlimpay
+            : this.handleNextStep
+        }
         isLoadingNextStep={tokenIsLoading}
+        textButtonNextStep={
+          payementMethod === 1 && !offer.time_limited
+            ? 'Payer'
+            : 'Récapituler la commande'
+        }
       />
     )
   }
@@ -147,26 +189,26 @@ PaymentStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  nextStep: PropTypes.func,
   stripe: PropTypes.object,
   dispatchSetTokenStripe: PropTypes.func,
   dispatchSetTokenStripeLoaded: PropTypes.func,
   dispatchSetTokenError: PropTypes.func,
-  dispatchPostToken: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
   payementMethod: PropTypes.number,
-  token: PropTypes.object,
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
-  tokenMessageError: PropTypes.string
+  tokenMessageError: PropTypes.string,
+  offer: PropTypes.object,
+  slimpayIframe: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
   payementMethod: makeSelectPayementMethod(),
   tokenIsLoading: makeSelectTokenIsLoading(),
-  token: makeSelectToken(),
   tokenMessageError: makeSelectTokenMessageError(),
-  tokenIsError: makeSelectTokenIsSetError()
+  tokenIsError: makeSelectTokenIsSetError(),
+  offer: makeSelectOffer(),
+  slimpayIframe: makeSelectIframeContent()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -175,8 +217,7 @@ function mapDispatchToProps(dispatch) {
     dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
     dispatchSetTokenStripeLoaded: token =>
       dispatch(setTokenStripeLoaded(token)),
-    dispatchSetTokenError: error => dispatch(setTokenStripeError(error)),
-    dispatchPostToken: () => dispatch(postToken())
+    dispatchSetTokenError: error => dispatch(setTokenStripeError(error))
   }
 }
 

@@ -18,7 +18,8 @@ const Layout = styled.div`
   margin-right: auto;
 
   ${media.tablet`
-    padding: 40px 0;
+    padding: 0;
+    width: calc(100% - 20px);
   `};
 `
 const TextLogin = styled.div`
@@ -40,12 +41,22 @@ const ColStyled = styled(Col)`
   padding: 50px;
   font-size: 18px;
 
+  ${media.tablet`
+    margin-bottom: 30px;
+    font-size: 16px;
+    padding: 30px;
+    line-height: 22px;
+  `};
+
   .laSource {
     max-width: 200px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
     display: block;
+    ${media.tablet`
+      max-width: 100%;
+    `};
   }
   a {
     margin: 0;
@@ -65,6 +76,9 @@ const ColStyled = styled(Col)`
 
   &.mgr {
     margin-right: calc(100% / 23);
+    ${media.tablet`
+      margin-right: auto;
+    `};
   }
 `
 
@@ -79,18 +93,29 @@ const RowStyled = styled(Row)`
     font-size: 18px;
     margin: 0;
     margin-bottom: 30px;
+    ${media.tablet`
+      font-size: 16px;
+      line-height: 22px;
+  `};
   }
+  ${media.tablet`
+    padding-top: 50px;
+    padding-bottom: 140px;
+  `};
 `
 
 const TitleColor = styled.h2`
   font-size: 22px;
-  color: #F39625;
+  color: #f39625;
   margin-top: 20px;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   width: 75%;
+  ${media.tablet`
+    font-size: 20px;
+  `};
 `
 const Title = styled.h2`
   font-size: 18px;
@@ -102,90 +127,98 @@ const ButtonWrap = styled(Button)`
   height: 40px;
 `
 function LoginPage(props) {
-  const { loginEmail, loginEmailCode, waitingForCode, handleSubmit, handleEmail, handleCode, email, code, handleRoute } = props
+  const {
+    waitingForCode,
+    handleSubmit,
+    handleEmail,
+    handleCode,
+    email,
+    code,
+    handleRoute,
+    isLoadingLogin
+  } = props
   return (
     <LoginWrap>
-        <Layout>
-          <Row>
-            <Col xs={12}>
-              <Header />
-            </Col>
-          </Row>
-          <RowStyled center="sm">
-            <ColStyled w={9} m={13} mc className="mgr">
-              <img src="la-source.png" alt="la source" className="laSource" />
-              <Title>
-                Accédez à La Source
-              </Title>
-              <p>
-                Entrez votre adresse email pour accéder à La Source. Nous vous enverrons un mail contenant votre accès temporaire.
-              </p>
-              <form onSubmit={handleSubmit}>
-                {!waitingForCode && (
+      <Layout>
+        <Row>
+          <Col m={13} mc>
+            <Header />
+          </Col>
+        </Row>
+        <RowStyled center="sm">
+          <ColStyled w={9} m={13} mc className="mgr">
+            <img src="la-source.png" alt="la source" className="laSource" />
+            <Title>Accédez à La Source</Title>
+            <p>
+              Entrez votre adresse email pour accéder à La Source. Nous vous
+              enverrons un mail contenant votre accès temporaire.
+            </p>
+            <form onSubmit={handleSubmit}>
+              {!waitingForCode && (
+                <InputText
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={handleEmail}
+                  placeholder="contact@mail.fr"
+                  label="Adresse email"
+                />
+              )}
+              {waitingForCode && (
+                <div>
+                  <p>Veuillez rentrer le code pour valider la connexion</p>
                   <InputText
-                    name="email"
-                    type="email"
-                    value={email}
-                    onChange={handleEmail}
-                    placeholder="contact@mail.fr"
-                    label="Adresse email"
+                    name="code"
+                    type="number"
+                    value={code}
+                    onChange={handleCode}
+                    placeholder="1234"
+                    label="Votre code reçu par email"
                   />
-                )}
-                {waitingForCode && (
-                  <div>
-                    <p>Veuillez rentrer le code pour valider la connexion</p>
-                    <input
-                      name="code"
-                      type="number"
-                      value={code}
-                      onChange={handleCode}
-                    />
-                  </div>
-                )}
-              </form>
-              <ButtonWrap
-                handleRoute={handleRoute}
-                color="--booger"
-              >
-                Recevoir mon lien
-              </ButtonWrap>
-            </ColStyled>
-            <ColStyled w={9} m={13} mc>
-              <TitleColor>Vous voulez gérer votre abonnement ?</TitleColor>
-              <p>
-                Un espace dédié vous permettra bientôt d’éditer toutes vos
-                informations. D’ici là, contactez-nous pour tout changement :
-              </p>
-              <TitleWithArrow
-                text="F.A.Q"
-                link="/faq"
-                color="--squash"
-                textColor="--black"
-              />
-              <TextLogin>
-                La réponse à votre question s’y trouve peut-être !
-              </TextLogin>
-              <TitleWithArrow
-                text="Telephone"
-                color="--squash"
-                textColor="--black"
-              />
-              <TextLogin>Appellez-nous au 00 00 00 00 00.</TextLogin>
-              <TitleWithArrow
-                text="Mail"
-                link="mailto:contact@ebdo-lejournal.com"
-                color="--squash"
-                textColor="--black"
-              />
-              <TextLogin className="no-b">
-                Envoyez votre question à{' '}
-                <a className="link" href="mailto:service-abo@ebdo-lejournal.com">
-                  service-abo@ebdo-lejournal.com
-                </a>
-              </TextLogin>
-            </ColStyled>
-          </RowStyled>
-        </Layout>
+                </div>
+              )}
+            </form>
+            <ButtonWrap handleRoute={handleRoute} color="--booger">
+              {isLoadingLogin && 'loading'}
+              {!isLoadingLogin && 'Recevoir mon lien'}
+            </ButtonWrap>
+          </ColStyled>
+          <ColStyled w={9} m={13} mc>
+            <TitleColor>Vous voulez gérer votre abonnement ?</TitleColor>
+            <p>
+              Un espace dédié vous permettra bientôt d’éditer toutes vos
+              informations. D’ici là, contactez-nous pour tout changement :
+            </p>
+            <TitleWithArrow
+              text="F.A.Q"
+              link="/faq"
+              color="--squash"
+              textColor="--black"
+            />
+            <TextLogin>
+              La réponse à votre question s’y trouve peut-être !
+            </TextLogin>
+            <TitleWithArrow
+              text="Telephone"
+              color="--squash"
+              textColor="--black"
+            />
+            <TextLogin>Appellez-nous au 00 00 00 00 00.</TextLogin>
+            <TitleWithArrow
+              text="Mail"
+              link="mailto:contact@ebdo-lejournal.com"
+              color="--squash"
+              textColor="--black"
+            />
+            <TextLogin className="no-b">
+              Envoyez votre question à{' '}
+              <a className="link" href="mailto:service-abo@ebdo-lejournal.com">
+                service-abo@ebdo-lejournal.com
+              </a>
+            </TextLogin>
+          </ColStyled>
+        </RowStyled>
+      </Layout>
       <Footer />
     </LoginWrap>
   )
@@ -196,6 +229,7 @@ LoginPage.propTypes = {
   handleEmail: PropTypes.func,
   handleRoute: PropTypes.func,
   handleCode: PropTypes.func,
+  isLoadingLogin: PropTypes.bool
 }
 
 export default LoginPage

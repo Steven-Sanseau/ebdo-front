@@ -48,14 +48,29 @@ function* getOffer(action) {
   }
 }
 
-function* redirectCheckout() {
-  const isGift = yield select(makeSelectOfferIsGift())
-
-  if (isGift) {
-    yield put(push('/offre'))
+function* redirectCheckout(action) {
+  let route = null
+  if (action.isRedirect && action.params) {
+    if (action.params.is_gift === true) {
+      route = '/offre'
+    }
+    if (action.params.is_gift === false) {
+      route = '/abonnement'
+    }
   }
-  if (!isGift) {
-    yield put(push('/abonnement'))
+
+  if (action.type === NEW_CHECKOUT) {
+    const isGift = yield select(makeSelectOfferIsGift())
+    if (isGift) {
+      route = '/offre'
+    }
+    if (!isGift) {
+      route = '/abonnement'
+    }
+  }
+
+  if (route) {
+    yield put(push(route))
   }
 }
 

@@ -11,11 +11,14 @@ import {
   makeSelectClientEmail,
   makeSelectClientExist
 } from 'selectors/client'
+import {
+  makeSelectLogin,
+} from 'selectors/login'
 import { setClientEmail, postClient, useClientExist } from 'actions/client'
+import { loginEmail } from 'actions/login'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
-import TextSummary from 'components/LayoutStep/TextSummary'
 import BoldText from 'components/LayoutStep/BoldText'
 
 class EmailStep extends React.Component {
@@ -65,6 +68,7 @@ class EmailStep extends React.Component {
 
     if (this.validateEmail()) {
       if (this.props.clientExist) {
+        this.props.dispatchLoginEmail(this.props.email)
         this.props.dispatchUseClientExist()
       } else {
         this.props.dispatchPostClient()
@@ -87,8 +91,8 @@ class EmailStep extends React.Component {
         />
         {clientExist && (
           <div>
-            <BoldText>Votre adresse est déjà enregistrée chez nous.</BoldText>
-            Etes vous sûr de vouloir passer une nouvelle commande ?
+            <BoldText>Votre adresse est déjà enregistrée chez nous. Vous allez devoir vous connecter.</BoldText>
+
           </div>
         )}
       </div>
@@ -111,7 +115,8 @@ class EmailStep extends React.Component {
       changeStep,
       stepNumber,
       clientIsLoading,
-      clientExist
+      clientExist,
+      login
     } = this.props
 
     return (
@@ -127,6 +132,7 @@ class EmailStep extends React.Component {
         isLoadingNextStep={clientIsLoading}
         textButtonNextStep={clientExist ? 'Je continue !' : null}
         colorButtonNextStep={clientExist ? '--squash' : '--booger'}
+        updateStepHide={!!login.token}
       />
     )
   }
@@ -148,14 +154,16 @@ EmailStep.propTypes = {
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectClientIsLoading(),
   clientExist: makeSelectClientExist(),
-  email: makeSelectClientEmail()
+  email: makeSelectClientEmail(),
+  login: makeSelectLogin()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchPostClient: () => dispatch(postClient()),
-    dispatchUseClientExist: () => dispatch(useClientExist())
+    dispatchUseClientExist: () => dispatch(useClientExist()),
+    dispatchLoginEmail: (email) => dispatch(loginEmail(email))
   }
 }
 

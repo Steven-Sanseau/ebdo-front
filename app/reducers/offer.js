@@ -55,7 +55,10 @@ function offerReducer(state = initialState, action) {
         .set('loading', false)
     case NEW_CHECKOUT: {
       const country = initialState.getIn(['data', 'country_shipping'])
-      return state.setIn(['data', 'country_shipping'], country)
+      const payementMethodInit = initialState.getIn(['data', 'payment_method'])
+      return state
+        .setIn(['data', 'country_shipping'], country)
+        .setIn(['data', 'payment_method'], payementMethodInit)
     }
     case NEW_CHECKOUT_TRY: {
       const country = initialState.getIn(['data', 'country_shipping'])

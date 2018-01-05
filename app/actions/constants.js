@@ -36,6 +36,17 @@ export const SET_TOKEN_STRIPE_LOADED =
   'app/Checkout/token/SET_TOKEN_STRIPE_LOADED'
 export const SET_TOKEN_STRIPE_ERROR =
   'app/Checkout/token/SET_TOKEN_STRIPE_ERROR'
+export const GET_TOKEN_SLIMPAY = 'app/Checkout/token/GET_TOKEN_SLIMPAY'
+export const GET_TOKEN_SLIMPAY_LOADED =
+  'app/Checkout/token/GET_TOKEN_SLIMPAY_LOADED'
+export const GET_TOKEN_SLIMPAY_ERROR =
+  'app/Checkout/token/GET_TOKEN_SLIMPAY_ERROR'
+export const GET_VALID_TOKEN_SLIMPAY =
+  'app/Checkout/token/GET_VALID_TOKEN_SLIMPAY'
+export const GET_VALID_TOKEN_SLIMPAY_LOADED =
+  'app/Checkout/token/GET_VALID_TOKEN_SLIMPAY_LOADED'
+export const GET_VALID_TOKEN_SLIMPAY_ERROR =
+  'app/Checkout/token/GET_VALID_TOKEN_SLIMPAY_ERROR'
 
 export const SET_PAYMENT_METHOD = 'app/Checkout/checkout/SET_PAYMENT_METHOD'
 export const SET_CGV_CONFIRM = 'app/Checkout/checkout/SET_CGV_CONFIRM'
@@ -53,6 +64,9 @@ export const LOGIN_USER_SUCCESS = 'app/Login/LOGIN_USER_SUCCESS'
 export const LOGIN_EMAIL_CODE = 'app/Login/LOGIN_EMAIL_CODE'
 export const LOGIN_EMAIL_CODE_ERROR = 'app/Login/LOGIN_EMAIL_CODE_ERROR'
 export const LOGIN_EMAIL_CODE_SUCCESS = 'app/Login/LOGIN_EMAIL_CODE_SUCCESS'
+export const LOGOUT = 'app/Home/Login/LOGOUT'
 
-export const CHANGE_NEWSLETTER_STATUS =
-  'app/Home/newsletter/CHANGE_NEWSLETTER_STATUS'
+export const POST_NEWSLETTER = 'app/Home/Newsletter/POST_NEWSLETTER'
+export const POST_NEWSLETTER_SUCCESS =
+  'app/Home/Newsletter/POST_NEWSLETTER_SUCCESS'
+export const POST_NEWSLETTER_ERROR = 'app/Home/Newsletter/POST_NEWSLETTER_ERROR'

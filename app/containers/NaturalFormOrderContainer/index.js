@@ -3,6 +3,21 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { push } from 'react-router-redux'
+
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+
+import {
+  makeSelectOffer,
+  makeSelectOfferError,
+  makeSelectOffersIsLoading,
+  makeSelectOfferErrorMessage
+} from 'selectors/offer'
+
+import { newCheckout } from 'actions/checkout'
+import { setOfferParams, getoffer } from 'actions/offer'
+
 import NaturalFormOrder from 'components/NaturalFormOrder'
 
 import Button from 'components/Button'
@@ -21,54 +36,32 @@ const LinkWrapper = styled(Link)`
   text-decoration: none;
   display: inline-block;
   margin-left: 20px;
-
 `
 
-export class NaturalFormOrderContainer extends React.Component {
+class NaturalFormOrderContainer extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props)
+  state = { isNaturalForm: true }
 
-    this.state = {
-      is_gift: false,
-      duration: 12,
-      monthly_price_ttc: 15,
-      isNaturalForm: true
+  handleChange = (key, event) => {
+    let params = {}
+    if (key === 'is_gift') {
+      params = { [key]: event.value == 1 }
     }
-  }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      is_gift: newProps.offer.data.is_gift,
-      duration: newProps.offer.data.duration,
-      monthly_price_ttc: newProps.offer.data.monthly_price_ttc
-    })
-  }
+    if (key === 'duration') {
+      const value = Number(event.value)
+      params = { [key]: value, time_limited: value !== 0 }
+    }
 
-  componentDidMount() {
-    this.setState({
-      is_gift: this.props.offer.data.is_gift,
-      duration: this.props.offer.data.duration,
-      monthly_price_ttc: this.props.offer.data.monthly_price_ttc
-    })
-  }
+    if (key === 'monthly_price_ttc') {
+      params = { [key]: Number(event.value) }
+    }
 
-  handleChange = (e, key) => {
-    this.setState({ [e]: key.value })
+    this.props.dispatchSetOfferParams(params, false)
   }
 
   handleRoute = () => {
-    const { duration } = this.state
-
-    this.props.dispatchSetOfferParams({
-      monthly_price_ttc: Number(this.state.monthly_price_ttc)
-    })
-
-    this.props.dispatchSetOfferParams({
-      duration: Number(duration),
-      time_limited: Number(duration) !== 0
-    })
-    this.props.dispatchSetOfferParams({ is_gift: this.state.is_gift == 1 })
+    this.props.dispatchNewCheckout()
   }
 
   switchUI = () => {
@@ -76,29 +69,36 @@ export class NaturalFormOrderContainer extends React.Component {
   }
 
   render() {
-    const { is_gift, duration, monthly_price_ttc, isNaturalForm } = this.state
+    const { isNaturalForm } = this.state
+    const { offer } = this.props
 
     return (
       <div>
         <NaturalFormOrder
           handleChange={this.handleChange}
-          target={is_gift}
-          time={duration}
-          price={monthly_price_ttc}
+          target={offer.data.is_gift}
+          time={offer.data.duration}
+          price={offer.data.monthly_price_ttc}
           isNaturalForm={isNaturalForm}
           switchUI={this.switchUI}
         />
         {isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.handleRoute} color="--squash" className="big">
+            <Button
+              handleRoute={this.handleRoute}
+              color="--squash"
+              className="big">
               Commander
             </Button>
-            <LinkWrapper to="#">J'ai un code cadeau</LinkWrapper>
+            <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
           </ButtonWrap>
         )}
         {!isNaturalForm && (
           <ButtonWrap>
-            <Button handleRoute={this.switchUI} color="--squash" className="big">
+            <Button
+              handleRoute={this.switchUI}
+              color="--squash"
+              className="big">
               Revenir au formulaire
             </Button>
           </ButtonWrap>
@@ -110,7 +110,32 @@ export class NaturalFormOrderContainer extends React.Component {
 
 NaturalFormOrderContainer.propTypes = {
   dispatchSetOfferParams: PropTypes.func,
-  offer: PropTypes.object
+  dispatchNewCheckout: PropTypes.func,
+  dispatchGetOffer: PropTypes.func,
+  dispatchPush: PropTypes.func,
+  offer: PropTypes.object,
+  offerError: PropTypes.bool,
+  offerIsLoading: PropTypes.bool,
+  offerErrorMessage: PropTypes.string
 }
 
-export default NaturalFormOrderContainer
+const mapStateToProps = createStructuredSelector({
+  offer: makeSelectOffer(),
+  offerIsLoading: makeSelectOffersIsLoading(),
+  offerError: makeSelectOfferError(),
+  offerErrorMessage: makeSelectOfferErrorMessage()
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchSetOfferParams: (params, isRedirect) =>
+      dispatch(setOfferParams(params, isRedirect)),
+    dispatchGetOffer: () => dispatch(getoffer()),
+    dispatchPush: route => dispatch(push(route)),
+    dispatchNewCheckout: () => dispatch(newCheckout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  NaturalFormOrderContainer
+)
