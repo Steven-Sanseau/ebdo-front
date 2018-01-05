@@ -20,7 +20,6 @@ import {
 
 function* postClient() {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
-  const id = yield select(makeSelectClientId())
   const email = yield select(makeSelectClientEmail())
 
   const method = 'POST'

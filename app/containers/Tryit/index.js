@@ -40,11 +40,7 @@ export class Tryit extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.login.token) {
-      this.props.goToStep(3)
-    } else {
-      this.props.dispatchNewCheckoutTry()
-    }
+    this.props.dispatchNewCheckoutTry()
   }
 
   nextStep() {
@@ -124,6 +120,7 @@ export class Tryit extends React.Component {
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
+                displayInvoiceAddress={false}
               />
             </Col>
           </Row>
@@ -152,9 +149,7 @@ Tryit.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep(),
-  login: makeSelectLogin(),
-  subscriptions: makeSelectSubscriptionData()
+  step: makeSelectStep()
 })
 
 function mapDispatchToProps(dispatch) {
