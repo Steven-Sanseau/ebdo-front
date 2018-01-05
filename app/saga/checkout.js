@@ -1,14 +1,13 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 
 import request from 'utils/request'
-
+import { push } from 'react-router-redux'
 import { POST_SUBSCRIPTION } from 'actions/constants'
 import { postCheckoutLoaded, postCheckoutError } from 'actions/checkout'
-import { nextStep } from 'actions/step'
 
 import { makeSelectCheckoutData } from 'selectors/checkout'
 
-function* postCheckout(action) {
+function* postCheckout() {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/checkout`
   const checkout = yield select(makeSelectCheckoutData())
   const method = 'POST'
@@ -22,7 +21,7 @@ function* postCheckout(action) {
       }
     })
     yield put(postCheckoutLoaded(checkoutResponse.checkout))
-    yield put(nextStep())
+    yield put(push('/abo/merci'))
   } catch (err) {
     yield put(postCheckoutError(err.message))
   }

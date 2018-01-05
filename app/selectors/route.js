@@ -5,4 +5,7 @@ const selectRoute = state => state.get('route')
 const makeSelectPathName = () =>
   createSelector(selectRoute, route => route.get('location').get('pathname'))
 
-export { makeSelectPathName }
+const makeSelectPath = () =>
+  createSelector(selectRoute, route => route.get('location').toJS())
+
+export { makeSelectPathName, makeSelectPath }

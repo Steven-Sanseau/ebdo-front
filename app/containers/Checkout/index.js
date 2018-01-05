@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-import { makeSelectClientExist } from 'selectors/client'
 
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 // SELECTOR
+import { makeSelectClientExist } from 'selectors/client'
 import { makeSelectStep } from 'selectors/step'
-import { makeSelectPathName } from 'selectors/route'
+import { makeSelectPath } from 'selectors/route'
 import { nextStep, goToStep } from 'actions/step'
 import { getValidTokenSlimpay } from 'actions/token'
 import { newCheckout } from 'actions/checkout'
@@ -40,8 +40,7 @@ export class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.pathName)
-    if (this.props.pathName.indexOf('slimpay/valid') !== -1) {
+    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
       this.props.dispatchSlimpayTokenValid()
     } else {
       this.props.dispatchNewCheckout()
@@ -149,13 +148,13 @@ Checkout.propTypes = {
   dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
-  pathName: PropTypes.string
+  path: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
   step: makeSelectStep(),
   clientExist: makeSelectClientExist(),
-  pathName: makeSelectPathName()
+  path: makeSelectPath()
 })
 
 function mapDispatchToProps(dispatch) {

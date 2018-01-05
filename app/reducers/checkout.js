@@ -8,7 +8,9 @@ import {
   POST_CLIENT_LOADED,
   GET_OFFER_LOADED,
   POST_TOKEN_LOADED,
+  GET_VALID_TOKEN_SLIMPAY_LOADED,
   POST_ADRESS_LOADED,
+  GET_TOKEN_SLIMPAY_LOADED,
   GET_CLIENT_LOADED,
   POST_SUBSCRIPTION,
   POST_SUBSCRIPTION_LOADED,
@@ -47,6 +49,12 @@ function checkoutReducer(state = initialState, action) {
         )
     case POST_TOKEN_LOADED:
       return state.setIn(['data', 'token_id'], action.token.token_id)
+    case GET_TOKEN_SLIMPAY_LOADED: {
+      return state.setIn(['data', 'token_id'], action.tokenSlimpay.token_id)
+    }
+    case GET_VALID_TOKEN_SLIMPAY_LOADED: {
+      return state.setIn(['data', 'token_id'], action.tokenSlimpay.token_id)
+    }
     case POST_ADRESS_LOADED: {
       return state.setIn(
         ['data', `address_${action.payload.typeOfAddress}_id`],

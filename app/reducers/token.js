@@ -65,12 +65,15 @@ function tokenReducer(state = initialState, action) {
         action.method === 2 ? 'stripe' : 'sepa'
       )
     case GET_TOKEN_SLIMPAY_LOADED: {
-      return state
-        .set('error', false)
-        .set('loading', false)
-        .set('errorMessage', null)
-        .set('data', new TokenModel(action.tokenSlimpay))
-        .set('slimpay_iframe_content', action.iframeContent)
+      return (
+        state
+          .set('error', false)
+          .set('loading', false)
+          .set('errorMessage', null)
+          .set('data', new TokenModel(action.tokenSlimpay))
+          // .set('slimpay_iframe_content', base64.decode(action.iframeContent))
+          .set('slimpay_iframe_content', action.iframeContent)
+      )
     }
     case GET_TOKEN_SLIMPAY_ERROR:
       return state

@@ -64,6 +64,14 @@ class PaymentStep extends React.Component {
     this.getStripeToken()
   }
 
+  handleGoToSlimpay = () => {
+    const { slimpayIframe } = this.props
+
+    if (slimpayIframe && slimpayIframe.href) {
+      window.location.href = slimpayIframe.href
+    }
+  }
+
   contentOpen() {
     const {
       payementMethod,
@@ -104,12 +112,15 @@ class PaymentStep extends React.Component {
           !offer.time_limited && (
             <Row>
               <Col xs={6}>
+                Vous allez être redirigé vers notr site partenaire sécurisé pour
+                valider votre Mandat de prélèvement
                 {/* // IFRAME SLIMPAY TRANSFORMED TO LINK */}
                 {/* <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} /> */}
-                {slimpayIframe &&
+                {/* {slimpayIframe &&
                   slimpayIframe.href && (
                     <a href={slimpayIframe.href}>Enregistrer mon mandat</a>
-                  )}
+                  )} */}
+                {tokenMessageError}
               </Col>
             </Row>
           )}
@@ -140,7 +151,14 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
+    const {
+      currentStep,
+      changeStep,
+      stepNumber,
+      tokenIsLoading,
+      payementMethod,
+      offer
+    } = this.props
 
     return (
       <ToggleStep
@@ -151,8 +169,17 @@ class PaymentStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={this.handleNextStep}
+        nextStep={
+          payementMethod === 1 && !offer.time_limited
+            ? this.handleGoToSlimpay
+            : this.handleNextStep
+        }
         isLoadingNextStep={tokenIsLoading}
+        textButtonNextStep={
+          payementMethod === 1 && !offer.time_limited
+            ? 'Payer'
+            : 'Récapituler la commande'
+        }
       />
     )
   }
@@ -172,7 +199,7 @@ PaymentStep.propTypes = {
   tokenIsError: PropTypes.bool,
   tokenMessageError: PropTypes.string,
   offer: PropTypes.object,
-  slimpayIframe: PropTypes.string
+  slimpayIframe: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({

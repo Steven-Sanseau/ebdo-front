@@ -71,22 +71,21 @@ function* getTokenSlimpaySaga() {
 
 function* getValidTokenSlimpaySaga() {
   const token = yield select(makeSelectTokenData())
-  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token/slimpay/valid/${
-    token.token_id
-  }`
+
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/token/slimpay/valid/`
   const method = 'GET'
 
   try {
-    const tokenResponse = yield call(request, paramsApiUrl, {
+    const tokenResponse = yield call(request, paramsApiUrl + token.token_id, {
       method,
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    yield put(getValidTokenSlimpay(tokenResponse.token))
+    yield put(getValidTokenSlimpayLoaded(tokenResponse.token))
     yield put(nextStep())
   } catch (err) {
-    yield put(getValidTokenSlimpay(err.message))
+    yield put(getValidTokenSlimpayError(err.message))
   }
 }
 

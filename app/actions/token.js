@@ -87,9 +87,9 @@ export function getValidTokenSlimpayError(error) {
   }
 }
 
-export function getValidTokenSlimpayLoaded(tokenSlipay) {
+export function getValidTokenSlimpayLoaded(tokenSlimpay) {
   return {
     type: GET_VALID_TOKEN_SLIMPAY_LOADED,
-    tokenSlipay
+    tokenSlimpay
   }
 }
