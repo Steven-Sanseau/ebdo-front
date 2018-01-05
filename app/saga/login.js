@@ -9,6 +9,7 @@ import {
   loginEmailCodeError
 } from '../actions/login'
 import { nextStep } from '../actions/step'
+import { getSubscriptionsLoaded } from '../actions/subscription'
 import {push} from "react-router-redux";
 
 function* loginEmailSaga(action) {
@@ -45,10 +46,20 @@ function* loginEmailCodeSaga(action) {
           'Authorization': `Bearer ${response.token}`,
         }
       })
+      yield put(getSubscriptionsLoaded(subscriptions.subscriptions))
 
+      // If user already has a valid subscription we redirect him to an error page with some information about his subscription
       if (subscriptions.subscriptions.length > 0) {
-        // TODO Redirect to error page
-        yield put(push('/'))
+        let redirect = false;
+        subscriptions.subscriptions.map((subscription) => {
+          if (subscription.status === "01") {
+            redirect = true;
+          }
+        })
+
+        if (redirect) {
+          yield put(push('/abo/existe'))
+        }
       }
 
       yield put(nextStep())
