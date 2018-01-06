@@ -30,21 +30,24 @@ const TextLogin = styled.div`
 export class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handleCode = this.handleCode.bind(this)
   }
   state = {
     email: '',
-    code: ''
+    code: '',
+    redirect: '/'
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    const { waitingForCode } = this.props
+    const { waitingForCode, location } = this.props
 
     if (waitingForCode && this.state.code !== '') {
-      this.props.dispatchLoginEmailCode(this.state.email, this.state.code)
+      const redirect = new URLSearchParams(location.search).get('redirect')
+      this.props.dispatchLoginEmailCode(
+        this.state.email,
+        this.state.code,
+        redirect
+      )
     } else {
       this.props.dispatchLoginEmail(this.state.email)
     }
@@ -63,6 +66,7 @@ export class Login extends React.Component {
 
   render() {
     const { isLoadingLogin } = this.props
+
     return (
       <div>
         <Helmet>
@@ -102,8 +106,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchLoginEmail: email => dispatch(loginEmail(email)),
-    dispatchLoginEmailCode: (email, code) =>
-      dispatch(loginEmailCode(email, code)),
+    dispatchLoginEmailCode: (email, code, redirect) =>
+      dispatch(loginEmailCode(email, code, false, redirect)),
     dispatch
   }
 }
