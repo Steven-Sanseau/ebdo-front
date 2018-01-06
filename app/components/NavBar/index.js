@@ -117,7 +117,7 @@ const Menu = styled.nav`
 
     .narrowLinks {
       display: ${props => (props.menuFixed ? 'block' : 'none')};
-      ${props => (props.page !== '/' ? 'display: none;' : '')};
+      ${'' /* ${props => (props.page !== '/' ? 'display: none;' : '')}; */};
     }
   }
 `

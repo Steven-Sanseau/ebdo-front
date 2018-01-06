@@ -8,7 +8,11 @@ import Wrapper from './Wrapper'
 function Button(props) {
   // Render an anchor tag
   let button = (
-    <A href={props.href} color={props.color} onClick={props.onClick}>
+    <A
+      href={props.href}
+      color={props.color}
+      colorText={props.colorText}
+      onClick={props.onClick}>
       {Children.toArray(props.children)}
     </A>
   )
@@ -22,8 +26,7 @@ function Button(props) {
         border={props.border}
         colorText={props.colorText}
         onClick={props.handleRoute}
-        className={props.className}
-      >
+        className={props.className}>
         {Children.toArray(props.children)}
       </StyledButton>
     )

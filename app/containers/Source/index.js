@@ -12,14 +12,18 @@ import SourcePage from 'components/SourcePage'
 export class Source extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { isLoggedIn, client } = this.props
+    const { isLoggedIn, client, dispatch } = this.props
     return (
       <div>
         <Helmet>
           <title>Espace Abonné</title>
           <meta name="description" content="La Source - Espace Abonné Ebdo" />
         </Helmet>
-        <SourcePage isLoggedIn={isLoggedIn} client={client} />
+        <SourcePage
+          isLoggedIn={isLoggedIn}
+          client={client}
+          dispatch={dispatch}
+        />
       </div>
     )
   }
@@ -27,7 +31,8 @@ export class Source extends React.Component {
 
 Source.propTypes = {
   isLoggedIn: PropTypes.bool,
-  client: PropTypes.object
+  client: PropTypes.object,
+  dispatch: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -35,4 +40,10 @@ const mapStateToProps = createStructuredSelector({
   client: makeSelectClient()
 })
 
-export default connect(mapStateToProps, {})(Source)
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Source)
