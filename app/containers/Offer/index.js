@@ -10,6 +10,7 @@ import { createStructuredSelector } from 'reselect'
 
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
+import { makeSelectLogin } from 'selectors/login'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
 
@@ -18,6 +19,7 @@ import FormulaStep from 'containers/Step/FormulaStep/Loadable'
 import InterludeStep from 'containers/Step/InterludeStep/Loadable'
 import CountryStep from 'containers/Step/CountryStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
+import EmailConfirmStep from 'containers/Step/EmailConfirmStep'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
 import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
@@ -53,7 +55,61 @@ export class Offer extends React.Component {
   }
 
   render() {
-    const { step } = this.props
+    const { step, login } = this.props
+    let steps = [
+      <FormulaStep
+        stepNumber={1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <InterludeStep
+        stepNumber={2}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <CountryStep
+        stepNumber={3}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ]
+
+    if (!login.token) {
+      steps.push(
+        <EmailConfirmStep
+          stepNumber={4}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      )
+    }
+
+    steps = steps.concat([
+      <DeliveryStep
+        stepNumber={steps.length + 1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <Elements>
+        <PaymentStep
+          stepNumber={steps.length + 2}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      </Elements>,
+      <ConfirmStep
+        stepNumber={steps.length + 3}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ])
 
     return (
       <div>
@@ -67,78 +123,11 @@ export class Offer extends React.Component {
               <Header />
             </Col>
           </Row>
-          <Row>
-            <Col xs={12}>
-              <FormulaStep
-                stepNumber={1}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <InterludeStep
-                stepNumber={2}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CountryStep
-                stepNumber={3}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <DeliveryStep
-                stepNumber={5}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Elements>
-                <PaymentStep
-                  stepNumber={6}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <ConfirmStep
-                stepNumber={7}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
+          {steps.map((step, index) => (
+            <Row key={index}>
+              <Col xs={12}>{step}</Col>
+            </Row>
+          ))}
           <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
@@ -154,7 +143,8 @@ Offer.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep()
+  step: makeSelectStep(),
+  login: makeSelectLogin()
 })
 
 function mapDispatchToProps(dispatch) {

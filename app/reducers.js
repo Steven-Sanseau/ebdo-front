@@ -8,6 +8,7 @@ import routeReducer from 'reducers/routes'
 import stepReducer from 'reducers/step'
 import tokenReducer from 'reducers/token'
 import loginReducer from 'reducers/login'
+import subscriptionReducer from 'reducers/subscription'
 
 export default function createReducer(injectedReducers) {
   return combineReducers({
@@ -20,6 +21,7 @@ export default function createReducer(injectedReducers) {
     step: stepReducer,
     token: tokenReducer,
     login: loginReducer,
+    subscription: subscriptionReducer,
     ...injectedReducers
   })
 }

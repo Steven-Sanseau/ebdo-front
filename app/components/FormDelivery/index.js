@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 import _ from 'lodash'
 import ReactDOM from 'react-dom'
 import places from 'places.js'
@@ -10,6 +12,9 @@ import 'react-phone-number-input/rrui.css'
 import 'react-phone-number-input/style.css'
 
 import InputText from '../InputText'
+import Input from '../InputText/Input'
+const PhoneWrapper = Input.withComponent(Phone)
+
 class FormDelivery extends React.Component {
   constructor(props) {
     super(props)
@@ -96,7 +101,7 @@ class FormDelivery extends React.Component {
               </Row>
               <Row>
                 <Col xs={12} lg={6}>
-                  <Phone
+                  <PhoneWrapper
                     country="FR"
                     placeholder="Votre numéro de téléphone"
                     value={this.props.address.phone}

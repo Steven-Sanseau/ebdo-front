@@ -56,6 +56,9 @@ const Title = styled.h3`
   `};
 `
 
+const OpacityLayout = styled.div`
+  opacity: ${props => (props.isOpen ? '0.15' : '1')};
+`
 const TextWrap = styled.div`
   margin-bottom: 50px;
   font-size: 18px;
@@ -72,53 +75,60 @@ const HomeLandingWrap = styled.div`
     margin-bottom: 40px;
 `};
 `
-
-function HomePage(props) {
-  return (
-    <Grid fluid>
-      <NavBar
-        page={props.page}
-        dispatch={props.dispatch}
-        isLoggedIn={props.isLoggedIn}
-      />
-      <HomeLandingWrap>
-        <HomeLanding />
-      </HomeLandingWrap>
-      <Layout>
-        <Row between="sm">
-          <ColCustom w={8} />
-          <ColCustom w={14} m={13} mc>
-            <Title>
-              <span>L’expérience ebdo,</span> chez vous, au prix que vous
-              souhaitez
-            </Title>
-            <TextWrap>
-              S{"'"}offrir <strong>ebdo</strong> chaque semaine, c{"'"}est
-              choisir une information indépendante, un journal sans pub et sans
-              compromis.
-            </TextWrap>
-          </ColCustom>
-          <Row between="sm">
-            <ColCustom w={8}>
-              <ImageWrap>
-                <img src="abo-illu.png" alt="abo illustration" width="100%" />
-              </ImageWrap>
-            </ColCustom>
-            <ColCustom w={14} m={13} mc>
-              <NaturalFormOrderContainer />
-            </ColCustom>
-          </Row>
-        </Row>
-      </Layout>
-      <ProgressWrap>
-        <Col xs={12} sm={12}>
-          <ProgressContainer />
-        </Col>
-      </ProgressWrap>
-      <ManifestoBlock />
-      <Footer dispatch={props.dispatch} />
-    </Grid>
-  )
+export class HomePage extends React.Component {
+  render() {
+    return (
+      <Grid fluid>
+        <NavBar
+          page={this.props.page}
+          dispatch={this.props.dispatch}
+          isLoggedIn={this.props.isLoggedIn}
+        />
+        <HomeLandingWrap>
+          <HomeLanding />
+        </HomeLandingWrap>
+        <OpacityLayout>
+          <Layout>
+            <Row between="sm">
+              <ColCustom w={8} />
+              <ColCustom w={14} m={13} mc>
+                <Title>
+                  <span>L’expérience ebdo,</span> chez vous, au prix que vous
+                  souhaitez
+                </Title>
+                <TextWrap>
+                  S{"'"}offrir <strong>ebdo</strong> chaque semaine, c{"'"}est
+                  choisir une information indépendante, un journal sans pub et
+                  sans compromis.
+                </TextWrap>
+              </ColCustom>
+              <Row between="sm">
+                <ColCustom w={8}>
+                  <ImageWrap>
+                    <img
+                      src="abo-illu.png"
+                      alt="abo illustration"
+                      width="100%"
+                    />
+                  </ImageWrap>
+                </ColCustom>
+                <ColCustom w={14} m={13} mc>
+                  <NaturalFormOrderContainer />
+                </ColCustom>
+              </Row>
+            </Row>
+          </Layout>
+          <ProgressWrap>
+            <Col xs={12} sm={12}>
+              <ProgressContainer />
+            </Col>
+          </ProgressWrap>
+        </OpacityLayout>
+        <ManifestoBlock />
+        <Footer dispatch={this.props.dispatch} />
+      </Grid>
+    )
+  }
 }
 
 HomePage.propTypes = {

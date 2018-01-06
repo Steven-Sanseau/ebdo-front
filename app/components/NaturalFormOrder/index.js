@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import 'components/NaturalFormOrder/NaturalForm.css'
 import { media } from 'global-styles'
-import Youtube from 'react-youtube'
 
 import Dropdown from 'react-dropdown'
 import 'components/NaturalFormOrder/NaturalForm.css'
@@ -37,7 +36,7 @@ const DropdownWrap = styled(Dropdown)`
   .Dropdown-option.is-selected h3 {
     color: var(${props => (props.color ? props.color : '--black')});
   }
-  .Dropdown-option .valueWrap:hover h3 {
+  .Dropdown-option:hover .valueWrap .title {
     color: var(${props => (props.color ? props.color : '--black')});
   }
   .Dropdown-root:not(.is-open):after {
@@ -97,7 +96,7 @@ const Help = styled.div`
 export class NaturalFormOrder extends React.Component {
   valueElem = (title, subtitle) => (
     <div className="valueWrap">
-      <h3>{title}</h3>
+      <h3 className="title">{title}</h3>
       <Subtitle>{subtitle}</Subtitle>
     </div>
   )
@@ -243,8 +242,9 @@ export class NaturalFormOrder extends React.Component {
         )
       }
     ]
+
     return (
-      <div>
+      <div onClick={this.handleClick}>
         <div className={isNaturalForm ? '' : 'hidden'}>
           <DropdownWrap
             className="dropdown-wrap"
@@ -252,6 +252,9 @@ export class NaturalFormOrder extends React.Component {
             value={options1.find(el => el.value === (target ? '1' : '0'))}
             color="--warm-purple"
             onChange={handleChange.bind(this, 'is_gift')}
+            ref={input => {
+              this.textInput = input
+            }}
           />
 
           <DropdownWrap
@@ -283,13 +286,14 @@ export class NaturalFormOrder extends React.Component {
           <Help onClick={switchUI}>?</Help>
         </div>
         <div className={isNaturalForm ? 'hidden' : ''}>
-          <Youtube
-            videoId="L6lRmAYFI9U"
-            id="L6lRmAYFI9U"
-            className={isNaturalForm ? 'hidden' : ''}
-            onReady={this.onReadyYoutube}
+          <iframe
             style={{ maxWidth: '100%' }}
-            title="Nos tarifs expliqués"
+            width="560"
+            height="315"
+            title="Pourquoi des tarifs flexibles"
+            src="https://www.youtube.com/embed/L6lRmAYFI9U"
+            frameBorder="0"
+            allowFullScreen
           />
         </div>
       </div>
