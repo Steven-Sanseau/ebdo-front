@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
-import { LOGIN_EMAIL, LOGIN_EMAIL_CODE } from '../actions/constants'
+import { LOGIN_EMAIL, LOGIN_EMAIL_CODE, LOGOUT } from '../actions/constants'
 import {
   loginEmailSuccess,
   loginEmailError,
@@ -9,6 +9,7 @@ import {
   loginEmailCodeError
 } from '../actions/login'
 import { nextStep } from '../actions/step'
+import { newCheckout } from '../actions/checkout'
 import { getSubscriptionsLoaded } from '../actions/subscription'
 import { push } from 'react-router-redux'
 
@@ -69,15 +70,20 @@ function* loginEmailCodeSaga(action) {
       }
 
       yield put(nextStep())
+    } else {
+      yield put(push(action.redirect))
     }
-
-    yield put(push(action.redirect))
   } catch (err) {
     yield put(loginEmailCodeError(err.message))
   }
 }
 
+function* logoutSaga() {
+  yield put(newCheckout())
+}
+
 export default function* sagaLogin() {
   yield takeEvery(LOGIN_EMAIL, loginEmailSaga)
+  yield takeEvery(LOGOUT, logoutSaga)
   yield takeEvery(LOGIN_EMAIL_CODE, loginEmailCodeSaga)
 }

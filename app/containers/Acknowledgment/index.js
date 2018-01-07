@@ -14,15 +14,24 @@ import { makeSelectSubscriptionData } from 'selectors/subscription'
 // COMPONENTS
 import Header from 'components/Header'
 
-const Subscription  = styled(Col)`
+const Subscription = styled(Col)`
   margin-top: 40px;
-  
+
   p {
     font-size: 18px;
   }
 `
 
 export class Acknowledgment extends React.Component {
+  componentDidMount() {
+    if (this.props.params.type === 'merci') {
+      // gtag('event', 'conversion', {
+      //   allow_custom_scripts: true,
+      //   send_to: 'DC-8312645/site18/hp18+standard'
+      // })
+    }
+  }
+
   render() {
     const { match, subscriptions } = this.props
 
@@ -35,22 +44,37 @@ export class Acknowledgment extends React.Component {
         </Row>
         <Row center="xs">
           <Col xs={12}>
-            {match.params.type === 'merci' && 'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
-            {match.params.type === 'existe' &&
+            {match.params.type === 'merci' &&
+              'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
+            {match.params.type === 'existe' && (
               <div>
-                Vous possédez déjà un abonnement il est donc impossible de vous réabonner.
+                Vous possédez déjà un abonnement il est donc impossible de vous
+                réabonner.
                 <div>
                   {subscriptions.map((subscription, key) => {
-                    if (subscription.status === "01") {
-                      return <Subscription key={key}>
-                        <p>Abonnement du {new Date(subscription.begin_at).toLocaleDateString()} au {new Date(subscription.end_at).toLocaleDateString()}</p>
-                        <p>Dernier numéro reçu n°{subscription.last_number_delivered}</p>
-                      </Subscription>
+                    if (subscription.status === '01') {
+                      return (
+                        <Subscription key={key}>
+                          <p>
+                            Abonnement du{' '}
+                            {new Date(
+                              subscription.begin_at
+                            ).toLocaleDateString()}{' '}
+                            au{' '}
+                            {new Date(subscription.end_at).toLocaleDateString()}
+                          </p>
+                          <p>
+                            Dernier numéro reçu n°{
+                              subscription.last_number_delivered
+                            }
+                          </p>
+                        </Subscription>
+                      )
                     }
                   })}
                 </div>
               </div>
-            }
+            )}
           </Col>
         </Row>
       </div>

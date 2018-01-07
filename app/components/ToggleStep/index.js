@@ -1,6 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'react-styled-flexboxgrid'
+import { Grid, Row, Col } from 'react-styled-flexboxgrid'
+import ColCustom from 'components/Grid/Col'
+
 import anime from 'animejs'
 
 import Button from '../Button'
@@ -8,13 +11,24 @@ import WhiteWrapper from '../LayoutStep/WhiteWrapper'
 import TextSummary from '../LayoutStep/TextSummary'
 import StepPreview from '../LayoutStep/StepPreview'
 import StepPostview from '../LayoutStep/StepPostview'
-import LoaderNextStep from '../LayoutStep/LoaderNextStep'
+// import LoaderNextStep from '../LayoutStep/LoaderNextStep'
 import StepPostviewText from '../LayoutStep/StepPostviewText'
 import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
 import Title from '../LayoutStep/Title'
 import SquareCheckout from '../SquareCheckout'
+
 import './style.css'
+const CurrentStep = styled.div``
+const ContentOpen = styled.div``
+
+const Layout = styled(Grid)`
+  position: relative;
+  width: calc(100% - 80px);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+`
 
 class ToggleStep extends React.Component {
   constructor(props) {
@@ -91,38 +105,27 @@ class ToggleStep extends React.Component {
       textButtonNextStep,
       colorButtonNextStep,
       updateStepHide,
-      isError
+      secondaryButton,
+      isError,
+      hideIconChecked
     } = this.props
 
     return (
       <div>
         {currentStep === stepNumber && (
-          <Row>
-            <Col xs={12}>
-              <WhiteWrapper>
+          <CurrentStep>
+            <WhiteWrapper>
+              <Layout fluid>
                 <Row>
-                  <Col xs={7} xsOffset={3}>
+                  <ColCustom w={5} />
+                  <ColCustom w={15}>
                     <Row>
-                      <Col xs={1}>
-                        <Row start="xs">
-                          <SquareCheckout iconName={iconName} />
-                        </Row>
-                      </Col>
-                      <Col lg={11} md={11} xs={12}>
+                      <ColCustom w={1} w-m={2}>
+                        <SquareCheckout iconName={iconName} />
+                      </ColCustom>
+                      <ColCustom w={21} mc>
                         <Title>{title}</Title>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row center="xs">
-                  <Col md={11} xs={11} lg={5}>
-                    {contentOpen}
-                  </Col>
-                </Row>
-                <Row center="xs">
-                  <Col xs={5}>
-                    <Row start="xs">
-                      <Col xs={12}>
+                        <ContentOpen>{contentOpen}</ContentOpen>
                         <NextStep>
                           <button
                             className="button"
@@ -147,13 +150,13 @@ class ToggleStep extends React.Component {
                             />
                           </button>
                         </NextStep>
-                      </Col>
+                      </ColCustom>
                     </Row>
-                  </Col>
+                  </ColCustom>
                 </Row>
-              </WhiteWrapper>
-            </Col>
-          </Row>
+              </Layout>
+            </WhiteWrapper>
+          </CurrentStep>
         )}
         {currentStep < stepNumber && (
           <StepPreview>
@@ -174,31 +177,34 @@ class ToggleStep extends React.Component {
           </StepPreview>
         )}
         {currentStep > stepNumber && (
-          <StepPostview>
-            <Row>
-              <Col lg={8} lgOffset={2} xs={12}>
-                <Row>
-                  <Col lg={1} xs={1} lgOffset={1}>
-                    <Row end="xs">
-                      <SquareCheckout checked />
-                    </Row>
-                  </Col>
-                  <Col lg={6} xs={10}>
-                    <StepPostviewText>
-                      <TextSummary>
-                        {contentClose}
-                        {!updateStepHide && (
-                          <UpdateStep>
-                            <Button onClick={this.change}>Modifier</Button>
-                          </UpdateStep>
-                        )}
-                      </TextSummary>
-                    </StepPostviewText>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </StepPostview>
+          <Layout fluid>
+            <StepPostview>
+              <Row>
+                <ColCustom w={5} />
+                <ColCustom w={15}>
+                  <Row>
+                    {!hideIconChecked && (
+                      <ColCustom w={1} w-m={2}>
+                        <SquareCheckout checked />
+                      </ColCustom>
+                    )}
+                    <ColCustom w={21} mc>
+                      <StepPostviewText>
+                        <TextSummary>
+                          {contentClose}
+                          {!updateStepHide && (
+                            <UpdateStep>
+                              <Button onClick={this.change}>Modifier</Button>
+                            </UpdateStep>
+                          )}
+                        </TextSummary>
+                      </StepPostviewText>
+                    </ColCustom>
+                  </Row>
+                </ColCustom>
+              </Row>
+            </StepPostview>
+          </Layout>
         )}
       </div>
     )
@@ -208,8 +214,10 @@ class ToggleStep extends React.Component {
 ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
+  secondaryButton: PropTypes.func,
   isLoadingNextStep: PropTypes.bool,
   isError: PropTypes.bool,
+  hideIconChecked: PropTypes.bool,
   iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
