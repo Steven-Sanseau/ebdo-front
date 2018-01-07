@@ -1,5 +1,5 @@
 .dropdown-input.Dropdown-root {
-  color: var(--silver);
+  color: var(--black);
   font-family: 'FG-R';
   font-size: 16px;
   cursor: pointer;
@@ -9,7 +9,7 @@
 
 .dropdown-input > .Dropdown-control {
   border-radius: 6px;
-  border: 1px solid var(--silver);
+  border: 1px solid var(--black);
 }
 
 .dropdown-input.is-open > .Dropdown-control {

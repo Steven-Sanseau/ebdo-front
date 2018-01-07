@@ -70,7 +70,7 @@ const Subtitle = styled.h2`
 const FlexWrap = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 3px;
+  padding-right: 3px;
 
   .withBorder {
     border-left: 1px solid var(--silver);

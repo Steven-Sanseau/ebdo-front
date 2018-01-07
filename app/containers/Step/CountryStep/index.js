@@ -71,7 +71,7 @@ class CountryStep extends React.Component {
       }
     ]
     return (
-      <Row>
+      <div>
         <ColCustom w={9} w-m={15}>
           <FormCountry
             handleCountry={this.handleCountry}
@@ -87,7 +87,7 @@ class CountryStep extends React.Component {
             </div>
           )}
         </ColCustom>
-      </Row>
+      </div>
     )
   }
 
@@ -119,7 +119,7 @@ class CountryStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je calcule mes frais de livraison"
+        title="Je choisis ma zone de livraison"
         stepNumber={stepNumber}
         iconName="save"
         contentClose={this.contentClose()}

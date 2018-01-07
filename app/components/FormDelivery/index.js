@@ -27,6 +27,10 @@ class FormDelivery extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      countryShowMessage: false,
+      countryMessage: ''
+    }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handlePlace = this.handlePlace.bind(this)
@@ -63,6 +67,14 @@ class FormDelivery extends React.Component {
     })
   }
 
+  showAlertCountry = () => {
+    this.setState({
+      countryShowMessage: true,
+      countryMessage:
+        'Si vous souhaitez changer de pays, veuillez modifier votre zone de livraison'
+    })
+  }
+
   handleSubmit(event) {
     this.props.handleSubmit(event)
   }
@@ -92,6 +104,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Prénom"
                     name="first_name"
+                    isRequired
                     value={this.props.address.first_name}
                     onChange={this.handleChange}
                     placeholder="Henry"
@@ -101,6 +114,7 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Nom"
                     name="last_name"
+                    isRequired
                     value={this.props.address.last_name}
                     onChange={this.handleChange}
                     placeholder="Michel"
@@ -168,9 +182,11 @@ class FormDelivery extends React.Component {
                     placeholder="Paris"
                   />
                 </Col>
-                <Col lg={6} xs={12}>
+                <Col lg={6} xs={12} onClick={this.showAlertCountry}>
                   <InputText
                     label="Pays"
+                    showMessage={this.state.countryShowMessage}
+                    message={this.state.countryMessage}
                     name="country"
                     isRequired
                     disabled

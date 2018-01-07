@@ -9,16 +9,14 @@ import {
   makeSelectWaitingForCode,
   makeIsLoadingLogin
 } from 'selectors/login'
-import {
-  makeSelectClientEmail,
-} from 'selectors/client'
+import { makeSelectClientEmail } from 'selectors/client'
 import { loginEmailCode } from 'actions/login'
 import InputText from 'components/InputText'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
 class EmailConfirmStep extends React.Component {
   state = {
-    code: ""
+    code: ''
   }
 
   handleNextStep = event => {
@@ -62,7 +60,7 @@ class EmailConfirmStep extends React.Component {
       <ToggleStep
         title="Je confirme mon adresse email"
         stepNumber={stepNumber}
-        iconName="check"
+        iconName="mail"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
@@ -80,7 +78,7 @@ EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
-  stepNumber: PropTypes.number,
+  stepNumber: PropTypes.number
 }
 
 const mapStateToProps = createStructuredSelector({

@@ -27,11 +27,13 @@ class DropdownInput extends React.Component {
     const { value } = this.state
     return (
       <DropdownWrapper>
-        <Row>
-          <Col xs={12}>
-            <Label>{label}</Label>
-          </Col>
-        </Row>
+        {label && (
+          <Row>
+            <Col xs={12}>
+              <Label>{label}</Label>
+            </Col>
+          </Row>
+        )}
         <Row>
           <Col xs={12}>
             <div className="dropdown-wrapper-input">
