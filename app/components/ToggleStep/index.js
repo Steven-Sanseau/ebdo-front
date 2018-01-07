@@ -117,7 +117,7 @@ class ToggleStep extends React.Component {
             <WhiteWrapper>
               <Layout fluid>
                 <Row>
-                  <ColCustom w={5} />
+                  <ColCustom w={5} w-m={0} />
                   <ColCustom w={15}>
                     <Row>
                       <ColCustom w={1} w-m={2}>
@@ -159,28 +159,29 @@ class ToggleStep extends React.Component {
           </CurrentStep>
         )}
         {currentStep < stepNumber && (
-          <StepPreview>
-            <Row>
-              <Col xs={12} lg={8} lgOffset={2}>
-                <Row>
-                  <Col xs={2}>
-                    <Row end="xs">
+          <Layout fluid>
+            <StepPreview>
+              <Row>
+                <ColCustom w={5} w-m={0} />
+                <ColCustom w={15}>
+                  <Row>
+                    <ColCustom w={1} w-m={2}>
                       <SquareCheckout iconName={iconName} silver />
-                    </Row>
-                  </Col>
-                  <Col xs={7}>
-                    <Title color="silver">{title}</Title>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </StepPreview>
+                    </ColCustom>
+                    <ColCustom w={15}>
+                      <Title color="silver">{title}</Title>
+                    </ColCustom>
+                  </Row>
+                </ColCustom>
+              </Row>
+            </StepPreview>
+          </Layout>
         )}
         {currentStep > stepNumber && (
           <Layout fluid>
             <StepPostview>
               <Row>
-                <ColCustom w={5} />
+                <ColCustom w={5} w-m={0} />
                 <ColCustom w={15}>
                   <Row>
                     {!hideIconChecked && (

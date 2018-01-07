@@ -11,9 +11,7 @@ import {
   makeSelectClientEmail,
   makeSelectClientExist
 } from 'selectors/client'
-import {
-  makeSelectLogin,
-} from 'selectors/login'
+import { makeSelectLogin } from 'selectors/login'
 import { setClientEmail, postClient, useClientExist } from 'actions/client'
 import { loginEmail } from 'actions/login'
 
@@ -91,8 +89,10 @@ class EmailStep extends React.Component {
         />
         {clientExist && (
           <div>
-            <BoldText>Votre adresse est déjà enregistrée chez nous. Vous allez devoir vous connecter.</BoldText>
-
+            <BoldText>
+              Votre adresse est déjà enregistrée chez nous. Vous allez devoir
+              vous connecter.
+            </BoldText>
           </div>
         )}
       </div>
@@ -102,10 +102,10 @@ class EmailStep extends React.Component {
   contentClose() {
     const { email } = this.props
     return (
-      <div>
-        Toutes les informations concernant mon abonnement seront envoyées à{' '}
-        <BoldText>{email}</BoldText>
-      </div>
+      <span>
+        Toutes les informations concernant mon abonnement seront <br /> envoyées
+        à <BoldText>{email}</BoldText>
+      </span>
     )
   }
 
@@ -163,7 +163,7 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchPostClient: () => dispatch(postClient()),
     dispatchUseClientExist: () => dispatch(useClientExist()),
-    dispatchLoginEmail: (email) => dispatch(loginEmail(email))
+    dispatchLoginEmail: email => dispatch(loginEmail(email))
   }
 }
 

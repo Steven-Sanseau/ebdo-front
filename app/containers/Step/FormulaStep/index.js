@@ -47,6 +47,10 @@ const LinkWrapper = styled(Link)`
   display: inline-block;
   margin-left: 20px;
 `
+const Price = styled.div`
+  font-size: 14px;
+  color: var(--space-grey);
+`
 
 class FormulaStep extends React.Component {
   constructor(props) {
@@ -171,31 +175,37 @@ class FormulaStep extends React.Component {
     return (
       <div>
         <Row>
-          <Col lg={5} xs={11}>
+          <ColCustom w={6}>
             <Image src="PostBox.png" alt="Post box" height={173} />
-          </Col>
-          <Col lg={7} xs={11}>
+          </ColCustom>
+          <Col w={17}>
             <TextFormulae>
-              {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
-              {offer.data.duration && (
-                <GreenText>Pendant {offer.data.duration / 4} mois</GreenText>
-              )}
+              {offer.data.is_gift && <VioletText>J'offre </VioletText>}
+              {!offer.data.is_gift && <VioletText>Je reçois</VioletText>}
+              <BigBoldText> ebdo </BigBoldText>
+              {/* {!offer.data.duration && <GreenText>chaque mois</GreenText>} */}
+              {offer.data.duration !== 0 &&
+                offer.data.duration && (
+                  <GreenText>pendant {offer.data.duration / 4} mois</GreenText>
+                )}
               <BigBoldText>, </BigBoldText>
-              {offer.data.is_gift && <VioletText> j'offre </VioletText>}
-              {!offer.data.is_gift && <VioletText> je reçois </VioletText>}
-              <BigBoldText>
-                {' '}
-                {offer.data.duration} numéros <br /> pour le prix de{' '}
-              </BigBoldText>
+              <br />
+              <BigBoldText> pour </BigBoldText>
               <BlueText>
                 {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
-              </BlueText>
-              <br />
+              </BlueText>{' '}
               <BigBoldText>
                 soit{' '}
-                {offer.data.monthly_price_ttc + offer.data.shipping_cost * 4}
-                {'€'}
-                /mois au total
+                {offer.data.duration !== 0 &&
+                  (offer.data.monthly_price_ttc / 4 +
+                    offer.data.shipping_cost) *
+                    offer.data.duration}
+                {offer.data.duration === 0 && offer.data.monthly_price_ttc}
+                {'€ '} au total.
+                {/* <Price>
+                  {offer.data.monthly_price_ttc * 4}€ +{' '}
+                  {offer.data.shipping_cost * 4}€ de frais de port
+                </Price> */}
               </BigBoldText>
             </TextFormulae>
             {offer.data.country_shipping === 'FR' && (
@@ -206,12 +216,29 @@ class FormulaStep extends React.Component {
             )}
             {offer.data.country_shipping === 'LU' && (
               <DeliveryText>
-                Les frais de livraison au Luxembourg sont de 2€ par numéro.
+                Les frais de livraison en Luxembourg sont de{' '}
+                {offer.data.shipping_cost}€ par numéro.<br />
+                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
+                {offer.data.shipping_cost * offer.data.duration}€ de frais de
+                port
               </DeliveryText>
             )}
             {offer.data.country_shipping === 'BE' && (
               <DeliveryText>
-                Les frais de livraison en Belgique sont de 1,5€ par numéro.
+                Les frais de livraison en Belgique sont de{' '}
+                {offer.data.shipping_cost}€ par numéro.<br />
+                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
+                {offer.data.shipping_cost * offer.data.duration}€ de frais de
+                port
+              </DeliveryText>
+            )}
+            {offer.data.country_shipping === 'CH' && (
+              <DeliveryText>
+                Les frais de livraison en Suisse sont de{' '}
+                {offer.data.shipping_cost}€ par numéro.<br />
+                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
+                {offer.data.shipping_cost * offer.data.duration}€ de frais de
+                port
               </DeliveryText>
             )}
             <NextStep>

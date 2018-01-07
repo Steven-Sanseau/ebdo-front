@@ -17,9 +17,8 @@ const buttonStyles = css`
   white-space: nowrap;
   min-width: ${props => props.minWidth};
   background-color: var(${props => (props.color ? props.color : '--booger')});
-  padding: 0 20px;
-  height: 32px;
-  line-height: 32px;
+  padding: 5px 20px;
+  line-height: 41px;
   transition: transform 0.15s ease-out, -webkit-transform 0.15s ease-out;
 
   &.big {
