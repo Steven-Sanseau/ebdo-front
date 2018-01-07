@@ -16,12 +16,16 @@ const makeIsLoggedIn = () =>
 const makeIsLoadingLogin = () =>
   createSelector(selectLogin, login => login.get('loading'))
 
+const makeIsErrorLogin = () =>
+  createSelector(selectLogin, login => login.get('error'))
+
 const makeSelectWaitingForCode = () =>
   createSelector(selectLogin, login => login.get('waitingForCode'))
 
 export {
   makeSelectToken,
   makeIsLoggedIn,
+  makeIsErrorLogin,
   makeSelectLogin,
   makeSelectWaitingForCode,
   makeIsLoadingLogin

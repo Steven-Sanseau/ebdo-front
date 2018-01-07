@@ -7,7 +7,6 @@ const buttonStyles = css`
   color: var(${props => (props.colorText ? props.colorText : '--white-true')});
   font-family: 'FG-R';
   font-size: 16px;
-  line-height: 16px;
   text-decoration: none;
   border-radius: 16px;
   -webkit-font-smoothing: antialiased;
