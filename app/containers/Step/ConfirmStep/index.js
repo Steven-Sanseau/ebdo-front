@@ -12,6 +12,8 @@ import {
   makeSelectIsCheckoutLoading
 } from 'selectors/checkout'
 
+import { makeIsErrorLogin } from 'selectors/login'
+
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
@@ -56,22 +58,27 @@ class ConfirmStep extends React.Component {
       currentStep,
       changeStep,
       stepNumber,
-      checkoutIsLoading
+      checkoutIsLoading,
+      isErrorLogin
     } = this.props
 
     return (
-      <ToggleStep
-        title="Je confirme mon abonnement"
-        stepNumber={stepNumber}
-        iconName="check"
-        contentClose={this.contentClose()}
-        contentOpen={this.contentOpen()}
-        currentStep={currentStep}
-        changeStep={changeStep}
-        nextStep={this.handleNextStep}
-        textButtonNextStep=">> Je m'abonne !"
-        isLoadingNextStep={checkoutIsLoading}
-      />
+      <div>
+        {isErrorLogin && 'errrrroooo'}
+        <ToggleStep
+          title="Je confirme mon abonnement"
+          stepNumber={stepNumber}
+          iconName="check"
+          contentClose={this.contentClose()}
+          contentOpen={this.contentOpen()}
+          currentStep={currentStep}
+          changeStep={changeStep}
+          nextStep={this.handleNextStep}
+          textButtonNextStep=">> Je m'abonne !"
+          isLoadingNextStep={checkoutIsLoading}
+          isError={isErrorLogin}
+        />
+      </div>
     )
   }
 }
@@ -85,13 +92,15 @@ ConfirmStep.propTypes = {
   stepNumber: PropTypes.number,
   dispatchConfirmCheckout: PropTypes.func,
   dispatchConfirmCGV: PropTypes.func,
-  isCGVAccepted: PropTypes.bool
+  isCGVAccepted: PropTypes.bool,
+  isErrorLogin: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   checkout: makeSelectCheckout(),
   isCGVAccepted: makeSelectIsCGVChecked(),
-  checkoutIsLoading: makeSelectIsCheckoutLoading()
+  checkoutIsLoading: makeSelectIsCheckoutLoading(),
+  isErrorLogin: makeIsErrorLogin()
 })
 
 function mapDispatchToProps(dispatch) {

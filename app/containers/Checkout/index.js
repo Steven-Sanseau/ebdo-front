@@ -31,7 +31,7 @@ import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
 
 import ButtonSticky from 'components/StickyHelpCheckout'
-import {push} from "react-router-redux";
+import { push } from 'react-router-redux'
 
 export class Checkout extends React.Component {
   constructor(props) {
@@ -43,8 +43,8 @@ export class Checkout extends React.Component {
 
   componentWillMount() {
     if (this.props.subscriptions) {
-      this.props.subscriptions.map((subscription) => {
-        if (subscription.status === "01") {
+      this.props.subscriptions.map(subscription => {
+        if (subscription.status === '01') {
           this.props.goToAboExist()
         }
       })
@@ -173,7 +173,7 @@ function mapDispatchToProps(dispatch) {
     dispatchNewCheckout: () => dispatch(newCheckout()),
     dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
     goToStep: step => dispatch(goToStep(step)),
-    goToAboExist: () => dispatch(push("abo/existe")),
+    goToAboExist: () => dispatch(push('abo/existe'))
   }
 }
 

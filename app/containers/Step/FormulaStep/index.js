@@ -29,6 +29,8 @@ import NextStep from 'components/LayoutStep/NextStep'
 import Button from 'components/Button'
 import Image from 'components/Image'
 
+import ButtonAnimate from 'components/ButtonAnim'
+
 import '!file-loader?name=[name].[ext]!images/checkout/PostBox.png'
 const ButtonWrap = styled.div`
   margin-top: 40px;
@@ -105,6 +107,7 @@ class FormulaStep extends React.Component {
         <div>
           <Row>
             <Col xs={11}>
+              {/* <ButtonAnimate /> */}
               <FormulaText>
                 Les frais de livraison en France (Métropilitaine et outre-mer)
                 sont inclus. Les frais de livraison vers un autre pays seront

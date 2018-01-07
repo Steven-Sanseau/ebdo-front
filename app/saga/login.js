@@ -70,7 +70,7 @@ function* loginEmailCodeSaga(action) {
 
       yield put(nextStep())
     }
-    console.log('rediurect', action.redirect)
+
     yield put(push(action.redirect))
   } catch (err) {
     yield put(loginEmailCodeError(err.message))

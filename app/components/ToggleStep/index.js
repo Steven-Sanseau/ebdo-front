@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-styled-flexboxgrid'
+import anime from 'animejs'
 
 import Button from '../Button'
 import WhiteWrapper from '../LayoutStep/WhiteWrapper'
@@ -13,21 +14,74 @@ import NextStep from '../LayoutStep/NextStep'
 import UpdateStep from '../LayoutStep/UpdateStep'
 import Title from '../LayoutStep/Title'
 import SquareCheckout from '../SquareCheckout'
+import './style.css'
 
 class ToggleStep extends React.Component {
   constructor(props) {
     super(props)
-    this.change = this.change.bind(this)
+    this.state = {
+      isAnim: false,
+      animInstance: null
+    }
   }
 
-  change() {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isAnim) {
+      this.state.animInstance.finished.then(() => {
+        if (this.state.animInstance) {
+          this.state.animInstance.restart()
+          this.state.animInstance.pause()
+        }
+
+        this.setState({ isAnim: false, animInstance: null })
+      })
+    }
+  }
+
+  change = () => {
     this.props.changeStep(this.props.stepNumber)
+  }
+
+  animAndNextStep = event => {
+    const basicTimeline = anime.timeline({
+      autoplay: false
+    })
+    basicTimeline
+      .add({
+        targets: this.text,
+        duration: 10,
+        opacity: '0'
+      })
+      .add({
+        targets: this.button,
+        duration: 500,
+        height: 20,
+        width: 140,
+        border: '0',
+        borderRadius: 100,
+        easing: 'easeOutCubic'
+      })
+      .add({
+        targets: this.progressBar,
+        duration: 2000,
+        width: 140,
+        easing: 'easeOutCubic'
+      })
+      .add({
+        targets: this.button,
+        duration: 100
+      })
+
+    if (!this.state.isAnim) {
+      this.props.nextStep(event)
+      basicTimeline.play()
+      this.setState({ isAnim: true, animInstance: basicTimeline })
+    }
   }
 
   render() {
     const {
       currentStep,
-      nextStep,
       stepNumber,
       iconName,
       title,
@@ -36,7 +90,8 @@ class ToggleStep extends React.Component {
       isLoadingNextStep,
       textButtonNextStep,
       colorButtonNextStep,
-      updateStepHide
+      updateStepHide,
+      isError
     } = this.props
 
     return (
@@ -69,17 +124,28 @@ class ToggleStep extends React.Component {
                     <Row start="xs">
                       <Col xs={12}>
                         <NextStep>
-                          <Button
-                            handleRoute={nextStep}
+                          <button
+                            className="button"
+                            onClick={this.animAndNextStep}
                             color={colorButtonNextStep}
-                          >
-                            {isLoadingNextStep && <LoaderNextStep />}
-                            {!isLoadingNextStep && (
-                              <span>
-                                {textButtonNextStep || 'Étape Suivante'}
-                              </span>
-                            )}
-                          </Button>
+                            ref={btn => {
+                              this.button = btn
+                            }}>
+                            <div
+                              ref={txt => {
+                                this.text = txt
+                              }}>
+                              {isError && 'Valider a nouveau'}
+                              {(!isError && textButtonNextStep) ||
+                                'Étape Suivante'}
+                            </div>
+                            <div
+                              className="progress-bar"
+                              ref={pgrs => {
+                                this.progressBar = pgrs
+                              }}
+                            />
+                          </button>
                         </NextStep>
                       </Col>
                     </Row>
@@ -143,6 +209,7 @@ ToggleStep.propTypes = {
   contentOpen: PropTypes.object,
   contentClose: PropTypes.object,
   isLoadingNextStep: PropTypes.bool,
+  isError: PropTypes.bool,
   iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
