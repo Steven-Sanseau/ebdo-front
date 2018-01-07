@@ -75,10 +75,12 @@ class DeliveryStep extends React.Component {
           handleChange={this.handleAddressForm}
           handleSubmit={this.handleSubmitAddressForm}
         />
-        {displayInvoiceAddress && <CheckboxShowInvoiceForm
-          isChecked={isInvoiceSameDelivery}
-          showInvoiceForm={this.showInvoiceForm}
-        />}
+        {displayInvoiceAddress && (
+          <CheckboxShowInvoiceForm
+            isChecked={isInvoiceSameDelivery}
+            showInvoiceForm={this.showInvoiceForm}
+          />
+        )}
         {!isInvoiceSameDelivery && (
           <FormDelivery
             address={invoice}
@@ -106,19 +108,19 @@ class DeliveryStep extends React.Component {
         <UpdateStep>
           <Button onClick={this.handleChangeStep}>Modifier</Button>
         </UpdateStep>{' '}
-
-        {displayInvoiceAddress && <div>
-          <br />
-          Je serai facturé à l’adresse suivante : <br />
-          <BoldText>
-            {invoice.first_name} {invoice.last_name}
-          </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city} ({
-          invoice.country
-           }).
-          <UpdateStep>
-            <Button onClick={this.handleChangeStep}>Modifier</Button>
-          </UpdateStep>
-        </div>}
+        {displayInvoiceAddress && (
+          <div>
+            <br />
+            Je serai facturé à l’adresse suivante : <br />
+            <BoldText>
+              {invoice.first_name} {invoice.last_name}
+            </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city}{' '}
+            ({invoice.country}).
+            <UpdateStep>
+              <Button onClick={this.handleChangeStep}>Modifier</Button>
+            </UpdateStep>
+          </div>
+        )}
       </div>
     )
   }

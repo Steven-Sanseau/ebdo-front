@@ -25,7 +25,7 @@ class ToggleStep extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     if (this.state.isAnim) {
       this.state.animInstance.finished.then(() => {
         if (this.state.animInstance) {
