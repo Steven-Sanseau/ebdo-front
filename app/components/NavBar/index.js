@@ -13,6 +13,7 @@ import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
 import { logout } from 'actions/login'
+import { newCheckout } from 'actions/checkout'
 
 const LinkWrap = styled.div`
   text-align: center;
@@ -117,7 +118,7 @@ const Menu = styled.nav`
 
     .narrowLinks {
       display: ${props => (props.menuFixed ? 'block' : 'none')};
-      ${'' /* ${props => (props.page !== '/' ? 'display: none;' : '')}; */};
+      ${props => (props.page !== '/' ? 'display: none;' : '')};
     }
   }
 `
@@ -157,6 +158,7 @@ class NavBar extends React.Component {
   }
 
   handleRouteSubscribe = () => {
+    this.props.dispatch(newCheckout())
     this.props.dispatch(push('abonnement'))
   }
 
@@ -266,13 +268,6 @@ class NavBar extends React.Component {
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <div style={menuFixed ? hidden : {}} className="hidden-xs">
-                  <Button
-                    handleRoute={this.handleRouteTryit}
-                    color="--warm-purple">
-                    J&apos;essaye
-                  </Button>
-                </div>
               </FlexWrap>
               <div className="narrowLinks">
                 <LinkBurger

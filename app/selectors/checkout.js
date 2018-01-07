@@ -15,6 +15,10 @@ const makeSelectPayementMethod = () =>
   createSelector(selectCheckout, checkout =>
     checkout.get('data').get('payment_method')
   )
+const makeSelectCheckoutMessageError = () =>
+  createSelector(selectCheckout, checkout =>
+    checkout.get('data').get('errorMessage')
+  )
 
 const makeSelectIsCGVChecked = () =>
   createSelector(selectCheckout, checkout =>
@@ -23,6 +27,7 @@ const makeSelectIsCGVChecked = () =>
 
 export {
   makeSelectCheckout,
+  makeSelectCheckoutMessageError,
   makeSelectIsCheckoutLoading,
   makeSelectCheckoutData,
   makeSelectPayementMethod,

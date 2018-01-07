@@ -47,7 +47,7 @@ export default class StripeForm extends Component {
                   <Col xs={12}>
                     <CardNumberElement
                       onChange={this.props.handleChange}
-                      className="card-number input-stripe"
+                      className="card-number input-stripe "
                     />
                   </Col>
                 </Row>

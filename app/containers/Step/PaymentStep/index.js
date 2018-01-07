@@ -7,7 +7,6 @@ import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { makeSelectPayementMethod } from 'selectors/checkout'
 import { setPayementMethod } from 'actions/checkout'
 import {
   makeSelectTokenIsLoading,
@@ -17,6 +16,12 @@ import {
 } from 'selectors/token'
 
 import { makeSelectOffer } from 'selectors/offer'
+import {
+  makeSelectPayementMethod,
+  makeSelectIsCGVChecked,
+  makeSelectIsCheckoutLoading,
+  makeSelectCheckoutMessageError
+} from 'selectors/checkout'
 
 import {
   setTokenStripe,
@@ -30,6 +35,7 @@ import SepaIcon from 'components/Icon/SepaIcon'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import StripeForm from 'components/StripeForm'
 import SlimpayForm from 'components/SlimpayForm'
+import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 
 const ChoicePaymentMethodWrapper = styled.div`
   margin-bottom: 30px;
@@ -80,6 +86,7 @@ class PaymentStep extends React.Component {
     const {
       payementMethod,
       tokenMessageError,
+      checkoutMessageError,
       offer,
       slimpayIframe
     } = this.props
@@ -117,8 +124,8 @@ class PaymentStep extends React.Component {
         {payementMethod === 1 &&
           !offer.data.time_limited && (
             <Row>
-              <Col xs={6}>
-                Vous allez être redirigé vers notr site partenaire sécurisé pour
+              <Col xs={12}>
+                Vous allez être redirigé vers le site partenaire sécurisé pour
                 valider votre Mandat de prélèvement
                 {/* // IFRAME SLIMPAY TRANSFORMED TO LINK */}
                 {/* <div dangerouslySetInnerHTML={{ __html: slimpayIframe }} /> */}
@@ -141,6 +148,15 @@ class PaymentStep extends React.Component {
             </Col>
           </Row>
         )}
+        <div>
+          Vérifiez attentivement vos informations avant de confirmer.
+          <CheckboxConfirmCheckout
+            handleConfirmCGV={this.handleCheckboxCGV}
+            isChecked={this.props.isCGVAccepted}
+            label="J'ai lu et accepte les CGV"
+          />
+          {checkoutMessageError}
+        </div>
       </div>
     )
   }
@@ -204,6 +220,7 @@ PaymentStep.propTypes = {
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
   tokenMessageError: PropTypes.string,
+  checkoutMessageError: PropTypes.string,
   offer: PropTypes.object,
   slimpayIframe: PropTypes.object
 }
@@ -212,9 +229,12 @@ const mapStateToProps = createStructuredSelector({
   payementMethod: makeSelectPayementMethod(),
   tokenIsLoading: makeSelectTokenIsLoading(),
   tokenMessageError: makeSelectTokenMessageError(),
+  checkoutMessageError: makeSelectCheckoutMessageError(),
   tokenIsError: makeSelectTokenIsSetError(),
   offer: makeSelectOffer(),
-  slimpayIframe: makeSelectIframeContent()
+  slimpayIframe: makeSelectIframeContent(),
+  isCGVAccepted: makeSelectIsCGVChecked(),
+  checkoutIsLoading: makeSelectIsCheckoutLoading()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -223,7 +243,9 @@ function mapDispatchToProps(dispatch) {
     dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
     dispatchSetTokenStripeLoaded: token =>
       dispatch(setTokenStripeLoaded(token)),
-    dispatchSetTokenError: error => dispatch(setTokenStripeError(error))
+    dispatchSetTokenError: error => dispatch(setTokenStripeError(error)),
+    dispatchConfirmCheckout: () => dispatch(postCheckout()),
+    dispatchConfirmCGV: () => dispatch(setCgvConfirm())
   }
 }
 

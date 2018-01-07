@@ -107,7 +107,7 @@ class FormDelivery extends React.Component {
                     isRequired
                     value={this.props.address.first_name}
                     onChange={this.handleChange}
-                    placeholder="Henry"
+                    placeholder="Sabrina"
                   />
                 </Col>
                 <Col xs={12} lg={6}>
@@ -117,7 +117,7 @@ class FormDelivery extends React.Component {
                     isRequired
                     value={this.props.address.last_name}
                     onChange={this.handleChange}
-                    placeholder="Michel"
+                    placeholder="Dubois"
                   />
                 </Col>
               </Row>
@@ -127,7 +127,7 @@ class FormDelivery extends React.Component {
                     Téléphone <Required>*</Required>
                     <PhoneWrapper
                       country="FR"
-                      placeholder="Votre numéro de téléphone"
+                      placeholder="+33 6 00 00 00 00"
                       value={this.props.address.phone}
                       onChange={this.handlePhone}
                       convertToNational
@@ -140,7 +140,7 @@ class FormDelivery extends React.Component {
                     name="company"
                     value={this.props.address.company}
                     onChange={this.handleChange}
-                    placeholder="Nom de la Société"
+                    placeholder="Nom de la Société (ex: SARL Dupont)"
                   />
                 </Col>
               </Row>
@@ -156,7 +156,7 @@ class FormDelivery extends React.Component {
                     }}
                     value={this.props.address.address}
                     onChange={this.handlePlace}
-                    placeholder="Adresse"
+                    placeholder="10 Bis, rue Simone de Beauvoir"
                   />
                 </Col>
                 <Col lg={4} xs={12}>
@@ -167,7 +167,7 @@ class FormDelivery extends React.Component {
                     type="number"
                     value={this.props.address.postal_code}
                     onChange={this.handleChange}
-                    placeholder="00000"
+                    placeholder="17000"
                   />
                 </Col>
               </Row>
@@ -179,7 +179,7 @@ class FormDelivery extends React.Component {
                     isRequired
                     value={this.props.address.city}
                     onChange={this.handleChange}
-                    placeholder="Paris"
+                    placeholder="La Rochelle"
                   />
                 </Col>
                 <Col lg={6} xs={12} onClick={this.showAlertCountry}>

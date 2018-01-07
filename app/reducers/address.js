@@ -67,15 +67,15 @@ function addressReducer(state = initialState, action) {
         .set(action.payload.typeOfAddress, Address(action.payload.address))
     }
     case SET_ADRESS_EQUAL: {
-      const addressDeliveryToInvoice = state.get('delivery')
-      const newAddressInvoice = addressDeliveryToInvoice
-        .mergeDeep({ type_address: 'invoice' })
-        .mergeDeep({ address_id: state.getIn(['invoice', 'address_id']) })
+      const addressInvoiceToDelivery = state.get('invoice')
+      const newAddressDelivery = addressInvoiceToDelivery
+        .mergeDeep({ type_address: 'delivery' })
+        .mergeDeep({ address_id: state.getIn(['delivery', 'address_id']) })
         .mergeDeep({ address_equal: true })
 
       return state
-        .set('invoice', new Address(newAddressInvoice))
-        .setIn(['delivery', 'address_equal'], true)
+        .set('delivery', new Address(newAddressDelivery))
+        .setIn(['invoice', 'address_equal'], true)
     }
     case SET_COUNTRY_ADRESS: {
       return state

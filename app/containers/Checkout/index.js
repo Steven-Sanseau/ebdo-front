@@ -30,7 +30,6 @@ import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
 
-import ButtonSticky from 'components/StickyHelpCheckout'
 import { push } from 'react-router-redux'
 
 export class Checkout extends React.Component {
@@ -144,7 +143,6 @@ export class Checkout extends React.Component {
               <Col xs={12}>{step}</Col>
             </Row>
           ))}
-          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )

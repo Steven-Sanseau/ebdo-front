@@ -6,7 +6,7 @@ const Offer = new Record(
     aboweb_id: null,
     name: null,
     price_ttc: 0,
-    monthly_price_ttc: 5,
+    monthly_price_ttc: 15,
     description: '',
     time_limited: false,
     duration: 0,

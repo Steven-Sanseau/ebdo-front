@@ -108,14 +108,11 @@ class FormulaStep extends React.Component {
     return (
       <div>
         <Row>
-          {/* <ColCustom w={15}> */}
-          {/* <ButtonAnimate /> */}
           <FormulaText>
             Les frais de livraison en France (Métropilitaine et outre-mer) sont
             inclus. Les frais de livraison vers un autre pays seront ajoutés à
             l’étape suivante.
           </FormulaText>
-          {/* </ColCustom> */}
         </Row>
         <Row center="xs" start="md">
           {offer.data && (
@@ -128,12 +125,6 @@ class FormulaStep extends React.Component {
                 isNaturalForm={isNaturalForm}
                 switchUI={this.switchUI}
               />
-
-              {isNaturalForm && (
-                <ButtonWrap>
-                  <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
-                </ButtonWrap>
-              )}
               {!isNaturalForm && (
                 <ButtonWrap>
                   <Button
