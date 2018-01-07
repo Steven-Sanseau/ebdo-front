@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 
@@ -30,6 +31,9 @@ import ToggleStep from 'components/ToggleStep/Loadable'
 import StripeForm from 'components/StripeForm'
 import SlimpayForm from 'components/SlimpayForm'
 
+const ChoicePaymentMethodWrapper = styled.div`
+  margin-bottom: 30px;
+`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
@@ -82,34 +86,36 @@ class PaymentStep extends React.Component {
 
     return (
       <div>
-        <Row start="xs">
-          <Col xs={12}>
-            <Row>
-              {!offer.time_limited && (
+        <ChoicePaymentMethodWrapper>
+          <Row start="xs">
+            <Col xs={12}>
+              <Row>
+                {!offer.data.time_limited && (
+                  <Col lg={6} xs={12}>
+                    <InputCheckbox
+                      text="Prélèvement SEPA"
+                      onCheck={this.handlePaiementMethod}
+                      isChecked={payementMethod === 1}
+                      icon={<SepaIcon />}
+                      valueCheck={1}
+                    />
+                  </Col>
+                )}
                 <Col lg={6} xs={12}>
                   <InputCheckbox
-                    text="Prélèvement SEPA"
+                    text="Carte Banquaire"
                     onCheck={this.handlePaiementMethod}
-                    isChecked={payementMethod === 1}
-                    icon={<SepaIcon />}
-                    valueCheck={1}
+                    isChecked={payementMethod === 2}
+                    icon={<CBIcon />}
+                    valueCheck={2}
                   />
                 </Col>
-              )}
-              <Col lg={6} xs={12}>
-                <InputCheckbox
-                  text="Carte Banquaire"
-                  onCheck={this.handlePaiementMethod}
-                  isChecked={payementMethod === 2}
-                  icon={<CBIcon />}
-                  valueCheck={2}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+              </Row>
+            </Col>
+          </Row>
+        </ChoicePaymentMethodWrapper>
         {payementMethod === 1 &&
-          !offer.time_limited && (
+          !offer.data.time_limited && (
             <Row>
               <Col xs={6}>
                 Vous allez être redirigé vers notr site partenaire sécurisé pour
@@ -170,13 +176,13 @@ class PaymentStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={
-          payementMethod === 1 && !offer.time_limited
+          payementMethod === 1 && !offer.data.time_limited
             ? this.handleGoToSlimpay
             : this.handleNextStep
         }
         isLoadingNextStep={tokenIsLoading}
         textButtonNextStep={
-          payementMethod === 1 && !offer.time_limited
+          payementMethod === 1 && !offer.data.time_limited
             ? 'Payer'
             : 'Récapituler la commande'
         }

@@ -8,12 +8,20 @@ import places from 'places.js'
 import { Row, Col } from 'react-flexbox-grid'
 import Phone from 'react-phone-number-input'
 
-import 'react-phone-number-input/rrui.css'
-import 'react-phone-number-input/style.css'
+import './phone.css'
 
 import InputText from '../InputText'
+import Required from 'components/InputText/Required'
 import Input from '../InputText/Input'
 const PhoneWrapper = Input.withComponent(Phone)
+const PhoneLabelWrapper = styled.div`
+  margin-top: 15px;
+  font-family: 'FG-R';
+  font-size: 14px;
+  line-height: 14px;
+  text-align: left;
+  color: var(--black);
+`
 
 class FormDelivery extends React.Component {
   constructor(props) {
@@ -101,13 +109,16 @@ class FormDelivery extends React.Component {
               </Row>
               <Row>
                 <Col xs={12} lg={6}>
-                  <PhoneWrapper
-                    country="FR"
-                    placeholder="Votre numéro de téléphone"
-                    value={this.props.address.phone}
-                    onChange={this.handlePhone}
-                    convertToNational
-                  />
+                  <PhoneLabelWrapper>
+                    Téléphone <Required>*</Required>
+                    <PhoneWrapper
+                      country="FR"
+                      placeholder="Votre numéro de téléphone"
+                      value={this.props.address.phone}
+                      onChange={this.handlePhone}
+                      convertToNational
+                    />
+                  </PhoneLabelWrapper>
                 </Col>
                 <Col xs={12} lg={6}>
                   <InputText

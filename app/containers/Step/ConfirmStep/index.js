@@ -64,7 +64,6 @@ class ConfirmStep extends React.Component {
 
     return (
       <div>
-        {isErrorLogin && 'errrrroooo'}
         <ToggleStep
           title="Je confirme mon abonnement"
           stepNumber={stepNumber}

@@ -16,7 +16,7 @@ import { setAddress, postAddress, setAddressEqual } from 'actions/address'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import BoldText from 'components/LayoutStep/BoldText'
 import FormDelivery from 'components/FormDelivery'
-import CheckboxShowInvoiceForm from 'components/FormDelivery/CheckboxShowInvoiceForm'
+import CheckboxShowDeliveryForm from 'components/FormDelivery/CheckboxShowDeliveryForm'
 import UpdateStep from 'components/LayoutStep/UpdateStep'
 import Button from 'components/Button'
 
@@ -27,31 +27,25 @@ class DeliveryStep extends React.Component {
     this.state = {
       isInvoiceSameDelivery: true
     }
-
-    this.handleChangeStep = this.handleChangeStep.bind(this)
-    this.showInvoiceForm = this.showInvoiceForm.bind(this)
-    this.handleAddressForm = this.handleAddressForm.bind(this)
-    this.handleSubmitAddressForm = this.handleSubmitAddressForm.bind(this)
-    this.handleNextStep = this.handleNextStep.bind(this)
   }
 
-  handleChangeStep() {
+  handleChangeStep = () => {
     this.props.changeStep(this.props.stepNumber)
   }
 
-  handleNextStep(event) {
+  handleNextStep = event => {
     this.handleSubmitAddressForm(event)
   }
 
-  showInvoiceForm() {
+  showDeliveryForm = () => {
     this.setState({ isInvoiceSameDelivery: !this.state.isInvoiceSameDelivery })
   }
 
-  handleAddressForm(type, address) {
+  handleAddressForm = (type, address) => {
     this.props.dispatchChangeAddress(type, address)
   }
 
-  handleSubmitAddressForm(event) {
+  handleSubmitAddressForm = event => {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
@@ -64,28 +58,28 @@ class DeliveryStep extends React.Component {
 
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
-    const { delivery, invoice, country, displayInvoiceAddress } = this.props
+    const { delivery, invoice, country, displayDeliveryAddress } = this.props
 
     return (
       <div>
         <FormDelivery
-          address={delivery}
+          address={invoice}
           country={country}
-          typeOfAddress="delivery"
+          typeOfAddress="invoice"
           handleChange={this.handleAddressForm}
           handleSubmit={this.handleSubmitAddressForm}
         />
-        {displayInvoiceAddress && (
-          <CheckboxShowInvoiceForm
+        {displayDeliveryAddress && (
+          <CheckboxShowDeliveryForm
             isChecked={isInvoiceSameDelivery}
-            showInvoiceForm={this.showInvoiceForm}
+            showDeliveryForm={this.showDeliveryForm}
           />
         )}
         {!isInvoiceSameDelivery && (
           <FormDelivery
-            address={invoice}
+            address={delivery}
             country={country}
-            typeOfAddress="invoice"
+            typeOfAddress="delivery"
             handleChange={this.handleAddressForm}
             handleSubmit={this.handleSubmitAddressForm}
           />
@@ -156,12 +150,12 @@ DeliveryStep.propTypes = {
   dispatchPostAddressDelivery: PropTypes.func,
   dispatchPostAddressInvoice: PropTypes.func,
   dispatchAddressEqual: PropTypes.func,
-  displayInvoiceAddress: PropTypes.bool,
+  displayDeliveryAddress: PropTypes.bool,
   dispatchChangeAddress: PropTypes.func
 }
 
 DeliveryStep.defaultProps = {
-  displayInvoiceAddress: true
+  displayDeliveryAddress: true
 }
 
 const mapStateToProps = createStructuredSelector({
