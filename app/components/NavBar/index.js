@@ -13,6 +13,7 @@ import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
 import { logout } from 'actions/login'
+import { newCheckout } from 'actions/checkout'
 
 const LinkWrap = styled.div`
   text-align: center;
@@ -70,7 +71,7 @@ const Subtitle = styled.h2`
 const FlexWrap = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 3px;
+  padding-right: 3px;
 
   .withBorder {
     border-left: 1px solid var(--silver);
@@ -98,7 +99,7 @@ const Menu = styled.nav`
 
   .nav-menu {
     width: ${props =>
-      props.menuFixed ? 'calc(100% - 50px)' : 'calc(100% - 80px)'};
+      props.menuFixed ? 'calc(100% - 50px)' : 'calc(75% - 80px)'};
     margin-left: auto;
     margin-right: auto;
     ${props =>
@@ -117,7 +118,7 @@ const Menu = styled.nav`
 
     .narrowLinks {
       display: ${props => (props.menuFixed ? 'block' : 'none')};
-      ${'' /* ${props => (props.page !== '/' ? 'display: none;' : '')}; */};
+      ${props => (props.page !== '/' ? 'display: none;' : '')};
     }
   }
 `
@@ -157,6 +158,7 @@ class NavBar extends React.Component {
   }
 
   handleRouteSubscribe = () => {
+    this.props.dispatch(newCheckout())
     this.props.dispatch(push('abonnement'))
   }
 
@@ -266,13 +268,6 @@ class NavBar extends React.Component {
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <div style={menuFixed ? hidden : {}} className="hidden-xs">
-                  <Button
-                    handleRoute={this.handleRouteTryit}
-                    color="--warm-purple">
-                    J&apos;essaye
-                  </Button>
-                </div>
               </FlexWrap>
               <div className="narrowLinks">
                 <LinkBurger

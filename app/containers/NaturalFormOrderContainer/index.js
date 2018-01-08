@@ -82,7 +82,7 @@ class NaturalFormOrderContainer extends React.Component {
           time={offer.data.duration}
           price={offer.data.monthly_price_ttc}
           isNaturalForm={isNaturalForm}
-          switchUI={this.props.switchUI}
+          switchUI={this.switchUI}
           isFormOpen={isFormOpen}
         />
         {isNaturalForm && (
@@ -93,7 +93,6 @@ class NaturalFormOrderContainer extends React.Component {
               className="big">
               Commander
             </Button>
-            <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
           </ButtonWrap>
         )}
         {!isNaturalForm && (

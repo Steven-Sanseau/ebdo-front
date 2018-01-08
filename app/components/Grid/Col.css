@@ -137,6 +137,12 @@
 }
 
 @media (max-width: 768px) {
+  .w-m-0 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
   .w-m-1 {
     width: calc(100% / 15 * 1);
   }

@@ -19,6 +19,7 @@ import {
   getValidTokenSlimpayLoaded
 } from 'actions/token'
 import { nextStep } from 'actions/step'
+import { postCheckout } from 'actions/checkout'
 
 import { makeSelectAddressInvoice } from 'selectors/address'
 import { makeSelectTokenData } from 'selectors/token'
@@ -42,7 +43,7 @@ function* postTokenStripeSaga() {
       }
     })
     yield put(postTokenLoaded(tokenResponse.token))
-    yield put(nextStep())
+    yield put(postCheckout())
   } catch (err) {
     yield put(postTokenError(err.message))
   }
@@ -83,7 +84,7 @@ function* getValidTokenSlimpaySaga() {
       }
     })
     yield put(getValidTokenSlimpayLoaded(tokenResponse.token))
-    yield put(nextStep())
+    yield put(postCheckout())
   } catch (err) {
     yield put(getValidTokenSlimpayError(err.message))
   }

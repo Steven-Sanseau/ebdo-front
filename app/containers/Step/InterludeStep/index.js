@@ -18,7 +18,16 @@ import ToggleStep from 'components/ToggleStep/Loadable'
 import TextSummary from 'components/LayoutStep/TextSummary'
 
 class InterludeStep extends React.Component {
+  state = {
+    isAnim: false
+  }
+
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.props.nextStep()
   }
 
@@ -53,6 +62,7 @@ class InterludeStep extends React.Component {
         changeStep={changeStep}
         updateStepHide
         nextStep={this.handleNextStep}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

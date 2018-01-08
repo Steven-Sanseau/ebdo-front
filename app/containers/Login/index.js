@@ -65,7 +65,7 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { isLoadingLogin } = this.props
+    const { isLoadingLogin, dispatch } = this.props
 
     return (
       <div>
@@ -84,6 +84,7 @@ export class Login extends React.Component {
             code={this.state.code}
             email={this.state.email}
             isLoadingLogin={isLoadingLogin}
+            dispatch={dispatch}
           />
         </ThemeProvider>
       </div>
@@ -94,7 +95,8 @@ Login.propTypes = {
   dispatchLoginEmail: PropTypes.func,
   dispatchLoginEmailCode: PropTypes.func,
   waitingForCode: PropTypes.bool,
-  isLoadingLogin: PropTypes.bool
+  isLoadingLogin: PropTypes.bool,
+  dispatch: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({

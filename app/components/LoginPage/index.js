@@ -150,7 +150,7 @@ function LoginPage(props) {
             <img src="la-source.png" alt="la source" className="laSource" />
             <Title>Accédez à La Source</Title>
             <p>
-              Entrez votre adresse email pour accéder à La Source. Nous vous
+              Entrez votre Adresse email pour accéder à La Source. Nous vous
               enverrons un mail contenant votre accès temporaire.
             </p>
             <form onSubmit={handleSubmit}>
@@ -179,7 +179,7 @@ function LoginPage(props) {
               )}
             </form>
             <ButtonWrap handleRoute={handleRoute} color="--booger">
-              {isLoadingLogin && 'loading'}
+              {isLoadingLogin && '...'}
               {!isLoadingLogin && 'Recevoir mon lien'}
             </ButtonWrap>
           </ColStyled>
@@ -219,7 +219,7 @@ function LoginPage(props) {
           </ColStyled>
         </RowStyled>
       </Layout>
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </LoginWrap>
   )
 }
@@ -229,6 +229,7 @@ LoginPage.propTypes = {
   handleEmail: PropTypes.func,
   handleRoute: PropTypes.func,
   handleCode: PropTypes.func,
+  dispatch: PropTypes.func,
   isLoadingLogin: PropTypes.bool
 }
 

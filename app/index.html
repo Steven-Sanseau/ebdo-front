@@ -90,5 +90,78 @@ gtag('js', new Date())
 
 gtag('config', 'DC-8312645')
 </script>
+<!-- Crisp Client Code -->
+<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="cca66c87-4cf0-47a2-a994-c1bdc2f7368c";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.im/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!-- End Crisp Client Code -->
+
+<!-- Crisp Routing Code -->
+<script>
+var departments = ['full', 'cm']
+var greetings = {
+  full: 'Très bien, comment puis-je vous aider ? :)',
+  cm: 'Très bien, comment puis-je vous aider ? :)'
+}
+
+if (!localStorage.getItem('crisp-routing')) {
+  $crisp.push([
+    'on',
+    'chat:opened',
+    function(data) {
+      if (!localStorage.getItem('crisp-intro')) {
+        $crisp.push([
+          'do',
+          'message:show',
+          [
+            'picker',
+            {
+              id: 'routing',
+              text: 'Bonjour, vous souhaitez contacter...',
+              choices: [
+                {
+                  value: 'full',
+                  label: 'Le service abonnement',
+                  selected: false
+                },
+                {
+                  value: 'cm',
+                  label: "L'équipe Ebdo",
+                  selected: false
+                }
+              ]
+            }
+          ]
+        ])
+        localStorage.setItem('crisp-intro', 'true')
+      }
+    }
+  ])
+}
+
+$crisp.push([
+  'on',
+  'message:received',
+  function(data) {
+    if (data.origin !== 'update') {
+      return
+    }
+    if (!data.content.choices) {
+      return
+    }
+    if (localStorage.getItem('crisp-routing')) {
+      return
+    }
+    for (var index in data.content.choices) {
+      var current = data.content.choices[index]
+      if (current.selected && departments[current.value] !== -1) {
+        $crisp.push(['set', 'session:segments', [[current.value]]])
+        $crisp.push(['do', 'message:show', ['text', greetings[current.value]]])
+        localStorage.setItem('crisp-routing', 'true')
+        return
+      }
+    }
+  }
+])
+</script>
+<!-- End Crisp Routing Code -->
   </body>
 </html>

@@ -45,6 +45,9 @@ class ToggleStep extends React.Component {
         if (this.state.animInstance) {
           this.state.animInstance.restart()
           this.state.animInstance.pause()
+          if (this.props.handleAnimationEnding) {
+            this.props.handleAnimationEnding()
+          }
         }
 
         this.setState({ isAnim: false, animInstance: null })
@@ -63,21 +66,22 @@ class ToggleStep extends React.Component {
     basicTimeline
       .add({
         targets: this.text,
-        duration: 10,
+        duration: 50,
         opacity: '0'
       })
       .add({
         targets: this.button,
-        duration: 500,
-        height: 20,
+        duration: 450,
+        height: 30,
         width: 140,
+        backgroundColor: '#fafafa',
         border: '0',
         borderRadius: 100,
         easing: 'easeOutCubic'
       })
       .add({
         targets: this.progressBar,
-        duration: 2000,
+        duration: 1100,
         width: 140,
         easing: 'easeOutCubic'
       })
@@ -117,7 +121,7 @@ class ToggleStep extends React.Component {
             <WhiteWrapper>
               <Layout fluid>
                 <Row>
-                  <ColCustom w={5} />
+                  <ColCustom w={5} w-m={0} />
                   <ColCustom w={15}>
                     <Row>
                       <ColCustom w={1} w-m={2}>
@@ -159,28 +163,29 @@ class ToggleStep extends React.Component {
           </CurrentStep>
         )}
         {currentStep < stepNumber && (
-          <StepPreview>
-            <Row>
-              <Col xs={12} lg={8} lgOffset={2}>
-                <Row>
-                  <Col xs={2}>
-                    <Row end="xs">
+          <Layout fluid>
+            <StepPreview>
+              <Row>
+                <ColCustom w={5} w-m={0} />
+                <ColCustom w={15}>
+                  <Row>
+                    <ColCustom w={1} w-m={2}>
                       <SquareCheckout iconName={iconName} silver />
-                    </Row>
-                  </Col>
-                  <Col xs={7}>
-                    <Title color="silver">{title}</Title>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </StepPreview>
+                    </ColCustom>
+                    <ColCustom w={15}>
+                      <Title color="silver">{title}</Title>
+                    </ColCustom>
+                  </Row>
+                </ColCustom>
+              </Row>
+            </StepPreview>
+          </Layout>
         )}
         {currentStep > stepNumber && (
           <Layout fluid>
             <StepPostview>
               <Row>
-                <ColCustom w={5} />
+                <ColCustom w={5} w-m={0} />
                 <ColCustom w={15}>
                   <Row>
                     {!hideIconChecked && (
@@ -226,7 +231,8 @@ ToggleStep.propTypes = {
   nextStep: PropTypes.func,
   textButtonNextStep: PropTypes.string,
   colorButtonNextStep: PropTypes.string,
-  updateStepHide: PropTypes.bool
+  updateStepHide: PropTypes.bool,
+  handleAnimationEnding: PropTypes.func
 }
 
 export default ToggleStep

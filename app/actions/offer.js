@@ -5,7 +5,7 @@ import {
   GET_OFFER,
   GET_OFFER_LOADED,
   GET_OFFER_ERROR,
-  SET_COUNTRY_ADRESS_OFFER_VALID
+  SET_COUNTRY_ADDRESS_OFFER_VALID
 } from './constants'
 
 export function setOfferParams(params, isRedirect) {
@@ -35,5 +35,5 @@ export function getoffer() {
 }
 
 export function setCountryAddressOfferValid() {
-  return { type: SET_COUNTRY_ADRESS_OFFER_VALID }
+  return { type: SET_COUNTRY_ADDRESS_OFFER_VALID }
 }

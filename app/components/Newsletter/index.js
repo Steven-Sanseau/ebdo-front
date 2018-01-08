@@ -44,8 +44,7 @@ const Newsletter = props => {
       <Col
         xs={12}
         sm={type === 'block' ? 12 : 7}
-        smOffset={type === 'block' ? 0 : 1}
-      >
+        smOffset={type === 'block' ? 0 : 1}>
         <InputWrapper>
           <InputText
             label="Adresse mail"

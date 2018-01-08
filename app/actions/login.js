@@ -35,7 +35,6 @@ export function loginEmailCode(
   isCheckout = false,
   redirect = '/'
 ) {
-  console.log('action', redirect)
   return {
     type: LOGIN_EMAIL_CODE,
     email,

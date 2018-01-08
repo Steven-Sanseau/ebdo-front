@@ -19,14 +19,18 @@ import ToggleStep from 'components/ToggleStep/Loadable'
 
 class ConfirmStep extends React.Component {
   state = {
-    errMessage: ''
+    errMessage: '',
+    isAnim: false
   }
 
   handleCheckboxCGV = event => {
     this.props.dispatchConfirmCGV()
   }
-
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
   handleNextStep = () => {
+    this.setState({ isAnim: true })
     if (this.props.isCGVAccepted) {
       this.props.dispatchConfirmCheckout()
     } else {
@@ -64,7 +68,6 @@ class ConfirmStep extends React.Component {
 
     return (
       <div>
-        {isErrorLogin && 'errrrroooo'}
         <ToggleStep
           title="Je confirme mon abonnement"
           stepNumber={stepNumber}
@@ -77,6 +80,7 @@ class ConfirmStep extends React.Component {
           textButtonNextStep=">> Je m'abonne !"
           isLoadingNextStep={checkoutIsLoading}
           isError={isErrorLogin}
+          handleAnimationEnding={this.handleAnimationEnding}
         />
       </div>
     )

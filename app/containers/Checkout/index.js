@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectClientExist } from 'selectors/client'
 import { makeSelectStep } from 'selectors/step'
 import { makeSelectPath } from 'selectors/route'
+import { makeIsLoggedIn } from 'selectors/login'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
 import { nextStep, goToStep } from 'actions/step'
 import { getValidTokenSlimpay } from 'actions/token'
@@ -30,7 +31,6 @@ import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
 
-import ButtonSticky from 'components/StickyHelpCheckout'
 import { push } from 'react-router-redux'
 
 export class Checkout extends React.Component {
@@ -48,12 +48,13 @@ export class Checkout extends React.Component {
           this.props.goToAboExist()
         }
       })
+      console.log('sub')
     } else {
-      if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
-        this.props.dispatchSlimpayTokenValid()
-      } else {
-        this.props.dispatchNewCheckout()
-      }
+      this.props.dispatchNewCheckout()
+    }
+
+    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
+      this.props.dispatchSlimpayTokenValid()
     }
   }
 
@@ -65,12 +66,8 @@ export class Checkout extends React.Component {
     this.props.goToStep(stepNumber)
   }
 
-  handleRouteButtonHelp = event => {
-    console.log('HELP CLIC')
-  }
-
   render() {
-    const { step, clientExist } = this.props
+    const { step, clientExist, isLoggedIn } = this.props
     let steps = [
       <FormulaStep
         stepNumber={1}
@@ -92,7 +89,7 @@ export class Checkout extends React.Component {
       />
     ]
 
-    if (clientExist) {
+    if (clientExist && !isLoggedIn) {
       steps.push(
         <EmailConfirmStep
           stepNumber={4}
@@ -118,13 +115,7 @@ export class Checkout extends React.Component {
           nextStep={this.nextStep}
           currentStep={step}
         />
-      </Elements>,
-      <ConfirmStep
-        stepNumber={steps.length + 3}
-        changeStep={this.changeStep}
-        nextStep={this.nextStep}
-        currentStep={step}
-      />
+      </Elements>
     ])
 
     return (
@@ -144,7 +135,6 @@ export class Checkout extends React.Component {
               <Col xs={12}>{step}</Col>
             </Row>
           ))}
-          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )
@@ -157,14 +147,16 @@ Checkout.propTypes = {
   dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
-  path: PropTypes.object
+  path: PropTypes.object,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   step: makeSelectStep(),
   clientExist: makeSelectClientExist(),
   path: makeSelectPath(),
-  subscriptions: makeSelectSubscriptionData()
+  subscriptions: makeSelectSubscriptionData(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const Input = styled.input`
   font-family: 'FG-R';
-  height: 40px;
   background-color: var(--white-true);
   border: solid 1px;
   border-radius: 6px;
@@ -11,7 +10,7 @@ const Input = styled.input`
   line-height: 40px;
   text-align: left;
   color: var(${props => (props.error ? '--tomato' : '--black')});
-  padding: 12px 14px;
+  padding: 0 14px;
   margin-top: 4px;
   width: 100%;
 

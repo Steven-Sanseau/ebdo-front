@@ -47,27 +47,30 @@ const LinkWrapper = styled(Link)`
   display: inline-block;
   margin-left: 20px;
 `
+const Price = styled.div`
+  font-size: 14px;
+  color: var(--space-grey);
+`
 
 class FormulaStep extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      isAnim: true,
       isNaturalForm: true
     }
-
-    this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleRoute = this.handleRoute.bind(this)
-    this.switchUI = this.switchUI.bind(this)
   }
-
-  handleNextStep(event) {
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+  handleNextStep = event => {
+    this.setState({ isAnim: true })
     event.preventDefault()
     this.props.dispatchGetOffer()
   }
 
-  handleChange(key, event) {
+  handleChange = (key, event) => {
     let params = {}
     if (key === 'is_gift') {
       params = { [key]: event.value == 1 }
@@ -89,11 +92,7 @@ class FormulaStep extends React.Component {
     this.props.changeStep(this.props.stepNumber)
   }
 
-  handleRoute() {
-    // console.log(e);
-  }
-
-  switchUI() {
+  switchUI = () => {
     this.setState({ isNaturalForm: !this.state.isNaturalForm })
   }
 
@@ -104,14 +103,11 @@ class FormulaStep extends React.Component {
     return (
       <div>
         <Row>
-          {/* <ColCustom w={15}> */}
-          {/* <ButtonAnimate /> */}
           <FormulaText>
             Les frais de livraison en France (Métropilitaine et outre-mer) sont
             inclus. Les frais de livraison vers un autre pays seront ajoutés à
             l’étape suivante.
           </FormulaText>
-          {/* </ColCustom> */}
         </Row>
         <Row center="xs" start="md">
           {offer.data && (
@@ -124,12 +120,6 @@ class FormulaStep extends React.Component {
                 isNaturalForm={isNaturalForm}
                 switchUI={this.switchUI}
               />
-
-              {isNaturalForm && (
-                <ButtonWrap>
-                  <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
-                </ButtonWrap>
-              )}
               {!isNaturalForm && (
                 <ButtonWrap>
                   <Button
@@ -153,49 +143,43 @@ class FormulaStep extends React.Component {
     )
   }
 
-  SecondaryButton = () => {
-    const { isNaturalForm } = this.state
-    return (
-      <div>
-        {isNaturalForm && (
-          <ButtonWrap>
-            <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
-          </ButtonWrap>
-        )}
-      </div>
-    )
-  }
-
   contentClose() {
     const { offer } = this.props
     return (
       <div>
         <Row>
-          <Col lg={5} xs={11}>
+          <ColCustom w={6}>
             <Image src="PostBox.png" alt="Post box" height={173} />
-          </Col>
-          <Col lg={7} xs={11}>
+          </ColCustom>
+          <Col w={17}>
             <TextFormulae>
-              {!offer.data.duration && <GreenText>Chaque mois</GreenText>}
-              {offer.data.duration && (
-                <GreenText>Pendant {offer.data.duration / 4} mois</GreenText>
+              {offer.data.is_gift && <VioletText>J'offre </VioletText>}
+              {!offer.data.is_gift && <VioletText>Je reçois</VioletText>}
+              <BigBoldText> ebdo </BigBoldText>
+              {/* {!offer.data.duration && <GreenText>chaque mois</GreenText>} */}
+              {offer.data.duration !== 0 &&
+                offer.data.duration && (
+                  <GreenText>pendant {offer.data.duration / 4} mois</GreenText>
+                )}
+              {offer.data.time_limited === true && (
+                <BigBoldText>
+                  , <br />
+                </BigBoldText>
               )}
-              <BigBoldText>, </BigBoldText>
-              {offer.data.is_gift && <VioletText> j'offre </VioletText>}
-              {!offer.data.is_gift && <VioletText> je reçois </VioletText>}
-              <BigBoldText>
-                {' '}
-                {offer.data.duration} numéros <br /> pour le prix de{' '}
-              </BigBoldText>
+              <BigBoldText> pour </BigBoldText>
               <BlueText>
                 {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
-              </BlueText>
-              <br />
+              </BlueText>{' '}
+              {offer.data.duration === 0 && <br />}
               <BigBoldText>
                 soit{' '}
-                {offer.data.monthly_price_ttc + offer.data.shipping_cost * 4}
-                {'€'}
-                /mois au total
+                {offer.data.duration !== 0 &&
+                  (offer.data.monthly_price_ttc / 4 +
+                    offer.data.shipping_cost) *
+                    offer.data.duration}
+                {offer.data.duration === 0 &&
+                  offer.data.monthly_price_ttc + offer.data.shipping_cost * 4}
+                {'€ '} au total.
               </BigBoldText>
             </TextFormulae>
             {offer.data.country_shipping === 'FR' && (
@@ -204,16 +188,30 @@ class FormulaStep extends React.Component {
                 sont inclus.
               </DeliveryText>
             )}
-            {offer.data.country_shipping === 'LU' && (
+            {offer.data.country_shipping !== 'FR' && (
               <DeliveryText>
-                Les frais de livraison au Luxembourg sont de 2€ par numéro.
+                Les frais de livraison{' '}
+                {offer.data.country_shipping === 'BE' && 'en Belgique'}
+                {offer.data.country_shipping === 'LU' && 'au Luxembourg'}{' '}
+                {offer.data.country_shipping === 'CH' && 'en Suisse'} sont de{' '}
+                {offer.data.shipping_cost}€ par numéro.<br />
+                Soit{' '}
+                {offer.data.time_limited === true && (
+                  <span>
+                    {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
+                    {offer.data.shipping_cost * offer.data.duration}€ de frais
+                    de port{' '}
+                  </span>
+                )}
+                {offer.data.time_limited === false && (
+                  <span>
+                    {offer.data.monthly_price_ttc}€ +{' '}
+                    {offer.data.shipping_cost * 4}€ de frais de port
+                  </span>
+                )}
               </DeliveryText>
             )}
-            {offer.data.country_shipping === 'BE' && (
-              <DeliveryText>
-                Les frais de livraison en Belgique sont de 1,5€ par numéro.
-              </DeliveryText>
-            )}
+
             <NextStep>
               <Button
                 border

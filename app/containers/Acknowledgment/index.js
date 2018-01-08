@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 import styled from 'styled-components'
 
+import { push } from 'react-router-redux'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -13,6 +14,7 @@ import { makeSelectSubscriptionData } from 'selectors/subscription'
 
 // COMPONENTS
 import Header from 'components/Header'
+import Button from 'components/Button'
 
 const Subscription = styled(Col)`
   margin-top: 40px;
@@ -23,14 +25,9 @@ const Subscription = styled(Col)`
 `
 
 export class Acknowledgment extends React.Component {
-  componentDidMount() {
-    if (this.props.params.type === 'merci') {
-      // gtag('event', 'conversion', {
-      //   allow_custom_scripts: true,
-      //   send_to: 'DC-8312645/site18/hp18+standard'
-      // })
-    }
-  }
+  componentDidMount() {}
+
+  goToCheckout = () => {}
 
   render() {
     const { match, subscriptions } = this.props
@@ -46,6 +43,17 @@ export class Acknowledgment extends React.Component {
           <Col xs={12}>
             {match.params.type === 'merci' &&
               'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
+            {match.params.type === 'erreur' && (
+              <div>
+                Une Erreur est survenue lors de votre commande
+                <Button
+                  handleRoute={() => {
+                    this.props.dispatch(push('/abonnement'))
+                  }}>
+                  Je change mes informations
+                </Button>
+              </div>
+            )}
             {match.params.type === 'existe' && (
               <div>
                 Vous possédez déjà un abonnement il est donc impossible de vous
@@ -93,7 +101,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 function mapDispatchToProps(dispatch) {
-  return {}
+  return { dispatch }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Acknowledgment)

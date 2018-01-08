@@ -44,6 +44,15 @@ class InputText extends React.Component {
               </Col>
             </Row>
           )}
+          {this.props.showMessage && (
+            <Row>
+              <Col xs={12}>
+                {this.props.message && (
+                  <ErrorMessage>{this.props.message}</ErrorMessage>
+                )}
+              </Col>
+            </Row>
+          )}
         </Label>
       </InputWrapper>
     )
@@ -53,6 +62,8 @@ class InputText extends React.Component {
 InputText.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  showMessage: PropTypes.bool,
+  message: PropTypes.string,
   color: PropTypes.string,
   id: PropTypes.string,
   isRequired: PropTypes.bool,
