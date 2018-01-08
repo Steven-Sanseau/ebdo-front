@@ -23,11 +23,15 @@ const makeSelectAddressId = () =>
 const makeSelectAddressType = type =>
   createSelector(selectAddress, address => address.get(type))
 
+const makeSelectIsEditableAddress = type =>
+  createSelector(selectAddress, address => address.get('isEditableAddress'))
+
 const makeSelectAddressCountry = () =>
   createSelector(selectAddress, address => address.get('country').toJS())
 
 export {
   makeSelectAddress,
+  makeSelectIsEditableAddress,
   makeSelectAddressIsEqual,
   makeSelectAddressId,
   makeSelectAddressCountry,

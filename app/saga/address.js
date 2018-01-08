@@ -2,12 +2,18 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_ADRESS } from 'actions/constants'
-import { postAddressError, postAddressLoaded } from 'actions/address'
+import { POST_ADDRESS, GET_ADDRESS, NEW_CHECKOUT_TRY } from 'actions/constants'
+import {
+  postAddressError,
+  postAddressLoaded,
+  getAddressError,
+  getAddressLoaded
+} from 'actions/address'
 import { nextStep } from 'actions/step'
 
 import { makeSelectAddressType } from 'selectors/address'
 import { makeSelectClientId } from 'selectors/client'
+import { makeSelectToken } from 'selectors/login'
 
 function* postAddress(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address`
@@ -39,6 +45,32 @@ function* postAddress(action) {
   }
 }
 
+function* getAddress(action) {
+  const token = yield select(makeSelectToken())
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address/${
+    action.typeOfAddress
+  }`
+  let method = 'GET'
+
+  try {
+    const addressResponse = yield call(request, paramsApiUrl, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    yield put(getAddressLoaded(action.typeOfAddress, addressResponse.address))
+    if (action.requestAction === NEW_CHECKOUT_TRY) {
+      yield put(nextStep())
+    }
+  } catch (err) {
+    yield put(getAddressError(err, action.typeOfAddress))
+  }
+}
+
 export default function* sagaAddress() {
-  yield takeEvery(POST_ADRESS, postAddress)
+  yield takeEvery(POST_ADDRESS, postAddress)
+  yield takeEvery(GET_ADDRESS, getAddress)
 }

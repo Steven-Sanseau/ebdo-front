@@ -11,9 +11,15 @@ import {
   makeSelectAddressInvoice,
   makeSelectAddressIsLoading,
   makeSelectAddressDelivery,
-  makeSelectAddressCountry
+  makeSelectAddressCountry,
+  makeSelectIsEditableAddress
 } from 'selectors/address'
-import { setAddress, postAddress, setAddressEqual } from 'actions/address'
+import {
+  setAddress,
+  postAddress,
+  setAddressEqual,
+  getAddress
+} from 'actions/address'
 
 import ToggleStep from 'components/ToggleStep/Loadable'
 import BoldText from 'components/LayoutStep/BoldText'
@@ -48,6 +54,7 @@ class DeliveryStep extends React.Component {
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
+
   handleNextStep = event => {
     this.setState({ isAnim: true })
     this.handleSubmitAddressForm(event)
@@ -178,7 +185,7 @@ class DeliveryStep extends React.Component {
             typeOfAddress="delivery"
             handleChange={this.handleAddressForm}
             handleSubmit={this.handleSubmitAddressForm}
-            errorForm={!this.state.isAnim ? this.state.error.delivery : false}
+            errorForm={!this.state.isAnim ? this.state.error.delivery : {}}
             errorFormMessage={this.state.errorMessage.delivery}
           />
         )}
@@ -187,42 +194,72 @@ class DeliveryStep extends React.Component {
   }
 
   contentClose() {
-    const { delivery, invoice, displayInvoiceAddress } = this.props
+    const {
+      delivery,
+      invoice,
+      displayDeliveryAddress,
+      isEditableAddress,
+      isFreeNumberStep
+    } = this.props
 
     return (
-      <div>
-        Mes numéros seront envoyés à l’adresse suivante : <br />
-        <BoldText>
-          {delivery.first_name} {delivery.last_name}
-        </BoldText>,{delivery.address}, {delivery.postal_code} {delivery.city} ({
-          delivery.country
-        }).
-        <UpdateStep>
-          <Button onClick={this.handleChangeStep}>Modifier</Button>
-        </UpdateStep>{' '}
-        {displayInvoiceAddress && (
-          <div>
-            <br />
-            Je serai facturé à l’adresse suivante : <br />
-            <BoldText>
-              {invoice.first_name} {invoice.last_name}
-            </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city}{' '}
-            ({invoice.country}).
+      <span>
+        <span>
+          {isFreeNumberStep && (
+            <span>
+              Mon numéro Gratuit sera envoyé à l’adresse suivante : <br />
+            </span>
+          )}
+          {displayDeliveryAddress && (
+            <span>
+              Je serai facturé à l’adresse suivante : <br />
+            </span>
+          )}
+          <BoldText>
+            {invoice.first_name} {invoice.last_name}
+          </BoldText>, {invoice.address}, {invoice.postal_code} {invoice.city} ({
+            invoice.country
+          }).
+          {isEditableAddress && (
             <UpdateStep>
               <Button onClick={this.handleChangeStep}>Modifier</Button>
             </UpdateStep>
-          </div>
+          )}
+        </span>
+        {displayDeliveryAddress && (
+          <span>
+            Mes numéros seront envoyés à l’adresse suivante : <br />
+            <BoldText>
+              {delivery.first_name} {delivery.last_name}
+            </BoldText>,{delivery.address}, {delivery.postal_code}{' '}
+            {delivery.city} ({delivery.country}).
+            {isEditableAddress && (
+              <UpdateStep>
+                <Button onClick={this.handleChangeStep}>Modifier</Button>
+              </UpdateStep>
+            )}
+          </span>
         )}
-      </div>
+      </span>
     )
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, addressIsLoading } = this.props
+    const {
+      currentStep,
+      changeStep,
+      stepNumber,
+      addressIsLoading,
+      displayDeliveryAddress
+    } = this.props
 
     return (
       <ToggleStep
-        title="Je renseigne mon adresse de facturation"
+        title={
+          displayDeliveryAddress
+            ? 'Je renseigne mon adresse de facturation'
+            : 'Je renseigne mon adresse'
+        }
         iconName="address"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
@@ -246,10 +283,14 @@ DeliveryStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
+  dispatchGetAddressDelivery: PropTypes.func,
+  dispatchGetAddressDelivery: PropTypes.func,
   dispatchPostAddressDelivery: PropTypes.func,
   dispatchPostAddressInvoice: PropTypes.func,
   dispatchAddressEqual: PropTypes.func,
   displayDeliveryAddress: PropTypes.bool,
+  isEditableAddress: PropTypes.bool,
+  isFreeNumberStep: PropTypes.bool,
   dispatchChangeAddress: PropTypes.func
 }
 
@@ -261,7 +302,8 @@ const mapStateToProps = createStructuredSelector({
   country: makeSelectAddressCountry(),
   addressIsLoading: makeSelectAddressIsLoading(),
   invoice: makeSelectAddressInvoice(),
-  delivery: makeSelectAddressDelivery()
+  delivery: makeSelectAddressDelivery(),
+  isEditableAddress: makeSelectIsEditableAddress()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -270,7 +312,9 @@ function mapDispatchToProps(dispatch) {
       dispatch(setAddress(type, address)),
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
     dispatchPostAddressDelivery: () => dispatch(postAddress('delivery')),
-    dispatchPostAddressInvoice: () => dispatch(postAddress('invoice'))
+    dispatchPostAddressInvoice: () => dispatch(postAddress('invoice')),
+    dispatchGetAddressDelivery: () => dispatch(getAddress('delivery')),
+    dispatchGetAddressDelivery: () => dispatch(getAddress('invoice'))
   }
 }
 

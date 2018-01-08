@@ -160,7 +160,8 @@ export class Tryit extends React.Component {
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
-                displayInvoiceAddress={false}
+                displayDeliveryAddress={false}
+                isFreeNumberStep
               />
             </Col>
           </Row>

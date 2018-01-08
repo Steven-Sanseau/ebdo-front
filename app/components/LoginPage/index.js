@@ -150,7 +150,7 @@ function LoginPage(props) {
             <img src="la-source.png" alt="la source" className="laSource" />
             <Title>Accédez à La Source</Title>
             <p>
-              Entrez votre adresse email pour accéder à La Source. Nous vous
+              Entrez votre Adresse email pour accéder à La Source. Nous vous
               enverrons un mail contenant votre accès temporaire.
             </p>
             <form onSubmit={handleSubmit}>

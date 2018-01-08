@@ -11,7 +11,8 @@ import {
   makeSelectClientEmail,
   makeSelectClientExist
 } from 'selectors/client'
-import { makeSelectLogin } from 'selectors/login'
+
+import { makeSelectLogin, makeIsLoggedIn } from 'selectors/login'
 import { setClientEmail, postClient, useClientExist } from 'actions/client'
 import { loginEmail } from 'actions/login'
 
@@ -51,7 +52,7 @@ class EmailStep extends React.Component {
     if (!emailRegex({ exact: true }).test(email)) {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez entrer une adresse email valide'
+        errorMessage: 'Veuillez entrer une ADDRESSe email valide'
       })
       return false
     }
@@ -161,6 +162,7 @@ EmailStep.propTypes = {
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectClientIsLoading(),
   clientExist: makeSelectClientExist(),
+  isLoggedIn: makeIsLoggedIn(),
   email: makeSelectClientEmail(),
   login: makeSelectLogin()
 })

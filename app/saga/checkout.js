@@ -12,6 +12,7 @@ import {
   postCheckoutError,
   newCheckout
 } from 'actions/checkout'
+import { getAddress } from 'actions/address'
 import { getOfferLoaded } from 'actions/offer'
 import { goToStep } from 'actions/step'
 import { makeIsLoggedIn } from 'selectors/login'
@@ -49,6 +50,8 @@ function* newCheckoutSaga(action) {
   const isLoggedIn = yield select(makeIsLoggedIn())
 
   if (isLoggedIn) {
+    yield put(getAddress('invoice', action.type))
+
     if (action.type === NEW_CHECKOUT_TRY) {
       yield put(goToStep(3))
     }

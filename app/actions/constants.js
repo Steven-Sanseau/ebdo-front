@@ -4,12 +4,15 @@ export const NEW_CHECKOUT_TRY = 'app/Checkout/NEW_CHECKOUT_TRY'
 export const NEXT_STEP = 'app/Checkout/step/NEXT_STEP'
 export const UPDATE_STEP = 'app/Checkout/step/UPDATE_STEP'
 
-export const POST_ADRESS = 'app/Checkout/address/POST_ADRESS'
-export const POST_ADRESS_ERROR = 'app/Checkout/address/POST_ADRESS_ERROR'
-export const POST_ADRESS_LOADED = 'app/Checkout/address/POST_ADRESS_LOADED'
-export const SET_ADRESS = 'app/Checkout/address/SET_ADRESS'
-export const SET_ADRESS_EQUAL = 'app/Checkout/address/SET_ADRESS_EQUAL'
-export const SET_COUNTRY_ADRESS = 'app/Checkout/address/SET_COUNTRY_ADRESS'
+export const POST_ADDRESS = 'app/Checkout/address/POST_ADDRESS'
+export const POST_ADDRESS_ERROR = 'app/Checkout/address/POST_ADDRESS_ERROR'
+export const POST_ADDRESS_LOADED = 'app/Checkout/address/POST_ADDRESS_LOADED'
+export const SET_ADDRESS = 'app/Checkout/address/SET_ADDRESS'
+export const SET_ADDRESS_EQUAL = 'app/Checkout/address/SET_ADDRESS_EQUAL'
+export const SET_COUNTRY_ADDRESS = 'app/Checkout/address/SET_COUNTRY_ADDRESS'
+export const GET_ADDRESS = 'app/Checkout/address/GET_ADDRESS'
+export const GET_ADDRESS_LOADED = 'app/Checkout/address/GET_ADDRESS_LOADED'
+export const GET_ADDRESS_ERROR = 'app/Checkout/address/GET_ADDRESS_ERROR'
 
 export const GET_CLIENT = 'app/Checkout/client/GET_CLIENT'
 export const USE_CLIENT_EXIST = 'app/Checkout/client/USE_CLIENT_EXIST'
@@ -25,8 +28,8 @@ export const GET_OFFERS_LIST = 'app/Checkout/offer/GET_OFFERS_LIST'
 export const GET_OFFER_LOADED = 'app/Checkout/offer/GET_OFFER_LOADED'
 export const GET_OFFER_ERROR = 'app/Checkout/offer/GET_OFFER_ERROR'
 export const GET_OFFER = 'app/Checkout/offer/GET_OFFER'
-export const SET_COUNTRY_ADRESS_OFFER_VALID =
-  'app/Checkout/offer/SET_COUNTRY_ADRESS_OFFER_VALID'
+export const SET_COUNTRY_ADDRESS_OFFER_VALID =
+  'app/Checkout/offer/SET_COUNTRY_ADDRESS_OFFER_VALID'
 
 export const POST_TOKEN = 'app/Checkout/token/POST_TOKEN'
 export const POST_TOKEN_ERROR = 'app/Checkout/token/POST_TOKEN_ERROR'
@@ -71,5 +74,5 @@ export const POST_NEWSLETTER_SUCCESS =
   'app/Home/Newsletter/POST_NEWSLETTER_SUCCESS'
 export const POST_NEWSLETTER_ERROR = 'app/Home/Newsletter/POST_NEWSLETTER_ERROR'
 
-export const GET_SUBSCRIPTIONS_LOADED = 'app/Checkout/subscriptions/GET_SUBSCRIPTIONS_LOADED'
-
+export const GET_SUBSCRIPTIONS_LOADED =
+  'app/Checkout/subscriptions/GET_SUBSCRIPTIONS_LOADED'

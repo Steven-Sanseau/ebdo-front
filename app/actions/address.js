@@ -1,22 +1,25 @@
 import {
-  POST_ADRESS,
-  POST_ADRESS_LOADED,
-  POST_ADRESS_ERROR,
-  SET_ADRESS,
-  SET_ADRESS_EQUAL,
-  SET_COUNTRY_ADRESS
+  POST_ADDRESS,
+  POST_ADDRESS_LOADED,
+  POST_ADDRESS_ERROR,
+  SET_ADDRESS,
+  SET_ADDRESS_EQUAL,
+  SET_COUNTRY_ADDRESS,
+  GET_ADDRESS,
+  GET_ADDRESS_ERROR,
+  GET_ADDRESS_LOADED
 } from 'actions/constants'
 
 export function postAddress(typeOfAddress) {
   return {
-    type: POST_ADRESS,
+    type: POST_ADDRESS,
     typeOfAddress
   }
 }
 
 export function postAddressLoaded(typeOfAddress, address) {
   return {
-    type: POST_ADRESS_LOADED,
+    type: POST_ADDRESS_LOADED,
     payload: {
       typeOfAddress,
       address
@@ -26,7 +29,35 @@ export function postAddressLoaded(typeOfAddress, address) {
 
 export function postAddressError(error, typeOfAddress) {
   return {
-    type: POST_ADRESS_ERROR,
+    type: POST_ADDRESS_ERROR,
+    error,
+    payload: {
+      typeOfAddress
+    }
+  }
+}
+
+export function getAddress(typeOfAddress, requestAction) {
+  return {
+    type: GET_ADDRESS,
+    typeOfAddress,
+    requestAction
+  }
+}
+
+export function getAddressLoaded(typeOfAddress, address) {
+  return {
+    type: GET_ADDRESS_LOADED,
+    payload: {
+      typeOfAddress,
+      address
+    }
+  }
+}
+
+export function getAddressError(error, typeOfAddress) {
+  return {
+    type: GET_ADDRESS_ERROR,
     error,
     payload: {
       typeOfAddress
@@ -36,7 +67,7 @@ export function postAddressError(error, typeOfAddress) {
 
 export function setAddress(typeOfAddress, address) {
   return {
-    type: SET_ADRESS,
+    type: SET_ADDRESS,
     payload: {
       typeOfAddress,
       address
@@ -46,7 +77,7 @@ export function setAddress(typeOfAddress, address) {
 
 export function setCountryAddress(country) {
   return {
-    type: SET_COUNTRY_ADRESS,
+    type: SET_COUNTRY_ADDRESS,
     payload: {
       country
     }
@@ -55,6 +86,6 @@ export function setCountryAddress(country) {
 
 export function setAddressEqual() {
   return {
-    type: SET_ADRESS_EQUAL
+    type: SET_ADDRESS_EQUAL
   }
 }

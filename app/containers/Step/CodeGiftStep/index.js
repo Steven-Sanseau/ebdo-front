@@ -87,7 +87,7 @@ class CodeGiftStep extends React.Component {
         />
         {clientExist && (
           <div>
-            Votre adresse est déjà enregistrée chez nous. Etes vous sûr de
+            Votre Adresse est déjà enregistrée chez nous. Etes vous sûr de
             vouloir passer une nouvelle commande ?
           </div>
         )}

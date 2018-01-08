@@ -66,14 +66,15 @@ class ToggleStep extends React.Component {
     basicTimeline
       .add({
         targets: this.text,
-        duration: 10,
+        duration: 50,
         opacity: '0'
       })
       .add({
         targets: this.button,
         duration: 500,
-        height: 20,
+        height: 30,
         width: 140,
+        backgroundColor: '#fafafa',
         border: '0',
         borderRadius: 100,
         easing: 'easeOutCubic'
