@@ -76,8 +76,8 @@ class DeliveryStep extends React.Component {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
-      this.validForm('invoice')
       this.props.dispatchAddressEqual()
+      this.validForm('invoice')
     } else {
       this.validForm('invoice')
       this.validForm('delivery')

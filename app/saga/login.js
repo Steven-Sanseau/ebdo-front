@@ -78,9 +78,7 @@ function* loginEmailCodeSaga(action) {
   }
 }
 
-function* logoutSaga() {
-  yield put(newCheckout())
-}
+function* logoutSaga() {}
 
 export default function* sagaLogin() {
   yield takeEvery(LOGIN_EMAIL, loginEmailSaga)
