@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
+import { isValidPhoneNumber } from 'react-phone-number-input'
 
 import {
   makeSelectAddressInvoice,
@@ -25,7 +27,16 @@ class DeliveryStep extends React.Component {
     super(props)
 
     this.state = {
-      isInvoiceSameDelivery: true
+      isFormValid: false,
+      isInvoiceSameDelivery: true,
+      error: {
+        invoice: {},
+        delivery: {}
+      },
+      errorMessage: {
+        invoice: {},
+        delivery: {}
+      }
     }
   }
 
@@ -43,17 +54,74 @@ class DeliveryStep extends React.Component {
 
   handleAddressForm = (type, address) => {
     this.props.dispatchChangeAddress(type, address)
+    this.setState({ isFormValid: false })
   }
 
-  handleSubmitAddressForm = event => {
+  handleSubmitAddressForm = (event, type) => {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
+      this.validForm('invoice')
       this.props.dispatchAddressEqual()
+    } else {
+      this.validForm('invoice')
+      this.validForm('delivery')
     }
 
-    this.props.dispatchPostAddressDelivery()
-    this.props.dispatchPostAddressInvoice()
+    if (this.state.isFormValid) {
+      this.props.dispatchPostAddressDelivery()
+      this.props.dispatchPostAddressInvoice()
+    }
+  }
+
+  validForm = type => {
+    const address = this.props[type]
+
+    const error = { invoice: {}, delivery: {} }
+    const errorMessage = { invoice: {}, delivery: {} }
+
+    if (address.first_name == null || address.first_name.trim() === '') {
+      error[type].first_name = true
+      errorMessage[type].first_name = 'Veuillez entrer votre prénom'
+    }
+
+    if (address.last_name == null || address.last_name.trim() === '') {
+      error[type].last_name = true
+      errorMessage[type].last_name = 'Veuillez entrer votre nom'
+    }
+
+    if (address.phone.trim() === '' || address.phone === null) {
+      error[type].phone = true
+      errorMessage[type].phone = 'Veuillez entrer votre numéro de téléphone'
+    }
+
+    if (!isValidPhoneNumber(address.phone)) {
+      error[type].phone = true
+      errorMessage[type].phone = "Votre numéro de téléphone n'est pas valide"
+    }
+
+    if (address.city == null || address.city.trim() === '') {
+      error[type].city = true
+      errorMessage[type].city = 'Veuillez entrer votre ville'
+    }
+
+    if (address.postal_code == null || address.postal_code.trim() === '') {
+      error[type].postal_code = true
+      errorMessage[type].postal_code = 'Veuillez entrer votre code postal'
+    }
+
+    if (address.address == null || address.address.trim() === '') {
+      error[type].address = true
+      errorMessage[type].address = 'Veuillez entrer votre addresse'
+    }
+
+    if (address.postal_code == null || address.postal_code.trim() === '') {
+      error[type].postal_code = true
+      errorMessage[type].postal_code = 'Veuillez entrer votre code postal'
+    }
+
+    console.log(address, error, errorMessage)
+    this.setState({ error, errorMessage })
   }
 
   contentOpen() {
@@ -68,6 +136,8 @@ class DeliveryStep extends React.Component {
           typeOfAddress="invoice"
           handleChange={this.handleAddressForm}
           handleSubmit={this.handleSubmitAddressForm}
+          errorForm={this.state.error.invoice}
+          errorFormMessage={this.state.errorMessage.invoice}
         />
         {displayDeliveryAddress && (
           <CheckboxShowDeliveryForm
@@ -82,6 +152,8 @@ class DeliveryStep extends React.Component {
             typeOfAddress="delivery"
             handleChange={this.handleAddressForm}
             handleSubmit={this.handleSubmitAddressForm}
+            errorForm={this.state.error.delivery}
+            errorFormMessage={this.state.errorMessage.delivery}
           />
         )}
       </div>

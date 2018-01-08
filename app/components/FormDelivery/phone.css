@@ -35,8 +35,11 @@
 }
 
 .rrui__input-error {
-  margin-top: calc(0.3rem);
-  color: var(--grey-blue);
+  font-family: 'FG-R';
+  font-size: 14px;
+  line-height: 14px;
+  text-align: left;
+  color: var(--tomato);
 }
 
 /*===========================================================
