@@ -12,7 +12,9 @@ import './phone.css'
 
 import InputText from '../InputText'
 import Required from 'components/InputText/Required'
-import Input from '../InputText/Input'
+import Input from 'components/InputText/Input'
+import ErrorMessage from 'components/InputText/ErrorMessage'
+
 const PhoneWrapper = Input.withComponent(Phone)
 const PhoneLabelWrapper = styled.div`
   margin-top: 15px;
@@ -20,7 +22,7 @@ const PhoneLabelWrapper = styled.div`
   font-size: 14px;
   line-height: 14px;
   text-align: left;
-  color: var(--black);
+  color: var(${props => (props.color ? props.color : '--black')});
 `
 
 class FormDelivery extends React.Component {
@@ -74,7 +76,6 @@ class FormDelivery extends React.Component {
   }
 
   handleSubmit = event => {
-    console.log('lo', event, this.props.typeOfAddress)
     this.props.handleSubmit(event, this.props.typeOfAddress)
   }
 
@@ -128,7 +129,8 @@ class FormDelivery extends React.Component {
               </Row>
               <Row>
                 <Col xs={12} lg={6}>
-                  <PhoneLabelWrapper>
+                  <PhoneLabelWrapper
+                    color={this.props.errorForm.phone ? '--tomato' : null}>
                     Téléphone <Required>*</Required>
                     <PhoneWrapper
                       country={this.props.country.value}
@@ -136,13 +138,16 @@ class FormDelivery extends React.Component {
                       value={this.props.address.phone}
                       onChange={this.handlePhone}
                       convertToNational
-                      indicateInvalid
-                      error={
-                        this.props.errorForm.phone
-                          ? this.props.errorFormMessage.phone
-                          : false
-                      }
                     />
+                    {this.props.errorForm.phone && (
+                      <Row>
+                        <Col xs={12}>
+                          <ErrorMessage>
+                            {this.props.errorFormMessage.phone}
+                          </ErrorMessage>
+                        </Col>
+                      </Row>
+                    )}
                   </PhoneLabelWrapper>
                 </Col>
                 <Col xs={12} lg={6}>

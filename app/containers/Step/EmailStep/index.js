@@ -21,11 +21,16 @@ import BoldText from 'components/LayoutStep/BoldText'
 
 class EmailStep extends React.Component {
   state = {
+    isAnim: false,
     errorEmail: false,
     errorMessage: ''
   }
 
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.handleSubmit(event)
   }
 
@@ -36,11 +41,11 @@ class EmailStep extends React.Component {
     this.props.dispatchChangeEmail(email)
   }
 
-  resetEmail() {
+  resetEmail = () => {
     this.setState({ errorEmail: false, errorMessage: '' })
   }
 
-  validateEmail() {
+  validateEmail = () => {
     const { email } = this.props
 
     if (!emailRegex({ exact: true }).test(email)) {
@@ -87,14 +92,15 @@ class EmailStep extends React.Component {
           handleSubmitEmail={this.handleSubmit}
           email={email}
         />
-        {clientExist && (
-          <div>
-            <BoldText>
-              Votre adresse est déjà enregistrée chez nous. Vous allez devoir
-              vous connecter.
-            </BoldText>
-          </div>
-        )}
+        {!this.state.isAnim &&
+          clientExist && (
+            <div>
+              <BoldText>
+                Votre adresse est déjà enregistrée chez nous. Vous allez devoir
+                vous connecter.
+              </BoldText>
+            </div>
+          )}
       </div>
     )
   }
@@ -133,6 +139,7 @@ class EmailStep extends React.Component {
         textButtonNextStep={clientExist ? 'Je continue !' : null}
         colorButtonNextStep={clientExist ? '--squash' : '--booger'}
         updateStepHide={!!login.token}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

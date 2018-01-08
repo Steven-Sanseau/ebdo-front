@@ -45,6 +45,9 @@ class ToggleStep extends React.Component {
         if (this.state.animInstance) {
           this.state.animInstance.restart()
           this.state.animInstance.pause()
+          if (this.props.handleAnimationEnding) {
+            this.props.handleAnimationEnding()
+          }
         }
 
         this.setState({ isAnim: false, animInstance: null })
@@ -227,7 +230,8 @@ ToggleStep.propTypes = {
   nextStep: PropTypes.func,
   textButtonNextStep: PropTypes.string,
   colorButtonNextStep: PropTypes.string,
-  updateStepHide: PropTypes.bool
+  updateStepHide: PropTypes.bool,
+  handleAnimationEnding: PropTypes.func
 }
 
 export default ToggleStep

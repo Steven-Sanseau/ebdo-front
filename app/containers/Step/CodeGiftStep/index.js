@@ -17,11 +17,15 @@ import FormGiftCode from 'components/FormGiftCode'
 
 class CodeGiftStep extends React.Component {
   state = {
+    isAnim: false,
     errorEmail: false,
     errorMessage: ''
   }
-
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.handleSubmit(event)
   }
 
@@ -115,6 +119,7 @@ class CodeGiftStep extends React.Component {
         nextStep={this.handleNextStep}
         textButtonNextStep=">> Je m'abonne !"
         isLoadingNextStep={checkoutIsLoading}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

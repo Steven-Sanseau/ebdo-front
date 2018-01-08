@@ -28,6 +28,7 @@ class DeliveryStep extends React.Component {
 
     this.state = {
       isFormValid: false,
+      isAnim: false,
       isInvoiceSameDelivery: true,
       error: {
         invoice: {},
@@ -44,7 +45,11 @@ class DeliveryStep extends React.Component {
     this.props.changeStep(this.props.stepNumber)
   }
 
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.handleSubmitAddressForm(event)
   }
 
@@ -67,61 +72,82 @@ class DeliveryStep extends React.Component {
       this.validForm('invoice')
       this.validForm('delivery')
     }
+  }
 
-    if (this.state.isFormValid) {
-      this.props.dispatchPostAddressDelivery()
-      this.props.dispatchPostAddressInvoice()
-    }
+  dispatchForm = () => {
+    this.props.dispatchPostAddressDelivery()
+    this.props.dispatchPostAddressInvoice()
   }
 
   validForm = type => {
     const address = this.props[type]
+    const { country } = this.props
 
     const error = { invoice: {}, delivery: {} }
     const errorMessage = { invoice: {}, delivery: {} }
+    let isFormValid = true
+
+    const validPostalCode = {
+      FR: /\d{2}[ ]?\d{3}/,
+      CH: /\d{4}/,
+      BE: /\d{4}/,
+      LU: /\d{4}/
+    }
 
     if (address.first_name == null || address.first_name.trim() === '') {
       error[type].first_name = true
       errorMessage[type].first_name = 'Veuillez entrer votre prénom'
+      isFormValid = false
     }
 
     if (address.last_name == null || address.last_name.trim() === '') {
       error[type].last_name = true
       errorMessage[type].last_name = 'Veuillez entrer votre nom'
+      isFormValid = false
     }
 
-    if (address.phone.trim() === '' || address.phone === null) {
+    if (address.phone === null || address.phone.trim() === '') {
       error[type].phone = true
       errorMessage[type].phone = 'Veuillez entrer votre numéro de téléphone'
+      isFormValid = false
     }
 
     if (!isValidPhoneNumber(address.phone)) {
       error[type].phone = true
       errorMessage[type].phone = "Votre numéro de téléphone n'est pas valide"
+      isFormValid = false
     }
 
     if (address.city == null || address.city.trim() === '') {
       error[type].city = true
       errorMessage[type].city = 'Veuillez entrer votre ville'
+      isFormValid = false
     }
 
     if (address.postal_code == null || address.postal_code.trim() === '') {
       error[type].postal_code = true
       errorMessage[type].postal_code = 'Veuillez entrer votre code postal'
+      isFormValid = false
     }
 
     if (address.address == null || address.address.trim() === '') {
       error[type].address = true
       errorMessage[type].address = 'Veuillez entrer votre addresse'
+      isFormValid = false
     }
 
-    if (address.postal_code == null || address.postal_code.trim() === '') {
+    if (!validPostalCode[country.value].test(address.postal_code)) {
       error[type].postal_code = true
-      errorMessage[type].postal_code = 'Veuillez entrer votre code postal'
+      errorMessage[type].postal_code =
+        "Le format de votre code postal n'est pas valide"
+      isFormValid = false
     }
 
-    console.log(address, error, errorMessage)
     this.setState({ error, errorMessage })
+
+    if (isFormValid) {
+      this.dispatchForm()
+    }
   }
 
   contentOpen() {
@@ -136,7 +162,7 @@ class DeliveryStep extends React.Component {
           typeOfAddress="invoice"
           handleChange={this.handleAddressForm}
           handleSubmit={this.handleSubmitAddressForm}
-          errorForm={this.state.error.invoice}
+          errorForm={!this.state.isAnim ? this.state.error.invoice : false}
           errorFormMessage={this.state.errorMessage.invoice}
         />
         {displayDeliveryAddress && (
@@ -152,7 +178,7 @@ class DeliveryStep extends React.Component {
             typeOfAddress="delivery"
             handleChange={this.handleAddressForm}
             handleSubmit={this.handleSubmitAddressForm}
-            errorForm={this.state.error.delivery}
+            errorForm={!this.state.isAnim ? this.state.error.delivery : false}
             errorFormMessage={this.state.errorMessage.delivery}
           />
         )}
@@ -205,6 +231,7 @@ class DeliveryStep extends React.Component {
         changeStep={changeStep}
         nextStep={this.handleNextStep}
         isLoadingNextStep={addressIsLoading}
+        handleAnimationEnding={this.handleAnimationEnding}
         updateStepHide
       />
     )

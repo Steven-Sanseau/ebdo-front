@@ -16,10 +16,14 @@ import ToggleStep from 'components/ToggleStep/Loadable'
 
 class EmailConfirmStep extends React.Component {
   state = {
-    code: ''
+    code: '',
+    isAnim: false
   }
-
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.props.loginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
   }
@@ -69,6 +73,7 @@ class EmailConfirmStep extends React.Component {
         textButtonNextStep="Valider le code"
         isLoadingNextStep={checkoutIsLoading}
         updateStepHide={true}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

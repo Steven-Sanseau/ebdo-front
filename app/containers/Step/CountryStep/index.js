@@ -27,6 +27,7 @@ class CountryStep extends React.Component {
     super(props)
 
     this.state = {
+      isAnim: false,
       countryList: [
         { label: 'France', value: 'FR' },
         { label: 'Belgique', value: 'BE' },
@@ -34,26 +35,25 @@ class CountryStep extends React.Component {
         { label: 'Luxenbourg', value: 'LU' }
       ]
     }
-
-    this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleCountry = this.handleCountry.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNextStep() {
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+  handleNextStep = () => {
+    this.setState({ isAnim: true })
     this.handleSubmit()
   }
 
-  handleCountry(country) {
+  handleCountry = country => {
     this.props.dispatchCountryAddress(country)
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.props.dispatchValidCountry()
   }
 
   contentOpen() {
-    // const { countryList } = this.state
     const { country, offerError, offerErrorMessage, offer } = this.props
     const countryList = [
       { label: 'France', value: 'FR' },
@@ -146,6 +146,7 @@ class CountryStep extends React.Component {
         colorButtonNextStep={
           offer.data.country_shipping !== 'FR' ? '--squash' : '--booger'
         }
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

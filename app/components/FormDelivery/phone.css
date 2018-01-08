@@ -257,15 +257,15 @@
 }
 
 .rrui__select__button:active {
-  color: #03b2cb;
+  color: black;
 }
 
 .rrui__select__button--expanded {
-  color: #3678d1;
+  color: black;
 }
 
 .rrui__select__button--empty {
-  color: #888c91;
+  color: black;
 }
 
 .rrui__select__button,
@@ -372,7 +372,7 @@
 
 .react-phone-number-input__icon--international {
   width: calc(0.93em + 2px);
-  height: calc(0.93em + 2px);
+  height: 40px;
   padding-left: 0.155em;
   padding-right: 0.155em;
 

@@ -57,21 +57,20 @@ class FormulaStep extends React.Component {
     super(props)
 
     this.state = {
+      isAnim: true,
       isNaturalForm: true
     }
-
-    this.handleNextStep = this.handleNextStep.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleRoute = this.handleRoute.bind(this)
-    this.switchUI = this.switchUI.bind(this)
   }
-
-  handleNextStep(event) {
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+  handleNextStep = event => {
+    this.setState({ isAnim: true })
     event.preventDefault()
     this.props.dispatchGetOffer()
   }
 
-  handleChange(key, event) {
+  handleChange = (key, event) => {
     let params = {}
     if (key === 'is_gift') {
       params = { [key]: event.value == 1 }
@@ -93,11 +92,7 @@ class FormulaStep extends React.Component {
     this.props.changeStep(this.props.stepNumber)
   }
 
-  handleRoute() {
-    // console.log(e);
-  }
-
-  switchUI() {
+  switchUI = () => {
     this.setState({ isNaturalForm: !this.state.isNaturalForm })
   }
 
