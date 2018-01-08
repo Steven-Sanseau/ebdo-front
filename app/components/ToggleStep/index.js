@@ -71,7 +71,7 @@ class ToggleStep extends React.Component {
       })
       .add({
         targets: this.button,
-        duration: 500,
+        duration: 450,
         height: 30,
         width: 140,
         backgroundColor: '#fafafa',
@@ -81,7 +81,7 @@ class ToggleStep extends React.Component {
       })
       .add({
         targets: this.progressBar,
-        duration: 2000,
+        duration: 1100,
         width: 140,
         easing: 'easeOutCubic'
       })

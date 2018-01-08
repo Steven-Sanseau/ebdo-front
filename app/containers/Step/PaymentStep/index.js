@@ -48,8 +48,7 @@ const ChoicePaymentMethodWrapper = styled.div`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
-
-    this.handleNextStep = this.handleNextStep.bind(this)
+    this.state = { errMessage: '' }
   }
 
   getStripeToken = () => {
@@ -64,19 +63,16 @@ class PaymentStep extends React.Component {
     })
   }
 
-  handleChangeStripeForm = () => {}
+  handleChangeStripeForm = () => {
+    this.handleSubscribe()
+  }
 
   handleSubmitStripeForm = () => {
-    this.getStripeToken()
+    this.handleSubscribe()
   }
 
   handlePaiementMethod = value => {
     this.props.dispatchSetPayementMethod(value)
-  }
-
-  handleNextStep = event => {
-    event.preventDefault()
-    this.getStripeToken()
   }
 
   handleGoToSlimpay = () => {
@@ -93,7 +89,14 @@ class PaymentStep extends React.Component {
 
   handleSubscribe = () => {
     if (this.props.isCGVAccepted) {
-      this.props.dispatchConfirmCheckout()
+      if (this.props.payementMethod === 1) {
+        this.handleGoToSlimpay()
+      }
+      if (this.props.payementMethod === 2) {
+        this.getStripeToken()
+      }
+
+      // this.props.dispatchConfirmCheckout()
     } else {
       this.setState({ errMessage: 'Vous devez acceptez les CGV' })
     }
@@ -174,6 +177,7 @@ class PaymentStep extends React.Component {
           />
           {checkoutMessageError}
         </div>
+        {this.state.errMessage}
       </div>
     )
   }

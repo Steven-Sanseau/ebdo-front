@@ -15,15 +15,29 @@ import {
 import { getAddress } from 'actions/address'
 import { getOfferLoaded } from 'actions/offer'
 import { goToStep } from 'actions/step'
+
+import { makeSelectTokenData } from 'selectors/token'
+import { makeSelectOfferData } from 'selectors/offer'
 import { makeIsLoggedIn } from 'selectors/login'
-import { makeSelectClientId } from 'selectors/client'
+import { makeSelectClient, makeSelectClientId } from 'selectors/client'
+import {
+  makeSelectAddressInvoice,
+  makeSelectAddressDelivery
+} from 'selectors/address'
 
 import { makeSelectCheckoutData } from 'selectors/checkout'
 
 function* postCheckout() {
   const isLoggedIn = yield select(makeIsLoggedIn())
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/checkout`
+  const addressInvoice = yield select(makeSelectAddressInvoice())
+  const addressDelivery = yield select(makeSelectAddressDelivery())
   const checkout = yield select(makeSelectCheckoutData())
+  const client = yield select(makeSelectClient())
+  const token = yield select(makeSelectTokenData())
+  const offer = yield select(makeSelectOfferData())
+
+  console.log('checkout data', checkout)
   const method = 'POST'
 
   if (isLoggedIn) {
@@ -32,7 +46,14 @@ function* postCheckout() {
 
   try {
     const checkoutResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ checkout }),
+      body: JSON.stringify({
+        checkout,
+        addressInvoice,
+        addressDelivery,
+        client,
+        token,
+        offer
+      }),
       method,
       headers: {
         'Content-Type': 'application/json'

@@ -108,7 +108,7 @@ class EmailStep extends React.Component {
       <div>
         <FormEmail
           handleEmail={this.handleEmail}
-          errorEmail={errorEmail}
+          errorEmail={!this.state.isAnim ? errorEmail : false}
           errorMessage={errorMessage}
           handleSubmitEmail={this.handleSubmit}
           email={email}
@@ -117,8 +117,8 @@ class EmailStep extends React.Component {
           clientExist && (
             <div>
               <BoldText>
-                Votre adresse est déjà enregistrée chez nous. Vous allez devoir
-                vous connecter.
+                Votre adresse est déjà enregistrée. Vous allez devoir vous
+                connecter.
               </BoldText>
             </div>
           )}

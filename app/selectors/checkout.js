@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect'
 
 const selectCheckout = state => state.get('checkout')
-
 const makeSelectCheckout = () =>
   createSelector(selectCheckout, checkout => checkout.toJS())
 
@@ -27,6 +26,7 @@ const makeSelectIsCGVChecked = () =>
 
 export {
   makeSelectCheckout,
+  makeSelectCheckoutAddressInvoice,
   makeSelectCheckoutMessageError,
   makeSelectIsCheckoutLoading,
   makeSelectCheckoutData,
