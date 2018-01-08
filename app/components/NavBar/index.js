@@ -99,7 +99,7 @@ const Menu = styled.nav`
 
   .nav-menu {
     width: ${props =>
-      props.menuFixed ? 'calc(100% - 50px)' : 'calc(100% - 80px)'};
+      props.menuFixed ? 'calc(100% - 50px)' : 'calc(75% - 80px)'};
     margin-left: auto;
     margin-right: auto;
     ${props =>

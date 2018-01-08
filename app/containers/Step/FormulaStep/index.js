@@ -148,19 +148,6 @@ class FormulaStep extends React.Component {
     )
   }
 
-  SecondaryButton = () => {
-    const { isNaturalForm } = this.state
-    return (
-      <div>
-        {isNaturalForm && (
-          <ButtonWrap>
-            <LinkWrapper to="/gift">J'ai un code cadeau</LinkWrapper>
-          </ButtonWrap>
-        )}
-      </div>
-    )
-  }
-
   contentClose() {
     const { offer } = this.props
     return (

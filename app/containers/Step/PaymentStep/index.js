@@ -7,7 +7,6 @@ import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { setPayementMethod } from 'actions/checkout'
 import {
   makeSelectTokenIsLoading,
   makeSelectTokenIsSetError,
@@ -29,12 +28,18 @@ import {
   setTokenStripeError
 } from 'actions/token'
 
+import {
+  setCgvConfirm,
+  postCheckout,
+  setPayementMethod
+} from 'actions/checkout'
+
 import InputCheckbox from 'components/InputCheckbox'
 import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import StripeForm from 'components/StripeForm'
-import SlimpayForm from 'components/SlimpayForm'
+
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 
 const ChoicePaymentMethodWrapper = styled.div`
@@ -79,6 +84,18 @@ class PaymentStep extends React.Component {
 
     if (slimpayIframe && slimpayIframe.href) {
       window.location.href = slimpayIframe.href
+    }
+  }
+
+  handleCheckboxCGV = event => {
+    this.props.dispatchConfirmCGV()
+  }
+
+  handleSubscribe = () => {
+    if (this.props.isCGVAccepted) {
+      this.props.dispatchConfirmCheckout()
+    } else {
+      this.setState({ errMessage: 'Vous devez acceptez les CGV' })
     }
   }
 
@@ -191,11 +208,7 @@ class PaymentStep extends React.Component {
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
-        nextStep={
-          payementMethod === 1 && !offer.data.time_limited
-            ? this.handleGoToSlimpay
-            : this.handleNextStep
-        }
+        nextStep={this.handleSubscribe}
         isLoadingNextStep={tokenIsLoading}
         textButtonNextStep={
           payementMethod === 1 && !offer.data.time_limited
@@ -216,9 +229,12 @@ PaymentStep.propTypes = {
   dispatchSetTokenStripeLoaded: PropTypes.func,
   dispatchSetTokenError: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
+  dispatchConfirmCheckout: PropTypes.func,
+  dispatchConfirmCGV: PropTypes.func,
   payementMethod: PropTypes.number,
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
+  isCGVAccepted: PropTypes.bool,
   tokenMessageError: PropTypes.string,
   checkoutMessageError: PropTypes.string,
   offer: PropTypes.object,

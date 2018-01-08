@@ -219,7 +219,7 @@ function LoginPage(props) {
           </ColStyled>
         </RowStyled>
       </Layout>
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </LoginWrap>
   )
 }
@@ -229,6 +229,7 @@ LoginPage.propTypes = {
   handleEmail: PropTypes.func,
   handleRoute: PropTypes.func,
   handleCode: PropTypes.func,
+  dispatch: PropTypes.func,
   isLoadingLogin: PropTypes.bool
 }
 
