@@ -11,6 +11,12 @@ const makeSelectAddressIsLoading = () =>
 const makeSelectAddressIsEqual = () =>
   createSelector(selectAddress, address => address.get('addressIsEqual'))
 
+const makeSelectAddressIsError = () =>
+  createSelector(selectAddress, address => address.get('error'))
+
+const makeSelectAddressError = () =>
+  createSelector(selectAddress, address => address.get('errorMessage'))
+
 const makeSelectAddressDelivery = () =>
   createSelector(selectAddress, address => address.get('delivery').toJS())
 
@@ -31,6 +37,8 @@ const makeSelectAddressCountry = () =>
 
 export {
   makeSelectAddress,
+  makeSelectAddressIsError,
+  makeSelectAddressError,
   makeSelectIsEditableAddress,
   makeSelectAddressIsEqual,
   makeSelectAddressId,

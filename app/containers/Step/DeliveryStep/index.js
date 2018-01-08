@@ -12,8 +12,11 @@ import {
   makeSelectAddressIsLoading,
   makeSelectAddressDelivery,
   makeSelectAddressCountry,
-  makeSelectIsEditableAddress
+  makeSelectIsEditableAddress,
+  makeSelectAddressIsError,
+  makeSelectAddressError
 } from 'selectors/address'
+
 import {
   setAddress,
   postAddress,
@@ -82,8 +85,8 @@ class DeliveryStep extends React.Component {
   }
 
   dispatchForm = () => {
-    this.props.dispatchPostAddressDelivery()
-    this.props.dispatchPostAddressInvoice()
+    this.props.dispatchPostAddressDelivery(this.props.delivery.address_id)
+    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id)
   }
 
   validForm = type => {
@@ -169,7 +172,7 @@ class DeliveryStep extends React.Component {
           typeOfAddress="invoice"
           handleChange={this.handleAddressForm}
           handleSubmit={this.handleSubmitAddressForm}
-          errorForm={!this.state.isAnim ? this.state.error.invoice : false}
+          errorForm={!this.state.isAnim ? this.state.error.invoice : {}}
           errorFormMessage={this.state.errorMessage.invoice}
         />
         {displayDeliveryAddress && (
@@ -189,6 +192,10 @@ class DeliveryStep extends React.Component {
             errorFormMessage={this.state.errorMessage.delivery}
           />
         )}
+        {!this.state.isAnim &&
+          this.props.isErrorPostAddress && (
+            <div>{this.props.errorPostAddress}</div>
+          )}
       </div>
     )
   }
@@ -227,7 +234,7 @@ class DeliveryStep extends React.Component {
           )}
         </span>
         {displayDeliveryAddress && (
-          <span>
+          <div>
             Mes numéros seront envoyés à l’adresse suivante : <br />
             <BoldText>
               {delivery.first_name} {delivery.last_name}
@@ -238,7 +245,7 @@ class DeliveryStep extends React.Component {
                 <Button onClick={this.handleChangeStep}>Modifier</Button>
               </UpdateStep>
             )}
-          </span>
+          </div>
         )}
       </span>
     )
@@ -303,7 +310,9 @@ const mapStateToProps = createStructuredSelector({
   addressIsLoading: makeSelectAddressIsLoading(),
   invoice: makeSelectAddressInvoice(),
   delivery: makeSelectAddressDelivery(),
-  isEditableAddress: makeSelectIsEditableAddress()
+  isEditableAddress: makeSelectIsEditableAddress(),
+  isErrorPostAddress: makeSelectAddressIsError(),
+  errorPostAddress: makeSelectAddressError()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -311,8 +320,10 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeAddress: (type, address) =>
       dispatch(setAddress(type, address)),
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
-    dispatchPostAddressDelivery: () => dispatch(postAddress('delivery')),
-    dispatchPostAddressInvoice: () => dispatch(postAddress('invoice')),
+    dispatchPostAddressDelivery: addressId =>
+      dispatch(postAddress('delivery', addressId || null)),
+    dispatchPostAddressInvoice: addressId =>
+      dispatch(postAddress('invoice', addressId || null)),
     dispatchGetAddressDelivery: () => dispatch(getAddress('delivery')),
     dispatchGetAddressDelivery: () => dispatch(getAddress('invoice'))
   }

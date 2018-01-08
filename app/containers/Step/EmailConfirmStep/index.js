@@ -7,7 +7,8 @@ import { compose } from 'redux'
 import {
   makeSelectLogin,
   makeSelectWaitingForCode,
-  makeIsLoadingLogin
+  makeIsLoadingLogin,
+  makeIsLoggedIn
 } from 'selectors/login'
 import { makeSelectClientEmail } from 'selectors/client'
 import { loginEmailCode } from 'actions/login'
@@ -19,12 +20,32 @@ class EmailConfirmStep extends React.Component {
     code: '',
     isAnim: false
   }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    if (
+      nextProps.currentStep === nextProps.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  componentWillMount = () => {
+    if (
+      this.props.currentStep === this.props.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
+
   handleNextStep = event => {
     this.setState({ isAnim: true })
-    this.props.loginEmailCode(this.props.email, this.state.code, true)
+    this.props.dispatchloginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
   }
 
@@ -81,16 +102,24 @@ class EmailConfirmStep extends React.Component {
 
 EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
+  dispatchloginEmailCode: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
-  stepNumber: PropTypes.number
+  stepNumber: PropTypes.number,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   email: makeSelectClientEmail()
 })
 
-const mapDispatchToProps = { loginEmailCode }
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchNextStep: () => dispatch(nextStep()),
+    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
+    dispatchloginEmailCode: () => dispatch(loginEmailCode())
+  }
+}
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 

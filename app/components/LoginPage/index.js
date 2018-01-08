@@ -179,7 +179,7 @@ function LoginPage(props) {
               )}
             </form>
             <ButtonWrap handleRoute={handleRoute} color="--booger">
-              {isLoadingLogin && 'loading'}
+              {isLoadingLogin && '...'}
               {!isLoadingLogin && 'Recevoir mon lien'}
             </ButtonWrap>
           </ColStyled>

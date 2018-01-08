@@ -54,10 +54,6 @@ function addressReducer(state = initialState, action) {
         .setIn(['delivery', 'address_equal'], false)
     }
     case POST_ADDRESS_ERROR: {
-      if (action.error.response.status === 404) {
-        state.setIn([action.payload.typeOfAddress, 'address_id'], null)
-      }
-
       return state
         .set('loading', false)
         .set('errorMessage', action.error.message)

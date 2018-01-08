@@ -15,6 +15,7 @@ import {
 import { makeSelectLogin, makeIsLoggedIn } from 'selectors/login'
 import { setClientEmail, postClient, useClientExist } from 'actions/client'
 import { loginEmail } from 'actions/login'
+import { nextStep } from 'actions/step'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -27,9 +28,28 @@ class EmailStep extends React.Component {
     errorMessage: ''
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (
+      nextProps.currentStep === nextProps.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  componentWillMount() {
+    if (
+      this.props.currentStep === this.props.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
+
   handleNextStep = event => {
     this.setState({ isAnim: true })
     this.handleSubmit(event)
@@ -52,7 +72,7 @@ class EmailStep extends React.Component {
     if (!emailRegex({ exact: true }).test(email)) {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez entrer une ADDRESSe email valide'
+        errorMessage: 'Veuillez entrer une adresse email valide'
       })
       return false
     }
@@ -60,7 +80,7 @@ class EmailStep extends React.Component {
     if (email === '') {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez remplir votre email'
+        errorMessage: 'Veuillez remplir votre adresse email'
       })
       return false
     }
@@ -123,7 +143,7 @@ class EmailStep extends React.Component {
       stepNumber,
       clientIsLoading,
       clientExist,
-      login
+      isLoggedIn
     } = this.props
 
     return (
@@ -139,7 +159,7 @@ class EmailStep extends React.Component {
         isLoadingNextStep={clientIsLoading}
         textButtonNextStep={clientExist ? 'Je continue !' : null}
         colorButtonNextStep={clientExist ? '--squash' : '--booger'}
-        updateStepHide={!!login.token}
+        updateStepHide={isLoggedIn}
         handleAnimationEnding={this.handleAnimationEnding}
       />
     )
@@ -156,6 +176,7 @@ EmailStep.propTypes = {
   dispatchChangeEmail: PropTypes.func,
   dispatchPostClient: PropTypes.func,
   dispatchUseClientExist: PropTypes.func,
+  dispatchNextStep: PropTypes.func,
   clientExist: PropTypes.bool
 }
 
@@ -163,8 +184,7 @@ const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectClientIsLoading(),
   clientExist: makeSelectClientExist(),
   isLoggedIn: makeIsLoggedIn(),
-  email: makeSelectClientEmail(),
-  login: makeSelectLogin()
+  email: makeSelectClientEmail()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -172,7 +192,8 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchPostClient: () => dispatch(postClient()),
     dispatchUseClientExist: () => dispatch(useClientExist()),
-    dispatchLoginEmail: email => dispatch(loginEmail(email))
+    dispatchLoginEmail: email => dispatch(loginEmail(email)),
+    dispatchNextStep: () => dispatch(nextStep())
   }
 }
 

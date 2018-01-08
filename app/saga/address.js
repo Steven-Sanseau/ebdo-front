@@ -22,9 +22,9 @@ function* postAddress(action) {
   let method = 'POST'
 
   try {
-    if (address.address_id !== null) {
+    if (action.addressId !== null) {
       method = 'PATCH'
-      paramsApiUrl = `${paramsApiUrl}/${address.address_id}`
+      paramsApiUrl = `${paramsApiUrl}/${action.addressId}`
     }
 
     const addressResponse = yield call(request, paramsApiUrl, {

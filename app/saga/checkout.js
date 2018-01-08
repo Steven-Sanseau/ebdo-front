@@ -43,6 +43,7 @@ function* postCheckout() {
     yield put(push('/abo/merci'))
   } catch (err) {
     yield put(postCheckoutError(err.message))
+    yield put(push('/abo/erreur'))
   }
 }
 

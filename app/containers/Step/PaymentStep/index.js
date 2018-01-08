@@ -210,11 +210,7 @@ class PaymentStep extends React.Component {
         changeStep={changeStep}
         nextStep={this.handleSubscribe}
         isLoadingNextStep={tokenIsLoading}
-        textButtonNextStep={
-          payementMethod === 1 && !offer.data.time_limited
-            ? 'Payer'
-            : 'Récapituler la commande'
-        }
+        textButtonNextStep="Payer"
       />
     )
   }
