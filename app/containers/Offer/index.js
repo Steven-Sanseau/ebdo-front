@@ -17,7 +17,6 @@ import { newCheckout } from 'actions/checkout'
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
 import InterludeStep from 'containers/Step/InterludeStep/Loadable'
-import CountryStep from 'containers/Step/CountryStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
@@ -68,19 +67,13 @@ export class Offer extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-      />,
-      <CountryStep
-        stepNumber={3}
-        changeStep={this.changeStep}
-        nextStep={this.nextStep}
-        currentStep={step}
       />
     ]
 
     if (!login.token) {
       steps.push(
-        <EmailConfirmStep
-          stepNumber={4}
+        <EmailStep
+          stepNumber={3}
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
@@ -94,6 +87,7 @@ export class Offer extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        displayInvoiceAddress={false}
       />,
       <Elements>
         <PaymentStep

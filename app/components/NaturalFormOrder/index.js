@@ -141,15 +141,6 @@ export class NaturalFormOrder extends React.Component {
     const options2 = !target
       ? [
           {
-            value: '0',
-            label: this.valueElem(
-              'chaque mois',
-              <span>
-                Sans engagement, je pourrais me désengager en un clic !
-              </span>
-            )
-          },
-          {
             value: '12',
             label: this.valueElem(
               'pendant 3 mois',
@@ -168,6 +159,15 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 12 mois',
               <span>Régler maintenant et recevez 48 numéros.</span>
+            )
+          },
+          {
+            value: '0',
+            label: this.valueElem(
+              'chaque mois',
+              <span>
+                Sans engagement, je pourrais me désengager en un clic !
+              </span>
             )
           }
         ]

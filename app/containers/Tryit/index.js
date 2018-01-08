@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
@@ -30,7 +31,43 @@ import Image from 'components/Image'
 import ButtonSticky from 'components/StickyHelpCheckout'
 
 import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
-
+const Undercover = styled.div`
+  img {
+    ${'' /* position: absolute; */} top: 0;
+    left: 0;
+    z-index: -1;
+    border-top: 1px solid var(--grey-blue);
+  }
+  .fond {
+    ${'' /* position: absolute; */} width: 100%;
+    height: 100%;
+    top: 0;
+    background: white;
+    border: 1px solid var(--grey-blue);
+    border-bottom-width: 0;
+    transition: transform 0.3s ease-out;
+    &:nth-of-type(1) {
+      z-index: -2;
+      left: 3px;
+    }
+    &:nth-of-type(2) {
+      z-index: -3;
+      left: 6px;
+    }
+    &:nth-of-type(3) {
+      z-index: -4;
+      left: 9px;
+    }
+    &:nth-of-type(4) {
+      z-index: -5;
+      left: 12px;
+    }
+    &:nth-of-type(5) {
+      z-index: -6;
+      left: 15px;
+    }
+  }
+`
 export class Tryit extends React.Component {
   constructor(props) {
     super(props)
@@ -74,19 +111,22 @@ export class Tryit extends React.Component {
             <Col xs={12}>
               <Row start="lg" center="xs">
                 <Col lg={2} lgOffset={3} xs={12}>
-                  <Image
-                    src="0-couv.jpg"
-                    alt="ebdo couverture magazine gratuit"
-                    width={174}
-                  />
+                  <Undercover>
+                    <img src="0-couv.jpg" alt="sommaire" width="100%" />
+                    <div className="fond" />
+                    <div className="fond" />
+                    <div className="fond" />
+                    <div className="fond" />
+                  </Undercover>
                 </Col>
                 <Col lg={5} xs={12}>
                   <BigBoldText>
-                    Vous voulez <VioletText>essayer ebdo ?</VioletText> On vous
-                    offre le prochain numéro.
+                    Vous voulez <VioletText>essayer ebdo ?</VioletText> <br />
+                    On vous offre le prochain numéro.
                   </BigBoldText>
                   <TextSummary>
-                    Vous nous laissez vos coordonnées, <BoldText>ebdo</BoldText>{' '}
+                    Vous nous laissez vos coordonnées, <BoldText>ebdo</BoldText>
+                    <br />
                     vous fait parvenir son nouveau numéro vendredi prochain.
                   </TextSummary>
                 </Col>
@@ -120,7 +160,8 @@ export class Tryit extends React.Component {
                 changeStep={this.changeStep}
                 nextStep={this.nextStep}
                 currentStep={step}
-                displayInvoiceAddress={false}
+                displayDeliveryAddress={false}
+                isFreeNumberStep
               />
             </Col>
           </Row>
@@ -134,7 +175,6 @@ export class Tryit extends React.Component {
               />
             </Col>
           </Row>
-          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )

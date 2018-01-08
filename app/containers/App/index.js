@@ -48,10 +48,11 @@ export default function App() {
         <Route exact path="/manifeste" component={Manifest} />
 
         <Redirect from="/lasource" to="/source" />
-        <PrivateRoute exact path="/source" component={Source} />
+        <Route exact path="/source" component={Source} />
 
         <Redirect from="/login" to="/connexion" />
         <PublicRoute exact path="/connexion" component={Login} />
+        <PublicRoute path="/connexion/:redirect" component={Login} />
 
         <Redirect from="/logout" to="/connexion" />
 

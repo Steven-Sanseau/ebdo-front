@@ -5,7 +5,7 @@ import { Col, Row } from 'react-flexbox-grid'
 import Title from 'components/LayoutStep/Title'
 import Checkbox from 'components/Checkbox'
 
-export default class CheckboxShowInvoiceForm extends React.Component {
+export default class CheckboxShowDeliveryForm extends React.Component {
   constructor(props) {
     super(props)
 
@@ -15,7 +15,7 @@ export default class CheckboxShowInvoiceForm extends React.Component {
   handleCheckbox(event) {
     event.preventDefault()
 
-    this.props.showInvoiceForm()
+    this.props.showDeliveryForm()
   }
 
   render() {
@@ -23,7 +23,7 @@ export default class CheckboxShowInvoiceForm extends React.Component {
     return (
       <Row>
         <Col lg={5} xs={11}>
-          <Title>Adresse de facturation</Title>
+          <Title>Adresse de livraison</Title>
           <Checkbox
             text="Utiliser la même adresse"
             onCheck={this.handleCheckbox}
@@ -35,7 +35,7 @@ export default class CheckboxShowInvoiceForm extends React.Component {
   }
 }
 
-CheckboxShowInvoiceForm.propTypes = {
-  showInvoiceForm: PropTypes.func,
+CheckboxShowDeliveryForm.propTypes = {
+  showDeliveryForm: PropTypes.func,
   isChecked: PropTypes.bool
 }

@@ -113,7 +113,7 @@ export class HomePage extends React.Component {
                   </ImageWrap>
                 </ColCustom>
                 <ColCustom w={14} m={13} mc>
-                  <NaturalFormOrderContainer />
+                  <NaturalFormOrderContainer id="NaturalFormOrder" />
                 </ColCustom>
               </Row>
             </Row>

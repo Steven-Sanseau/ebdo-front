@@ -6,22 +6,33 @@ import _ from 'lodash'
 import ReactDOM from 'react-dom'
 import places from 'places.js'
 import { Row, Col } from 'react-flexbox-grid'
-import Phone from 'react-phone-number-input'
+import Phone, { isValidPhoneNumber } from 'react-phone-number-input'
 
-import 'react-phone-number-input/rrui.css'
-import 'react-phone-number-input/style.css'
+import './phone.css'
 
 import InputText from '../InputText'
-import Input from '../InputText/Input'
+import Required from 'components/InputText/Required'
+import Input from 'components/InputText/Input'
+import ErrorMessage from 'components/InputText/ErrorMessage'
+
 const PhoneWrapper = Input.withComponent(Phone)
+const PhoneLabelWrapper = styled.div`
+  margin-top: 15px;
+  font-family: 'FG-R';
+  font-size: 14px;
+  line-height: 14px;
+  text-align: left;
+  color: var(${props => (props.color ? props.color : '--black')});
+`
 
 class FormDelivery extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handlePlace = this.handlePlace.bind(this)
+    this.state = {
+      countryShowMessage: false,
+      countryMessage: ''
+    }
   }
 
   componentDidMount() {
@@ -44,22 +55,31 @@ class FormDelivery extends React.Component {
     })
   }
 
-  handleChange(event) {
+  handleChange = event => {
     this.props.handleChange(this.props.typeOfAddress, {
       [event.target.name]: event.target.value
     })
   }
+
   handlePhone = tel => {
     this.props.handleChange(this.props.typeOfAddress, {
       phone: tel
     })
   }
 
-  handleSubmit(event) {
-    this.props.handleSubmit(event)
+  showAlertCountry = () => {
+    this.setState({
+      countryShowMessage: true,
+      countryMessage:
+        'Si vous souhaitez changer de pays, veuillez modifier votre zone de livraison'
+    })
   }
 
-  handlePlace(event) {
+  handleSubmit = event => {
+    this.props.handleSubmit(event, this.props.typeOfAddress)
+  }
+
+  handlePlace = event => {
     event.preventDefault()
     this.props.handleChange(this.props.typeOfAddress, {
       [event.target.name]: event.target.value
@@ -84,38 +104,61 @@ class FormDelivery extends React.Component {
                   <InputText
                     label="Prénom"
                     name="first_name"
+                    isRequired
+                    error={this.props.errorForm.first_name || false}
+                    errorMessage={
+                      this.props.errorFormMessage.first_name || null
+                    }
                     value={this.props.address.first_name}
                     onChange={this.handleChange}
-                    placeholder="Henry"
+                    placeholder="Sabrina"
                   />
                 </Col>
                 <Col xs={12} lg={6}>
                   <InputText
                     label="Nom"
                     name="last_name"
+                    isRequired
+                    error={this.props.errorForm.last_name || false}
+                    errorMessage={this.props.errorFormMessage.last_name || null}
                     value={this.props.address.last_name}
                     onChange={this.handleChange}
-                    placeholder="Michel"
+                    placeholder="Dubois"
                   />
                 </Col>
               </Row>
               <Row>
                 <Col xs={12} lg={6}>
-                  <PhoneWrapper
-                    country="FR"
-                    placeholder="Votre numéro de téléphone"
-                    value={this.props.address.phone}
-                    onChange={this.handlePhone}
-                    convertToNational
-                  />
+                  <PhoneLabelWrapper
+                    color={this.props.errorForm.phone ? '--tomato' : null}>
+                    Téléphone <Required>*</Required>
+                    <PhoneWrapper
+                      country={this.props.country.value}
+                      placeholder="+33 6 00 00 00 00"
+                      value={this.props.address.phone}
+                      onChange={this.handlePhone}
+                      convertToNational
+                    />
+                    {this.props.errorForm.phone && (
+                      <Row>
+                        <Col xs={12}>
+                          <ErrorMessage>
+                            {this.props.errorFormMessage.phone}
+                          </ErrorMessage>
+                        </Col>
+                      </Row>
+                    )}
+                  </PhoneLabelWrapper>
                 </Col>
                 <Col xs={12} lg={6}>
                   <InputText
                     label="Société"
                     name="company"
+                    error={this.props.errorForm.company || false}
+                    errorMessage={this.props.errorFormMessage.company || null}
                     value={this.props.address.company}
                     onChange={this.handleChange}
-                    placeholder="Nom de la Société"
+                    placeholder="Nom de la Société (ex: SARL Dupont)"
                   />
                 </Col>
               </Row>
@@ -126,12 +169,14 @@ class FormDelivery extends React.Component {
                     id="address-input"
                     name="address"
                     isRequired
+                    error={this.props.errorForm.address || false}
+                    errorMessage={this.props.errorFormMessage.address || null}
                     reference={input => {
                       this.addressInput = input
                     }}
                     value={this.props.address.address}
                     onChange={this.handlePlace}
-                    placeholder="Adresse"
+                    placeholder="10 Bis, rue Simone de Beauvoir"
                   />
                 </Col>
                 <Col lg={4} xs={12}>
@@ -139,10 +184,14 @@ class FormDelivery extends React.Component {
                     label="Code Postal"
                     name="postal_code"
                     isRequired
+                    error={this.props.errorForm.postal_code || false}
+                    errorMessage={
+                      this.props.errorFormMessage.postal_code || null
+                    }
                     type="number"
                     value={this.props.address.postal_code}
                     onChange={this.handleChange}
-                    placeholder="00000"
+                    placeholder="17000"
                   />
                 </Col>
               </Row>
@@ -152,14 +201,18 @@ class FormDelivery extends React.Component {
                     label="Ville"
                     name="city"
                     isRequired
+                    error={this.props.errorForm.city || false}
+                    errorMessage={this.props.errorFormMessage.city || null}
                     value={this.props.address.city}
                     onChange={this.handleChange}
-                    placeholder="Paris"
+                    placeholder="La Rochelle"
                   />
                 </Col>
-                <Col lg={6} xs={12}>
+                <Col lg={6} xs={12} onClick={this.showAlertCountry}>
                   <InputText
                     label="Pays"
+                    showMessage={this.state.countryShowMessage}
+                    message={this.state.countryMessage}
                     name="country"
                     isRequired
                     disabled
@@ -182,7 +235,9 @@ FormDelivery.propTypes = {
   country: PropTypes.object.isRequired,
   typeOfAddress: PropTypes.string,
   handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  errorForm: PropTypes.object,
+  errorFormMessage: PropTypes.object
 }
 
 export default FormDelivery

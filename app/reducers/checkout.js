@@ -9,7 +9,7 @@ import {
   GET_OFFER_LOADED,
   POST_TOKEN_LOADED,
   GET_VALID_TOKEN_SLIMPAY_LOADED,
-  POST_ADRESS_LOADED,
+  POST_ADDRESS_LOADED,
   GET_TOKEN_SLIMPAY_LOADED,
   GET_CLIENT_LOADED,
   POST_SUBSCRIPTION,
@@ -18,8 +18,8 @@ import {
   NEW_CHECKOUT,
   NEW_CHECKOUT_TRY
 } from 'actions/constants'
-import jwtDecode from "jwt-decode";
-import {LOGIN_EMAIL_CODE_SUCCESS} from "../actions/constants";
+import jwtDecode from 'jwt-decode'
+import { LOGIN_EMAIL_CODE_SUCCESS } from '../actions/constants'
 
 const initialState = Immutable.fromJS({
   loading: false,
@@ -36,36 +36,6 @@ function checkoutReducer(state = initialState, action) {
     }
     case SET_PAYMENT_METHOD:
       return state.setIn(['data', 'payment_method'], action.method)
-    case GET_CLIENT_LOADED:
-      return state.setIn(['data', 'client_id'], action.client.client_id)
-    case POST_CLIENT_LOADED:
-      return state.setIn(['data', 'client_id'], action.client.client_id)
-    case LOGIN_EMAIL_CODE_SUCCESS:
-      const clientData = jwtDecode(action.token)
-      return state.setIn(['data', 'client_id'], clientData.client_id)
-    case GET_OFFER_LOADED:
-      return state
-        .setIn(['data', 'offer_id'], action.offer.offer_id)
-        .setIn(
-          ['data', 'payment_method'],
-          !action.offer.time_limited && action.offer.payment_method !== 2
-            ? 1
-            : 2
-        )
-    case POST_TOKEN_LOADED:
-      return state.setIn(['data', 'token_id'], action.token.token_id)
-    case GET_TOKEN_SLIMPAY_LOADED: {
-      return state.setIn(['data', 'token_id'], action.tokenSlimpay.token_id)
-    }
-    case GET_VALID_TOKEN_SLIMPAY_LOADED: {
-      return state.setIn(['data', 'token_id'], action.tokenSlimpay.token_id)
-    }
-    case POST_ADRESS_LOADED: {
-      return state.setIn(
-        ['data', `address_${action.payload.typeOfAddress}_id`],
-        action.payload.address.address_id
-      )
-    }
     case POST_SUBSCRIPTION:
       return state
         .set('loading', true)

@@ -7,22 +7,45 @@ import { compose } from 'redux'
 import {
   makeSelectLogin,
   makeSelectWaitingForCode,
-  makeIsLoadingLogin
+  makeIsLoadingLogin,
+  makeIsLoggedIn
 } from 'selectors/login'
-import {
-  makeSelectClientEmail,
-} from 'selectors/client'
+import { makeSelectClientEmail } from 'selectors/client'
 import { loginEmailCode } from 'actions/login'
 import InputText from 'components/InputText'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
 class EmailConfirmStep extends React.Component {
   state = {
-    code: ""
+    code: '',
+    isAnim: false
+  }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    if (
+      nextProps.currentStep === nextProps.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  componentWillMount = () => {
+    if (
+      this.props.currentStep === this.props.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
   }
 
   handleNextStep = event => {
-    this.props.loginEmailCode(this.props.email, this.state.code, true)
+    this.setState({ isAnim: true })
+    this.props.dispatchloginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
   }
 
@@ -62,7 +85,7 @@ class EmailConfirmStep extends React.Component {
       <ToggleStep
         title="Je confirme mon adresse email"
         stepNumber={stepNumber}
-        iconName="check"
+        iconName="mail"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
@@ -71,6 +94,7 @@ class EmailConfirmStep extends React.Component {
         textButtonNextStep="Valider le code"
         isLoadingNextStep={checkoutIsLoading}
         updateStepHide={true}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }
@@ -78,16 +102,25 @@ class EmailConfirmStep extends React.Component {
 
 EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
+  dispatchloginEmailCode: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   email: makeSelectClientEmail()
 })
 
-const mapDispatchToProps = { loginEmailCode }
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchNextStep: () => dispatch(nextStep()),
+    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
+    dispatchloginEmailCode: (email, code, isCheckout) =>
+      dispatch(loginEmailCode(email, code, isCheckout))
+  }
+}
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 

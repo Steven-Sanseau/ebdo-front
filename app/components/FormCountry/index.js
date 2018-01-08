@@ -1,29 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 import DropdownInput from 'components/DropdownInput'
 
+const DropdownWrapperCountry = styled(DropdownInput)`
+  width: 200px;
+`
 function FormCountry(props) {
   return (
     <div>
-      <Row>
-        <Col xs={12}>
-          <form onSubmit={props.handleSubmitCountry}>
-            <Row>
-              <Col xs={12} lg={6}>
-                <DropdownInput
-                  name="country"
-                  label="Mon pays de livraison"
-                  value={props.country}
-                  options={props.countryList}
-                  handleChange={props.handleCountry}
-                  placeholder="France"
-                />
-              </Col>
-            </Row>
-          </form>
-        </Col>
-      </Row>
+      <form onSubmit={props.handleSubmitCountry}>
+        <DropdownWrapperCountry
+          name="country"
+          value={props.country}
+          options={props.countryList}
+          handleChange={props.handleCountry}
+          placeholder="France"
+        />
+      </form>
     </div>
   )
 }

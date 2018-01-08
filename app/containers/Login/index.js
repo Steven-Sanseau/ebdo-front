@@ -30,21 +30,24 @@ const TextLogin = styled.div`
 export class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handleCode = this.handleCode.bind(this)
   }
   state = {
     email: '',
-    code: ''
+    code: '',
+    redirect: '/'
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    const { waitingForCode } = this.props
+    const { waitingForCode, location } = this.props
 
     if (waitingForCode && this.state.code !== '') {
-      this.props.dispatchLoginEmailCode(this.state.email, this.state.code)
+      const redirect = new URLSearchParams(location.search).get('redirect')
+      this.props.dispatchLoginEmailCode(
+        this.state.email,
+        this.state.code,
+        redirect
+      )
     } else {
       this.props.dispatchLoginEmail(this.state.email)
     }
@@ -62,7 +65,8 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { isLoadingLogin } = this.props
+    const { isLoadingLogin, dispatch } = this.props
+
     return (
       <div>
         <Helmet>
@@ -80,6 +84,7 @@ export class Login extends React.Component {
             code={this.state.code}
             email={this.state.email}
             isLoadingLogin={isLoadingLogin}
+            dispatch={dispatch}
           />
         </ThemeProvider>
       </div>
@@ -90,7 +95,8 @@ Login.propTypes = {
   dispatchLoginEmail: PropTypes.func,
   dispatchLoginEmailCode: PropTypes.func,
   waitingForCode: PropTypes.bool,
-  isLoadingLogin: PropTypes.bool
+  isLoadingLogin: PropTypes.bool,
+  dispatch: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -102,8 +108,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchLoginEmail: email => dispatch(loginEmail(email)),
-    dispatchLoginEmailCode: (email, code) =>
-      dispatch(loginEmailCode(email, code)),
+    dispatchLoginEmailCode: (email, code, redirect) =>
+      dispatch(loginEmailCode(email, code, false, redirect)),
     dispatch
   }
 }

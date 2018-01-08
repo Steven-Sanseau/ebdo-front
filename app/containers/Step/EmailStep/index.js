@@ -11,11 +11,11 @@ import {
   makeSelectClientEmail,
   makeSelectClientExist
 } from 'selectors/client'
-import {
-  makeSelectLogin,
-} from 'selectors/login'
+
+import { makeSelectLogin, makeIsLoggedIn } from 'selectors/login'
 import { setClientEmail, postClient, useClientExist } from 'actions/client'
 import { loginEmail } from 'actions/login'
+import { nextStep } from 'actions/step'
 
 import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
@@ -23,11 +23,35 @@ import BoldText from 'components/LayoutStep/BoldText'
 
 class EmailStep extends React.Component {
   state = {
+    isAnim: false,
     errorEmail: false,
     errorMessage: ''
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (
+      nextProps.currentStep === nextProps.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  componentWillMount() {
+    if (
+      this.props.currentStep === this.props.stepNumber &&
+      this.props.isLoggedIn
+    ) {
+      this.props.dispatchNextStep()
+    }
+  }
+
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+
   handleNextStep = event => {
+    this.setState({ isAnim: true })
     this.handleSubmit(event)
   }
 
@@ -38,11 +62,11 @@ class EmailStep extends React.Component {
     this.props.dispatchChangeEmail(email)
   }
 
-  resetEmail() {
+  resetEmail = () => {
     this.setState({ errorEmail: false, errorMessage: '' })
   }
 
-  validateEmail() {
+  validateEmail = () => {
     const { email } = this.props
 
     if (!emailRegex({ exact: true }).test(email)) {
@@ -56,7 +80,7 @@ class EmailStep extends React.Component {
     if (email === '') {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez remplir votre email'
+        errorMessage: 'Veuillez remplir votre adresse email'
       })
       return false
     }
@@ -84,17 +108,20 @@ class EmailStep extends React.Component {
       <div>
         <FormEmail
           handleEmail={this.handleEmail}
-          errorEmail={errorEmail}
+          errorEmail={!this.state.isAnim ? errorEmail : false}
           errorMessage={errorMessage}
           handleSubmitEmail={this.handleSubmit}
           email={email}
         />
-        {clientExist && (
-          <div>
-            <BoldText>Votre adresse est déjà enregistrée chez nous. Vous allez devoir vous connecter.</BoldText>
-
-          </div>
-        )}
+        {!this.state.isAnim &&
+          clientExist && (
+            <div>
+              <BoldText>
+                Votre adresse est déjà enregistrée. Vous allez devoir vous
+                connecter.
+              </BoldText>
+            </div>
+          )}
       </div>
     )
   }
@@ -102,10 +129,10 @@ class EmailStep extends React.Component {
   contentClose() {
     const { email } = this.props
     return (
-      <div>
-        Toutes les informations concernant mon abonnement seront envoyées à{' '}
-        <BoldText>{email}</BoldText>
-      </div>
+      <span>
+        Toutes les informations concernant mon abonnement seront <br /> envoyées
+        à <BoldText>{email}</BoldText>
+      </span>
     )
   }
 
@@ -116,12 +143,12 @@ class EmailStep extends React.Component {
       stepNumber,
       clientIsLoading,
       clientExist,
-      login
+      isLoggedIn
     } = this.props
 
     return (
       <ToggleStep
-        title="Je renseigne mon Email"
+        title="Je renseigne mon email"
         iconName="mail"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
@@ -132,7 +159,8 @@ class EmailStep extends React.Component {
         isLoadingNextStep={clientIsLoading}
         textButtonNextStep={clientExist ? 'Je continue !' : null}
         colorButtonNextStep={clientExist ? '--squash' : '--booger'}
-        updateStepHide={!!login.token}
+        updateStepHide={isLoggedIn}
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }
@@ -148,14 +176,15 @@ EmailStep.propTypes = {
   dispatchChangeEmail: PropTypes.func,
   dispatchPostClient: PropTypes.func,
   dispatchUseClientExist: PropTypes.func,
+  dispatchNextStep: PropTypes.func,
   clientExist: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectClientIsLoading(),
   clientExist: makeSelectClientExist(),
-  email: makeSelectClientEmail(),
-  login: makeSelectLogin()
+  isLoggedIn: makeIsLoggedIn(),
+  email: makeSelectClientEmail()
 })
 
 function mapDispatchToProps(dispatch) {
@@ -163,7 +192,8 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchPostClient: () => dispatch(postClient()),
     dispatchUseClientExist: () => dispatch(useClientExist()),
-    dispatchLoginEmail: (email) => dispatch(loginEmail(email))
+    dispatchLoginEmail: email => dispatch(loginEmail(email)),
+    dispatchNextStep: () => dispatch(nextStep())
   }
 }
 
