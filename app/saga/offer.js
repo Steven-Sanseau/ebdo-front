@@ -12,7 +12,7 @@ import {
   SET_PAYMENT_METHOD,
   SET_COUNTRY_ADRESS_OFFER_VALID
 } from 'actions/constants'
-import { getOfferError, getOfferLoaded } from 'actions/offer'
+import { getOfferError, getOfferLoaded, setOfferParams } from 'actions/offer'
 import { nextStep } from 'actions/step'
 import {
   makeSelectOffer,
@@ -81,7 +81,15 @@ function* nextStepSaga() {
   }
 }
 
+function* middleWareSetParamsOffer(action) {
+  const offer = yield select(makeSelectOffer())
+  if (action.params.is_gift && offer.data.duration === 0) {
+    yield put(setOfferParams({ duration: 12 }, false))
+  }
+}
+
 export default function* sagaOffer() {
+  yield takeEvery(SET_OFFER_PARAMS, middleWareSetParamsOffer)
   yield takeEvery(SET_COUNTRY_ADRESS, getOffer)
   yield takeEvery(SET_PAYMENT_METHOD, getOffer)
   yield takeEvery(GET_OFFER, getOffer)
