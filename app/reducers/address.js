@@ -84,7 +84,7 @@ function addressReducer(state = initialState, action) {
         .set('country', Immutable.fromJS(action.payload.country))
     }
     case POST_CLIENT_LOADED:
-      return initialState
+      return state.set('delivery', new Address()).set('invoice', new Address())
     case NEW_CHECKOUT:
       return initialState
     case NEW_CHECKOUT_TRY:

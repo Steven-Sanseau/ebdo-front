@@ -58,15 +58,21 @@ class CountryStep extends React.Component {
     const countryList = [
       { label: 'France', value: 'FR' },
       {
-        label: `Belgique (+${1 * offer.data.duration}€ de frais de port)`,
+        label: `Belgique (+${
+          1 * offer.data.duration ? offer.data.duration : 4
+        }€ de frais de port)`,
         value: 'BE'
       },
       {
-        label: `Suisse (+${1 * offer.data.duration}€ de frais de port)`,
+        label: `Suisse (+${
+          1 * offer.data.duration ? offer.data.duration : 4
+        }€ de frais de port)`,
         value: 'CH'
       },
       {
-        label: `Suisse (+${1 * offer.data.duration}€ de frais de port)`,
+        label: `Luxembourg (+${
+          1 * offer.data.duration ? offer.data.duration : 4
+        }€ de frais de port)`,
         value: 'LU'
       }
     ]
@@ -100,7 +106,8 @@ class CountryStep extends React.Component {
         {country.value !== 'FR' && (
           <span>
             (des frais supplémentaires de{' '}
-            {offer.data.shipping_cost * offer.data.duration} € ont été
+            {offer.data.shipping_cost *
+              (offer.data.duration ? offer.data.duration : 4)} € ont été
             appliqués)
           </span>
         )}
@@ -130,7 +137,10 @@ class CountryStep extends React.Component {
         isLoadingNextStep={clientIsLoading}
         textButtonNextStep={
           offer.data.country_shipping !== 'FR'
-            ? 'Étape suivante (+12€ de frais de port)'
+            ? `Étape suivante (+${offer.data.shipping_cost *
+                (offer.data.duration
+                  ? offer.data.duration
+                  : 4)}€ de frais de port)`
             : null
         }
         colorButtonNextStep={

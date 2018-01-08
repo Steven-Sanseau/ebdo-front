@@ -166,24 +166,25 @@ class FormulaStep extends React.Component {
                 offer.data.duration && (
                   <GreenText>pendant {offer.data.duration / 4} mois</GreenText>
                 )}
-              <BigBoldText>, </BigBoldText>
-              <br />
+              {offer.data.time_limited === true && (
+                <BigBoldText>
+                  , <br />
+                </BigBoldText>
+              )}
               <BigBoldText> pour </BigBoldText>
               <BlueText>
                 {offer.data.monthly_price_ttc}€<SupText>/mois</SupText>
               </BlueText>{' '}
+              {offer.data.duration === 0 && <br />}
               <BigBoldText>
                 soit{' '}
                 {offer.data.duration !== 0 &&
                   (offer.data.monthly_price_ttc / 4 +
                     offer.data.shipping_cost) *
                     offer.data.duration}
-                {offer.data.duration === 0 && offer.data.monthly_price_ttc}
+                {offer.data.duration === 0 &&
+                  offer.data.monthly_price_ttc + offer.data.shipping_cost * 4}
                 {'€ '} au total.
-                {/* <Price>
-                  {offer.data.monthly_price_ttc * 4}€ +{' '}
-                  {offer.data.shipping_cost * 4}€ de frais de port
-                </Price> */}
               </BigBoldText>
             </TextFormulae>
             {offer.data.country_shipping === 'FR' && (
@@ -192,33 +193,30 @@ class FormulaStep extends React.Component {
                 sont inclus.
               </DeliveryText>
             )}
-            {offer.data.country_shipping === 'LU' && (
+            {offer.data.country_shipping !== 'FR' && (
               <DeliveryText>
-                Les frais de livraison en Luxembourg sont de{' '}
+                Les frais de livraison{' '}
+                {offer.data.country_shipping === 'BE' && 'en Belgique'}
+                {offer.data.country_shipping === 'LU' && 'au Luxembourg'}{' '}
+                {offer.data.country_shipping === 'CH' && 'en Suisse'} sont de{' '}
                 {offer.data.shipping_cost}€ par numéro.<br />
-                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
-                {offer.data.shipping_cost * offer.data.duration}€ de frais de
-                port
+                Soit{' '}
+                {offer.data.time_limited === true && (
+                  <span>
+                    {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
+                    {offer.data.shipping_cost * offer.data.duration}€ de frais
+                    de port{' '}
+                  </span>
+                )}
+                {offer.data.time_limited === false && (
+                  <span>
+                    {offer.data.monthly_price_ttc}€ +{' '}
+                    {offer.data.shipping_cost * 4}€ de frais de port
+                  </span>
+                )}
               </DeliveryText>
             )}
-            {offer.data.country_shipping === 'BE' && (
-              <DeliveryText>
-                Les frais de livraison en Belgique sont de{' '}
-                {offer.data.shipping_cost}€ par numéro.<br />
-                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
-                {offer.data.shipping_cost * offer.data.duration}€ de frais de
-                port
-              </DeliveryText>
-            )}
-            {offer.data.country_shipping === 'CH' && (
-              <DeliveryText>
-                Les frais de livraison en Suisse sont de{' '}
-                {offer.data.shipping_cost}€ par numéro.<br />
-                Soit {offer.data.monthly_price_ttc / 4 * offer.data.duration}€ +{' '}
-                {offer.data.shipping_cost * offer.data.duration}€ de frais de
-                port
-              </DeliveryText>
-            )}
+
             <NextStep>
               <Button
                 border
