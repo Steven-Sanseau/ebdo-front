@@ -48,12 +48,13 @@ export class Checkout extends React.Component {
           this.props.goToAboExist()
         }
       })
+      console.log('sub')
     } else {
-      if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
-        this.props.dispatchSlimpayTokenValid()
-      } else {
-        this.props.dispatchNewCheckout()
-      }
+      this.props.dispatchNewCheckout()
+    }
+
+    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
+      this.props.dispatchSlimpayTokenValid()
     }
   }
 

@@ -117,7 +117,8 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchNextStep: () => dispatch(nextStep()),
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchloginEmailCode: () => dispatch(loginEmailCode())
+    dispatchloginEmailCode: (email, code, isCheckout) =>
+      dispatch(loginEmailCode(email, code, isCheckout))
   }
 }
 

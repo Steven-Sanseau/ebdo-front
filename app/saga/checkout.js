@@ -85,7 +85,8 @@ function* newCheckoutSaga(action) {
     yield put(
       getOfferLoaded(
         {
-          offer_id: 81 // TODO Use aboweb id instead ?
+          aboweb_id: 'F-EB-GRABW-000-1-DD',
+          offer_id: 1
         },
         false
       )
