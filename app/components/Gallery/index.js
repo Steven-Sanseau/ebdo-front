@@ -9,12 +9,15 @@ import Lightbox from 'react-images'
 import styled from 'styled-components'
 import { media } from 'global-styles'
 
+import 'components/Gallery/Gallery.css'
+
 import '!file-loader?name=[name].[ext]!images/numero-0/1-sommaire-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/2-infographie-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/3-RER-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/4-fusees-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/5-bd-HD.jpg'
 import '!file-loader?name=[name].[ext]!images/numero-0/6-cyberguerre-HD.jpg'
+import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
 
 const Undercover = styled.div`
   img {
@@ -22,7 +25,7 @@ const Undercover = styled.div`
     top: 0;
     left: 0;
     z-index: -1;
-    border-top: 1px solid var(--grey-blue); 
+    border-top: 1px solid var(--grey-blue);
   }
   .fond {
     position: absolute;
@@ -57,6 +60,7 @@ const Undercover = styled.div`
 `
 const CTA = styled.button`
   color: var(--cool-grey);
+  font-family: FG-R;
   border: 1px solid var(--cool-grey);
   border-radius: 16px;
   background-color: var(--white-true);
@@ -80,14 +84,17 @@ const Cover = styled.div`
   cursor: pointer;
   img {
     transition: transform 0.3s ease-out;
+    border: 1px solid var(--grey-blue);
   }
   button {
     transition: opacity 0.2s ease-out;
   }
-  &:hover > img {
+  &:hover > img,
+  &:hover .pin {
     transform: translateX(-150px);
   }
-  &:hover div img, &:hover .fond  {
+  &:hover div img,
+  &:hover .fond {
     transform: translateX(50px);
   }
   &:hover button {
@@ -183,7 +190,7 @@ class Gallery extends React.Component {
     return (
       <Cover onClick={this.openLightbox}>
         <img src="0-couv.jpg" alt="couv" width="100%" />
-        <Pin>En kiosque cette semaine</Pin>
+        <Pin className="pin">En kiosque cette semaine</Pin>
         <Undercover>
           <img src="sommaire-droite.png" alt="sommaire" width="100%" />
           <div className="fond" />

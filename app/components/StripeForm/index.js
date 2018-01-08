@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 import {
@@ -9,9 +11,13 @@ import {
 
 import Label from 'components/InputText/Label'
 import Required from 'components/InputText/Required'
+import IconWrapper from 'components/InputCheckbox/IconWrapper'
+import SecureSvg from 'components/Icon/SecureSvg'
 
 import './stripe.css'
-
+const LabelCard = styled(Label)`
+  margin-top: 15px;
+`
 export default class StripeForm extends Component {
   constructor(props) {
     super(props)
@@ -31,7 +37,7 @@ export default class StripeForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col lg={6} xs={12}>
-              <Label>
+              <LabelCard>
                 <Row>
                   <Col xs={12}>
                     Numéro de carte<Required>*</Required>
@@ -41,14 +47,14 @@ export default class StripeForm extends Component {
                   <Col xs={12}>
                     <CardNumberElement
                       onChange={this.props.handleChange}
-                      className="card-number input-stripe"
+                      className="card-number input-stripe "
                     />
                   </Col>
                 </Row>
-              </Label>
+              </LabelCard>
             </Col>
             <Col lg={3} xs={12}>
-              <Label>
+              <LabelCard>
                 <Row>
                   <Col xs={12}>
                     Date d{"'"}expiration<Required>*</Required>
@@ -62,10 +68,10 @@ export default class StripeForm extends Component {
                     />
                   </Col>
                 </Row>
-              </Label>
+              </LabelCard>
             </Col>
             <Col lg={3} xs={12}>
-              <Label>
+              <LabelCard>
                 <Row>
                   <Col xs={12}>
                     CVC<Required>*</Required>
@@ -79,7 +85,7 @@ export default class StripeForm extends Component {
                     />
                   </Col>
                 </Row>
-              </Label>
+              </LabelCard>
             </Col>
           </Row>
         </form>

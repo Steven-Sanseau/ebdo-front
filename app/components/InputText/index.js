@@ -28,7 +28,7 @@ class InputText extends React.Component {
                 onChange={this.props.onChange || null}
                 placeholder={this.props.placeholder || ''}
                 ref={this.props.reference || null}
-                type="text"
+                type={this.props.type || 'text'}
                 value={this.props.value || ''}
                 disabled={this.props.disabled || false}
                 autocomplete="false"
@@ -44,6 +44,15 @@ class InputText extends React.Component {
               </Col>
             </Row>
           )}
+          {this.props.showMessage && (
+            <Row>
+              <Col xs={12}>
+                {this.props.message && (
+                  <ErrorMessage>{this.props.message}</ErrorMessage>
+                )}
+              </Col>
+            </Row>
+          )}
         </Label>
       </InputWrapper>
     )
@@ -53,10 +62,13 @@ class InputText extends React.Component {
 InputText.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
+  showMessage: PropTypes.bool,
+  message: PropTypes.string,
   color: PropTypes.string,
   id: PropTypes.string,
   isRequired: PropTypes.bool,
   label: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,

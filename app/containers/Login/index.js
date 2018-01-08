@@ -1,59 +1,117 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 import Helmet from 'react-helmet'
+import { ThemeProvider } from 'styled-components'
+
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import { createStructuredSelector } from 'reselect'
+import {
+  makeSelectLogin,
+  makeSelectWaitingForCode,
+  makeIsLoadingLogin
+} from 'selectors/login'
+import { loginEmail, loginEmailCode } from 'actions/login'
 
-import injectSaga from '../../utils/injectSaga'
-import sagaLogin from '../../saga/login'
-import { loginEmail, loginEmailCode } from '../../actions/login'
+import LoginPage from 'components/LoginPage'
 
-class Login extends React.PureComponent {
+const theme = {
+  flexboxgrid: {
+    // Defaults
+    gutterWidth: 0, // rem
+    outerMargin: 0 // rem
+  }
+}
+const TextLogin = styled.div`
+  font-size: 18px;
+  font-family: 'FG-R';
+`
+export class Login extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   state = {
-    email: "tlenclos@jolicode.com",
-    code: ""
+    email: '',
+    code: '',
+    redirect: '/'
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const { waitingForCode, location } = this.props
+
+    if (waitingForCode && this.state.code !== '') {
+      const redirect = new URLSearchParams(location.search).get('redirect')
+      this.props.dispatchLoginEmailCode(
+        this.state.email,
+        this.state.code,
+        redirect
+      )
+    } else {
+      this.props.dispatchLoginEmail(this.state.email)
+    }
+  }
+
+  handleEmail = event => {
+    this.setState({ email: event.target.value })
+  }
+
+  handleCode = event => {
+    this.setState({ code: event.target.value })
+  }
+  handleRoute = event => {
+    this.handleSubmit(event)
   }
 
   render() {
-    const { loginEmail, loginEmailCode, waitingForCode } = this.props;
+    const { isLoadingLogin, dispatch } = this.props
+
     return (
       <div>
         <Helmet>
-          <title>Login</title>
+          <title>connexion à mon espace abonné ebdo</title>
+          <meta name="description" content="Abonnement à ebdo le journal" />
         </Helmet>
-        <h1>Login</h1>
 
-        <form onSubmit={(event) => {
-          // TODO Use state in React
-          event.preventDefault();
-
-          if (waitingForCode && this.state.code !== "") {
-            loginEmailCode(this.state.email, this.state.code)
-          } else {
-            loginEmail(this.state.email)
-          }
-        }}>
-          {!waitingForCode && <input name="email" type="email" value={this.state.email} onChange={(event) => {
-            this.setState({ email: event.target.value })
-          }} />}
-          {waitingForCode &&
-          <div>
-            <p>Veuillez rentrer le code pour valider la connexion</p>
-            <input name="code" type="number" value={this.state.code} onChange={(event) => {
-              this.setState({ code: event.target.value })
-            }} />
-          </div>
-          }
-        </form>
-
+        <ThemeProvider theme={theme}>
+          <LoginPage
+            {...this.props}
+            handleSubmit={this.handleSubmit}
+            handleEmail={this.handleEmail}
+            handleCode={this.handleCode}
+            handleRoute={this.handleRoute}
+            code={this.state.code}
+            email={this.state.email}
+            isLoadingLogin={isLoadingLogin}
+            dispatch={dispatch}
+          />
+        </ThemeProvider>
       </div>
     )
   }
 }
+Login.propTypes = {
+  dispatchLoginEmail: PropTypes.func,
+  dispatchLoginEmailCode: PropTypes.func,
+  waitingForCode: PropTypes.bool,
+  isLoadingLogin: PropTypes.bool,
+  dispatch: PropTypes.func
+}
 
-const withConnect = connect((state) => state.get('login').toJS(), { loginEmail, loginEmailCode });
-const withLoginSaga = injectSaga({ key: 'saga', saga: sagaLogin })
+const mapStateToProps = createStructuredSelector({
+  login: makeSelectLogin(),
+  waitingForCode: makeSelectWaitingForCode(),
+  isLoadingLogin: makeIsLoadingLogin()
+})
 
-export default compose(
-  withConnect,
-  withLoginSaga,
-)(Login)
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchLoginEmail: email => dispatch(loginEmail(email)),
+    dispatchLoginEmailCode: (email, code, redirect) =>
+      dispatch(loginEmailCode(email, code, false, redirect)),
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

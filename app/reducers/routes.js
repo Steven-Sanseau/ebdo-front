@@ -19,4 +19,3 @@ function routeReducer(state = routeInitialState, action) {
 }
 
 export default routeReducer
-

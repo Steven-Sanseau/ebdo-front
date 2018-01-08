@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import Link from 'components/Link'
 import { media } from 'global-styles'
+import ColCustom from 'components/Grid/Col'
 
 const Layout = styled.div`
   width: calc(100% - 80px);
@@ -25,25 +26,54 @@ const Layout = styled.div`
 
 const SecondaryFooterWrapper = styled.section`
   background-color: var(--voodoo);
+
+  .m-up {
+    ${media.tablet`
+      order: -1;
+    `}
+  }
+  .m-border {
+    ${media.tablet`
+      padding: 40px 0;
+      margin: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    `}
+  }
 `
 const Title = styled.h2`
   font-size: 18px;
   margin: 0;
   line-height: 26px;
+  ${media.tablet`
+    font-size: 16px;
+    line-height: 22px;
+  `}
 `
 
 const LinkWrapper = styled.div`
   margin-bottom: 20px;
 `
 
+const RowSimpleBorder = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
+
 const SecondaryFooter = () => (
   <SecondaryFooterWrapper>
     <Layout>
-      <Row>
-        <Col smOffset={3} xs={12} sm={3}>
+      <RowSimpleBorder between="sm">
+        <ColCustom w={5} m={13}>
+        </ColCustom>
+        <ColCustom w={5} m={13} className="m-border">
           <Title>Mentions légales</Title>
-        </Col>
-        <Col xs={12} sm={6}>
+        </ColCustom>
+        <ColCustom w={5} m={13} className="m-up">
           <LinkWrapper>
             <Title>Contacter la rédaction</Title>
             <Link to="mailto:redaction@ebdo-lejournal.com">
@@ -56,8 +86,10 @@ const SecondaryFooter = () => (
               service-lecteurs@ebdo-lejournal.com
             </Link>
           </LinkWrapper>
-        </Col>
-      </Row>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
+        </ColCustom>
+      </RowSimpleBorder>
     </Layout>
   </SecondaryFooterWrapper>
 )

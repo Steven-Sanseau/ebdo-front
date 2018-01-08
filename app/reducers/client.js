@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+import jwtDecode from 'jwt-decode'
 
 import ClientModel from 'models/client'
 
@@ -10,7 +11,11 @@ import {
   SET_CLIENT_EMAIL,
   POST_CLIENT_LOADED,
   POST_CLIENT_ERROR,
-  USE_CLIENT_EXIST
+  USE_CLIENT_EXIST,
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY,
+  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGOUT
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
@@ -69,6 +74,16 @@ function clientReducer(state = initialState, action) {
         .set('isNewClient', false)
         .set('clientExist', true)
         .set('data', new ClientModel(action.client))
+    case LOGIN_EMAIL_CODE_SUCCESS:
+      return state.set('data', new ClientModel(jwtDecode(action.token)))
+    case LOGOUT:
+      return initialState
+    /* This is commented because it remove the data from the logged user, why ?
+    case NEW_CHECKOUT:
+      return initialState
+    case NEW_CHECKOUT_TRY:
+      return initialState
+    */
     default:
       return state
   }

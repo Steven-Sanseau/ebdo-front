@@ -7,11 +7,14 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { StripeProvider } from 'react-stripe-elements'
+import StoreSaga from './stores'
 import FontFaceObserver from 'fontfaceobserver'
 import createHistory from 'history/createBrowserHistory'
 import 'sanitize.css/sanitize.css'
+
 // Import root app
 import App from 'containers/App'
+import ScrollMemory from 'react-router-scroll-memory'
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
@@ -50,11 +53,16 @@ const MOUNT_NODE = document.getElementById('app')
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </StripeProvider>
+      <StoreSaga store={store}>
+        <StripeProvider apiKey={process.env.EBDO_STRIPE_KEY_API}>
+          <ConnectedRouter history={history}>
+            <div>
+              <ScrollMemory />
+              <App />
+            </div>
+          </ConnectedRouter>
+        </StripeProvider>
+      </StoreSaga>
     </Provider>,
     MOUNT_NODE
   )

@@ -1,29 +1,38 @@
-/**
- *
- * AboProposition
- *
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from 'global-styles'
+import { push } from 'react-router-redux'
 
 import Button from 'components/Button'
 
 const AboPropositionWrapper = styled.div`
-  max-width: 220px;
 `
-const ButtonWrapper = styled.div``
+const ButtonWrapper = styled.div`
+  margin-top: 40px;
+  ${media.tablet`
+    margin-top: 30px;
+  `};
+`
 const Title = styled.h2`
   font-size: 28px;
   font-weight: 700;
   line-height: 26px;
   margin: 0;
+
+  ${media.tablet`
+    font-size: 22px;
+    line-height: 24px;
+  `};
 `
 
 const TextWrapper = styled.div`
   margin-top: 10px;
+  font-size: 18px;
+
+  ${media.tablet`
+    font-size: 16px;
+  `};
 `
 
 const Wrapper = styled.div`
@@ -34,16 +43,17 @@ const Wrapper = styled.div`
 
   ${media.tablet`
     margin-bottom: 45px;
+    height: auto;
   `};
 `
 
 const AboProposition = props => {
-  const {
-    to, buttonText, children, buttonColor, title
-  } = props
+  const { to, buttonText, children, buttonColor, title, dispatch } = props
+
   const handleRoute = () => {
-    console.log(to)
+    props.dispatch(push(to))
   }
+
   return (
     <Wrapper>
       <AboPropositionWrapper>
@@ -51,7 +61,7 @@ const AboProposition = props => {
         <TextWrapper>{children}</TextWrapper>
       </AboPropositionWrapper>
       <ButtonWrapper>
-        <Button handleRoute={handleRoute} color={buttonColor}>
+        <Button handleRoute={handleRoute} color={buttonColor} className="big">
           {buttonText}
         </Button>
       </ButtonWrapper>
@@ -61,6 +71,7 @@ const AboProposition = props => {
 
 AboProposition.propTypes = {
   to: PropTypes.string,
+  dispatch: PropTypes.func,
   title: PropTypes.string,
   children: PropTypes.node,
   buttonText: PropTypes.string,

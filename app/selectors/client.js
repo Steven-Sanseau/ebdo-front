@@ -17,7 +17,8 @@ const makeSelectClientIsNewClient = () =>
 const makeSelectClientExist = () =>
   createSelector(selectClient, client => client.get('clientExist'))
 
-const makeSelectClient = () => createSelector(selectClient, client => client)
+const makeSelectClient = () =>
+  createSelector(selectClient, client => client.toJS())
 
 export {
   makeSelectClientEmail,

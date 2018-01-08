@@ -3,36 +3,35 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Row, Col } from 'react-flexbox-grid'
 import { Elements } from 'react-stripe-elements'
-// import idx from 'idx'
 
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import injectSaga from 'utils/injectSaga'
 
 // SELECTOR
+import { makeSelectClientExist } from 'selectors/client'
 import { makeSelectStep } from 'selectors/step'
+import { makeSelectPath } from 'selectors/route'
+import { makeIsLoggedIn } from 'selectors/login'
+import { makeSelectSubscriptionData } from 'selectors/subscription'
 import { nextStep, goToStep } from 'actions/step'
-
-// SAGA
-import sagaOffer from 'saga/offer'
-import sagaCheckout from 'saga/checkout'
-import sagaToken from 'saga/token'
-import sagaAddress from 'saga/address'
-import sagaClient from 'saga/client'
+import { getValidTokenSlimpay } from 'actions/token'
+import { newCheckout } from 'actions/checkout'
 
 // CONTAINERS
-import FormulaStep from 'containers/FormulaStep/Loadable'
-import CountryStep from 'containers/CountryStep/Loadable'
-import EmailStep from 'containers/EmailStep/Loadable'
-import DeliveryStep from 'containers/DeliveryStep/Loadable'
-import PaymentStep from 'containers/PaymentStep/Loadable'
-import ConfirmStep from 'containers/ConfirmStep/Loadable'
+import FormulaStep from 'containers/Step/FormulaStep/Loadable'
+import CountryStep from 'containers/Step/CountryStep/Loadable'
+import EmailStep from 'containers/Step/EmailStep/Loadable'
+import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
+import PaymentStep from 'containers/Step/PaymentStep/Loadable'
+import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
+import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
 import Layout from 'containers/Checkout/Layout'
+
+import { push } from 'react-router-redux'
 
 export class Checkout extends React.Component {
   constructor(props) {
@@ -42,7 +41,22 @@ export class Checkout extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  // componentDidMount() {}
+  componentWillMount() {
+    if (this.props.subscriptions) {
+      this.props.subscriptions.map(subscription => {
+        if (subscription.status === '01') {
+          this.props.goToAboExist()
+        }
+      })
+      console.log('sub')
+    } else {
+      this.props.dispatchNewCheckout()
+    }
+
+    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
+      this.props.dispatchSlimpayTokenValid()
+    }
+  }
 
   nextStep() {
     this.props.nextStep()
@@ -53,7 +67,56 @@ export class Checkout extends React.Component {
   }
 
   render() {
-    const { step } = this.props
+    const { step, clientExist, isLoggedIn } = this.props
+    let steps = [
+      <FormulaStep
+        stepNumber={1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <CountryStep
+        stepNumber={2}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <EmailStep
+        stepNumber={3}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ]
+
+    if (clientExist && !isLoggedIn) {
+      steps.push(
+        <EmailConfirmStep
+          stepNumber={4}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      )
+    }
+
+    // TODO Remove delivery step if the user already has an address
+    steps = steps.concat([
+      <DeliveryStep
+        stepNumber={steps.length + 1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />,
+      <Elements>
+        <PaymentStep
+          stepNumber={steps.length + 2}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      </Elements>
+    ])
 
     return (
       <div>
@@ -63,72 +126,15 @@ export class Checkout extends React.Component {
             <meta name="description" content="Abonnement à ebdo le journal" />
           </Helmet>
           <Row center="xs" start="lg">
-            <Col mdOffset={1} xs={12} md={11}>
+            <Col xs={12}>
               <Header />
             </Col>
           </Row>
-          <Row>
-            <Col xs={12}>
-              <FormulaStep
-                stepNumber={1}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <CountryStep
-                stepNumber={2}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailStep
-                stepNumber={3}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <DeliveryStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Elements>
-                <PaymentStep
-                  stepNumber={5}
-                  changeStep={this.changeStep}
-                  nextStep={this.nextStep}
-                  currentStep={step}
-                />
-              </Elements>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <ConfirmStep
-                stepNumber={6}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
+          {steps.map((step, index) => (
+            <Row key={index}>
+              <Col xs={12}>{step}</Col>
+            </Row>
+          ))}
         </Layout>
       </div>
     )
@@ -137,34 +143,30 @@ export class Checkout extends React.Component {
 
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  dispatchNewCheckout: PropTypes.func,
+  dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
-  goToStep: PropTypes.func
+  goToStep: PropTypes.func,
+  path: PropTypes.object,
+  isLoggedIn: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep()
+  step: makeSelectStep(),
+  clientExist: makeSelectClientExist(),
+  path: makeSelectPath(),
+  subscriptions: makeSelectSubscriptionData(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
-    goToStep: step => dispatch(goToStep(step))
+    dispatchNewCheckout: () => dispatch(newCheckout()),
+    dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
+    goToStep: step => dispatch(goToStep(step)),
+    goToAboExist: () => dispatch(push('abo/existe'))
   }
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
-const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
-const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
-const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
-const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
-const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
-
-export default compose(
-  withSagaOffer,
-  withSagaToken,
-  withSagaCheckout,
-  withSagaAddress,
-  withSagaClient,
-  withConnect
-)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

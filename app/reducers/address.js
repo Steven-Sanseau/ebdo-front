@@ -3,18 +3,25 @@ import Immutable from 'immutable'
 import Address from 'models/address'
 
 import {
-  POST_ADRESS,
-  POST_ADRESS_LOADED,
-  POST_ADRESS_ERROR,
-  SET_ADRESS,
-  SET_ADRESS_EQUAL,
-  SET_COUNTRY_ADRESS
+  POST_ADDRESS,
+  POST_ADDRESS_LOADED,
+  POST_ADDRESS_ERROR,
+  SET_ADDRESS,
+  SET_ADDRESS_EQUAL,
+  SET_COUNTRY_ADDRESS,
+  NEW_CHECKOUT,
+  NEW_CHECKOUT_TRY,
+  POST_CLIENT_LOADED,
+  GET_ADDRESS,
+  GET_ADDRESS_ERROR,
+  GET_ADDRESS_LOADED
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
   loading: false,
   error: false,
   errorMessage: null,
+  isEditableAddress: true,
   country: {
     value: 'FR',
     label: 'France'
@@ -25,12 +32,12 @@ const initialState = Immutable.fromJS({
 
 function addressReducer(state = initialState, action) {
   switch (action.type) {
-    case POST_ADRESS:
+    case POST_ADDRESS:
       return state
         .set('loading', true)
         .set('error', false)
         .set('errorMessage', '')
-    case SET_ADRESS: {
+    case SET_ADDRESS: {
       const newAddress = state
         .get(action.payload.typeOfAddress)
         .mergeDeep(action.payload.address)
@@ -43,36 +50,61 @@ function addressReducer(state = initialState, action) {
           action.payload.typeOfAddress
         )
         .setIn([action.payload.typeOfAddress, 'country'], country)
+        .setIn(['invoice', 'address_equal'], false)
+        .setIn(['delivery', 'address_equal'], false)
     }
-    case POST_ADRESS_ERROR: {
-      if (action.error.response.status === 404) {
-        state.setIn([action.payload.typeOfAddress, 'address_id'], null)
-      }
-
+    case POST_ADDRESS_ERROR: {
       return state
         .set('loading', false)
         .set('errorMessage', action.error.message)
         .set('error', true)
     }
-    case POST_ADRESS_LOADED: {
+    case POST_ADDRESS_LOADED: {
       return state
         .set('loading', false)
         .set('error', false)
         .set('errorMessage', '')
-        .set(action.payload.typeOfAddress, Address(action.payload.address))
+        .set(action.payload.typeOfAddress, new Address(action.payload.address))
     }
-    case SET_ADRESS_EQUAL: {
-      const addressDeliveryToInvoice = state
-        .get('delivery')
-        .mergeDeep({ type_address: 'invoice' })
-      return state.set('invoice', new Address(addressDeliveryToInvoice))
+    case SET_ADDRESS_EQUAL: {
+      const addressInvoiceToDelivery = state.get('invoice')
+      const newAddressDelivery = addressInvoiceToDelivery
+        .mergeDeep({ type_address: 'delivery' })
+        .mergeDeep({ address_id: state.getIn(['delivery', 'address_id']) })
+        .mergeDeep({ address_equal: true })
+
+      return state
+        .set('delivery', new Address(newAddressDelivery))
+        .setIn(['invoice', 'address_equal'], true)
     }
-    case SET_COUNTRY_ADRESS: {
+    case SET_COUNTRY_ADDRESS: {
       return state
         .set('loading', false)
         .set('error', false)
         .set('country', Immutable.fromJS(action.payload.country))
     }
+    case GET_ADDRESS:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('errorMessage', null)
+    case GET_ADDRESS_LOADED:
+      return state
+        .set('loading', false)
+        .set('error', false)
+        .set('isEditableAddress', false)
+        .set(action.payload.typeOfAddress, new Address(action.payload.address))
+    case GET_ADDRESS_ERROR:
+      return state
+        .set('loading', false)
+        .set('error', true)
+        .set('errorMessage', action.error)
+    case POST_CLIENT_LOADED:
+      return state.set('delivery', new Address()).set('invoice', new Address())
+    case NEW_CHECKOUT:
+      return initialState
+    case NEW_CHECKOUT_TRY:
+      return initialState
     default:
       return state
   }

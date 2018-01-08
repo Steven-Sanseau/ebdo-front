@@ -15,6 +15,7 @@ import Image from 'components/Image'
 import SocialIcons from 'components/Icon/SocialIcons'
 import Logo from 'components/Icon/Logo'
 import { media } from 'global-styles'
+import ColCustom from 'components/Grid/Col'
 
 import '!file-loader?name=[name].[ext]!images/logos/6mois-white.png'
 import '!file-loader?name=[name].[ext]!images/logos/XXI.png'
@@ -29,10 +30,11 @@ const Layout = styled.div`
 
   ${media.tablet`
     padding: 40px 0;
-  `}
+  `};
 `
 const MainFooterWrapper = styled.section`
   background-color: var(--warm-purple);
+  position: relative;
 `
 
 const NewsletterWrapper = styled.div`
@@ -40,7 +42,7 @@ const NewsletterWrapper = styled.div`
 
   ${media.tablet`
     margin-top: 0;
-  `}
+  `};
 `
 
 const LogoWrapper = styled.div`
@@ -49,7 +51,7 @@ const LogoWrapper = styled.div`
   ${media.tablet`
     padding-bottom: 35px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  `}
+  `};
 `
 const EtWrapper = styled.span`
   margin-top: 10px;
@@ -62,14 +64,28 @@ const MobileWrapper = styled.div`
     padding-bottom: 35px;
     padding-top: 35px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  `}
+  `};
+`
+const RowFirstLine = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2), .w-5:nth-of-type(3) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+`
+const RowSimpleBorder = styled(Row)`
+  @media (min-width: 768px) {
+    .w-5:nth-of-type(2) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
 `
 
 const MainFooter = () => (
   <MainFooterWrapper>
     <Layout>
-      <Row>
-        <Col xs={12} sm={3}>
+      <RowFirstLine between="sm">
+        <ColCustom w={5} m={13}>
           <Logo color="var(--white-true)" />
           <LogoWrapper>
             Par les créateurs de <br />
@@ -77,44 +93,53 @@ const MainFooter = () => (
             <EtWrapper>et</EtWrapper>
             <Image src="/6mois-white.png" alt="6 mois" height={22} />
           </LogoWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
-            <TitleWithArrow text="Besoin d'aide ?" color="--topaz" />
-            <TitleWithArrow text="Manifeste" color="--sunflower" />
-            <TitleWithArrow text="L'équipe" color="--tomato" />
+            <TitleWithArrow text="Besoin d'aide ?" link="/" color="--topaz" />
+            <TitleWithArrow
+              text="Manifeste"
+              link="/manifest"
+              color="--sunflower"
+            />
+            <TitleWithArrow text="L'équipe" link="/team" color="--tomato" />
           </MobileWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
-            <TitleWithArrow text="La source" color="--turquoise-blue" />
+            <TitleWithArrow
+              text="La source"
+              link="/source"
+              color="--turquoise-blue"
+            />
             <Col xs={12} sm={8}>
               Des centaines d’abonnés ont déjà contribué à la source,
               rejoignez-les !
             </Col>
           </MobileWrapper>
-        </Col>
-        <Col xs={12} sm={3}>
+        </ColCustom>
+        <ColCustom w={5} m={13}>
           <MobileWrapper>
             <TextBlock title="Réseaux sociaux" type="footer">
               Tous les jours, du contenu exclusif sur nos réseaux
             </TextBlock>
             <SocialIcons />
           </MobileWrapper>
-        </Col>
-      </Row>
+        </ColCustom>
+      </RowFirstLine>
       <NewsletterWrapper>
-        <Row>
-          <Col xs={12} sm={3} smOffset={3}>
+        <RowSimpleBorder between="sm">
+          <ColCustom w={5} m={13}></ColCustom>
+          <ColCustom w={5} m={13}>
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
                 Ebdo est présent dans plus de 10 000 kiosques en France.
                 N’hésitez pas à vous renseigner auprès de vos bureau de presse.
               </TextBlock>
             </MobileWrapper>
-          </Col>
+          </ColCustom>
           <NewsletterContainer type="footer" />
-        </Row>
+        </RowSimpleBorder>
       </NewsletterWrapper>
     </Layout>
   </MainFooterWrapper>

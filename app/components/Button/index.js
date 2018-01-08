@@ -8,7 +8,11 @@ import Wrapper from './Wrapper'
 function Button(props) {
   // Render an anchor tag
   let button = (
-    <A href={props.href} color={props.color} onClick={props.onClick}>
+    <A
+      href={props.href}
+      color={props.color}
+      colorText={props.colorText}
+      onClick={props.onClick}>
       {Children.toArray(props.children)}
     </A>
   )
@@ -16,7 +20,13 @@ function Button(props) {
   // If the Button has a handleRoute prop, we want to render a button
   if (props.handleRoute) {
     button = (
-      <StyledButton minWidth={props.minWidth} color={props.color} onClick={props.handleRoute}>
+      <StyledButton
+        minWidth={props.minWidth}
+        color={props.color}
+        border={props.border}
+        colorText={props.colorText}
+        onClick={props.handleRoute}
+        className={props.className}>
         {Children.toArray(props.children)}
       </StyledButton>
     )
@@ -30,9 +40,15 @@ Button.propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.string,
+  colorText: PropTypes.string,
+  border: PropTypes.bool,
   minWidth: PropTypes.string,
   children: PropTypes.node.isRequired
 }
-Button.defaultProps = { color: '--booger' }
+Button.defaultProps = {
+  color: '--booger',
+  colorText: '--white-true',
+  border: false
+}
 
 export default Button

@@ -12,17 +12,9 @@ class DropdownInput extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { value: null }
+    this.state = { value: this.props.value }
 
     this.handleSelect = this.handleSelect.bind(this)
-  }
-
-  componentDidMount() {
-    this.state.value = this.props.value
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.state.value = nextProps.value
   }
 
   handleSelect(value) {
@@ -35,20 +27,24 @@ class DropdownInput extends React.Component {
     const { value } = this.state
     return (
       <DropdownWrapper>
+        {label && (
+          <Row>
+            <Col xs={12}>
+              <Label>{label}</Label>
+            </Col>
+          </Row>
+        )}
         <Row>
           <Col xs={12}>
-            <Label>{label}</Label>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Dropdown
-              className="dropdown-input"
-              options={options}
-              value={value}
-              onChange={this.handleSelect}
-              placeholder={placeholder}
-            />
+            <div className="dropdown-wrapper-input">
+              <Dropdown
+                className="dropdown-input"
+                options={options}
+                value={value}
+                onChange={this.handleSelect}
+                placeholder={placeholder}
+              />
+            </div>
           </Col>
         </Row>
       </DropdownWrapper>

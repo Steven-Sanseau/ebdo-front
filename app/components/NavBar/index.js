@@ -1,19 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Col, Row } from 'react-styled-flexboxgrid'
-import { Link, NavLink } from 'react-router-dom'
+import { Row } from 'react-styled-flexboxgrid'
+import { Link } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 import { media } from 'global-styles'
 import { push } from 'react-router-redux'
 
 import Button from 'components/Button'
+import Col from 'components/Grid/Col'
 import Logo from 'components/Icon/Logo'
 import 'components/NavBar/NavBar.css'
 
+import { logout } from 'actions/login'
+import { newCheckout } from 'actions/checkout'
+
 const LinkWrap = styled.div`
-  flex: 1;
   text-align: center;
+  margin-right: 30px;
   color: var(--cool-grey);
   a {
     color: inherit;
@@ -23,20 +27,20 @@ const LinkWrap = styled.div`
   a:hover {
     color: var(${props => (props.color ? props.color : 'inherit')});
   }
-  ${media.tablet`
+  ${media.desktop`
     display: none;
 `};
 `
 const LinkBurger = styled(LinkWrap)`
   text-align: left;
   margin-bottom: 10px;
-  ${media.tablet`
+  ${media.desktop`
     display: inherit;
   `};
 `
 
 const LinkWrapMobile = LinkWrap.extend`
-  ${media.tablet`
+  ${media.desktop`
     display: inherit;
     justify-content: center;
 `};
@@ -48,8 +52,11 @@ const Title = styled.h1`
   margin-bottom: ${props => (props.menuFixed ? '0' : '10px')};
   margin-top: 0;
   line-height: inherit;
-  ${media.tablet`
+  ${media.desktop`
     display: ${props => (props.menuFixed ? 'none' : 'inherit')};
+    svg {
+      width: 100px;
+    }
   `};
 `
 
@@ -57,60 +64,81 @@ const Subtitle = styled.h2`
   color: var(--topaz);
   font-size: 24px;
   line-height: 26px;
+  margin: 0;
   display: ${props => (props.menuFixed ? 'none' : 'inherit')};
 `
 
 const FlexWrap = styled.div`
   display: flex;
   align-items: center;
+  padding-right: 3px;
 
   .withBorder {
     border-left: 1px solid var(--silver);
-  ${media.tablet`
-    border-right: ${props => (props.menuFixed ? 'none' : '1px solid var(--silver)')}; ;
+    padding-left: 30px;
+    ${media.desktop`
+    border-right: ${props =>
+      props.menuFixed ? 'none' : '1px solid var(--silver)'}; ;
     border-left: none;
     margin-right: ${props => (props.menuFixed ? '0' : '20px')};;
     padding-right: 20px;
   `};
-    
   }
-  
-  ${media.tablet`
-    margin: ${props => (props.menuFixed ? '6px 0' : '30px')}; 0;
+  .hidden-xs {
+    ${media.desktop`
+      display: none;
+    `};
+  }
+  ${media.desktop`
+    margin: ${props => (props.menuFixed ? '0' : '30px')}; 0;
 `};
 `
 
 const Menu = styled.nav`
   background: white;
-  ${media.tablet`
-    margin-bottom: 30px;
-  `};
-  
+
+  .nav-menu {
+    width: ${props =>
+      props.menuFixed ? 'calc(100% - 50px)' : 'calc(75% - 80px)'};
+    margin-left: auto;
+    margin-right: auto;
+    ${props =>
+      props.menuFixed
+        ? 'padding: 6px 0;'
+        : ''} transition: transform 0.2s ease-out,
+      height 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+      -webkit-transform 0.2s ease-out;
+    ${props => (props.menuFixed ? 'height: 50px;' : '')} overflow: hidden;
+
+    ${media.desktop`
+      width: calc(100% - 20px) !important;
+      padding: 0;
+      justify-content: end;
+    `};
+
+    .narrowLinks {
+      display: ${props => (props.menuFixed ? 'block' : 'none')};
+      ${props => (props.page !== '/' ? 'display: none;' : '')};
+    }
+  }
 `
-const Burger = styled(Col)`
-  ${media.tablet`
+const Burger = styled.div`
+  display: none;
+  ${media.desktop`
     display: ${props => (props.menuFixed ? 'inherit' : 'none')};
   `};
-
-  .narrowLinks {
-    display: none;
-  }
 `
 
 const menuFixedStyle = {
   borderBottom: '1px solid var(--silver)',
-  padding: '7px 25px',
   zIndex: '100'
 }
 
 const menuStyle = {
   padding: '40px 0',
+  paddingBottom: '0',
   marginRight: 'auto',
-  marginLeft: 'auto',
-  maxWidth: '1200px',
-  width: 'calc(100% - 80px)',
-  transition:
-    'transform 0.2s ease-out, height 0.4s cubic-bezier(0.19, 1, 0.22, 1), -webkit-transform 0.2s ease-out'
+  marginLeft: 'auto'
 }
 
 const hidden = {
@@ -129,24 +157,37 @@ class NavBar extends React.Component {
     menuFixed: false
   }
 
-  handleRoute = () => {
+  handleRouteSubscribe = () => {
+    this.props.dispatch(newCheckout())
     this.props.dispatch(push('abonnement'))
+  }
+
+  handleRouteTryit = () => {
+    this.props.dispatch(push('essai'))
+  }
+
+  handleRouteLogout = () => {
+    this.props.dispatch(logout())
   }
 
   handleStateChange(status) {
     if (status.status === Sticky.STATUS_FIXED) {
       this.setState({ menuFixed: true })
+      document.querySelector('.nav-menu').style.height = '50px'
     }
     if (status.status === Sticky.STATUS_ORIGINAL) {
       this.setState({ menuFixed: false })
+      document.querySelector('.nav-menu').style.height = 'inherit'
     }
   }
+
   burgerToggle() {
-    const linksEl = document.querySelector('.narrowLinks')
-    if (linksEl.style.display === 'block') {
-      linksEl.style.display = 'none'
+    const linksEl = document.querySelector('.nav-menu')
+    if (linksEl.style.height === '') linksEl.style.height = '50px'
+    if (linksEl.style.height === '50px') {
+      linksEl.style.height = '194px'
     } else {
-      linksEl.style.display = 'block'
+      linksEl.style.height = '50px'
     }
   }
 
@@ -162,93 +203,96 @@ class NavBar extends React.Component {
         <Menu
           menuFixed={menuFixed}
           style={menuFixed ? menuFixedStyle : menuStyle}
-        >
-          <Row between="sm">
-            <Col xs={menuFixed ? 3 : 12} sm={menuFixed ? 4 : 2}>
+          page={page}>
+          <Row between="sm" className="nav-menu">
+            <Col m={13} mc>
               <Title menuFixed={menuFixed}>
-                <Logo
-                  width={menuFixed ? 65 : 150}
-                  height={menuFixed ? 25 : 56}
-                />
+                <Link to="/">
+                  <Logo
+                    width={menuFixed ? 65 : 150}
+                    height={menuFixed ? 25 : 56}
+                  />
+                </Link>
               </Title>
               <Subtitle menuFixed={menuFixed}>
                 À chaque époque <br /> son journal.
               </Subtitle>
-              <Burger className="navNarrow" menuFixed={menuFixed} sm={false}>
-                <div className="ctn-hamburger" onClick={this.burgerToggle}>
-                  <div className="hamburger" />
-                </div>
-                <div className="narrowLinks">
-                  <LinkBurger
-                    color="--tomato"
-                    style={page === 'team' ? { color: 'var(--tomato)' } : {}}
-                  >
-                    <Link to="team">L&apos;équipe</Link>
-                  </LinkBurger>
-                  <LinkBurger
-                    color="--sunflower"
-                    style={
-                      page === 'pourquoi' ? { color: 'var(--sunflower)' } : {}
-                    }
-                  >
-                    <Link to="#">Pourquoi ?</Link>
-                  </LinkBurger>
-                  <LinkBurger
-                    color="--topaz"
-                    style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
-                  >
-                    <Link to="#">La Fabrique</Link>
-                  </LinkBurger>
-                </div>
-              </Burger>
             </Col>
-            <Col xs={menuFixed ? 9 : 12} sm={menuFixed ? 8 : 7}>
+            <Col m={13}>
               <FlexWrap menuFixed={menuFixed}>
+                <Burger className="navNarrow" menuFixed={menuFixed} sm={false}>
+                  <div className="ctn-hamburger" onClick={this.burgerToggle}>
+                    <div className="hamburger" />
+                  </div>
+                </Burger>
                 <LinkWrap
                   color="--tomato"
-                  style={page === 'team' ? { color: 'var(--tomato)' } : {}}
-                >
-                  <NavLink
-                    to="team"
-                    activeStyle={{
-                      color: 'var(--tomato)'
-                    }}
-                  >
-                    L&apos;équipe
-                  </NavLink>
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
+                  <Link to="/equipe">L&apos;équipe</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--sunflower"
                   style={
-                    page === 'manifest' ? { color: 'var(--sunflower)' } : {}
-                  }
-                >
-                  <Link to="manifest">Pourquoi ?</Link>
+                    page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
+                  }>
+                  <Link to="/manifeste">Pourquoi ?</Link>
                 </LinkWrap>
                 <LinkWrap
-                  color="--topaz"
-                  style={page === 'fabrique' ? { color: 'var(--topaz)' } : {}}
-                >
+                  color="--peacock-blue"
+                  style={
+                    page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                  }>
+                  <Link to="/source">La Source</Link>
+                </LinkWrap>
+                <LinkWrap color="--topaz">
                   <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
                 </LinkWrap>
-                <LinkWrapMobile color="--squash" className="withBorder">
-                  <Link to="login">Connexion</Link>
-                </LinkWrapMobile>
-                <LinkWrapMobile style={{ marginRight: '19px' }}>
+                {!this.props.isLoggedIn && (
+                  <LinkWrapMobile color="--squash" className="withBorder">
+                    <Link to="/connexion">Connexion</Link>
+                  </LinkWrapMobile>
+                )}
+                {this.props.isLoggedIn && (
+                  <LinkWrapMobile color="--squash" className="withBorder">
+                    <Button
+                      handleRoute={this.handleRouteLogout}
+                      color="--squash">
+                      Se déconnecter
+                    </Button>
+                  </LinkWrapMobile>
+                )}
+                <LinkWrapMobile style={menuFixed ? { marginRight: '0' } : {}}>
                   <Button
-                    minWidth="130px"
-                    handleRoute={this.handleRoute}
-                    color="--squash"
-                  >
+                    handleRoute={this.handleRouteSubscribe}
+                    color="--squash">
                     Je m&apos;abonne
                   </Button>
                 </LinkWrapMobile>
-                <LinkWrap style={menuFixed ? hidden : {}}>
-                  <Button handleRoute={this.handleRoute} color="--warm-purple">
-                    J&apos;essaye
-                  </Button>
-                </LinkWrap>
               </FlexWrap>
+              <div className="narrowLinks">
+                <LinkBurger
+                  color="--tomato"
+                  style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
+                  <Link to="/equipe">L&apos;équipe</Link>
+                </LinkBurger>
+                <LinkBurger
+                  color="--sunflower"
+                  style={
+                    page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
+                  }>
+                  <Link to="/manifeste">Pourquoi ?</Link>
+                </LinkBurger>
+                <LinkBurger
+                  color="--peacock-blue"
+                  style={
+                    page === '/source' ? { color: 'var(--peacock-blue)' } : {}
+                  }>
+                  <Link to="/source">La source</Link>
+                </LinkBurger>
+                <LinkBurger color="--topaz">
+                  <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
+                </LinkBurger>
+              </div>
             </Col>
           </Row>
         </Menu>
@@ -260,7 +304,8 @@ class NavBar extends React.Component {
 NavBar.propTypes = {
   dispatch: PropTypes.func,
   isFixed: PropTypes.bool,
-  page: PropTypes.string
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 }
 
 export default NavBar

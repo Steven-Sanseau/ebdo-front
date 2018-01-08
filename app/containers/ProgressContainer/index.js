@@ -1,17 +1,35 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-
+import Waypoint from 'react-waypoint'
 import Progress from 'components/Progress'
 
 export class ProgressContainer extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
   state = {
-    rate: 0.44,
-    number: 6349
+    rate: 0.0,
+    number: 0,
+    initialAnimate: false
   }
+
+  _handleWaypointEnter = event => {
+    this.setState({
+      initialAnimate: true,
+      number: 6349,
+      rate: 0.4
+    })
+  }
+
   render() {
-    const { rate, number } = this.state
-    return <Progress rate={rate} number={number} />
+    const { rate, number, initialAnimate } = this.state
+    return (
+      <Waypoint onEnter={this._handleWaypointEnter}>
+        <div>
+          <Progress
+            rate={rate}
+            initialAnimate={initialAnimate}
+            number={number}
+          />
+        </div>
+      </Waypoint>
+    )
   }
 }
 

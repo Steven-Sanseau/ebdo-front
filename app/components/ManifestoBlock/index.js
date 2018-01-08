@@ -11,6 +11,7 @@ import { media } from 'global-styles'
 import { Row, Col } from 'react-styled-flexboxgrid'
 
 import TextBlock from 'components/TextBlock'
+import ColCustom from 'components/Grid/Col'
 
 import NewsletterContainer from 'containers/NewsletterContainer'
 import { Link } from 'react-router-dom'
@@ -24,16 +25,40 @@ const Layout = styled.div`
   margin-right: auto;
 
   ${media.tablet`
+    width: calc(100% - 20px);
   `};
 `
 const SectionWrapper = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+
+  .no-p {
+    padding: 0;
+  }
   ${media.tablet`
-    padding: 40px 0;
+    // padding: 40px 0;
   `};
 `
 const SectionWrapperBig = styled(Row)`
-  padding: 80px 0;
+  padding-top: 100px;
+  padding-bottom: 120px;
+  .no-p {
+    padding: 0;
+  }
+  .hidden-xs {
+    ${media.tablet`
+      display: none;
+    `};
+  }
+  .m-b-60 {
+    ${media.tablet`
+      margin-bottom: 60px;
+    `};
+  }
+  .m-up {
+    ${media.tablet`
+      order: -1;
+    `};
+  }
   ${media.tablet`
     padding: 40px 0;
   `};
@@ -48,11 +73,19 @@ const LinkWrapper = styled(Link)`
     color: var(--white-true);
   }
 `
+const Legend = styled.legend`
+  margin-top: 20px;
+  font-size: 18px;
+  ${media.tablet`
+    font-size: 16px;
+    margin-bottom: 60px;
+  `};
+`
 
 function ManifestoBlock() {
   return (
     <Layout>
-      <SectionWrapperBig>
+      <SectionWrapperBig className="hidden-xs">
         <Col xs={12} sm={3}>
           <TextBlock
             title="Une équipe aux profils multiples"
@@ -66,7 +99,7 @@ function ManifestoBlock() {
             </span>, favoriser les forces créatives de la société française,
             dans toutes les couches sociales et tous les territoires. <br />
             <br />
-            <LinkWrapper to="#">Découvrir l&apos;équipe</LinkWrapper>
+            <LinkWrapper to="/team">Découvrir l&apos;équipe</LinkWrapper>
           </TextBlock>
         </Col>
         <Col xs={12} sm={3}>
@@ -106,22 +139,24 @@ function ManifestoBlock() {
             <span>Ils sont au même niveau que l&apos;équipe,</span> sans eux
             nous ne sommes rien : nos abonnés, ceux qui nous hébergent, ceux qui
             nous irriguent de leur idées{' '}
-            <LinkWrapper to="#">via La Source</LinkWrapper>, ceux qui nous
+            <LinkWrapper to="/login">via La Source</LinkWrapper>, ceux qui nous
             rencontrent lors de nos événements, ceux qui participent à faire
             connaître <strong>ebdo</strong>, ceux qui sont heureux de lire{' '}
             <strong>ebdo</strong> tout simplement.
           </TextBlock>
         </Col>
       </SectionWrapperBig>
-      <SectionWrapper>
-        <Col xs={12} sm={6}>
+      <SectionWrapper between="sm">
+        <ColCustom w={14} m={13} mc>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
-        </Col>
-        <Col xs={12} sm={5} smOffset={1}>
+          <Legend>Photo issue de la tournée d'<strong>ebdo</strong> en minibus</Legend>
+        </ColCustom>
+        <ColCustom w={7} m={13} mc>
           <TextBlock
             title="Un journal qui se construit ensemble..."
-            colorTitle="--squash"
+            colorTitle="--sunflower"
             fontSize="28px"
+            className="no-p"
           >
             Nous sommes atteints d’un mal étrange :{' '}
             <strong>la sur-information.</strong> Chaque possesseur d’un
@@ -133,21 +168,21 @@ function ManifestoBlock() {
             Mais au lieu de nous donner des clés de compréhension, l’information
             nous noie (…)<br />
             <br />
-            <LinkWrapper to="#">Lire la suite du Manifeste</LinkWrapper>
+            <LinkWrapper to="/manifest">Lire la suite du Manifeste</LinkWrapper>
           </TextBlock>
-        </Col>
+        </ColCustom>
       </SectionWrapper>
-      <SectionWrapperBig>
-        <Col xs={12} sm={4}>
-          <TextBlock title="La Fabrique" colorTitle="--topaz">
+      <SectionWrapperBig between="sm">
+        <ColCustom w={7} m={13} mc>
+          <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p" >
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
             <LinkWrapper to="#">la Fabrique</LinkWrapper>.
           </TextBlock>
           <NewsletterContainer />
-        </Col>
-        <Col xs={12} sm={6} smOffset={1}>
+        </ColCustom>
+        <ColCustom w={14} m={13} mc className="m-up m-b-60">
           <img src="fabrique.png" alt="la fabrique" width="100%" />
-        </Col>
+        </ColCustom>
       </SectionWrapperBig>
     </Layout>
   )

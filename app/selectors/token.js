@@ -16,10 +16,14 @@ const makeSelectTokenIsSetError = () =>
 const makeSelectTokenMessageError = () =>
   createSelector(selectToken, token => token.get('errorMessage'))
 
+const makeSelectIframeContent = () =>
+  createSelector(selectToken, token => token.get('slimpay_iframe_content'))
+
 export {
   makeSelectTokenData,
   makeSelectTokenIsLoading,
   makeSelectToken,
   makeSelectTokenIsSetError,
-  makeSelectTokenMessageError
+  makeSelectTokenMessageError,
+  makeSelectIframeContent
 }
