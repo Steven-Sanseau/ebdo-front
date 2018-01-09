@@ -23,7 +23,6 @@ export default class CheckboxShowDeliveryForm extends React.Component {
     return (
       <Row>
         <Col lg={5} xs={11}>
-          <Title>Adresse de livraison</Title>
           <Checkbox
             text="Utiliser la même adresse"
             onCheck={this.handleCheckbox}

@@ -23,7 +23,6 @@ import CountryStep from 'containers/Step/CountryStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
 
 // COMPONENTS
@@ -62,6 +61,7 @@ export class Checkout extends React.Component {
 
   render() {
     const { step, clientExist, isLoggedIn } = this.props
+
     let steps = [
       <FormulaStep
         stepNumber={1}

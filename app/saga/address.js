@@ -13,12 +13,13 @@ import { nextStep } from 'actions/step'
 
 import { makeSelectAddressType } from 'selectors/address'
 import { makeSelectClientId } from 'selectors/client'
+import { makeSelectGodsonId } from 'selectors/godson'
 import { makeSelectToken } from 'selectors/login'
 
 function* postAddress(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address`
   const address = yield select(makeSelectAddressType(action.typeOfAddress))
-  const clientId = yield select(makeSelectClientId())
+  const clientId = action.isOffer ? yield select(makeSelectGodsonId()) : yield select(makeSelectClientId())
   let method = 'POST'
 
   try {
