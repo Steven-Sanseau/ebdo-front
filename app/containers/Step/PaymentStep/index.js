@@ -154,7 +154,6 @@ class PaymentStep extends React.Component {
                   slimpayIframe.href && (
                     <a href={slimpayIframe.href}>Enregistrer mon mandat</a>
                   )} */}
-                {tokenMessageError}
               </Col>
             </Row>
           )}
@@ -165,7 +164,6 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
-              {tokenMessageError}
             </Col>
           </Row>
         )}
@@ -180,6 +178,7 @@ class PaymentStep extends React.Component {
           />
           {checkoutMessageError}
         </div>
+        {tokenMessageError}
         {this.state.errMessage}
       </div>
     )

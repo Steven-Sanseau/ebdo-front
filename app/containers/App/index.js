@@ -26,11 +26,13 @@ export default function App() {
         <Route exact path="/" component={Home} />
 
         <Redirect from="/subscribe" to="/abonnement" />
+        <Route path="/abonnement/:step" component={Checkout} />
         <Route path="/abonnement" component={Checkout} />
 
         <Route exact path="/abo/:type" component={Acknowledgment} />
 
         <Redirect from="/offer" to="/offre" />
+        <Route exact path="/offre/:step" component={Offer} />
         <Route exact path="/offre" component={Offer} />
 
         <Redirect from="/gift" to="/cadeau" />
@@ -38,7 +40,8 @@ export default function App() {
 
         <Redirect from="/try" to="/essai" />
         <Redirect from="/jessaye" to="/essai" />
-        <Route exact path="/essai" component={TryIt} />
+        <Route path="/essai/:step" component={TryIt} />
+        <Route path="/essai" component={TryIt} />
 
         <Redirect from="/team" to="/equipe" />
         <Route exact path="/equipe" component={Team} />

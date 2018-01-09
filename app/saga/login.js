@@ -69,7 +69,7 @@ function* loginEmailCodeSaga(action) {
         }
       }
 
-      yield put(nextStep())
+      // yield put(nextStep())
     } else {
       yield put(push(action.redirect))
     }
