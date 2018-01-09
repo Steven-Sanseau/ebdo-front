@@ -39,7 +39,7 @@ import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import StripeForm from 'components/StripeForm'
-
+import ErrorMessage from 'components/InputText/ErrorMessage'
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 
 const ChoicePaymentMethodWrapper = styled.div`
@@ -164,6 +164,9 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
+              <ErrorMessage>
+                {tokenMessageError}
+              </ErrorMessage>
             </Col>
           </Row>
         )}
@@ -200,9 +203,7 @@ class PaymentStep extends React.Component {
       currentStep,
       changeStep,
       stepNumber,
-      tokenIsLoading,
-      payementMethod,
-      offer
+      tokenIsLoading
     } = this.props
 
     return (
