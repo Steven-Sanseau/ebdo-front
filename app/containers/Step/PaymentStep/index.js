@@ -11,7 +11,8 @@ import {
   makeSelectTokenIsLoading,
   makeSelectTokenIsSetError,
   makeSelectTokenMessageError,
-  makeSelectIframeContent
+  makeSelectIframeContent,
+  makeSelectTokenCardError
 } from 'selectors/token'
 
 import { makeSelectOffer } from 'selectors/offer'
@@ -39,7 +40,7 @@ import CBIcon from 'components/Icon/CBIcon'
 import SepaIcon from 'components/Icon/SepaIcon'
 import ToggleStep from 'components/ToggleStep/Loadable'
 import StripeForm from 'components/StripeForm'
-
+import ErrorMessage from 'components/InputText/ErrorMessage'
 import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 
 const ChoicePaymentMethodWrapper = styled.div`
@@ -48,10 +49,11 @@ const ChoicePaymentMethodWrapper = styled.div`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { errMessage: '', errorCGV: false }
+    this.state = { errMessage: '', errorCGV: false, isAnim: false }
   }
 
   getStripeToken = () => {
+    this.setState({ isAnim: true })
     this.props.dispatchSetTokenStripe()
     this.props.stripe.createToken().then(result => {
       if (result.error) {
@@ -63,8 +65,12 @@ class PaymentStep extends React.Component {
     })
   }
 
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
+  }
+
   handleChangeStripeForm = () => {
-    this.handleSubscribe()
+    this.props.dispatchSetTokenStripe()
   }
 
   handleSubmitStripeForm = () => {
@@ -88,6 +94,11 @@ class PaymentStep extends React.Component {
   }
 
   handleSubscribe = () => {
+    this.setState({
+      isAnim: true,
+      errMessage: '',
+      errorCGV: false
+    })
     if (this.props.isCGVAccepted) {
       if (this.props.payementMethod === 1) {
         this.handleGoToSlimpay()
@@ -109,7 +120,9 @@ class PaymentStep extends React.Component {
       tokenMessageError,
       checkoutMessageError,
       offer,
-      slimpayIframe
+      slimpayIframe,
+      tokenIsError,
+      tokenCardError
     } = this.props
 
     return (
@@ -121,7 +134,7 @@ class PaymentStep extends React.Component {
                 {!offer.data.time_limited && (
                   <Col lg={6} xs={12}>
                     <InputCheckbox
-                      text="Prélèvement SEPA"
+                      text="Prélèvement banquaire"
                       onCheck={this.handlePaiementMethod}
                       isChecked={payementMethod === 1}
                       icon={<SepaIcon />}
@@ -161,9 +174,15 @@ class PaymentStep extends React.Component {
           <Row>
             <Col xs={12}>
               <StripeForm
+                error={tokenIsError}
+                errorCardType={tokenCardError}
+                errorMessage={tokenMessageError}
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
+              <ErrorMessage>
+                {tokenMessageError}
+              </ErrorMessage>
             </Col>
           </Row>
         )}
@@ -171,15 +190,12 @@ class PaymentStep extends React.Component {
           Vérifiez attentivement vos informations avant de confirmer.
           <CheckboxConfirmCheckout
             error={this.state.errorCGV}
-            errMessage={this.state.errMessage}
+            errorMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
             label="J'ai lu et accepte les CGV"
           />
-          {checkoutMessageError}
         </div>
-        {tokenMessageError}
-        {this.state.errMessage}
       </div>
     )
   }
@@ -189,7 +205,7 @@ class PaymentStep extends React.Component {
     return (
       <div>
         Je souhaite regler mon abonnement par
-        {payementMethod === 1 && <span>prélèvement SEPA</span>}
+        {payementMethod === 1 && <span>prélèvement banquaire</span>}
         {payementMethod === 2 && <span>carte bancaire</span>}
       </div>
     )
@@ -200,9 +216,7 @@ class PaymentStep extends React.Component {
       currentStep,
       changeStep,
       stepNumber,
-      tokenIsLoading,
-      payementMethod,
-      offer
+      tokenIsLoading
     } = this.props
 
     return (
@@ -217,6 +231,7 @@ class PaymentStep extends React.Component {
         nextStep={this.handleSubscribe}
         isLoadingNextStep={tokenIsLoading}
         textButtonNextStep="Payer"
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }
@@ -237,6 +252,7 @@ PaymentStep.propTypes = {
   payementMethod: PropTypes.number,
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
+  tokenCardError: PropTypes.object,
   isCGVAccepted: PropTypes.bool,
   tokenMessageError: PropTypes.string,
   checkoutMessageError: PropTypes.string,
@@ -250,6 +266,7 @@ const mapStateToProps = createStructuredSelector({
   tokenMessageError: makeSelectTokenMessageError(),
   checkoutMessageError: makeSelectCheckoutMessageError(),
   tokenIsError: makeSelectTokenIsSetError(),
+  tokenCardError: makeSelectTokenCardError(),
   offer: makeSelectOffer(),
   slimpayIframe: makeSelectIframeContent(),
   isCGVAccepted: makeSelectIsCGVChecked(),

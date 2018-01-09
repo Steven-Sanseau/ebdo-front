@@ -8,8 +8,9 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+import { getValidTokenSlimpay } from 'actions/token'
 // SELECTOR
-import { makeSelectPathName } from 'selectors/route'
+import { makeSelectPath } from 'selectors/route'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
 
 // COMPONENTS
@@ -25,9 +26,11 @@ const Subscription = styled(Col)`
 `
 
 export class Acknowledgment extends React.Component {
-  componentDidMount() {}
-
-  goToCheckout = () => {}
+  componentWillMount() {
+    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
+      this.props.dispatchSlimpayTokenValid()
+    }
+  }
 
   render() {
     const { match, subscriptions } = this.props
@@ -43,6 +46,7 @@ export class Acknowledgment extends React.Component {
           <Col xs={12}>
             {match.params.type === 'merci' &&
               'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
+            {match.params.type === 'chargement' && 'chargement'}
             {match.params.type === 'erreur' && (
               <div>
                 Une Erreur est survenue lors de votre commande
@@ -91,17 +95,21 @@ export class Acknowledgment extends React.Component {
 }
 
 Acknowledgment.propTypes = {
-  pathName: PropTypes.string,
-  match: PropTypes.object
+  match: PropTypes.object,
+  path: PropTypes.object,
+  dispatchSlimpayTokenValid: PropTypes.func
 }
 
 const mapStateToProps = createStructuredSelector({
-  pathName: makeSelectPathName(),
+  path: makeSelectPath(),
   subscriptions: makeSelectSubscriptionData()
 })
 
 function mapDispatchToProps(dispatch) {
-  return { dispatch }
+  return {
+    dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
+    dispatch
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Acknowledgment)

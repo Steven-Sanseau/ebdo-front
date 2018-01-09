@@ -11,6 +11,7 @@ import {
 
 import Label from 'components/InputText/Label'
 import Required from 'components/InputText/Required'
+import ErrorMessage from 'components/InputText/ErrorMessage'
 import IconWrapper from 'components/InputCheckbox/IconWrapper'
 import SecureSvg from 'components/Icon/SecureSvg'
 
@@ -19,16 +20,10 @@ const LabelCard = styled(Label)`
   margin-top: 15px;
 `
 export default class StripeForm extends Component {
-  constructor(props) {
-    super(props)
+  state = {}
 
-    this.state = {}
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleSubmit(event) {
-    this.props.submitPayement(event)
+  handleSubmit = event => {
+    this.props.handleSubmit(event)
   }
 
   render() {
@@ -37,7 +32,8 @@ export default class StripeForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col lg={6} xs={12}>
-              <LabelCard>
+              <LabelCard
+                color={this.props.errorCardType.card ? '--tomato' : ''}>
                 <Row>
                   <Col xs={12}>
                     Numéro de carte<Required>*</Required>
@@ -48,13 +44,20 @@ export default class StripeForm extends Component {
                     <CardNumberElement
                       onChange={this.props.handleChange}
                       className="card-number input-stripe "
+                      style={
+                        this.props.errorCardType.card ? { color: 'red' } : {}
+                      }
                     />
+                    {this.props.errorCardType.card && (
+                      <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+                    )}
                   </Col>
                 </Row>
               </LabelCard>
             </Col>
             <Col lg={3} xs={12}>
-              <LabelCard>
+              <LabelCard
+                color={this.props.errorCardType.year ? '--tomato' : ''}>
                 <Row>
                   <Col xs={12}>
                     Date d{"'"}expiration<Required>*</Required>
@@ -66,12 +69,15 @@ export default class StripeForm extends Component {
                       onChange={this.props.handleChange}
                       className="card-expire input-stripe"
                     />
+                    {this.props.errorCardType.year && (
+                      <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+                    )}
                   </Col>
                 </Row>
               </LabelCard>
             </Col>
             <Col lg={3} xs={12}>
-              <LabelCard>
+              <LabelCard color={this.props.errorCardType.cvc ? '--tomato' : ''}>
                 <Row>
                   <Col xs={12}>
                     CVC<Required>*</Required>
@@ -83,6 +89,9 @@ export default class StripeForm extends Component {
                       onChange={this.props.handleChange}
                       className="card-cvc input-stripe"
                     />
+                    {this.props.errorCardType.cvc && (
+                      <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+                    )}
                   </Col>
                 </Row>
               </LabelCard>
@@ -96,5 +105,8 @@ export default class StripeForm extends Component {
 
 StripeForm.propTypes = {
   submitPayement: PropTypes.func,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
+  error: PropTypes.bool,
+  errorCardType: PropTypes.object,
+  errorMessage: PropTypes.string
 }

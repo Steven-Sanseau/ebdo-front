@@ -30,6 +30,7 @@ import FormDelivery from 'components/FormDelivery'
 import CheckboxShowDeliveryForm from 'components/FormDelivery/CheckboxShowDeliveryForm'
 import UpdateStep from 'components/LayoutStep/UpdateStep'
 import Button from 'components/Button'
+import Title from 'components/LayoutStep/Title'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class DeliveryStep extends React.Component {
     this.state = {
       isFormValid: false,
       isAnim: false,
-      isInvoiceSameDelivery: true,
+      isInvoiceSameDelivery: !props.isOffer,
       error: {
         invoice: {},
         delivery: {}
@@ -77,16 +78,20 @@ class DeliveryStep extends React.Component {
 
     if (this.state.isInvoiceSameDelivery) {
       this.props.dispatchAddressEqual()
+      if (this.validForm('invoice')) {
+        this.dispatchForm()
+      }
+    } else if (
       this.validForm('invoice')
-    } else {
-      this.validForm('invoice')
-      this.validForm('delivery')
+      && this.validForm('delivery')
+    ) {
+      this.dispatchForm()
     }
   }
 
   dispatchForm = () => {
     this.props.dispatchPostAddressDelivery(this.props.delivery.address_id)
-    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id)
+    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id, this.props.isOffer)
   }
 
   validForm = type => {
@@ -153,14 +158,12 @@ class DeliveryStep extends React.Component {
 
     this.setState({ error, errorMessage })
 
-    if (isFormValid) {
-      this.dispatchForm()
-    }
+    return isFormValid;
   }
 
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
-    const { delivery, invoice, country, displayDeliveryAddress } = this.props
+    const { delivery, invoice, country, displayDeliveryAddress, isOffer } = this.props
 
     return (
       <div>
@@ -173,7 +176,8 @@ class DeliveryStep extends React.Component {
           errorForm={!this.state.isAnim ? this.state.error.invoice : {}}
           errorFormMessage={this.state.errorMessage.invoice}
         />
-        {displayDeliveryAddress && (
+        <Title>Adresse de livraison</Title>
+        {displayDeliveryAddress && !isOffer && (
           <CheckboxShowDeliveryForm
             isChecked={isInvoiceSameDelivery}
             showDeliveryForm={this.showDeliveryForm}
@@ -289,8 +293,6 @@ DeliveryStep.propTypes = {
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  dispatchGetAddressDelivery: PropTypes.func,
-  dispatchGetAddressDelivery: PropTypes.func,
   dispatchPostAddressDelivery: PropTypes.func,
   dispatchPostAddressInvoice: PropTypes.func,
   dispatchAddressEqual: PropTypes.func,
@@ -321,10 +323,8 @@ function mapDispatchToProps(dispatch) {
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
     dispatchPostAddressDelivery: addressId =>
       dispatch(postAddress('delivery', addressId || null)),
-    dispatchPostAddressInvoice: addressId =>
-      dispatch(postAddress('invoice', addressId || null)),
-    dispatchGetAddressDelivery: () => dispatch(getAddress('delivery')),
-    dispatchGetAddressDelivery: () => dispatch(getAddress('invoice'))
+    dispatchPostAddressInvoice: (addressId, isOffer) =>
+      dispatch(postAddress('invoice', addressId || null, isOffer)),
   }
 }
 

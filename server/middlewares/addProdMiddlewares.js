@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const compression = require('compression')
 const sslRedirect = require('heroku-ssl-redirect')
+const wwwhisper = require('connect-wwwhisper')
 
 module.exports = function addProdMiddlewares(app, options) {
   const publicPath = options.publicPath || '/'
@@ -14,7 +15,9 @@ module.exports = function addProdMiddlewares(app, options) {
   app.use(publicPath, express.static(outputPath, { maxage: 86400000 }))
 
   // Force SSL on production
-  // app.use(sslRedirect())
+  app.use(sslRedirect())
+
+  app.use(wwwhisper())
 
   app.get('*', (req, res) => {
     res.set('Cache-Control', 'public, max-age=3600')

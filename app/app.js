@@ -22,6 +22,7 @@ import ScrollMemory from 'react-router-scroll-memory'
 import '!file-loader?name=[name].[ext]!./images/favicon.ico'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Bold.woff'
 import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Medium.woff'
+import '!file-loader?name=[name].[ext]!./assets/fonts/FoundersGroteskWeb-Regular.woff'
 import '!file-loader?name=[name].[ext]!./assets/loaderio-9f09f6f63a76c58a1c2976d678e16529.txt'
 
 import configureStore from './configureStore'
