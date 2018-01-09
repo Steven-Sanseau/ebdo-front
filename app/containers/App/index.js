@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import PrivateRoute from 'utils/PrivateRoute'
 import PublicRoute from 'utils/PublicRoute'
 
 import Home from 'containers/Home/Loadable'
