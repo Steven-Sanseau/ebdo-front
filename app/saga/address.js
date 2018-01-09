@@ -22,7 +22,7 @@ function* postAddress(action) {
   let method = 'POST'
 
   try {
-    if (action.addressId !== null) {
+    if (address.address_id !== null) {
       method = 'PATCH'
       paramsApiUrl = `${paramsApiUrl}/${action.addressId}`
     }

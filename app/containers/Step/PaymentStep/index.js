@@ -11,7 +11,8 @@ import {
   makeSelectTokenIsLoading,
   makeSelectTokenIsSetError,
   makeSelectTokenMessageError,
-  makeSelectIframeContent
+  makeSelectIframeContent,
+  makeSelectTokenCardError
 } from 'selectors/token'
 
 import { makeSelectOffer } from 'selectors/offer'
@@ -64,7 +65,7 @@ class PaymentStep extends React.Component {
   }
 
   handleChangeStripeForm = () => {
-    this.handleSubscribe()
+    this.props.dispatchSetTokenStripe()
   }
 
   handleSubmitStripeForm = () => {
@@ -109,7 +110,9 @@ class PaymentStep extends React.Component {
       tokenMessageError,
       checkoutMessageError,
       offer,
-      slimpayIframe
+      slimpayIframe,
+      tokenIsError,
+      tokenCardError
     } = this.props
 
     return (
@@ -161,6 +164,9 @@ class PaymentStep extends React.Component {
           <Row>
             <Col xs={12}>
               <StripeForm
+                error={tokenIsError}
+                errorCardType={tokenCardError}
+                errorMessage={tokenMessageError}
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
@@ -237,6 +243,7 @@ PaymentStep.propTypes = {
   payementMethod: PropTypes.number,
   tokenIsLoading: PropTypes.bool,
   tokenIsError: PropTypes.bool,
+  tokenCardError: PropTypes.object,
   isCGVAccepted: PropTypes.bool,
   tokenMessageError: PropTypes.string,
   checkoutMessageError: PropTypes.string,
@@ -250,6 +257,7 @@ const mapStateToProps = createStructuredSelector({
   tokenMessageError: makeSelectTokenMessageError(),
   checkoutMessageError: makeSelectCheckoutMessageError(),
   tokenIsError: makeSelectTokenIsSetError(),
+  tokenCardError: makeSelectTokenCardError(),
   offer: makeSelectOffer(),
   slimpayIframe: makeSelectIframeContent(),
   isCGVAccepted: makeSelectIsCGVChecked(),
