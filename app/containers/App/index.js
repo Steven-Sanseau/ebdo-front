@@ -35,9 +35,6 @@ export default function App() {
         <Route exact path="/offre/:step" component={Offer} />
         <Route exact path="/offre" component={Offer} />
 
-        <Redirect from="/gift" to="/cadeau" />
-        <Route exact path="/cadeau" component={Gift} />
-
         <Redirect from="/try" to="/essai" />
         <Redirect from="/jessaye" to="/essai" />
         <Route path="/essai/:step" component={TryIt} />
