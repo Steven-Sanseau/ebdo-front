@@ -28,24 +28,6 @@ class EmailStep extends React.Component {
     errorMessage: ''
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (
-      nextProps.currentStep === nextProps.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
-  componentWillMount() {
-    if (
-      this.props.currentStep === this.props.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
@@ -169,6 +151,7 @@ class EmailStep extends React.Component {
 EmailStep.propTypes = {
   clientIsLoading: PropTypes.bool,
   email: PropTypes.string,
+  stepUrl: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,

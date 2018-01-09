@@ -21,24 +21,6 @@ class EmailConfirmStep extends React.Component {
     isAnim: false
   }
 
-  componentWillUpdate = (nextProps, nextState) => {
-    if (
-      nextProps.currentStep === nextProps.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
-  componentWillMount = () => {
-    if (
-      this.props.currentStep === this.props.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
@@ -102,6 +84,7 @@ class EmailConfirmStep extends React.Component {
 
 EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
+  stepUrl: PropTypes.string,
   dispatchloginEmailCode: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,

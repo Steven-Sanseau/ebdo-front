@@ -116,13 +116,11 @@ class DeliveryStep extends React.Component {
       isFormValid = false
     }
 
-    if (address.phone === null || address.phone.trim() === '') {
-      error[type].phone = true
-      errorMessage[type].phone = 'Veuillez entrer votre numéro de téléphone'
-      isFormValid = false
-    }
-
-    if (!isValidPhoneNumber(address.phone)) {
+    if (
+      address.phone !== null &&
+      address.phone.trim() !== '' &&
+      !isValidPhoneNumber(address.phone)
+    ) {
       error[type].phone = true
       errorMessage[type].phone = "Votre numéro de téléphone n'est pas valide"
       isFormValid = false
@@ -284,6 +282,7 @@ class DeliveryStep extends React.Component {
 
 DeliveryStep.propTypes = {
   addressIsLoading: PropTypes.bool,
+  stepUrl: PropTypes.string,
   country: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),

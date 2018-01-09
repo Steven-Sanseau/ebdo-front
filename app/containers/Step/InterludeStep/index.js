@@ -70,6 +70,7 @@ class InterludeStep extends React.Component {
 
 InterludeStep.propTypes = {
   stepNumber: PropTypes.number,
+  stepUrl: PropTypes.string,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func

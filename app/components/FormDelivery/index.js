@@ -131,7 +131,7 @@ class FormDelivery extends React.Component {
                 <Col xs={12} lg={6}>
                   <PhoneLabelWrapper
                     color={this.props.errorForm.phone ? '--tomato' : null}>
-                    Téléphone <Required>*</Required>
+                    Téléphone
                     <PhoneWrapper
                       country={this.props.country.value}
                       placeholder="+33 6 00 00 00 00"

@@ -224,6 +224,7 @@ class PaymentStep extends React.Component {
 
 PaymentStep.propTypes = {
   stepNumber: PropTypes.number,
+  stepUrl: PropTypes.string,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   stripe: PropTypes.object,

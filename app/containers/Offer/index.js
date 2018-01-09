@@ -89,6 +89,13 @@ export class Offer extends React.Component {
         currentStep={step}
         displayInvoiceAddress={false}
       />,
+      <DeliveryStep
+        stepNumber={steps.length + 1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+        displayInvoiceAddress={false}
+      />,
       <Elements>
         <PaymentStep
           stepNumber={steps.length + 2}
@@ -122,7 +129,6 @@ export class Offer extends React.Component {
               <Col xs={12}>{step}</Col>
             </Row>
           ))}
-          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )
