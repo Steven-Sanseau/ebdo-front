@@ -26,6 +26,8 @@ class EmailConfirmStep extends React.Component {
   }
 
   handleNextStep = event => {
+    event.preventDefault()
+
     this.setState({ isAnim: true })
     this.props.dispatchloginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
@@ -35,18 +37,24 @@ class EmailConfirmStep extends React.Component {
     this.setState({ code: event.target.value })
   }
 
+  handleSubmit = event => {
+    this.handleNextStep(event)
+  }
+
   contentOpen() {
     return (
       <div>
         <p>Veuillez rentrer le code reçu par email pour valider la connexion</p>
-        <InputText
-          name="code"
-          type="number"
-          value={this.state.code}
-          onChange={this.handleCode}
-          placeholder="557590"
-          label="Code reçu par email"
-        />
+        <form onSubmit={this.handleSubmit}>
+          <InputText
+            name="code"
+            type="number"
+            value={this.state.code}
+            onChange={this.handleCode}
+            placeholder="557590"
+            label="Code reçu par email"
+          />
+        </form>
       </div>
     )
   }

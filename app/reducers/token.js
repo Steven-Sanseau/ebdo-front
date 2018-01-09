@@ -82,7 +82,10 @@ function tokenReducer(state = initialState, action) {
         errorType.cvc = true
       }
 
-      if (action.error.error.code == 'incomplete_expiry') {
+      if (
+        action.error.error.code == 'invalid_expiry_year_past' ||
+        action.error.error.code == 'incomplete_expiry'
+      ) {
         errorType.year = true
       }
 
