@@ -43,6 +43,7 @@ function tokenReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
+        .setIn(['data', 'token_type'], 'stripe')
         .set('errorCardType', initialState.get('errorCardType'))
     case SET_TOKEN_STRIPE_LOADED:
       return state
@@ -50,6 +51,7 @@ function tokenReducer(state = initialState, action) {
         .set('error', false)
         .set('errorCardType', initialState.get('errorCardType'))
         .setIn(['data', 'stripe_token_id'], action.tokenStripe.id)
+        .setIn(['data', 'token_type'], 'stripe')
         .setIn(['data', 'stripe_card_id'], action.tokenStripe.card.id)
         .set('errorMessage', '')
     case POST_TOKEN_ERROR:

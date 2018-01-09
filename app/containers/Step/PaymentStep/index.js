@@ -49,10 +49,11 @@ const ChoicePaymentMethodWrapper = styled.div`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { errMessage: '', errorCGV: false }
+    this.state = { errMessage: '', errorCGV: false, isAnim: false }
   }
 
   getStripeToken = () => {
+    this.setState({ isAnim: true })
     this.props.dispatchSetTokenStripe()
     this.props.stripe.createToken().then(result => {
       if (result.error) {
@@ -62,6 +63,10 @@ class PaymentStep extends React.Component {
         this.props.dispatchSetTokenStripeLoaded(result.token)
       }
     })
+  }
+
+  handleAnimationEnding = () => {
+    this.setState({ isAnim: false })
   }
 
   handleChangeStripeForm = () => {
@@ -89,6 +94,11 @@ class PaymentStep extends React.Component {
   }
 
   handleSubscribe = () => {
+    this.setState({
+      isAnim: true,
+      errMessage: '',
+      errorCGV: false
+    })
     if (this.props.isCGVAccepted) {
       if (this.props.payementMethod === 1) {
         this.handleGoToSlimpay()
@@ -124,7 +134,7 @@ class PaymentStep extends React.Component {
                 {!offer.data.time_limited && (
                   <Col lg={6} xs={12}>
                     <InputCheckbox
-                      text="Prélèvement SEPA"
+                      text="Prélèvement banquaire"
                       onCheck={this.handlePaiementMethod}
                       isChecked={payementMethod === 1}
                       icon={<SepaIcon />}
@@ -177,15 +187,12 @@ class PaymentStep extends React.Component {
           Vérifiez attentivement vos informations avant de confirmer.
           <CheckboxConfirmCheckout
             error={this.state.errorCGV}
-            errMessage={this.state.errMessage}
+            errorMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
             label="J'ai lu et accepte les CGV"
           />
-          {checkoutMessageError}
         </div>
-        {tokenMessageError}
-        {this.state.errMessage}
       </div>
     )
   }
@@ -195,7 +202,7 @@ class PaymentStep extends React.Component {
     return (
       <div>
         Je souhaite regler mon abonnement par
-        {payementMethod === 1 && <span>prélèvement SEPA</span>}
+        {payementMethod === 1 && <span>prélèvement banquaire</span>}
         {payementMethod === 2 && <span>carte bancaire</span>}
       </div>
     )
@@ -223,6 +230,7 @@ class PaymentStep extends React.Component {
         nextStep={this.handleSubscribe}
         isLoadingNextStep={tokenIsLoading}
         textButtonNextStep="Payer"
+        handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }

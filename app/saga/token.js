@@ -1,7 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
-
+import { push } from 'react-router-redux'
 import {
   SET_TOKEN_STRIPE_LOADED,
   GET_TOKEN_SLIMPAY,
@@ -43,6 +43,7 @@ function* postTokenStripeSaga() {
       }
     })
     yield put(postTokenLoaded(tokenResponse.token))
+    yield put(push('/abo/chargement'))
     yield put(postCheckout())
   } catch (err) {
     yield put(postTokenError(err.message))
@@ -84,6 +85,7 @@ function* getValidTokenSlimpaySaga() {
       }
     })
     yield put(getValidTokenSlimpayLoaded(tokenResponse.token))
+    yield put(push('/abo/chargement'))
     yield put(postCheckout())
   } catch (err) {
     yield put(getValidTokenSlimpayError(err.message))

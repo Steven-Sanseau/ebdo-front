@@ -15,7 +15,6 @@ import { makeSelectPath } from 'selectors/route'
 import { makeIsLoggedIn } from 'selectors/login'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
 import { nextStep, goToStep } from 'actions/step'
-import { getValidTokenSlimpay } from 'actions/token'
 import { newCheckout } from 'actions/checkout'
 
 // CONTAINERS
@@ -48,13 +47,8 @@ export class Checkout extends React.Component {
           this.props.goToAboExist()
         }
       })
-      console.log('sub')
     } else {
       this.props.dispatchNewCheckout()
-    }
-
-    if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
-      this.props.dispatchSlimpayTokenValid()
     }
   }
 
@@ -150,7 +144,6 @@ export class Checkout extends React.Component {
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   dispatchNewCheckout: PropTypes.func,
-  dispatchSlimpayTokenValid: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
   path: PropTypes.object,
@@ -169,7 +162,6 @@ function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
     dispatchNewCheckout: () => dispatch(newCheckout()),
-    dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
     goToStep: step => dispatch(goToStep(step)),
     goToAboExist: () => dispatch(push('abo/existe'))
   }
