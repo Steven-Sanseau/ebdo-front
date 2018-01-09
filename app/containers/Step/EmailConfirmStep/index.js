@@ -51,7 +51,7 @@ class EmailConfirmStep extends React.Component {
             type="number"
             value={this.state.code}
             onChange={this.handleCode}
-            placeholder="557590"
+            placeholder="5575"
             label="Code reçu par email"
           />
         </form>

@@ -196,6 +196,21 @@ class FormDelivery extends React.Component {
                 </Col>
               </Row>
               <Row>
+                <Col xs={12} lg={8}>
+                  <InputText
+                    label="Complément d'adresse"
+                    name="address_post"
+                    error={this.props.errorForm.address_post || false}
+                    errorMessage={
+                      this.props.errorFormMessage.address_post || null
+                    }
+                    value={this.props.address.address_post}
+                    onChange={this.handleChange}
+                    placeholder="bat. A"
+                  />
+                </Col>
+              </Row>
+              <Row>
                 <Col lg={6} xs={12}>
                   <InputText
                     label="Ville"

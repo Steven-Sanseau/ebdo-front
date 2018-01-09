@@ -18,7 +18,6 @@ import { makeIsLoggedIn } from 'selectors/login'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
-import InterludeStep from 'containers/Step/InterludeStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
@@ -57,14 +56,8 @@ export class Offer extends React.Component {
         nextStep={this.nextStep}
         currentStep={step}
       />,
-      <InterludeStep
-        stepNumber={2}
-        changeStep={this.changeStep}
-        nextStep={this.nextStep}
-        currentStep={step}
-      />,
       <EmailStep
-        stepNumber={3}
+        stepNumber={2}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
@@ -74,7 +67,7 @@ export class Offer extends React.Component {
     if (clientExist && !isLoggedIn) {
       steps.push(
         <EmailConfirmStep
-          stepNumber={4}
+          stepNumber={3}
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
