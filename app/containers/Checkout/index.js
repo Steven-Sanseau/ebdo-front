@@ -74,18 +74,21 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        stepUrl={'/abonnement/formule'}
       />,
       <CountryStep
         stepNumber={2}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        stepUrl={'/abonnement/pays'}
       />,
       <EmailStep
         stepNumber={3}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        stepUrl={'/abonnement/email'}
       />
     ]
 
@@ -96,6 +99,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
+          stepUrl={'/abonnement/confirmation'}
         />
       )
     }
@@ -107,6 +111,7 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        stepUrl={'/abonnement/adresse'}
       />,
       <Elements>
         <PaymentStep
@@ -114,6 +119,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
+          stepUrl={'/abonnement/paiement'}
         />
       </Elements>
     ])

@@ -35,6 +35,7 @@ const Undercover = styled.div`
     background: white;
     border: 1px solid var(--grey-blue);
     border-bottom-width: 0;
+    border-bottom: none;
     transition: transform 0.3s ease-out;
     &:nth-of-type(1) {
       z-index: -2;
@@ -182,7 +183,9 @@ class Gallery extends React.Component {
     })
   }
   handleClickImage() {
-    if (this.state.currentImage === Images.length - 1) return
+    if (this.state.currentImage === Images.length - 1) {
+      this.closeLightbox()
+    }
 
     this.gotoNext()
   }

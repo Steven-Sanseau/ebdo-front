@@ -21,6 +21,7 @@ class CodeGiftStep extends React.Component {
     errorEmail: false,
     errorMessage: ''
   }
+
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
@@ -127,6 +128,7 @@ class CodeGiftStep extends React.Component {
 
 CodeGiftStep.propTypes = {
   checkoutIsLoading: PropTypes.bool,
+  stepUrl: PropTypes.string,
   checkout: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,

@@ -90,6 +90,7 @@ class ConfirmStep extends React.Component {
 ConfirmStep.propTypes = {
   checkoutIsLoading: PropTypes.bool,
   checkout: PropTypes.object,
+  stepUrl: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,

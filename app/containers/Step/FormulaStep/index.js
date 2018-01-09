@@ -257,6 +257,7 @@ class FormulaStep extends React.Component {
 
 FormulaStep.propTypes = {
   stepNumber: PropTypes.number,
+  stepUrl: PropTypes.string,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   nextStep: PropTypes.func,

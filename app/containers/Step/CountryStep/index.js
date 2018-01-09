@@ -155,6 +155,7 @@ class CountryStep extends React.Component {
 CountryStep.propTypes = {
   clientIsLoading: PropTypes.bool,
   country: PropTypes.object,
+  stepUrl: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   stepNumber: PropTypes.number,

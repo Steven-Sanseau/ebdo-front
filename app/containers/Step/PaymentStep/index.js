@@ -48,7 +48,7 @@ const ChoicePaymentMethodWrapper = styled.div`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { errMessage: '' }
+    this.state = { errMessage: '', errorCGV: false }
   }
 
   getStripeToken = () => {
@@ -95,10 +95,11 @@ class PaymentStep extends React.Component {
       if (this.props.payementMethod === 2) {
         this.getStripeToken()
       }
-
-      // this.props.dispatchConfirmCheckout()
     } else {
-      this.setState({ errMessage: 'Vous devez acceptez les CGV' })
+      this.setState({
+        errMessage: 'Vous devez acceptez les CGV',
+        errorCGV: true
+      })
     }
   }
 
@@ -153,7 +154,6 @@ class PaymentStep extends React.Component {
                   slimpayIframe.href && (
                     <a href={slimpayIframe.href}>Enregistrer mon mandat</a>
                   )} */}
-                {tokenMessageError}
               </Col>
             </Row>
           )}
@@ -164,19 +164,21 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
-              {tokenMessageError}
             </Col>
           </Row>
         )}
         <div>
           Vérifiez attentivement vos informations avant de confirmer.
           <CheckboxConfirmCheckout
+            error={this.state.errorCGV}
+            errMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
             label="J'ai lu et accepte les CGV"
           />
           {checkoutMessageError}
         </div>
+        {tokenMessageError}
         {this.state.errMessage}
       </div>
     )
@@ -222,6 +224,7 @@ class PaymentStep extends React.Component {
 
 PaymentStep.propTypes = {
   stepNumber: PropTypes.number,
+  stepUrl: PropTypes.string,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
   stripe: PropTypes.object,

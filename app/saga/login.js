@@ -69,7 +69,7 @@ function* loginEmailCodeSaga(action) {
         }
       }
 
-      yield put(nextStep())
+      // yield put(nextStep())
     } else {
       yield put(push(action.redirect))
     }
@@ -78,9 +78,7 @@ function* loginEmailCodeSaga(action) {
   }
 }
 
-function* logoutSaga() {
-  yield put(newCheckout())
-}
+function* logoutSaga() {}
 
 export default function* sagaLogin() {
   yield takeEvery(LOGIN_EMAIL, loginEmailSaga)
