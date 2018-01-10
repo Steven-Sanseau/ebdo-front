@@ -69,7 +69,6 @@ const TextWrap = styled.div`
 const HomeLandingWrap = styled.div`
   margin-bottom: 140px;
   padding-top: 327px;
-  border-bottom: 1px solid var(--silver);
   ${media.tablet`
     margin-bottom: 40px;
 `};
