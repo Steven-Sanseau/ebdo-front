@@ -30,7 +30,6 @@ import NextStep from 'components/LayoutStep/NextStep'
 import Button from 'components/Button'
 import Image from 'components/Image'
 
-import '!file-loader?name=[name].[ext]!images/checkout/PostBox.png'
 const ButtonWrap = styled.div`
   margin-top: 40px;
   & > div {
@@ -149,7 +148,20 @@ class FormulaStep extends React.Component {
       <div>
         <Row>
           <ColCustom w={6}>
-            <Image src="PostBox.png" alt="Post box" height={173} />
+            {offer.data.is_gift && (
+              <Image
+                src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png"
+                alt="J'offre un abonnement ebdo illustration"
+                width="100%"
+              />
+            )}
+            {!offer.data.is_gift && (
+              <Image
+                src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/checkout.png"
+                alt="Je m'abonne à ebdo illustration"
+                width="100%"
+              />
+            )}
           </ColCustom>
           <Col w={17}>
             <TextFormulae>

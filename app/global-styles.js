@@ -41,12 +41,12 @@ injectGlobal`
   a:hover {
     color: inherit;
   }
-  
+
   * {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
   }
-  
+
   .hidden {
     display: none;
   }
@@ -62,6 +62,7 @@ injectGlobal`
       --warm-purple: #9d358a;
       --tomato: #e52d28;
       --topaz: #15aaa9;
+      --blue-greened: #99DFC9;
       --squash: #f39625;
       --turquoise-blue: #00a4d8;
       --peacock-blue: #006397;

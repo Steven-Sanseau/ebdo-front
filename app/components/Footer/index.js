@@ -17,7 +17,7 @@ const Footer = props => (
 )
 
 Footer.propTypes = {
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func.isRequired
 }
 
 export default Footer

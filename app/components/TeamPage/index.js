@@ -173,7 +173,7 @@ function TeamPage(props) {
           </Profile>
         </Row>
       </Layout>
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </div>
   )
 }

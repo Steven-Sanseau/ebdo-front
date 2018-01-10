@@ -115,7 +115,7 @@ function ManifestPage(props) {
           </TextWrap>
         </Row>
       </Layout>
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </div>
   )
 }

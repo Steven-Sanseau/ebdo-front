@@ -1,9 +1,3 @@
-/**
- *
- * MainFooter
- *
- */
-
 import React from 'react'
 import styled from 'styled-components'
 import { Row, Col } from 'react-styled-flexboxgrid'
@@ -134,7 +128,13 @@ const MainFooter = () => (
       </RowFirstLine>
       <NewsletterWrapper>
         <RowSimpleBorder between="sm">
-          <ColCustom w={5} m={13} />
+          <ColCustom w={5} m={13}>
+            <Image
+              src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/footer.png"
+              alt="footer illustration ebdo"
+              width="100%"
+            />
+          </ColCustom>
           <ColCustom w={5} m={13}>
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
