@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 import { push } from 'react-router-redux'
@@ -97,6 +97,6 @@ function* newCheckoutSaga(action) {
 
 export default function* sagaCheckout() {
   yield takeLatest(POST_SUBSCRIPTION, postCheckout)
-  yield takeLatest(NEW_CHECKOUT_TRY, newCheckoutSaga)
-  yield takeLatest(NEW_CHECKOUT, newCheckoutSaga)
+  yield takeEvery(NEW_CHECKOUT_TRY, newCheckoutSaga)
+  yield takeEvery(NEW_CHECKOUT, newCheckoutSaga)
 }

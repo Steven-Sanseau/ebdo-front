@@ -1,4 +1,7 @@
 import {
+  GET_CLIENTS_COUNT_LOADED,
+  GET_CLIENTS_COUNT_ERROR,
+  GET_CLIENTS_COUNT,
   GET_CLIENT,
   GET_CLIENT_LOADED,
   GET_CLIENT_ERROR,
@@ -8,6 +11,25 @@ import {
   SET_CLIENT_EMAIL,
   USE_CLIENT_EXIST
 } from './constants'
+
+export function getClientCountLoaded(clientsCount) {
+  return {
+    type: GET_CLIENTS_COUNT_LOADED,
+    clientsCount
+  }
+}
+
+export function getClientCountError(error) {
+  return {
+    type: GET_CLIENTS_COUNT_ERROR,
+    error
+  }
+}
+export function getClientsCount() {
+  return {
+    type: GET_CLIENTS_COUNT
+  }
+}
 
 export function getClient() {
   return {

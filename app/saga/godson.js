@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
@@ -69,7 +69,7 @@ function* getGodsonApi() {
 }
 
 export default function* sagaGodson() {
-  yield takeLatest(USE_GODSON_CLIENT_EXIST, next)
-  yield takeLatest(POST_GODSON_CLIENT, postGodson)
-  yield takeLatest(GET_GODSON_CLIENT, getGodsonApi)
+  yield takeEvery(USE_GODSON_CLIENT_EXIST, next)
+  yield takeEvery(POST_GODSON_CLIENT, postGodson)
+  yield takeEvery(GET_GODSON_CLIENT, getGodsonApi)
 }

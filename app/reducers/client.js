@@ -5,6 +5,9 @@ import ClientModel from 'models/client'
 
 import {
   POST_CLIENT,
+  GET_CLIENTS_COUNT,
+  GET_CLIENTS_COUNT_ERROR,
+  GET_CLIENTS_COUNT_LOADED,
   GET_CLIENT,
   GET_CLIENT_LOADED,
   GET_CLIENT_ERROR,
@@ -20,6 +23,7 @@ import {
 
 const initialState = Immutable.fromJS({
   loading: false,
+  clientsCount: 0,
   error: false,
   errorMessage: null,
   clientExist: false,
@@ -32,6 +36,18 @@ function clientReducer(state = initialState, action) {
   switch (action.type) {
     case POST_CLIENT:
       return state.set('loading', true).set('errorMessage', null)
+    case GET_CLIENTS_COUNT:
+      return state.set('loading', true).set('errorMessage', null)
+    case GET_CLIENTS_COUNT_ERROR:
+      return state
+        .set('error', true)
+        .set('errorMessage', action.error)
+        .set('loading', false)
+    case GET_CLIENTS_COUNT_LOADED:
+      return state
+        .set('clientsCount', action.clientsCount)
+        .set('loading', false)
+        .set('error', false)
     case GET_CLIENT:
       return state
         .set('loading', true)

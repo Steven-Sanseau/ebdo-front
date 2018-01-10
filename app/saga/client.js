@@ -1,9 +1,16 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_CLIENT, GET_CLIENT, USE_CLIENT_EXIST } from 'actions/constants'
 import {
+  POST_CLIENT,
+  GET_CLIENT,
+  USE_CLIENT_EXIST,
+  GET_CLIENTS_COUNT
+} from 'actions/constants'
+import {
+  getClientCountError,
+  getClientCountLoaded,
   postClientLoaded,
   postClientError,
   getClientLoaded,
@@ -72,8 +79,26 @@ function* getClientApi() {
   }
 }
 
+function* getClientsCountApi() {
+  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client/count`
+  const method = 'GET'
+
+  try {
+    const clientResponse = yield call(request, paramsApiUrl, {
+      method,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    yield put(getClientCountLoaded(clientResponse.count))
+  } catch (err) {
+    yield put(getClientCountError(err.message))
+  }
+}
+
 export default function* sagaClient() {
-  yield takeLatest(USE_CLIENT_EXIST, next)
-  yield takeLatest(POST_CLIENT, postClient)
-  yield takeLatest(GET_CLIENT, getClientApi)
+  yield takeEvery(USE_CLIENT_EXIST, next)
+  yield takeEvery(POST_CLIENT, postClient)
+  yield takeEvery(GET_CLIENT, getClientApi)
+  yield takeLatest(GET_CLIENTS_COUNT, getClientsCountApi)
 }

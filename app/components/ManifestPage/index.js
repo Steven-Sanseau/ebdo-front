@@ -42,30 +42,6 @@ const TextWrap = styled(Col)`
   }
 `
 
-const Profile = styled(Col)`
-  margin-bottom: 80px;
-  span {
-    color: var(--grey-blue);
-  }
-  h3 {
-    margin-bottom: 10px;
-    margin-top: 0;
-  }
-  p {
-    font-size: 18px;
-  }
-  a {
-    color: #658089;
-    text-decoration: none;
-    cursor: pointer;
-    border-bottom: 1px solid #658089;
-  }
-  a:hover {
-    background: #658089;
-    color: #ffffff;
-  }
-`
-
 function ManifestPage(props) {
   return (
     <div>
@@ -79,7 +55,7 @@ function ManifestPage(props) {
         <Layout>
           <Row>
             <Col xs={12} sm={6}>
-              <h2>L'équipe</h2>
+              <h2>Manifeste</h2>
               <p>
                 Une question ? Vous n’êtes sûrement pas le premier. Parcourez
                 toutes les interrogations de lecteurs auxquelles nous avons

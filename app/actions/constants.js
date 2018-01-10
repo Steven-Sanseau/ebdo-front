@@ -14,6 +14,11 @@ export const GET_ADDRESS = 'app/Checkout/address/GET_ADDRESS'
 export const GET_ADDRESS_LOADED = 'app/Checkout/address/GET_ADDRESS_LOADED'
 export const GET_ADDRESS_ERROR = 'app/Checkout/address/GET_ADDRESS_ERROR'
 
+export const GET_CLIENTS_COUNT = 'app/Checkout/client/GET_CLIENTS_COUNT'
+export const GET_CLIENTS_COUNT_ERROR =
+  'app/Checkout/client/GET_CLIENTS_COUNT_ERROR'
+export const GET_CLIENTS_COUNT_LOADED =
+  'app/Checkout/client/GET_CLIENTS_COUNT_LOADED'
 export const GET_CLIENT = 'app/Checkout/client/GET_CLIENT'
 export const USE_CLIENT_EXIST = 'app/Checkout/client/USE_CLIENT_EXIST'
 export const GET_CLIENT_LOADED = 'app/Checkout/client/GET_CLIENT_LOADED'
