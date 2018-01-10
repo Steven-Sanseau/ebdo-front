@@ -2,8 +2,8 @@ import Immutable from 'immutable'
 
 import {
   LOGIN_EMAIL_ERROR,
-  LOGIN_EMAIL_SUCCESS,
-  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGIN_EMAIL_LOADED,
+  LOGIN_EMAIL_CODE_LOADED,
   LOGIN_USER_SUCCESS,
   LOGIN_EMAIL_CODE_ERROR,
   LOGIN_EMAIL,
@@ -23,7 +23,7 @@ function loginReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_EMAIL:
       return state.set('loading', true)
-    case LOGIN_EMAIL_SUCCESS:
+    case LOGIN_EMAIL_LOADED:
       return state
         .set('waitingForCode', true)
         .set('loading', false)
@@ -36,7 +36,7 @@ function loginReducer(state = initialState, action) {
         .set('loading', false)
         .set('token', null)
         .set('isUserConnected', false)
-    case LOGIN_EMAIL_CODE_SUCCESS:
+    case LOGIN_EMAIL_CODE_LOADED:
       return state
         .set('token', action.token)
         .set('waitingForCode', false)

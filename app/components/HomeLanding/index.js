@@ -127,23 +127,15 @@ function HomeLanding() {
         <BlockWrap w={8}>
           <Title mc m={13}>
             <h2>
-              ebdo <span>est un journal</span> papier, indépendant{' '}
-              <span>et</span> proche de ses lecteurs.
+              ebdo est un journal papier, indépendant, irrigué par ses lecteurs.
+              À retrouver chaque vendredi.
             </h2>
           </Title>
           <Text mc m={13}>
             <p>
-              Un projet par les créateurs de{' '}
-              <img src="/XXI.png" alt="XXI" height="15" /> et
-              <img src="/6mois-black.png" alt="6 mois" height="15" /> grâce au
-              soutien des 5 960 lecteurs qui nous ont fait confiance et soutenu
-              lors de{' '}
-              <AWrapper
-                target="_blank"
-                rel="noopener"
-                href="https://www.kisskissbankbank.com/ebdo-un-journal-independant-et-inspirant">
-                notre campagne de financement participatif.
-              </AWrapper>
+              Reportages, enquêtes, actus, photos, BD, vie pratique : Ebdo, une
+              invitation à prendre du recul pour comprendre, pour soi, pour
+              agir.
             </p>
           </Text>
           <Discover>

@@ -228,6 +228,7 @@ class FormulaStep extends React.Component {
   }
 
   render() {
+    const { isNaturalForm } = this.state
     const {
       currentStep,
       nextStep,
@@ -246,6 +247,7 @@ class FormulaStep extends React.Component {
         currentStep={currentStep}
         changeStep={changeStep}
         updateStepHide
+        hideNextStep={!isNaturalForm}
         hideIconChecked
         secondaryButton={this.SecondaryButton}
         nextStep={this.handleNextStep}

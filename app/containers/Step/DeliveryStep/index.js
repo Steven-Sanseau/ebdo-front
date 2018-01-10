@@ -81,17 +81,17 @@ class DeliveryStep extends React.Component {
       if (this.validForm('invoice')) {
         this.dispatchForm()
       }
-    } else if (
-      this.validForm('invoice')
-      && this.validForm('delivery')
-    ) {
+    } else if (this.validForm('invoice') && this.validForm('delivery')) {
       this.dispatchForm()
     }
   }
 
   dispatchForm = () => {
-    this.props.dispatchPostAddressDelivery(this.props.delivery.address_id)
-    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id, this.props.isOffer)
+    this.props.dispatchPostAddressDelivery(
+      this.props.delivery.address_id,
+      this.props.isOffer
+    )
+    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id)
   }
 
   validForm = type => {
@@ -158,12 +158,18 @@ class DeliveryStep extends React.Component {
 
     this.setState({ error, errorMessage })
 
-    return isFormValid;
+    return isFormValid
   }
 
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
-    const { delivery, invoice, country, displayDeliveryAddress, isOffer } = this.props
+    const {
+      delivery,
+      invoice,
+      country,
+      displayDeliveryAddress,
+      isOffer
+    } = this.props
 
     return (
       <div>
@@ -177,12 +183,13 @@ class DeliveryStep extends React.Component {
           errorFormMessage={this.state.errorMessage.invoice}
         />
         <Title>Adresse de livraison</Title>
-        {displayDeliveryAddress && !isOffer && (
-          <CheckboxShowDeliveryForm
-            isChecked={isInvoiceSameDelivery}
-            showDeliveryForm={this.showDeliveryForm}
-          />
-        )}
+        {displayDeliveryAddress &&
+          !isOffer && (
+            <CheckboxShowDeliveryForm
+              isChecked={isInvoiceSameDelivery}
+              showDeliveryForm={this.showDeliveryForm}
+            />
+          )}
         {!isInvoiceSameDelivery && (
           <FormDelivery
             address={delivery}
@@ -303,7 +310,8 @@ DeliveryStep.propTypes = {
 }
 
 DeliveryStep.defaultProps = {
-  displayDeliveryAddress: true
+  displayDeliveryAddress: true,
+  isFreeNumberStep: false
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -324,7 +332,7 @@ function mapDispatchToProps(dispatch) {
     dispatchPostAddressDelivery: addressId =>
       dispatch(postAddress('delivery', addressId || null)),
     dispatchPostAddressInvoice: (addressId, isOffer) =>
-      dispatch(postAddress('invoice', addressId || null, isOffer)),
+      dispatch(postAddress('invoice', addressId || null, isOffer))
   }
 }
 

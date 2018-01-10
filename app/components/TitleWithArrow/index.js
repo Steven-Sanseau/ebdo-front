@@ -18,13 +18,35 @@ const Title = styled(LinkRouter)`
   text-decoration: none;
   display: block;
 `
+const TitleOutside = styled.a`
+  font-size: 18px;
+  color: var(${props => props.color});
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-decoration: none;
+  display: block;
+`
 const TitleWithArrow = props => {
-  const { text, color, textColor } = props
+  const { text, color, textColor, linkOutside, link } = props
   return (
-    <Title color={textColor || '--white-true'} to={props.link || '#'}>
-      {text}
-      <ArrowRight color={color} />
-    </Title>
+    <span>
+      {linkOutside && (
+        <TitleOutside
+          color={textColor || '--white-true'}
+          rel="noopener"
+          target="_blank"
+          href={props.linkOutside}>
+          {text}
+          <ArrowRight color={color} />
+        </TitleOutside>
+      )}
+      {link && (
+        <Title color={textColor || '--white-true'} to={props.link || '#'}>
+          {text}
+          <ArrowRight color={color} />
+        </Title>
+      )}
+    </span>
   )
 }
 
@@ -32,6 +54,7 @@ TitleWithArrow.propTypes = {
   text: PropTypes.string,
   textColor: PropTypes.string,
   link: PropTypes.string,
+  linkOutside: PropTypes.string,
   color: PropTypes.string
 }
 

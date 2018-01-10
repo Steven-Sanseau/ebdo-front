@@ -19,39 +19,50 @@ import { makeSelectToken } from 'selectors/login'
 function* postAddress(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address`
   const address = yield select(makeSelectAddressType(action.typeOfAddress))
-  const clientId = action.isOffer ? yield select(makeSelectGodsonId()) : yield select(makeSelectClientId())
+  const clientId = action.isOffer
+    ? yield select(makeSelectGodsonId())
+    : yield select(makeSelectClientId())
   let method = 'POST'
-
+  let Authorization = null
   try {
     if (address.address_id !== null) {
       method = 'PATCH'
       paramsApiUrl = `${paramsApiUrl}/${action.addressId}`
+      const token = yield select(makeSelectToken())
+      Authorization = `Bearer ${token}`
     }
 
     const addressResponse = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ address, client: { client_id: clientId } }),
       method,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization
       }
     })
 
     yield put(postAddressLoaded(action.typeOfAddress, addressResponse.address))
 
-    if (action.typeOfAddress === 'invoice') {
+    if (action.typeOfAddress === 'invoice' && action.redirect) {
       yield put(nextStep())
     }
   } catch (err) {
-    yield put(postAddressError(err, action.typeOfAddress))
+    yield put(
+      postAddressError(
+        err.message,
+        err.statusCode || null,
+        action.typeOfAddress
+      )
+    )
   }
 }
 
 function* getAddress(action) {
   const token = yield select(makeSelectToken())
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address/${
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address/${
     action.typeOfAddress
   }`
-  let method = 'GET'
+  const method = 'GET'
 
   try {
     const addressResponse = yield call(request, paramsApiUrl, {
@@ -63,9 +74,6 @@ function* getAddress(action) {
     })
 
     yield put(getAddressLoaded(action.typeOfAddress, addressResponse.address))
-    if (action.requestAction === NEW_CHECKOUT_TRY) {
-      yield put(nextStep())
-    }
   } catch (err) {
     yield put(getAddressError(err, action.typeOfAddress))
   }

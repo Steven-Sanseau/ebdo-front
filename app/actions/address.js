@@ -10,12 +10,18 @@ import {
   GET_ADDRESS_LOADED
 } from 'actions/constants'
 
-export function postAddress(typeOfAddress, addressId, isOffer) {
+export function postAddress(
+  typeOfAddress,
+  addressId,
+  isOffer,
+  redirect = true
+) {
   return {
     type: POST_ADDRESS,
     typeOfAddress,
     addressId,
-    isOffer
+    isOffer,
+    redirect
   }
 }
 
@@ -29,10 +35,11 @@ export function postAddressLoaded(typeOfAddress, address) {
   }
 }
 
-export function postAddressError(error, typeOfAddress) {
+export function postAddressError(error, statusCode, typeOfAddress) {
   return {
     type: POST_ADDRESS_ERROR,
     error,
+    statusCode,
     payload: {
       typeOfAddress
     }

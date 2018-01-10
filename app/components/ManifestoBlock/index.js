@@ -77,7 +77,7 @@ const Legend = styled.legend`
   margin-top: 20px;
   font-size: 18px;
   ${media.tablet`
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 60px;
   `};
 `
@@ -86,78 +86,57 @@ function ManifestoBlock() {
   return (
     <Layout>
       <SectionWrapperBig className="hidden-xs">
-        <Col xs={12} sm={3}>
+        <Col xs={12} sm={4}>
           <TextBlock
-            title="Une équipe aux profils multiples"
-            colorTitle="--warm-purple"
-            colorSpan="--warm-purple"
-            colorHr="--warm-purple"
-          >
-            La mission d’<strong>ebdo</strong> :{' '}
-            <span>
-              nous aider à être des citoyens et à agir sur notre quotidien
-            </span>, favoriser les forces créatives de la société française,
-            dans toutes les couches sociales et tous les territoires. <br />
-            <br />
-            <LinkWrapper to="/team">Découvrir l&apos;équipe</LinkWrapper>
-          </TextBlock>
-        </Col>
-        <Col xs={12} sm={3}>
-          <TextBlock
-            title="ebdo est un projet de société"
+            title="Un projet de société"
             colorTitle="--booger"
             colorSpan="--booger"
-            colorHr="--booger"
-          >
-            Tout citoyen doit pouvoir s&apos;informer à un prix accessible.{' '}
-            <strong>ebdo est le moins cher des hebdo :</strong>{' '}
+            colorHr="--booger">
+            Notre volonté : un journal accessible à tous. Un journal qui
+            s’adresse à tous ses lecteurs et pas qu’en France. Pour cela, Ebdo
+            est le moins cher des hebdomadaires d’actualité : vendu{' '}
             <span>3,50€</span> en kiosque.
           </TextBlock>
         </Col>
-        <Col xs={12} sm={3}>
+        <Col xs={12} sm={4}>
           <TextBlock
             title="Un journal sans pub, entièrement indépendant"
             colorTitle="--sunflower"
             colorSpan="--sunflower"
-            colorHr="--sunflower"
-          >
-            Sans publicité, <strong>ebdo est libre de tout pouvoir.</strong>{' '}
-            Vous, nos lecteurs, êtes notre seule ressource.{' '}
-            <span>C’est un pacte de confiance.</span> Les journalistes discutent
-            avec les lecteurs, ils sollicitent leurs compétences et tiennent
-            compte de leur expérience.
+            colorHr="--sunflower">
+            Sans publicité, <strong>ebdo</strong> est libre de toute pression.
+            Notre rédaction est 100% indépendante : nous choisissons librement
+            nos sujets. Nos lecteurs sont notre seule ressource.{' '}
+            <span>C’est un pacte de confiance.</span>
           </TextBlock>
         </Col>
-        <Col xs={12} sm={3}>
+        <Col xs={12} sm={4}>
           <TextBlock
-            title="La source, une vraie relation avec nos lecteurs"
+            title="Une relation quotidienne"
             colorTitle="--turquoise-blue"
             colorSpan="--turquoise-blue"
-            colorHr="--turquoise-blue"
-          >
-            <strong>Nos lecteurs font communauté.</strong>{' '}
-            <span>Ils sont au même niveau que l&apos;équipe,</span> sans eux
-            nous ne sommes rien : nos abonnés, ceux qui nous hébergent, ceux qui
-            nous irriguent de leur idées{' '}
-            <LinkWrapper to="/login">via La Source</LinkWrapper>, ceux qui nous
-            rencontrent lors de nos événements, ceux qui participent à faire
-            connaître <strong>ebdo</strong>, ceux qui sont heureux de lire{' '}
-            <strong>ebdo</strong> tout simplement.
+            colorHr="--turquoise-blue">
+            Nos lecteurs font communauté. Sans eux, nous ne sommes rien : ils
+            nous irriguent de leur idées via{' '}
+            <LinkWrapper to="/source">La Source</LinkWrapper>, ils co-organisent
+            des événements, nous hébergent et participent activement à faire
+            connaître <strong>ebdo</strong>
           </TextBlock>
         </Col>
       </SectionWrapperBig>
       <SectionWrapper between="sm">
         <ColCustom w={14} m={13} mc>
           <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
-          <Legend>Photo issue de la tournée d'<strong>ebdo</strong> en minibus</Legend>
+          <Legend>
+            Photo issue de la tournée d'<strong>ebdo</strong> en minibus
+          </Legend>
         </ColCustom>
         <ColCustom w={7} m={13} mc>
           <TextBlock
             title="Un journal qui se construit ensemble..."
             colorTitle="--sunflower"
             fontSize="28px"
-            className="no-p"
-          >
+            className="no-p">
             Nous sommes atteints d’un mal étrange :{' '}
             <strong>la sur-information.</strong> Chaque possesseur d’un
             smartphone accède directement 24H/24 à un nombre d’articles
@@ -174,7 +153,7 @@ function ManifestoBlock() {
       </SectionWrapper>
       <SectionWrapperBig between="sm">
         <ColCustom w={7} m={13} mc>
-          <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p" >
+          <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p">
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
             <LinkWrapper to="#">la Fabrique</LinkWrapper>.
           </TextBlock>

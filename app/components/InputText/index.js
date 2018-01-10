@@ -23,7 +23,7 @@ class InputText extends React.Component {
             <Col xs={12}>
               <Input
                 error={this.props.error || false}
-                id={this.props.id || ''}
+                id={this.props.id || null}
                 name={this.props.name || ''}
                 onChange={this.props.onChange || null}
                 placeholder={this.props.placeholder || ''}
@@ -31,7 +31,6 @@ class InputText extends React.Component {
                 type={this.props.type || 'text'}
                 value={this.props.value || ''}
                 disabled={this.props.disabled || false}
-                autocomplete="false"
               />
             </Col>
           </Row>

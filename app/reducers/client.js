@@ -5,6 +5,9 @@ import ClientModel from 'models/client'
 
 import {
   POST_CLIENT,
+  GET_CLIENTS_COUNT,
+  GET_CLIENTS_COUNT_ERROR,
+  GET_CLIENTS_COUNT_LOADED,
   GET_CLIENT,
   GET_CLIENT_LOADED,
   GET_CLIENT_ERROR,
@@ -14,12 +17,13 @@ import {
   USE_CLIENT_EXIST,
   NEW_CHECKOUT,
   NEW_CHECKOUT_TRY,
-  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGIN_EMAIL_CODE_LOADED,
   LOGOUT
 } from 'actions/constants'
 
 const initialState = Immutable.fromJS({
   loading: false,
+  clientsCount: 0,
   error: false,
   errorMessage: null,
   clientExist: false,
@@ -32,6 +36,18 @@ function clientReducer(state = initialState, action) {
   switch (action.type) {
     case POST_CLIENT:
       return state.set('loading', true).set('errorMessage', null)
+    case GET_CLIENTS_COUNT:
+      return state.set('loading', true).set('errorMessage', null)
+    case GET_CLIENTS_COUNT_ERROR:
+      return state
+        .set('error', true)
+        .set('errorMessage', action.error)
+        .set('loading', false)
+    case GET_CLIENTS_COUNT_LOADED:
+      return state
+        .set('clientsCount', action.clientsCount)
+        .set('loading', false)
+        .set('error', false)
     case GET_CLIENT:
       return state
         .set('loading', true)
@@ -74,7 +90,7 @@ function clientReducer(state = initialState, action) {
         .set('isNewClient', false)
         .set('clientExist', true)
         .set('data', new ClientModel(action.client))
-    case LOGIN_EMAIL_CODE_SUCCESS:
+    case LOGIN_EMAIL_CODE_LOADED:
       return state.set('data', new ClientModel(jwtDecode(action.token)))
     case LOGOUT:
       return initialState

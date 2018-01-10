@@ -214,9 +214,7 @@ class NavBar extends React.Component {
                   />
                 </Link>
               </Title>
-              <Subtitle menuFixed={menuFixed}>
-                À chaque époque <br /> son journal.
-              </Subtitle>
+              <Subtitle menuFixed={menuFixed}>Lisez vous, lisez nous</Subtitle>
             </Col>
             <Col m={13}>
               <FlexWrap menuFixed={menuFixed}>
@@ -235,7 +233,7 @@ class NavBar extends React.Component {
                   style={
                     page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                   }>
-                  <Link to="/manifeste">Pourquoi ?</Link>
+                  <Link to="/manifeste">Le manifeste</Link>
                 </LinkWrap>
                 <LinkWrap
                   color="--peacock-blue"
@@ -280,7 +278,7 @@ class NavBar extends React.Component {
                   style={
                     page === '/manifeste' ? { color: 'var(--sunflower)' } : {}
                   }>
-                  <Link to="/manifeste">Pourquoi ?</Link>
+                  <Link to="/manifeste">le manifeste</Link>
                 </LinkBurger>
                 <LinkBurger
                   color="--peacock-blue"
@@ -290,7 +288,12 @@ class NavBar extends React.Component {
                   <Link to="/source">La source</Link>
                 </LinkBurger>
                 <LinkBurger color="--topaz">
-                  <a href="http://fabrique.ebdo-lejournal.com/">La Fabrique</a>
+                  <a
+                    rel="noopener^"
+                    target="_blank"
+                    href="http://fabrique.ebdo-lejournal.com/">
+                    La Fabrique
+                  </a>
                 </LinkBurger>
               </div>
             </Col>
