@@ -14,7 +14,7 @@ import {
   USE_CLIENT_EXIST,
   NEW_CHECKOUT,
   NEW_CHECKOUT_TRY,
-  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGIN_EMAIL_CODE_LOADED,
   LOGOUT
 } from 'actions/constants'
 
@@ -74,7 +74,7 @@ function clientReducer(state = initialState, action) {
         .set('isNewClient', false)
         .set('clientExist', true)
         .set('data', new ClientModel(action.client))
-    case LOGIN_EMAIL_CODE_SUCCESS:
+    case LOGIN_EMAIL_CODE_LOADED:
       return state.set('data', new ClientModel(jwtDecode(action.token)))
     case LOGOUT:
       return initialState

@@ -86,6 +86,32 @@ class ToggleStep extends React.Component {
         easing: 'easeOutCubic'
       })
       .add({
+        targets: this.progressBar,
+        duration: 1100,
+        left: 140,
+        width: 0,
+        easing: 'easeOutCubic'
+      })
+      .add({
+        targets: this.progressBar,
+        duration: 0,
+        left: 0,
+        width: 0
+      })
+      .add({
+        targets: this.progressBar,
+        duration: 1100,
+        width: 140,
+        easing: 'easeOutCubic'
+      })
+      .add({
+        targets: this.progressBar,
+        duration: 1100,
+        left: 140,
+        width: 0,
+        easing: 'easeOutCubic'
+      })
+      .add({
         targets: this.button,
         duration: 100
       })
@@ -111,7 +137,8 @@ class ToggleStep extends React.Component {
       updateStepHide,
       secondaryButton,
       isError,
-      hideIconChecked
+      hideIconChecked,
+      hideNextStep
     } = this.props
 
     return (
@@ -131,28 +158,30 @@ class ToggleStep extends React.Component {
                         <Title>{title}</Title>
                         <ContentOpen>{contentOpen}</ContentOpen>
                         <NextStep>
-                          <button
-                            className="button"
-                            onClick={this.animAndNextStep}
-                            color={colorButtonNextStep}
-                            ref={btn => {
-                              this.button = btn
-                            }}>
-                            <div
-                              ref={txt => {
-                                this.text = txt
+                          {!hideNextStep && (
+                            <button
+                              className="button"
+                              onClick={this.animAndNextStep}
+                              color={colorButtonNextStep}
+                              ref={btn => {
+                                this.button = btn
                               }}>
-                              {isError && 'Valider a nouveau'}
-                              {(!isError && textButtonNextStep) ||
-                                'Étape Suivante'}
-                            </div>
-                            <div
-                              className="progress-bar"
-                              ref={pgrs => {
-                                this.progressBar = pgrs
-                              }}
-                            />
-                          </button>
+                              <div
+                                ref={txt => {
+                                  this.text = txt
+                                }}>
+                                {isError && 'Valider a nouveau'}
+                                {(!isError && textButtonNextStep) ||
+                                  'Étape Suivante'}
+                              </div>
+                              <div
+                                className="progress-bar"
+                                ref={pgrs => {
+                                  this.progressBar = pgrs
+                                }}
+                              />
+                            </button>
+                          )}
                         </NextStep>
                       </ColCustom>
                     </Row>
@@ -223,6 +252,7 @@ ToggleStep.propTypes = {
   isLoadingNextStep: PropTypes.bool,
   isError: PropTypes.bool,
   hideIconChecked: PropTypes.bool,
+  hideNextStep: PropTypes.bool,
   iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
@@ -233,6 +263,10 @@ ToggleStep.propTypes = {
   colorButtonNextStep: PropTypes.string,
   updateStepHide: PropTypes.bool,
   handleAnimationEnding: PropTypes.func
+}
+
+ToggleStep.defaultProps = {
+  hideNextStep: false
 }
 
 export default ToggleStep

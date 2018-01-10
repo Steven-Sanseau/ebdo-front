@@ -105,6 +105,9 @@ class FormDelivery extends React.Component {
                     label="Prénom"
                     name="first_name"
                     isRequired
+                    reference={input => {
+                      this.firstNameInput = input
+                    }}
                     error={this.props.errorForm.first_name || false}
                     errorMessage={
                       this.props.errorFormMessage.first_name || null

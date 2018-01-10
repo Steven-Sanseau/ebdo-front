@@ -19,7 +19,9 @@ import { makeSelectToken } from 'selectors/login'
 function* postAddress(action) {
   let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address`
   const address = yield select(makeSelectAddressType(action.typeOfAddress))
-  const clientId = action.isOffer ? yield select(makeSelectGodsonId()) : yield select(makeSelectClientId())
+  const clientId = action.isOffer
+    ? yield select(makeSelectGodsonId())
+    : yield select(makeSelectClientId())
   let method = 'POST'
 
   try {
@@ -37,8 +39,8 @@ function* postAddress(action) {
     })
 
     yield put(postAddressLoaded(action.typeOfAddress, addressResponse.address))
-
-    if (action.typeOfAddress === 'invoice') {
+    console.log(action)
+    if (action.typeOfAddress === 'invoice' && action.redirect) {
       yield put(nextStep())
     }
   } catch (err) {
@@ -48,10 +50,10 @@ function* postAddress(action) {
 
 function* getAddress(action) {
   const token = yield select(makeSelectToken())
-  let paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address/${
+  const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/address/${
     action.typeOfAddress
   }`
-  let method = 'GET'
+  const method = 'GET'
 
   try {
     const addressResponse = yield call(request, paramsApiUrl, {
@@ -63,9 +65,6 @@ function* getAddress(action) {
     })
 
     yield put(getAddressLoaded(action.typeOfAddress, addressResponse.address))
-    if (action.requestAction === NEW_CHECKOUT_TRY) {
-      yield put(nextStep())
-    }
   } catch (err) {
     yield put(getAddressError(err, action.typeOfAddress))
   }

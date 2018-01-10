@@ -7,11 +7,13 @@ import { Row, Col } from 'react-flexbox-grid'
 // STATE
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { makeSelectStep } from 'selectors/step'
-import { makeSelectLogin } from 'selectors/login'
 import { newCheckoutTry } from 'actions/checkout'
-import { makeSelectSubscriptionData } from 'selectors/subscription'
 import { nextStep, goToStep } from 'actions/step'
+
+import { makeSelectStep } from 'selectors/step'
+import { makeSelectSubscriptionData } from 'selectors/subscription'
+import { makeSelectClientExist } from 'selectors/client'
+import { makeIsLoggedIn } from 'selectors/login'
 
 // CONTAINERS
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep/Loadable'
@@ -76,24 +78,58 @@ export class Tryit extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.props.dispatchNewCheckoutTry()
   }
 
-  nextStep() {
+  nextStep = () => {
     this.props.nextStep()
   }
 
-  changeStep(stepNumber) {
+  changeStep = stepNumber => {
     this.props.goToStep(stepNumber)
   }
 
-  handleRouteButtonHelp = event => {
-    console.log('HELP CLIC')
-  }
-
   render() {
-    const { step } = this.props
+    const { step, clientExist, isLoggedIn } = this.props
+
+    let steps = [
+      <EmailStep
+        stepNumber={1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+        isFreeNumberStep
+      />
+    ]
+
+    if (!isLoggedIn) {
+      steps.push(
+        <EmailConfirmStep
+          stepNumber={2}
+          changeStep={this.changeStep}
+          nextStep={this.nextStep}
+          currentStep={step}
+        />
+      )
+    }
+
+    steps = steps.concat([
+      <DeliveryStep
+        stepNumber={steps.length + 1}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+        displayDeliveryAddress={false}
+        isFreeNumberStep
+      />,
+      <ConfirmStep
+        stepNumber={steps.length + 2}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+      />
+    ])
 
     return (
       <div>
@@ -107,74 +143,11 @@ export class Tryit extends React.Component {
               <Header />
             </Col>
           </Row>
-          <Row center="xs">
-            <Col xs={12}>
-              <Row start="lg" center="xs">
-                <Col lg={2} lgOffset={3} xs={12}>
-                  <Undercover>
-                    <img src="0-couv.jpg" alt="sommaire" width="100%" />
-                    <div className="fond" />
-                    <div className="fond" />
-                    <div className="fond" />
-                    <div className="fond" />
-                  </Undercover>
-                </Col>
-                <Col lg={5} xs={12}>
-                  <BigBoldText>
-                    Vous voulez <VioletText>essayer ebdo ?</VioletText> <br />
-                    On vous offre le prochain numéro.
-                  </BigBoldText>
-                  <TextSummary>
-                    Vous nous laissez vos coordonnées, <BoldText>ebdo</BoldText>
-                    <br />
-                    vous fait parvenir son nouveau numéro vendredi prochain.
-                  </TextSummary>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailStep
-                stepNumber={1}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <EmailConfirmStep
-                stepNumber={2}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <DeliveryStep
-                stepNumber={3}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-                displayDeliveryAddress={false}
-                isFreeNumberStep
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <ConfirmStep
-                stepNumber={4}
-                changeStep={this.changeStep}
-                nextStep={this.nextStep}
-                currentStep={step}
-              />
-            </Col>
-          </Row>
+          {steps.map((step, index) => (
+            <Row key={index}>
+              <Col xs={12}>{step}</Col>
+            </Row>
+          ))}
         </Layout>
       </div>
     )
@@ -189,7 +162,9 @@ Tryit.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  step: makeSelectStep()
+  step: makeSelectStep(),
+  clientExist: makeSelectClientExist(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {

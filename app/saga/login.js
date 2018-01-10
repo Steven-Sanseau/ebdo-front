@@ -1,17 +1,23 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 
 import request from 'utils/request'
-import { LOGIN_EMAIL, LOGIN_EMAIL_CODE, LOGOUT } from '../actions/constants'
 import {
-  loginEmailSuccess,
+  LOGIN_EMAIL,
+  LOGIN_EMAIL_CODE,
+  LOGIN_EMAIL_LOADED,
+  LOGOUT
+} from 'actions/constants'
+import {
+  loginEmailLoaded,
   loginEmailError,
-  loginEmailCodeSuccess,
+  loginEmailCodeLoaded,
   loginEmailCodeError
-} from '../actions/login'
-import { nextStep } from '../actions/step'
-import { newCheckout } from '../actions/checkout'
-import { getSubscriptionsLoaded } from '../actions/subscription'
-import { push } from 'react-router-redux'
+} from 'actions/login'
+import { nextStep } from 'actions/step'
+import { getAddress } from 'actions/address'
+import { newCheckout } from 'actions/checkout'
+import { getSubscriptionsLoaded } from 'actions/subscription'
 
 function* loginEmailSaga(action) {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/login/code/${
@@ -23,7 +29,7 @@ function* loginEmailSaga(action) {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
-    yield put(loginEmailSuccess())
+    yield put(loginEmailLoaded(action.redirect))
   } catch (err) {
     yield put(loginEmailError(err.message))
   }
@@ -39,7 +45,7 @@ function* loginEmailCodeSaga(action) {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
-    yield put(loginEmailCodeSuccess(response.token))
+    yield put(loginEmailCodeLoaded(response.token))
 
     if (action.isCheckout) {
       const subscriptions = yield call(
@@ -68,8 +74,8 @@ function* loginEmailCodeSaga(action) {
           yield put(push('/abo/existe'))
         }
       }
-
-      // yield put(nextStep())
+      yield put(getAddress('invoice'))
+      yield put(getAddress('delivery'))
     } else {
       yield put(push(action.redirect))
     }
@@ -80,8 +86,15 @@ function* loginEmailCodeSaga(action) {
 
 function* logoutSaga() {}
 
+function* loginEmailNextStep(redirect) {
+  if (redirect) {
+    yield put(nextStep())
+  }
+}
+
 export default function* sagaLogin() {
   yield takeEvery(LOGIN_EMAIL, loginEmailSaga)
+  yield takeEvery(LOGIN_EMAIL_LOADED, loginEmailNextStep)
   yield takeEvery(LOGOUT, logoutSaga)
   yield takeEvery(LOGIN_EMAIL_CODE, loginEmailCodeSaga)
 }

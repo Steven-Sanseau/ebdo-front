@@ -11,6 +11,7 @@ import {
   getClientError
 } from 'actions/client'
 import { nextStep } from 'actions/step'
+import { loginEmail } from 'actions/login'
 
 import {
   makeSelectClientEmail,

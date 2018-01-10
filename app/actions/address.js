@@ -10,12 +10,18 @@ import {
   GET_ADDRESS_LOADED
 } from 'actions/constants'
 
-export function postAddress(typeOfAddress, addressId, isOffer) {
+export function postAddress(
+  typeOfAddress,
+  addressId,
+  isOffer,
+  redirect = true
+) {
   return {
     type: POST_ADDRESS,
     typeOfAddress,
     addressId,
-    isOffer
+    isOffer,
+    redirect
   }
 }
 
