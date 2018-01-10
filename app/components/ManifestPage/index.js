@@ -77,38 +77,41 @@ function ManifestPage(props) {
             </p>
           </TextWrap>
           <TextWrap xs={12} sm={6} smOffset={3}>
-            Nous sommes atteints d’un mal étrange : la sur-information. Chaque
-            possesseur d’un smartphone accède directement 24H/24 à un nombre
-            d’articles disponibles et gratuits qui progresse de manière folle, à
-            des milliards d’images et de vidéos, un foisonnement de sources
-            d’informations sans précédent dans l’Histoire de l’humanité. Mais au
-            lieu de nous donner des clés de compréhension, l'information nous
-            noie. Les journaux ne sont plus des repères. Leur utilité et celle
-            des journalistes sont remises en cause. Leur crédibilité est en
-            baisse continue. Les journalistes sont submergés, dilués et
-            contestés. Où est la vérité ? Comment s’y retrouver ? Nous ne sommes
-            pas condamnés à être mal informés. Forts de dix ans d'expérience
-            avec les revues XXI et 6Mois ainsi que de deux ans de recherche,
-            nous décidons de lancer un hebdomadaire de presse d’un genre nouveau
-            qui répond à ce défi. Ebdo, un journal sans publicité, libre de tous
-            les pouvoirs, de toutes les influences. Nos journalistes n’auront de
-            compte à rendre à personne si ce n’est à vous, leurs lecteurs. Notre
-            seule ressource, c’est vous. Ebdo, un journal dont les lecteurs sont
-            acteurs. L’échange avec vous est le moteur de notre projet :
-            reportages en immersion chez vous, recueil de témoignages… Avec
-            l'outil numérique, nous voulons mettre en place un système
-            radicalement innovant d’échanges entre les lecteurs et la rédaction.
-            Ebdo, un rendez-vous sur papier. Chaque semaine, il sera un remède
-            pour lutter contre le chaos de l’information continue. Un journal
-            qui, nous l'espérons, vous aidera à vous ressourcer, vous divertir
-            et vous émerveiller. Il donnera des clés de compréhension. Ce sera
-            un rendez-vous avec le monde, de l’intime au lointain, du coin de la
-            rue au bout de la terre, pour se connecter avec les autres et avec
-            soi-même. Toutes les ressources de l’image seront utilisées – la
-            photo, le dessin, les cartes, la bande dessinée. Ce sera un guide
-            pour mieux comprendre le monde, y trouver sa place et en devenir
-            acteur. Ebdo, l'essentiel chaque vendredi, à partir du 12 janvier
-            2018. L'équipe Ebdo.
+            <p>
+              Nous sommes noyés sous les informations, en perte de repères.{' '}
+            </p>
+            <br />
+            <h4>Comment nous y retrouver ? </h4>
+            <p>
+              Forts de dix ans d’expérience avec les revues XXI et 6Mois ainsi
+              que de deux ans de recherche, nous lançons un nouvel hebdomadaire
+              de presse pour répondre à ce défi et reprendre pied.{' '}
+            </p>
+            <h4>ebdo, un rendez-vous sur papier. </h4>
+            <p>
+              Chaque semaine, un remède pour lutter contre le chaos de
+              l’information. Pour nous ressourcer, découvrir, comprendre. Pour
+              nous donner des clés. Un rendez-vous avec le monde, de l’intime au
+              lointain, du coin de la rue au bout de la Terre, pour nous
+              connecter avec les autres et nous-mêmes.
+            </p>
+            <h4>Ebdo, un journal dont les lecteurs sont les acteurs.</h4>
+            <p>
+              {' '}
+              L’échange avec vous est le moteur de notre projet. Avec l’outil
+              numérique, nous mettons en place un système innovant d’interaction
+              entre les lecteurs et la rédaction, La Source. C’est une boîte à
+              idées, à questions et à initiatives, qui recueille témoignages et
+              expertises.
+            </p>
+            <h4>Ebdo, un journal sans publicité</h4>,<p>
+              {' '}
+              libre de tout pouvoir, de toute influence. Nos journalistes n’ont
+              de compte à rendre à personne si ce n’est à vous, lecteurs. Notre
+              seule ressource, c’est vous. Un guide pour mieux comprendre le
+              monde, y trouver sa place et en devenir acteur Ebdo, l’essentiel,
+              chaque vendredi
+            </p>
           </TextWrap>
         </Row>
       </Layout>
