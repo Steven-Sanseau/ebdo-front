@@ -16,7 +16,6 @@ import ColCustom from 'components/Grid/Col'
 import NewsletterContainer from 'containers/NewsletterContainer'
 import { Link } from 'react-router-dom'
 import '!file-loader?name=[name].[ext]!../../images/home/tournee-ebdo.jpg'
-import '!file-loader?name=[name].[ext]!../../images/home/fabrique.png'
 
 const Layout = styled.div`
   width: calc(100% - 80px);
@@ -160,7 +159,11 @@ function ManifestoBlock() {
           <NewsletterContainer />
         </ColCustom>
         <ColCustom w={14} m={13} mc className="m-up m-b-60">
-          <img src="fabrique.png" alt="la fabrique" width="100%" />
+          <img
+            src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png"
+            alt="illustration la fabrique"
+            width="100%"
+          />
         </ColCustom>
       </SectionWrapperBig>
     </Layout>
