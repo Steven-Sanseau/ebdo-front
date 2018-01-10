@@ -35,10 +35,11 @@ export function postAddressLoaded(typeOfAddress, address) {
   }
 }
 
-export function postAddressError(error, typeOfAddress) {
+export function postAddressError(error, statusCode, typeOfAddress) {
   return {
     type: POST_ADDRESS_ERROR,
     error,
+    statusCode,
     payload: {
       typeOfAddress
     }

@@ -75,7 +75,7 @@ class EmailStep extends React.Component {
     if (this.validateEmail()) {
       if (this.props.clientExist) {
         this.props.dispatchLoginEmail(this.props.email, false)
-        this.props.dispatchUseClientExist()
+        this.props.dispatchUseClientExist(!this.props.isOfferStep)
       } else {
         this.props.dispatchPostClient(this.props.isFreeNumberStep)
       }

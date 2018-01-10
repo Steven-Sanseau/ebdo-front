@@ -46,7 +46,7 @@ function* postClient(action) {
   }
 }
 
-function* next() {
+function* next(action) {
   yield put(nextStep())
 }
 

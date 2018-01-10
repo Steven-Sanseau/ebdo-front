@@ -2,7 +2,11 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 
 import request from 'utils/request'
 
-import { POST_GODSON_CLIENT, GET_GODSON_CLIENT, USE_GODSON_CLIENT_EXIST } from 'actions/constants'
+import {
+  POST_GODSON_CLIENT,
+  GET_GODSON_CLIENT,
+  USE_GODSON_CLIENT_EXIST
+} from 'actions/constants'
 import {
   postGodsonLoaded,
   postGodsonError,
@@ -12,9 +16,7 @@ import {
 } from 'actions/godson'
 import { nextStep } from 'actions/step'
 
-import {
-  makeSelectGodsonEmail,
-} from '../selectors/godson'
+import { makeSelectGodsonEmail } from '../selectors/godson'
 
 function* postGodson() {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
@@ -60,6 +62,7 @@ function* getGodsonApi() {
       }
     })
     yield put(getGodsonLoaded(clientResponse.client))
+    yield put(nextStep())
   } catch (err) {
     yield put(getGodsonError(err.message))
   }

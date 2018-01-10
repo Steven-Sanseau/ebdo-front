@@ -23,28 +23,37 @@ function* postAddress(action) {
     ? yield select(makeSelectGodsonId())
     : yield select(makeSelectClientId())
   let method = 'POST'
-
+  let Authorization = null
   try {
     if (address.address_id !== null) {
       method = 'PATCH'
       paramsApiUrl = `${paramsApiUrl}/${action.addressId}`
+      const token = yield select(makeSelectToken())
+      Authorization = `Bearer ${token}`
     }
 
     const addressResponse = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ address, client: { client_id: clientId } }),
       method,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization
       }
     })
 
     yield put(postAddressLoaded(action.typeOfAddress, addressResponse.address))
-    console.log(action)
+
     if (action.typeOfAddress === 'invoice' && action.redirect) {
       yield put(nextStep())
     }
   } catch (err) {
-    yield put(postAddressError(err, action.typeOfAddress))
+    yield put(
+      postAddressError(
+        err.message,
+        err.statusCode || null,
+        action.typeOfAddress
+      )
+    )
   }
 }
 

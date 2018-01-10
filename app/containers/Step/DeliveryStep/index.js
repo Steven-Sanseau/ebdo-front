@@ -87,11 +87,11 @@ class DeliveryStep extends React.Component {
   }
 
   dispatchForm = () => {
-    this.props.dispatchPostAddressDelivery(this.props.delivery.address_id)
-    this.props.dispatchPostAddressInvoice(
-      this.props.invoice.address_id,
+    this.props.dispatchPostAddressDelivery(
+      this.props.delivery.address_id,
       this.props.isOffer
     )
+    this.props.dispatchPostAddressInvoice(this.props.invoice.address_id)
   }
 
   validForm = type => {

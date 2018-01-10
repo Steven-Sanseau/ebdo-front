@@ -61,6 +61,7 @@ export class Offer extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        isOfferStep
       />
     ]
 
