@@ -19,7 +19,7 @@ import {
   makeSelectClientIsNewClient
 } from 'selectors/client'
 
-function* postClient() {
+function* postClient(action) {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
   const email = yield select(makeSelectClientEmail())
 
@@ -35,7 +35,11 @@ function* postClient() {
     })
 
     yield put(postClientLoaded(clientResponse.client))
-    yield put(nextStep())
+    if (action.checkEmail) {
+      yield put(loginEmail(email))
+    } else {
+      yield put(nextStep())
+    }
   } catch (err) {
     yield put(getClient())
     yield put(postClientError(err.message))

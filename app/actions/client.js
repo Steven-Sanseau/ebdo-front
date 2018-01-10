@@ -35,9 +35,10 @@ export function getClientError(error) {
   }
 }
 
-export function postClient() {
+export function postClient(checkEmail = false) {
   return {
-    type: POST_CLIENT
+    type: POST_CLIENT,
+    checkEmail
   }
 }
 

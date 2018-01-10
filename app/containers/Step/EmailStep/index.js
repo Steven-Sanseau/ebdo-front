@@ -77,10 +77,7 @@ class EmailStep extends React.Component {
         this.props.dispatchLoginEmail(this.props.email, false)
         this.props.dispatchUseClientExist()
       } else {
-        this.props.dispatchPostClient()
-        if (this.props.isFreeNumberStep) {
-          this.props.dispatchLoginEmail(this.props.email, false)
-        }
+        this.props.dispatchPostClient(this.props.isFreeNumberStep)
       }
     }
   }
@@ -181,7 +178,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient()),
+    dispatchPostClient: checkEmail => dispatch(postClient(checkEmail)),
     dispatchUseClientExist: () => dispatch(useClientExist()),
     dispatchLoginEmail: (email, redirect) =>
       dispatch(loginEmail(email, redirect)),

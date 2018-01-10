@@ -86,8 +86,8 @@ function* loginEmailCodeSaga(action) {
 
 function* logoutSaga() {}
 
-function* loginEmailNextStep(redirect) {
-  if (redirect) {
+function* loginEmailNextStep(action) {
+  if (action.redirect) {
     yield put(nextStep())
   }
 }
