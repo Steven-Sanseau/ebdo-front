@@ -91,7 +91,7 @@ class NaturalFormOrderContainer extends React.Component {
               handleRoute={this.handleRoute}
               color="--squash"
               className="big">
-              Commander
+              Je commande
             </Button>
           </ButtonWrap>
         )}

@@ -143,6 +143,32 @@ export class Tryit extends React.Component {
               <Header />
             </Col>
           </Row>
+          <Row center="xs">
+            <Col xs={12}>
+              <Row start="lg" center="xs">
+                <Col lg={2} lgOffset={3} xs={12}>
+                  <Undercover>
+                    <img src="0-couv.jpg" alt="sommaire" width="100%" />
+                    <div className="fond" />
+                    <div className="fond" />
+                    <div className="fond" />
+                    <div className="fond" />
+                  </Undercover>
+                </Col>
+                <Col lg={5} xs={12}>
+                  <BigBoldText>
+                    Vous voulez <VioletText>essayer ebdo ?</VioletText> <br />
+                    On vous offre le prochain numéro.
+                  </BigBoldText>
+                  <TextSummary>
+                    Vous nous laissez vos coordonnées, <BoldText>ebdo</BoldText>
+                    <br />
+                    vous fait parvenir son nouveau numéro vendredi prochain.
+                  </TextSummary>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
           {steps.map((step, index) => (
             <Row key={index}>
               <Col xs={12}>{step}</Col>
