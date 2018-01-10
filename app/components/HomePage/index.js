@@ -12,7 +12,6 @@ import HomeLanding from 'components/HomeLanding'
 import ColCustom from 'components/Grid/Col'
 
 import NaturalFormOrderContainer from 'containers/NaturalFormOrderContainer/Loadable'
-import '!file-loader?name=[name].[ext]!../../images/home/abo-illu.png'
 
 const ProgressWrap = styled(Row)`
   padding-top: 60px;
@@ -106,7 +105,7 @@ export class HomePage extends React.Component {
                 <ColCustom w={8}>
                   <ImageWrap>
                     <img
-                      src="abo-illu.png"
+                      src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/price.png"
                       alt="abo illustration"
                       width="100%"
                     />

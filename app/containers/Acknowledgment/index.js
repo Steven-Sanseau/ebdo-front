@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
 import styled from 'styled-components'
 
+import Image from 'components/Image'
+
 import { push } from 'react-router-redux'
 // STATE
 import { connect } from 'react-redux'
@@ -25,18 +27,53 @@ const Subscription = styled(Col)`
   }
 `
 
+const ColoredBackground = styled.div`
+  background-color: var(--blue-greened);
+`
+
+const Layout = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+
+  background: var(${props => props.background});
+`
+
+const TextFinalMessage = styled.div`
+  color: var(--white-true);
+  font-size: 24px;
+  font-weight: bold;
+`
+
+const TextRecapEmail = styled.div`
+  color: var(--white-true);
+  font-size: 18px;
+  font-weight: 400;
+`
+
+const LoadingMessage = styled.div`
+  color: var(--greyish-brown);
+  font-size: 30px;
+  font-weight: 400;
+`
+
 export class Acknowledgment extends React.Component {
   componentWillMount() {
     if (this.props.path.search.indexOf('?slimpay=valid') !== -1) {
       this.props.dispatchSlimpayTokenValid()
     }
   }
+  returnHome = () => {
+    this.dispatch(push('/'))
+  }
 
   render() {
     const { match, subscriptions } = this.props
 
     return (
-      <div>
+      <Layout
+        background={
+          match.params.type !== 'merci' ? '--background' : '--blue-greened'
+        }>
         <Row center="xs" start="lg">
           <Col xs={12}>
             <Header />
@@ -44,9 +81,32 @@ export class Acknowledgment extends React.Component {
         </Row>
         <Row center="xs">
           <Col xs={12}>
-            {match.params.type === 'merci' &&
-              'Nous sommes ravis de vous compter parmi les abonnés d’ebdo !'}
-            {match.params.type === 'chargement' && 'chargement'}
+            {match.params.type === 'merci' && (
+              <div>
+                <TextFinalMessage>
+                  Nous sommes ravis de vous compter parmi les abonnés d’ebdo !
+                </TextFinalMessage>
+                <Image
+                  src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/subscribed.png"
+                  width="800px"
+                />
+                <TextRecapEmail>
+                  Un récapitulatif de votre abonnement vient de vous être envoyé
+                  par mail.
+                </TextRecapEmail>
+                <Button
+                  colorText="--topaz"
+                  color="--white-true"
+                  handleRoute={this.returnHome}>
+                  Retourner à l'accueil
+                </Button>
+              </div>
+            )}
+            {match.params.type === 'chargement' && (
+              <div>
+                <LoadingMessage>Chargement</LoadingMessage>
+              </div>
+            )}
             {match.params.type === 'erreur' && (
               <div>
                 Une Erreur est survenue lors de votre commande
@@ -89,7 +149,7 @@ export class Acknowledgment extends React.Component {
             )}
           </Col>
         </Row>
-      </div>
+      </Layout>
     )
   }
 }

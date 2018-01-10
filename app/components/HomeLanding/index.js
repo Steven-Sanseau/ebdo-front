@@ -1,9 +1,3 @@
-/**
- *
- * HomeLanding
- *
- */
-
 import React from 'react'
 import { Row, Col } from 'react-styled-flexboxgrid'
 import { Link } from 'react-router-dom'
@@ -11,8 +5,6 @@ import Gallery from 'components/Gallery'
 
 import styled from 'styled-components'
 import '!file-loader?name=[name].[ext]!images/logos/6mois-black.png'
-import '!file-loader?name=[name].[ext]!images/home/sommaire-droite.png'
-import '!file-loader?name=[name].[ext]!images/home/illu-test.jpg'
 
 import { media } from 'global-styles'
 import ArrowDown from 'components/Icon/ArrowDown'
@@ -139,7 +131,11 @@ function HomeLanding() {
             </p>
           </Text>
           <Discover>
-            <img src="illu-test.jpg" alt="illustration cover" width="100%" />
+            <img
+              src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/nomad.png"
+              alt="illustration nomade"
+              width="100%"
+            />
           </Discover>
         </BlockWrap>
       </Row>
