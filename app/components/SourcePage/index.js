@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Row, Col } from 'react-styled-flexboxgrid'
-
 import NavBar from 'components/NavBar'
 import SourcePagePrivate from 'components/SourcePage/private'
 import SourcePagePublic from 'components/SourcePage/public'
@@ -17,12 +15,8 @@ function SourcePage(props) {
         page="/source"
         isLoggedIn={props.isLoggedIn}
       />
-      <Row>
-        <Col xs={12}>
-          {props.isLoggedIn && <SourcePagePrivate client={client} />}
-          {!props.isLoggedIn && <SourcePagePublic dispatch={props.dispatch} />}
-        </Col>
-      </Row>
+      {props.isLoggedIn && <SourcePagePrivate client={client} />}
+      {!props.isLoggedIn && <SourcePagePublic dispatch={props.dispatch} />}
     </div>
   )
 }

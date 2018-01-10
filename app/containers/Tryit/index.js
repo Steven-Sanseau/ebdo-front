@@ -147,13 +147,11 @@ export class Tryit extends React.Component {
             <Col xs={12}>
               <Row start="lg" center="xs">
                 <Col lg={2} lgOffset={3} xs={12}>
-                  <Undercover>
-                    <img src="0-couv.jpg" alt="sommaire" width="100%" />
-                    <div className="fond" />
-                    <div className="fond" />
-                    <div className="fond" />
-                    <div className="fond" />
-                  </Undercover>
+                  <img
+                    src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/tryebdo.png"
+                    alt="Je veux recevoir un numéro gratuit de ebdo"
+                    width="100%"
+                  />
                 </Col>
                 <Col lg={5} xs={12}>
                   <BigBoldText>

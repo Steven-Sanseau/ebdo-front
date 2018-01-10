@@ -170,7 +170,7 @@ function SourcePagePublic(props) {
           </Category>
         </Row>
       </Layout>
-      <Footer />
+      <Footer dispatch={props.dispatch} />
     </div>
   )
 }
