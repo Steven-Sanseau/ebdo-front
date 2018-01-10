@@ -1,23 +1,9 @@
-/**
- *
- * Gallery
- *
- */
-
 import React from 'react'
 import Lightbox from 'react-images'
 import styled from 'styled-components'
 import { media } from 'global-styles'
 
 import 'components/Gallery/Gallery.css'
-
-import '!file-loader?name=[name].[ext]!images/numero-0/1-sommaire-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/numero-0/2-infographie-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/numero-0/3-RER-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/numero-0/4-fusees-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/numero-0/5-bd-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/numero-0/6-cyberguerre-HD.jpg'
-import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
 
 const Undercover = styled.div`
   img {
@@ -119,22 +105,22 @@ const Pin = styled.div`
 `
 const Images = [
   {
-    src: '1-sommaire-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/1.jpg'
   },
   {
-    src: '2-infographie-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/2.jpg'
   },
   {
-    src: '3-RER-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/3.jpg'
   },
   {
-    src: '4-fusees-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/4.jpg'
   },
   {
-    src: '5-bd-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/5.jpg'
   },
   {
-    src: '6-cyberguerre-HD.jpg'
+    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/6.jpg'
   }
 ]
 
