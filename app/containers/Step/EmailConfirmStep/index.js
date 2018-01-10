@@ -21,29 +21,13 @@ class EmailConfirmStep extends React.Component {
     isAnim: false
   }
 
-  componentWillUpdate = (nextProps, nextState) => {
-    if (
-      nextProps.currentStep === nextProps.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
-  componentWillMount = () => {
-    if (
-      this.props.currentStep === this.props.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
 
   handleNextStep = event => {
+    event.preventDefault()
+
     this.setState({ isAnim: true })
     this.props.dispatchloginEmailCode(this.props.email, this.state.code, true)
     // TODO Handle wrong code
@@ -53,18 +37,24 @@ class EmailConfirmStep extends React.Component {
     this.setState({ code: event.target.value })
   }
 
+  handleSubmit = event => {
+    this.handleNextStep(event)
+  }
+
   contentOpen() {
     return (
       <div>
         <p>Veuillez rentrer le code reçu par email pour valider la connexion</p>
-        <InputText
-          name="code"
-          type="number"
-          value={this.state.code}
-          onChange={this.handleCode}
-          placeholder="557590"
-          label="Code reçu par email"
-        />
+        <form onSubmit={this.handleSubmit}>
+          <InputText
+            name="code"
+            type="number"
+            value={this.state.code}
+            onChange={this.handleCode}
+            placeholder="5575"
+            label="Code reçu par email"
+          />
+        </form>
       </div>
     )
   }
@@ -102,6 +92,7 @@ class EmailConfirmStep extends React.Component {
 
 EmailConfirmStep.propTypes = {
   changeStep: PropTypes.func,
+  stepUrl: PropTypes.string,
   dispatchloginEmailCode: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,

@@ -28,24 +28,6 @@ class EmailStep extends React.Component {
     errorMessage: ''
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (
-      nextProps.currentStep === nextProps.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
-  componentWillMount() {
-    if (
-      this.props.currentStep === this.props.stepNumber &&
-      this.props.isLoggedIn
-    ) {
-      this.props.dispatchNextStep()
-    }
-  }
-
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
@@ -92,10 +74,10 @@ class EmailStep extends React.Component {
 
     if (this.validateEmail()) {
       if (this.props.clientExist) {
-        this.props.dispatchLoginEmail(this.props.email)
-        this.props.dispatchUseClientExist()
+        this.props.dispatchLoginEmail(this.props.email, false)
+        this.props.dispatchUseClientExist(!this.props.isOfferStep)
       } else {
-        this.props.dispatchPostClient()
+        this.props.dispatchPostClient(this.props.isFreeNumberStep)
       }
     }
   }
@@ -169,6 +151,7 @@ class EmailStep extends React.Component {
 EmailStep.propTypes = {
   clientIsLoading: PropTypes.bool,
   email: PropTypes.string,
+  stepUrl: PropTypes.string,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
@@ -177,7 +160,12 @@ EmailStep.propTypes = {
   dispatchPostClient: PropTypes.func,
   dispatchUseClientExist: PropTypes.func,
   dispatchNextStep: PropTypes.func,
-  clientExist: PropTypes.bool
+  clientExist: PropTypes.bool,
+  isFreeNumberStep: PropTypes.bool
+}
+
+EmailStep.defaultProps = {
+  isFreeNumberStep: false
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -190,9 +178,10 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
-    dispatchPostClient: () => dispatch(postClient()),
+    dispatchPostClient: checkEmail => dispatch(postClient(checkEmail)),
     dispatchUseClientExist: () => dispatch(useClientExist()),
-    dispatchLoginEmail: email => dispatch(loginEmail(email)),
+    dispatchLoginEmail: (email, redirect) =>
+      dispatch(loginEmail(email, redirect)),
     dispatchNextStep: () => dispatch(nextStep())
   }
 }

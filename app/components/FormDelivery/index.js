@@ -105,6 +105,9 @@ class FormDelivery extends React.Component {
                     label="Prénom"
                     name="first_name"
                     isRequired
+                    reference={input => {
+                      this.firstNameInput = input
+                    }}
                     error={this.props.errorForm.first_name || false}
                     errorMessage={
                       this.props.errorFormMessage.first_name || null
@@ -131,7 +134,7 @@ class FormDelivery extends React.Component {
                 <Col xs={12} lg={6}>
                   <PhoneLabelWrapper
                     color={this.props.errorForm.phone ? '--tomato' : null}>
-                    Téléphone <Required>*</Required>
+                    Téléphone
                     <PhoneWrapper
                       country={this.props.country.value}
                       placeholder="+33 6 00 00 00 00"
@@ -192,6 +195,21 @@ class FormDelivery extends React.Component {
                     value={this.props.address.postal_code}
                     onChange={this.handleChange}
                     placeholder="17000"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} lg={8}>
+                  <InputText
+                    label="Complément d'adresse"
+                    name="address_post"
+                    error={this.props.errorForm.address_post || false}
+                    errorMessage={
+                      this.props.errorFormMessage.address_post || null
+                    }
+                    value={this.props.address.address_post}
+                    onChange={this.handleChange}
+                    placeholder="bat. A"
                   />
                 </Col>
               </Row>

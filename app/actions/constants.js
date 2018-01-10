@@ -14,6 +14,11 @@ export const GET_ADDRESS = 'app/Checkout/address/GET_ADDRESS'
 export const GET_ADDRESS_LOADED = 'app/Checkout/address/GET_ADDRESS_LOADED'
 export const GET_ADDRESS_ERROR = 'app/Checkout/address/GET_ADDRESS_ERROR'
 
+export const GET_CLIENTS_COUNT = 'app/Checkout/client/GET_CLIENTS_COUNT'
+export const GET_CLIENTS_COUNT_ERROR =
+  'app/Checkout/client/GET_CLIENTS_COUNT_ERROR'
+export const GET_CLIENTS_COUNT_LOADED =
+  'app/Checkout/client/GET_CLIENTS_COUNT_LOADED'
 export const GET_CLIENT = 'app/Checkout/client/GET_CLIENT'
 export const USE_CLIENT_EXIST = 'app/Checkout/client/USE_CLIENT_EXIST'
 export const GET_CLIENT_LOADED = 'app/Checkout/client/GET_CLIENT_LOADED'
@@ -22,6 +27,21 @@ export const POST_CLIENT = 'app/Checkout/client/POST_CLIENT'
 export const POST_CLIENT_ERROR = 'app/Checkout/client/POST_CLIENT_ERROR'
 export const POST_CLIENT_LOADED = 'app/Checkout/client/POST_CLIENT_LOADED'
 export const SET_CLIENT_EMAIL = 'app/Checkout/client/SET_CLIENT_EMAIL'
+
+export const GET_GODSON_CLIENT = 'app/Checkout/client/GET_GODSON_CLIENT'
+export const USE_GODSON_CLIENT_EXIST =
+  'app/Checkout/client/USE_GODSON_CLIENT_EXIST'
+export const GET_GODSON_CLIENT_LOADED =
+  'app/Checkout/client/GET_GODSON_CLIENT_LOADED'
+export const GET_GODSON_CLIENT_ERROR =
+  'app/Checkout/client/GET_GODSON_CLIENT_ERROR'
+export const POST_GODSON_CLIENT = 'app/Checkout/client/POST_GODSON_CLIENT'
+export const POST_GODSON_CLIENT_ERROR =
+  'app/Checkout/client/POST_GODSON_CLIENT_ERROR'
+export const POST_GODSON_CLIENT_LOADED =
+  'app/Checkout/client/POST_GODSON_CLIENT_LOADED'
+export const SET_GODSON_CLIENT_EMAIL =
+  'app/Checkout/client/SET_GODSON_CLIENT_EMAIL'
 
 export const SET_OFFER_PARAMS = 'app/Checkout/offer/SET_OFFER_PARAMS'
 export const GET_OFFERS_LIST = 'app/Checkout/offer/GET_OFFERS_LIST'
@@ -60,13 +80,13 @@ export const POST_SUBSCRIPTION_LOADED =
   'app/Checkout/checkout/POST_SUBSCRIPTION_LOADED'
 
 export const LOGIN_EMAIL = 'app/Login/LOGIN_EMAIL'
+export const LOGIN_EMAIL_LOADED = 'app/Login/LOGIN_EMAIL_LOADED'
 export const LOGIN_EMAIL_ERROR = 'app/Login/LOGIN_EMAIL_ERROR'
-export const LOGIN_EMAIL_SUCCESS = 'app/Login/LOGIN_EMAIL_SUCCESS'
 export const LOGIN_USER_SUCCESS = 'app/Login/LOGIN_USER_SUCCESS'
 
 export const LOGIN_EMAIL_CODE = 'app/Login/LOGIN_EMAIL_CODE'
 export const LOGIN_EMAIL_CODE_ERROR = 'app/Login/LOGIN_EMAIL_CODE_ERROR'
-export const LOGIN_EMAIL_CODE_SUCCESS = 'app/Login/LOGIN_EMAIL_CODE_SUCCESS'
+export const LOGIN_EMAIL_CODE_LOADED = 'app/Login/LOGIN_EMAIL_CODE_LOADED'
 export const LOGOUT = 'app/Home/Login/LOGOUT'
 
 export const POST_NEWSLETTER = 'app/Home/Newsletter/POST_NEWSLETTER'

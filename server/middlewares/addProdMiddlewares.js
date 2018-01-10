@@ -14,7 +14,7 @@ module.exports = function addProdMiddlewares(app, options) {
   app.use(publicPath, express.static(outputPath, { maxage: 86400000 }))
 
   // Force SSL on production
-  // app.use(sslRedirect())
+  app.use(sslRedirect())
 
   app.get('*', (req, res) => {
     res.set('Cache-Control', 'public, max-age=3600')

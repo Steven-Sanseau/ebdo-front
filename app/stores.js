@@ -10,6 +10,7 @@ import sagaCheckout from 'saga/checkout'
 import sagaToken from 'saga/token'
 import sagaAddress from 'saga/address'
 import sagaClient from 'saga/client'
+import sagaGodson from 'saga/godson'
 import sagaLogin from 'saga/login'
 import sagaNewsletter from 'saga/newsletter'
 
@@ -27,6 +28,7 @@ const withSagaOffer = injectSaga({ key: 'offer', saga: sagaOffer })
 const withSagaToken = injectSaga({ key: 'token', saga: sagaToken })
 const withSagaCheckout = injectSaga({ key: 'checklout', saga: sagaCheckout })
 const withSagaClient = injectSaga({ key: 'client', saga: sagaClient })
+const withSagaGodson = injectSaga({ key: 'godson', saga: sagaGodson })
 const withSagaAddress = injectSaga({ key: 'address', saga: sagaAddress })
 const withSagaLogin = injectSaga({ key: 'login', saga: sagaLogin })
 const withSagaNewsletter = injectSaga({ key: 'newsletter', saga: sagaNewsletter })
@@ -37,6 +39,7 @@ export default compose(
   withSagaCheckout,
   withSagaAddress,
   withSagaClient,
+  withSagaGodson,
   withSagaLogin,
   withSagaNewsletter
 )(StoreSaga)

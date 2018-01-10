@@ -30,6 +30,7 @@ import FormDelivery from 'components/FormDelivery'
 import CheckboxShowDeliveryForm from 'components/FormDelivery/CheckboxShowDeliveryForm'
 import UpdateStep from 'components/LayoutStep/UpdateStep'
 import Button from 'components/Button'
+import Title from 'components/LayoutStep/Title'
 
 class DeliveryStep extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class DeliveryStep extends React.Component {
     this.state = {
       isFormValid: false,
       isAnim: false,
-      isInvoiceSameDelivery: true,
+      isInvoiceSameDelivery: !props.isOffer,
       error: {
         invoice: {},
         delivery: {}
@@ -76,16 +77,20 @@ class DeliveryStep extends React.Component {
     event.preventDefault()
 
     if (this.state.isInvoiceSameDelivery) {
-      this.validForm('invoice')
       this.props.dispatchAddressEqual()
-    } else {
-      this.validForm('invoice')
-      this.validForm('delivery')
+      if (this.validForm('invoice')) {
+        this.dispatchForm()
+      }
+    } else if (this.validForm('invoice') && this.validForm('delivery')) {
+      this.dispatchForm()
     }
   }
 
   dispatchForm = () => {
-    this.props.dispatchPostAddressDelivery(this.props.delivery.address_id)
+    this.props.dispatchPostAddressDelivery(
+      this.props.delivery.address_id,
+      this.props.isOffer
+    )
     this.props.dispatchPostAddressInvoice(this.props.invoice.address_id)
   }
 
@@ -116,13 +121,11 @@ class DeliveryStep extends React.Component {
       isFormValid = false
     }
 
-    if (address.phone === null || address.phone.trim() === '') {
-      error[type].phone = true
-      errorMessage[type].phone = 'Veuillez entrer votre numéro de téléphone'
-      isFormValid = false
-    }
-
-    if (!isValidPhoneNumber(address.phone)) {
+    if (
+      address.phone !== null &&
+      address.phone.trim() !== '' &&
+      !isValidPhoneNumber(address.phone)
+    ) {
       error[type].phone = true
       errorMessage[type].phone = "Votre numéro de téléphone n'est pas valide"
       isFormValid = false
@@ -155,14 +158,18 @@ class DeliveryStep extends React.Component {
 
     this.setState({ error, errorMessage })
 
-    if (isFormValid) {
-      this.dispatchForm()
-    }
+    return isFormValid
   }
 
   contentOpen() {
     const { isInvoiceSameDelivery } = this.state
-    const { delivery, invoice, country, displayDeliveryAddress } = this.props
+    const {
+      delivery,
+      invoice,
+      country,
+      displayDeliveryAddress,
+      isOffer
+    } = this.props
 
     return (
       <div>
@@ -175,12 +182,14 @@ class DeliveryStep extends React.Component {
           errorForm={!this.state.isAnim ? this.state.error.invoice : {}}
           errorFormMessage={this.state.errorMessage.invoice}
         />
-        {displayDeliveryAddress && (
-          <CheckboxShowDeliveryForm
-            isChecked={isInvoiceSameDelivery}
-            showDeliveryForm={this.showDeliveryForm}
-          />
-        )}
+        <Title>Adresse de livraison</Title>
+        {displayDeliveryAddress &&
+          !isOffer && (
+            <CheckboxShowDeliveryForm
+              isChecked={isInvoiceSameDelivery}
+              showDeliveryForm={this.showDeliveryForm}
+            />
+          )}
         {!isInvoiceSameDelivery && (
           <FormDelivery
             address={delivery}
@@ -284,14 +293,13 @@ class DeliveryStep extends React.Component {
 
 DeliveryStep.propTypes = {
   addressIsLoading: PropTypes.bool,
+  stepUrl: PropTypes.string,
   country: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   invoice: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   delivery: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   stepNumber: PropTypes.number,
   currentStep: PropTypes.number,
   changeStep: PropTypes.func,
-  dispatchGetAddressDelivery: PropTypes.func,
-  dispatchGetAddressDelivery: PropTypes.func,
   dispatchPostAddressDelivery: PropTypes.func,
   dispatchPostAddressInvoice: PropTypes.func,
   dispatchAddressEqual: PropTypes.func,
@@ -302,7 +310,8 @@ DeliveryStep.propTypes = {
 }
 
 DeliveryStep.defaultProps = {
-  displayDeliveryAddress: true
+  displayDeliveryAddress: true,
+  isFreeNumberStep: false
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -322,10 +331,8 @@ function mapDispatchToProps(dispatch) {
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
     dispatchPostAddressDelivery: addressId =>
       dispatch(postAddress('delivery', addressId || null)),
-    dispatchPostAddressInvoice: addressId =>
-      dispatch(postAddress('invoice', addressId || null)),
-    dispatchGetAddressDelivery: () => dispatch(getAddress('delivery')),
-    dispatchGetAddressDelivery: () => dispatch(getAddress('invoice'))
+    dispatchPostAddressInvoice: (addressId, isOffer) =>
+      dispatch(postAddress('invoice', addressId || null, isOffer))
   }
 }
 

@@ -7,8 +7,6 @@ import { media } from 'global-styles'
 
 import NavBar from 'components/NavBar'
 
-import '!file-loader?name=[name].[ext]!../../images/team/equipe.jpg'
-
 const Layout = styled.div`
   width: calc(100% - 80px);
   max-width: 1200px;
@@ -18,13 +16,6 @@ const Layout = styled.div`
   ${media.tablet`
     padding: 40px 0;
   `};
-`
-const ImageWrap = styled.div`
-  width: 100%;
-  height: 50vh;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-image: url(equipe.jpg);
 `
 const IntroWrap = styled.div`
   padding-top: 100px;
@@ -93,7 +84,6 @@ function TeamPage(props) {
         page={props.page}
         isLoggedIn={props.isLoggedIn}
       />
-      <ImageWrap />
       <IntroWrap>
         <Layout>
           <Row>

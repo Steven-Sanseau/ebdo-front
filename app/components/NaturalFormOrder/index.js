@@ -32,6 +32,9 @@ const DropdownWrap = styled(Dropdown)`
     border-width: 1px;
     border-radius: 35px;
     margin-top: -70px;
+    &:first-letter {
+      text-transform: uppercase;
+    }
   }
   .Dropdown-option.is-selected h3 {
     color: var(${props => (props.color ? props.color : '--black')});
@@ -141,32 +144,41 @@ export class NaturalFormOrder extends React.Component {
     const options2 = !target
       ? [
           {
+            value: '0',
+            label: this.valueElem(
+              'tous les mois',
+              <span>
+                Sans engagement, je pourrais me désengager en un clic !
+              </span>
+            )
+          },
+          {
             value: '12',
             label: this.valueElem(
               'pendant 3 mois',
-              <span>Régler maintenant et recevez 12 numéros.</span>
+              <span>
+                Régler maintenant et recevez 12 numéros (sauf désengagement de
+                votre part)
+              </span>
             )
           },
           {
             value: '24',
             label: this.valueElem(
               'pendant 6 mois',
-              <span>Régler maintenant et recevez 24 numéros.</span>
+              <span>
+                Régler maintenant et recevez 24 numéros (sauf désengagement de
+                votre part)
+              </span>
             )
           },
           {
             value: '48',
             label: this.valueElem(
               'pendant 12 mois',
-              <span>Régler maintenant et recevez 48 numéros.</span>
-            )
-          },
-          {
-            value: '0',
-            label: this.valueElem(
-              'chaque mois',
               <span>
-                Sans engagement, je pourrais me désengager en un clic !
+                Régler maintenant et recevez 48 numéros (sauf désengagement de
+                votre part)
               </span>
             )
           }
@@ -176,21 +188,30 @@ export class NaturalFormOrder extends React.Component {
             value: '12',
             label: this.valueElem(
               'pendant 3 mois',
-              <span>Régler maintenant et recevez 12 numéros.</span>
+              <span>
+                Régler maintenant et recevez 12 numéros (sauf désengagement de
+                votre part)
+              </span>
             )
           },
           {
             value: '24',
             label: this.valueElem(
               'pendant 6 mois',
-              <span>Régler maintenant et recevez 24 numéros.</span>
+              <span>
+                Régler maintenant et recevez 24 numéros (sauf désengagement de
+                votre part){' '}
+              </span>
             )
           },
           {
             value: '48',
             label: this.valueElem(
               'pendant 12 mois',
-              <span>Régler maintenant et recevez 48 numéros.</span>
+              <span>
+                Réglez maintenant et recevez 48 numéros (sauf désengagement de
+                votre part)
+              </span>
             )
           }
         ]
@@ -203,7 +224,7 @@ export class NaturalFormOrder extends React.Component {
             10€ <sup>/ mois</sup>
           </span>,
           <span>
-            <strong>ebdo</strong> sera presque à l'équilibre !
+            C’est le prix minimum pour qu’<strong>ebdo</strong> existe
           </span>
         )
       },
@@ -214,7 +235,8 @@ export class NaturalFormOrder extends React.Component {
             15€ <sup>/ mois</sup>
           </span>,
           <span>
-            <strong>ebdo</strong> sera à l'équilibre !
+            C’est le prix normal pour financer un <strong>ebdo</strong> de
+            qualité et indépendant
           </span>
         )
       },
@@ -225,7 +247,8 @@ export class NaturalFormOrder extends React.Component {
             20€ <sup>/ mois</sup>
           </span>,
           <span>
-            Vous aiderez d'autres abonnés à s'offrir <strong>ebdo</strong> !
+            C’est le prix d’un abonnement de soutien. Vous aiderez d’autres
+            abonnés à lire <strong>ebdo</strong>
           </span>
         )
       },
@@ -236,8 +259,8 @@ export class NaturalFormOrder extends React.Component {
             5€ <sup>/ mois</sup>
           </span>,
           <span>
-            Vous bénéficierez de la solidarité d'autres abonnés d'
-            <strong>ebdo</strong>
+            C’est une offre pour ceux qui ne peuvent pas donner plus. Vous
+            bénéficierez de la solidarité d’autres abonnés.
           </span>
         )
       }
@@ -268,13 +291,13 @@ export class NaturalFormOrder extends React.Component {
           />
 
           <TextWrap>
-            {String(time) === '0' && <span>4 numéros</span>}
+            {String(time) === '0' && <span>ebdo chaque vendredi</span>}
             {String(time) === '12' && <span>12 numéros</span>}
             {String(time) === '24' && <span>24 numéros</span>}
             {String(time) === '48' && <span>48 numéros</span>}
-            {String(target) === 'false' && <span> chez moi </span>}
+            {String(target) === 'false' && <span> </span>}
             {String(target) === 'true' && <span> à un proche </span>}
-            pour le prix de{' '}
+            pour{' '}
           </TextWrap>
           <DropdownWrap
             className="dropdown-wrap"

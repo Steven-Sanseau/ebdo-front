@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import request from 'utils/request'
 import { push } from 'react-router-redux'
@@ -15,6 +15,7 @@ import {
 import { getAddress } from 'actions/address'
 import { getOfferLoaded } from 'actions/offer'
 import { goToStep } from 'actions/step'
+import { logout } from 'actions/login'
 
 import { makeSelectTokenData } from 'selectors/token'
 import { makeSelectOfferData } from 'selectors/offer'
@@ -37,7 +38,6 @@ function* postCheckout() {
   const token = yield select(makeSelectTokenData())
   const offer = yield select(makeSelectOfferData())
 
-  console.log('checkout data', checkout)
   const method = 'POST'
 
   if (isLoggedIn) {
@@ -62,6 +62,7 @@ function* postCheckout() {
     yield put(postCheckoutLoaded(checkoutResponse.checkout))
     yield put(newCheckout())
     yield put(push('/abo/merci'))
+    yield put(logout())
   } catch (err) {
     yield put(postCheckoutError(err.message))
     yield put(push('/abo/erreur'))
@@ -96,6 +97,6 @@ function* newCheckoutSaga(action) {
 
 export default function* sagaCheckout() {
   yield takeLatest(POST_SUBSCRIPTION, postCheckout)
-  yield takeLatest(NEW_CHECKOUT_TRY, newCheckoutSaga)
-  yield takeLatest(NEW_CHECKOUT, newCheckoutSaga)
+  yield takeEvery(NEW_CHECKOUT_TRY, newCheckoutSaga)
+  yield takeEvery(NEW_CHECKOUT, newCheckoutSaga)
 }

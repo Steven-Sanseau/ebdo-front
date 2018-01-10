@@ -68,15 +68,16 @@ const MobileWrapper = styled.div`
 `
 const RowFirstLine = styled(Row)`
   @media (min-width: 768px) {
-    .w-5:nth-of-type(2), .w-5:nth-of-type(3) {
-      border-right: 1px solid rgba(255,255,255,0.1);
+    .w-5:nth-of-type(2),
+    .w-5:nth-of-type(3) {
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 `
 const RowSimpleBorder = styled(Row)`
   @media (min-width: 768px) {
     .w-5:nth-of-type(2) {
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 `
@@ -96,7 +97,11 @@ const MainFooter = () => (
         </ColCustom>
         <ColCustom w={5} m={13}>
           <MobileWrapper>
-            <TitleWithArrow text="Besoin d'aide ?" link="/" color="--topaz" />
+            <TitleWithArrow
+              text="Besoin d'aide ?"
+              linkOutside="https://aide.ebdo-lejournal.com/fr/"
+              color="--topaz"
+            />
             <TitleWithArrow
               text="Manifeste"
               link="/manifest"
@@ -129,7 +134,7 @@ const MainFooter = () => (
       </RowFirstLine>
       <NewsletterWrapper>
         <RowSimpleBorder between="sm">
-          <ColCustom w={5} m={13}></ColCustom>
+          <ColCustom w={5} m={13} />
           <ColCustom w={5} m={13}>
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">

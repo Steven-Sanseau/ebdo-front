@@ -1,13 +1,11 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import PrivateRoute from 'utils/PrivateRoute'
 import PublicRoute from 'utils/PublicRoute'
 
 import Home from 'containers/Home/Loadable'
 import Checkout from 'containers/Checkout/Loadable'
 import Acknowledgment from 'containers/Acknowledgment/Loadable'
-import Gift from 'containers/Gift/Loadable'
 import Offer from 'containers/Offer/Loadable'
 import TryIt from 'containers/Tryit/Loadable'
 import Team from 'containers/Team/Loadable'
@@ -26,19 +24,19 @@ export default function App() {
         <Route exact path="/" component={Home} />
 
         <Redirect from="/subscribe" to="/abonnement" />
+        <Route path="/abonnement/:step" component={Checkout} />
         <Route path="/abonnement" component={Checkout} />
 
         <Route exact path="/abo/:type" component={Acknowledgment} />
 
         <Redirect from="/offer" to="/offre" />
+        <Route exact path="/offre/:step" component={Offer} />
         <Route exact path="/offre" component={Offer} />
-
-        <Redirect from="/gift" to="/cadeau" />
-        <Route exact path="/cadeau" component={Gift} />
 
         <Redirect from="/try" to="/essai" />
         <Redirect from="/jessaye" to="/essai" />
-        <Route exact path="/essai" component={TryIt} />
+        <Route path="/essai/:step" component={TryIt} />
+        <Route path="/essai" component={TryIt} />
 
         <Redirect from="/team" to="/equipe" />
         <Route exact path="/equipe" component={Team} />

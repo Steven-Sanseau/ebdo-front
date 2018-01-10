@@ -24,6 +24,11 @@ const initialState = Immutable.fromJS({
   loading: false,
   error: false,
   errorMessage: '',
+  errorCardType: {
+    card: false,
+    cvc: false,
+    year: false
+  },
   tokenStripe: {},
   mandatSepa: {},
   slimpay_iframe_content: null,
@@ -35,12 +40,18 @@ function tokenReducer(state = initialState, action) {
     case POST_TOKEN:
       return state.set('loading', true).set('errorMessage', '')
     case SET_TOKEN_STRIPE:
-      return state.set('loading', true).set('error', false)
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .setIn(['data', 'token_type'], 'stripe')
+        .set('errorCardType', initialState.get('errorCardType'))
     case SET_TOKEN_STRIPE_LOADED:
       return state
         .set('tokenStripe', action.tokenStripe)
         .set('error', false)
+        .set('errorCardType', initialState.get('errorCardType'))
         .setIn(['data', 'stripe_token_id'], action.tokenStripe.id)
+        .setIn(['data', 'token_type'], 'stripe')
         .setIn(['data', 'stripe_card_id'], action.tokenStripe.card.id)
         .set('errorMessage', '')
     case POST_TOKEN_ERROR:
@@ -54,10 +65,35 @@ function tokenReducer(state = initialState, action) {
         .set('error', false)
         .set('data', new TokenModel(action.token))
     case SET_TOKEN_STRIPE_ERROR: {
+      let errorType = {
+        card: false,
+        cvc: false,
+        year: false
+      }
+
+      if (
+        action.error.error.code == 'incomplete_number' ||
+        action.error.error.code == 'invalid_number'
+      ) {
+        errorType.card = true
+      }
+
+      if (action.error.error.code == 'incomplete_cvc') {
+        errorType.cvc = true
+      }
+
+      if (
+        action.error.error.code == 'invalid_expiry_year_past' ||
+        action.error.error.code == 'incomplete_expiry'
+      ) {
+        errorType.year = true
+      }
+
       return state
         .set('error', true)
         .set('loading', false)
         .set('errorMessage', action.error.error.message)
+        .set('errorCardType', errorType)
     }
     case SET_PAYMENT_METHOD:
       return state.setIn(

@@ -11,6 +11,8 @@ function FormConfirm(props) {
           text="J'ai lu et accepté les CGV"
           onCheck={props.handleConfirmCGV}
           isChecked={props.isChecked}
+          error={props.error}
+          errorMessage={props.errorMessage}
         />
       </Row>
     </div>
@@ -19,7 +21,9 @@ function FormConfirm(props) {
 
 FormConfirm.propTypes = {
   handleConfirmCGV: PropTypes.func,
-  isChecked: PropTypes.bool
+  isChecked: PropTypes.bool,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string
 }
 
 export default FormConfirm

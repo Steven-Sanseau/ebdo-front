@@ -2,10 +2,10 @@ import styled from 'styled-components'
 
 const IconCheckbox = styled.div`
   font-family: 'FG-R';
-  font-size: 16px;
+  font-size: 18px;
   display: inline-block;
-  line-height: 16px;
-  color: var(${props => (props.checked ? '--black' : '--silver')});
+  line-height: 18px;
+  color: var(${props => (props.error ? '--tomato' : '--black')});
 `
 
 export default IconCheckbox

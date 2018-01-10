@@ -7,6 +7,8 @@ const Address = new Record(
     phone: null,
     first_name: null,
     address: null,
+    address_pre: null,
+    address_post: null,
     city: null,
     postal_code: null,
     country: null,

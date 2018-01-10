@@ -2,6 +2,7 @@ import { combineReducers } from 'redux-immutable'
 import addressReducer from 'reducers/address'
 import checkoutReducer from 'reducers/checkout'
 import clientReducer from 'reducers/client'
+import godsonReducer from 'reducers/godson'
 import offerReducer from 'reducers/offer'
 import newsletterReducer from 'reducers/newsletter'
 import routeReducer from 'reducers/routes'
@@ -15,6 +16,7 @@ export default function createReducer(injectedReducers) {
     address: addressReducer,
     checkout: checkoutReducer,
     client: clientReducer,
+    godson: godsonReducer,
     offer: offerReducer,
     newsletter: newsletterReducer,
     route: routeReducer,

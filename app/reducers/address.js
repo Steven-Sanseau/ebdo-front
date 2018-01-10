@@ -22,6 +22,9 @@ const initialState = Immutable.fromJS({
   error: false,
   errorMessage: null,
   isEditableAddress: true,
+  addressTypeError: '',
+  addressGodSonError: true,
+  addressGodSonErrorMessage: true,
   country: {
     value: 'FR',
     label: 'France'
@@ -58,12 +61,13 @@ function addressReducer(state = initialState, action) {
         .set('loading', false)
         .set('errorMessage', action.error.message)
         .set('error', true)
+        .set('addressGodSonError', action.statusCode || true)
+        .set('addressGodSonErrorMessage', action.message)
+        .set('addressTypeError', action.payload.typeOfAddress)
     }
     case POST_ADDRESS_LOADED: {
       return state
         .set('loading', false)
-        .set('error', false)
-        .set('errorMessage', '')
         .set(action.payload.typeOfAddress, new Address(action.payload.address))
     }
     case SET_ADDRESS_EQUAL: {

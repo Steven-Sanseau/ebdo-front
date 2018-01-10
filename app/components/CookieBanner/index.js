@@ -7,7 +7,7 @@ export default function CookieBannerWrapper(props) {
     <CookieBanner
       //TODO repair error
       // message={<MessageCookie />}
-      message="En navigant sur ce site vous acceptez l'utilisation de cookie"
+      message="Bonjour, afin de rendre votre expérience ebdo plus agréable nous utilisons des cookies. Le respect de votre vie privée est au centre de nos préoccupations, n'hésitez pas à nous contacter pour toute suggestion ou remarque à ce sujet."
       cookie="user-has-accepted-"
       dismissOnScroll={false}
       buttonMessage="ok"

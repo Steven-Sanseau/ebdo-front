@@ -1,9 +1,19 @@
-import { POST_NEWSLETTER, POST_NEWSLETTER_SUCCESS, POST_NEWSLETTER_ERROR } from './constants'
+import { EventTypes } from 'redux-segment'
+import {
+  POST_NEWSLETTER,
+  POST_NEWSLETTER_SUCCESS,
+  POST_NEWSLETTER_ERROR
+} from './constants'
 
 export function postNewsletter(newsletter) {
   return {
     type: POST_NEWSLETTER,
-    newsletter
+    newsletter,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track
+      }
+    }
   }
 }
 

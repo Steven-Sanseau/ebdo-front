@@ -1,6 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Waypoint from 'react-waypoint'
 import Progress from 'components/Progress'
+
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+
+import { makeSelectClientCount } from 'selectors/client'
+import { getClientsCount } from 'actions/client'
 
 export class ProgressContainer extends React.Component {
   state = {
@@ -9,10 +17,16 @@ export class ProgressContainer extends React.Component {
     initialAnimate: false
   }
 
+  componentDidMount() {
+    if (!this.props.clientCount || this.props.clientCount === 0) {
+      this.props.dispatch(getClientsCount())
+    }
+  }
+
   _handleWaypointEnter = event => {
     this.setState({
       initialAnimate: true,
-      number: 6349,
+      number: this.props.clientCount,
       rate: 0.4
     })
   }
@@ -33,6 +47,19 @@ export class ProgressContainer extends React.Component {
   }
 }
 
-ProgressContainer.propTypes = {}
+ProgressContainer.propTypes = {
+  clientCount: PropTypes.number,
+  dispatch: PropTypes.func
+}
 
-export default ProgressContainer
+const mapStateToProps = createStructuredSelector({
+  clientCount: makeSelectClientCount()
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProgressContainer)

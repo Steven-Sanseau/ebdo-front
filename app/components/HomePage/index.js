@@ -97,9 +97,9 @@ export class HomePage extends React.Component {
                   souhaitez
                 </Title>
                 <TextWrap>
-                  S{"'"}offrir <strong>ebdo</strong> chaque semaine, c{"'"}est
-                  choisir une information indépendante, un journal sans pub et
-                  sans compromis.
+                  Lire <strong>ebdo</strong> chaque semaine, c’est choisir un
+                  journal sans publicité avec une information originale et sans
+                  compromis
                 </TextWrap>
               </ColCustom>
               <Row between="sm">

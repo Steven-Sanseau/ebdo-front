@@ -5,17 +5,21 @@ import emailRegex from 'email-regex'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-import { postCheckout, setCgvConfirm } from 'actions/checkout'
+
 import {
-  makeSelectCheckout,
-  makeSelectIsCGVChecked,
-  makeSelectIsCheckoutLoading
-} from 'selectors/checkout'
+  makeSelectGodsonIsLoading,
+  makeSelectGodsonEmail,
+  makeSelectGodsonExist
+} from 'selectors/godson'
 
+import { setGodsonEmail, postGodson, useGodsonExist } from 'actions/godson'
+import { nextStep } from 'actions/step'
+
+import FormEmail from 'components/FormEmail'
 import ToggleStep from 'components/ToggleStep/Loadable'
-import FormGiftCode from 'components/FormGiftCode'
+import BoldText from 'components/LayoutStep/BoldText'
 
-class CodeGiftStep extends React.Component {
+class GodsonEmailStep extends React.Component {
   state = {
     isAnim: false,
     errorEmail: false,
@@ -25,6 +29,7 @@ class CodeGiftStep extends React.Component {
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }
+
   handleNextStep = event => {
     this.setState({ isAnim: true })
     this.handleSubmit(event)
@@ -37,11 +42,11 @@ class CodeGiftStep extends React.Component {
     this.props.dispatchChangeEmail(email)
   }
 
-  resetEmail() {
+  resetEmail = () => {
     this.setState({ errorEmail: false, errorMessage: '' })
   }
 
-  validateEmail() {
+  validateEmail = () => {
     const { email } = this.props
 
     if (!emailRegex({ exact: true }).test(email)) {
@@ -55,7 +60,7 @@ class CodeGiftStep extends React.Component {
     if (email === '') {
       this.setState({
         errorEmail: true,
-        errorMessage: 'Veuillez remplir votre email'
+        errorMessage: "Veuillez remplir l'adresse email du parrainé"
       })
       return false
     }
@@ -67,37 +72,38 @@ class CodeGiftStep extends React.Component {
 
     if (this.validateEmail()) {
       if (this.props.clientExist) {
-        this.props.dispatchUseClientExist()
+        this.props.dispatchUseGodsonExist()
       } else {
-        this.props.dispatchPostClient()
+        this.props.dispatchPostGodson()
       }
     }
   }
+
   contentOpen() {
     const { errorEmail, errorMessage } = this.state
-    const { email, clientExist } = this.props
+    const { email } = this.props
 
     return (
       <div>
-        <FormGiftCode
+        <FormEmail
           handleEmail={this.handleEmail}
-          errorEmail={errorEmail}
+          errorEmail={!this.state.isAnim ? errorEmail : false}
           errorMessage={errorMessage}
           handleSubmitEmail={this.handleSubmit}
           email={email}
         />
-        {clientExist && (
-          <div>
-            Votre Adresse est déjà enregistrée chez nous. Etes vous sûr de
-            vouloir passer une nouvelle commande ?
-          </div>
-        )}
       </div>
     )
   }
 
   contentClose() {
-    return <div>Vous avez validé votre commande</div>
+    const { email } = this.props
+    return (
+      <span>
+        Toutes les informations concernant le parrainé seront <br /> envoyées
+        à <BoldText>{email}</BoldText>
+      </span>
+    )
   }
 
   render() {
@@ -105,53 +111,59 @@ class CodeGiftStep extends React.Component {
       currentStep,
       changeStep,
       stepNumber,
-      checkoutIsLoading
+      clientIsLoading,
+      clientExist
     } = this.props
 
     return (
       <ToggleStep
-        title="Je confirme mon abonnement"
+        title="Je renseigne l'email du parrainé"
+        iconName="mail"
         stepNumber={stepNumber}
-        iconName="check"
         contentClose={this.contentClose()}
         contentOpen={this.contentOpen()}
         currentStep={currentStep}
         changeStep={changeStep}
         nextStep={this.handleNextStep}
-        textButtonNextStep=">> Je m'abonne !"
-        isLoadingNextStep={checkoutIsLoading}
+        isLoadingNextStep={clientIsLoading}
+        textButtonNextStep={clientExist ? 'Je continue !' : null}
+        colorButtonNextStep={clientExist ? '--squash' : '--booger'}
         handleAnimationEnding={this.handleAnimationEnding}
       />
     )
   }
 }
 
-CodeGiftStep.propTypes = {
-  checkoutIsLoading: PropTypes.bool,
+GodsonEmailStep.propTypes = {
+  clientIsLoading: PropTypes.bool,
+  email: PropTypes.string,
   stepUrl: PropTypes.string,
-  checkout: PropTypes.object,
   changeStep: PropTypes.func,
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  dispatchConfirmCheckout: PropTypes.func,
-  dispatchConfirmCGV: PropTypes.func,
-  isCGVAccepted: PropTypes.bool
+  dispatchChangeEmail: PropTypes.func,
+  dispatchPostGodson: PropTypes.func,
+  dispatchUseGodsonExist: PropTypes.func,
+  dispatchNextStep: PropTypes.func,
+  clientExist: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
-  checkout: makeSelectCheckout(),
-  isCGVAccepted: makeSelectIsCGVChecked(),
-  checkoutIsLoading: makeSelectIsCheckoutLoading()
+  clientIsLoading: makeSelectGodsonIsLoading(),
+  clientExist: makeSelectGodsonExist(),
+  email: makeSelectGodsonEmail()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchConfirmCheckout: () => dispatch(postCheckout()),
-    dispatchConfirmCGV: () => dispatch(setCgvConfirm())
+    dispatchChangeEmail: email => dispatch(setGodsonEmail(email)),
+    dispatchPostGodson: () => dispatch(postGodson()),
+    dispatchUseGodsonExist: () => dispatch(useGodsonExist()),
+    dispatchNextStep: () => dispatch(nextStep())
   }
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(CodeGiftStep)
+export default compose(withConnect)(GodsonEmailStep)

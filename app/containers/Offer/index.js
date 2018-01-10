@@ -13,15 +13,16 @@ import { makeSelectStep } from 'selectors/step'
 import { makeSelectLogin } from 'selectors/login'
 import { nextStep, goToStep } from 'actions/step'
 import { newCheckout } from 'actions/checkout'
+import { makeSelectClientExist } from 'selectors/client'
+import { makeIsLoggedIn } from 'selectors/login'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
-import InterludeStep from 'containers/Step/InterludeStep/Loadable'
 import EmailStep from 'containers/Step/EmailStep/Loadable'
 import EmailConfirmStep from 'containers/Step/EmailConfirmStep'
 import DeliveryStep from 'containers/Step/DeliveryStep/Loadable'
 import PaymentStep from 'containers/Step/PaymentStep/Loadable'
-import ConfirmStep from 'containers/Step/ConfirmStep/Loadable'
+import GodsonEmailStep from 'containers/Step/GodsonEmailStep/Loadable'
 
 // COMPONENTS
 import Header from 'components/Header'
@@ -37,10 +38,6 @@ export class Offer extends React.Component {
     this.changeStep = this.changeStep.bind(this)
   }
 
-  componentDidMount() {
-    // this.props.dispatchNewCheckout()
-  }
-
   nextStep() {
     this.props.nextStep()
   }
@@ -49,12 +46,9 @@ export class Offer extends React.Component {
     this.props.goToStep(stepNumber)
   }
 
-  handleRouteButtonHelp = event => {
-    console.log('HELP CLIC')
-  }
-
   render() {
-    const { step, login } = this.props
+    const { step, clientExist, isLoggedIn } = this.props
+
     let steps = [
       <FormulaStep
         stepNumber={1}
@@ -62,17 +56,18 @@ export class Offer extends React.Component {
         nextStep={this.nextStep}
         currentStep={step}
       />,
-      <InterludeStep
+      <EmailStep
         stepNumber={2}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
+        isOfferStep
       />
     ]
 
-    if (!login.token) {
+    if (clientExist && !isLoggedIn) {
       steps.push(
-        <EmailStep
+        <EmailConfirmStep
           stepNumber={3}
           changeStep={this.changeStep}
           nextStep={this.nextStep}
@@ -82,27 +77,27 @@ export class Offer extends React.Component {
     }
 
     steps = steps.concat([
-      <DeliveryStep
+      <GodsonEmailStep
         stepNumber={steps.length + 1}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        displayInvoiceAddress={false}
+      />,
+      <DeliveryStep
+        stepNumber={steps.length + 2}
+        changeStep={this.changeStep}
+        nextStep={this.nextStep}
+        currentStep={step}
+        isOffer={true}
       />,
       <Elements>
         <PaymentStep
-          stepNumber={steps.length + 2}
+          stepNumber={steps.length + 3}
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
         />
-      </Elements>,
-      <ConfirmStep
-        stepNumber={steps.length + 3}
-        changeStep={this.changeStep}
-        nextStep={this.nextStep}
-        currentStep={step}
-      />
+      </Elements>
     ])
 
     return (
@@ -122,7 +117,6 @@ export class Offer extends React.Component {
               <Col xs={12}>{step}</Col>
             </Row>
           ))}
-          <ButtonSticky handleRoute={this.handleRouteButtonHelp} />
         </Layout>
       </div>
     )
@@ -138,7 +132,9 @@ Offer.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   step: makeSelectStep(),
-  login: makeSelectLogin()
+  login: makeSelectLogin(),
+  clientExist: makeSelectClientExist(),
+  isLoggedIn: makeIsLoggedIn()
 })
 
 function mapDispatchToProps(dispatch) {

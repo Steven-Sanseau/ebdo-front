@@ -5,6 +5,9 @@ const selectClient = state => state.get('client')
 const makeSelectClientEmail = () =>
   createSelector(selectClient, client => client.get('data').get('email'))
 
+const makeSelectClientCount = () =>
+  createSelector(selectClient, client => client.get('clientsCount'))
+
 const makeSelectClientId = () =>
   createSelector(selectClient, client => client.get('data').get('client_id'))
 
@@ -22,6 +25,7 @@ const makeSelectClient = () =>
 
 export {
   makeSelectClientEmail,
+  makeSelectClientCount,
   makeSelectClientIsNewClient,
   makeSelectClientExist,
   makeSelectClientId,

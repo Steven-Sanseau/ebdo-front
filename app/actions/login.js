@@ -1,24 +1,26 @@
 import { EventTypes } from 'redux-segment'
 import {
   LOGIN_EMAIL,
-  LOGIN_EMAIL_SUCCESS,
+  LOGIN_EMAIL_LOADED,
   LOGIN_EMAIL_ERROR,
   LOGIN_EMAIL_CODE,
-  LOGIN_EMAIL_CODE_SUCCESS,
+  LOGIN_EMAIL_CODE_LOADED,
   LOGIN_EMAIL_CODE_ERROR,
   LOGOUT
 } from './constants'
 
-export function loginEmail(email) {
+export function loginEmail(email, redirect) {
   return {
     type: LOGIN_EMAIL,
-    email
+    email,
+    redirect
   }
 }
 
-export function loginEmailSuccess() {
+export function loginEmailLoaded(redirect) {
   return {
-    type: LOGIN_EMAIL_SUCCESS
+    type: LOGIN_EMAIL_LOADED,
+    redirect
   }
 }
 
@@ -52,9 +54,9 @@ export function loginEmailCode(
   }
 }
 
-export function loginEmailCodeSuccess(token) {
+export function loginEmailCodeLoaded(token) {
   return {
-    type: LOGIN_EMAIL_CODE_SUCCESS,
+    type: LOGIN_EMAIL_CODE_LOADED,
     token
   }
 }
