@@ -14,7 +14,7 @@ function Header() {
   return (
     <div>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/accueil" style={{ textDecoration: 'none' }}>
           <LogoWrapper>
             <Logo width={175} height={66} />
           </LogoWrapper>

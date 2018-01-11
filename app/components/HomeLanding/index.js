@@ -61,13 +61,20 @@ const Text = styled(ColCustom)`
   }
 `
 
+// TODO Hack max height is moving the content of the cover
+// Cover should use a flexbox and follow the height of the image
 const Discover = styled.div`
-  margin-top: 60px;
+  position: relative;
+  bottom: -80px;
   text-align: center;
-
+  max-height: 390px;
   span {
     color: var(--grey-blue);
   }
+
+  ${media.tablet`
+    display: none;
+  `};
 `
 const Layout = styled.div`
   width: calc(100% - 80px);
@@ -101,6 +108,8 @@ const ImageWrap = styled(ColCustom)`
   max-width: 336px;
   min-width: 336px;
   position: relative;
+  margin-bottom: 100px;
+
   ${media.tablet`
     min-width: inherit;
     max-width: 200px;

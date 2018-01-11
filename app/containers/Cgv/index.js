@@ -8,23 +8,26 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectPathName } from 'selectors/route'
 import { makeIsLoggedIn } from 'selectors/login'
 
-import TeamPage from 'components/TeamPage'
+import LegalPage from 'components/LegalPage'
 
-export class Team extends React.Component {
+export class Cgv extends React.Component {
   render() {
     const { dispatch, page, isLoggedIn } = this.props
     return (
       <div>
         <Helmet>
-          <title>Team</title>
-          <meta name="description" content="Description of Team" />
+          <title>Conditions générales de ventes</title>
+          <meta
+            name="description"
+            content="conditions générales de ventes ebdo"
+          />
         </Helmet>
-        <TeamPage dispatch={dispatch} page={page} isLoggedIn={isLoggedIn} />
+        <LegalPage dispatch={dispatch} page={page} isLoggedIn={isLoggedIn} />
       </div>
     )
   }
 }
-Team.propTypes = {
+Cgv.propTypes = {
   dispatch: PropTypes.func.isRequired,
   page: PropTypes.string,
   isLoggedIn: PropTypes.bool
@@ -41,4 +44,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Team)
+export default connect(mapStateToProps, mapDispatchToProps)(Cgv)

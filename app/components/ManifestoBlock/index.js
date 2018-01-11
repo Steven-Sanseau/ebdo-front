@@ -28,8 +28,6 @@ const Layout = styled.div`
   `};
 `
 const SectionWrapper = styled(Row)`
-  padding-top: 100px;
-
   .no-p {
     padding: 0;
   }
@@ -85,7 +83,7 @@ function ManifestoBlock() {
   return (
     <Layout>
       <SectionWrapperBig className="hidden-xs">
-        <Col xs={12} sm={4}>
+        <Col xs={12} sm={3}>
           <TextBlock
             title="Un projet de société"
             colorTitle="--booger"
@@ -97,7 +95,7 @@ function ManifestoBlock() {
             <span>3,50€</span> en kiosque.
           </TextBlock>
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} smOffset={1} sm={3}>
           <TextBlock
             title="Un journal sans pub, entièrement indépendant"
             colorTitle="--sunflower"
@@ -109,7 +107,7 @@ function ManifestoBlock() {
             <span>C’est un pacte de confiance.</span>
           </TextBlock>
         </Col>
-        <Col xs={12} sm={4}>
+        <Col xs={12} smOffset={1} sm={4}>
           <TextBlock
             title="Une relation quotidienne"
             colorTitle="--turquoise-blue"
@@ -125,9 +123,18 @@ function ManifestoBlock() {
       </SectionWrapperBig>
       <SectionWrapper between="sm">
         <ColCustom w={14} m={13} mc>
-          <img src="/tournee-ebdo.jpg" alt="tournée ebdo" width="100%" />
+          <iframe
+            style={{ maxWidth: '100%' }}
+            width="700"
+            height="380"
+            title="ebdo - La Tournée, le documentaire par Anouk Rapaport"
+            src="https://www.youtube.com/embed/0bkkaMrMQC4?modestbranding=1&autohide=1&showinfo=0&controls=0"
+            frameBorder="0"
+            allowFullScreen
+          />
           <Legend>
-            Photo issue de la tournée d'<strong>ebdo</strong> en minibus
+            <strong>ebdo - La Tournée</strong>. Le documentaire par Anouk
+            Rapaport
           </Legend>
         </ColCustom>
         <ColCustom w={7} m={13} mc>

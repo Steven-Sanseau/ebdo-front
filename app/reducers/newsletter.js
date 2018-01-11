@@ -10,13 +10,14 @@ const initialState = Immutable.fromJS({
   error: false,
   errorMessage: null,
   isNewsletterPost: false
-  // token: null,
 })
 
 function newsletterReducer(state = initialState, action) {
   switch (action.type) {
     case POST_NEWSLETTER_SUCCESS:
       return state.set('isNewsletterPost', true)
+        .set('error', false)
+        .set('errorMessage', null)
     case POST_NEWSLETTER_ERROR:
       return state.set('error', action.error)
     default:

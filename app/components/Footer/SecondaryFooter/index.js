@@ -21,7 +21,7 @@ const Layout = styled.div`
 
   ${media.tablet`
     padding: 40px 0;
-  `}
+  `};
 `
 
 const SecondaryFooterWrapper = styled.section`
@@ -30,7 +30,7 @@ const SecondaryFooterWrapper = styled.section`
   .m-up {
     ${media.tablet`
       order: -1;
-    `}
+    `};
   }
   .m-border {
     ${media.tablet`
@@ -39,7 +39,7 @@ const SecondaryFooterWrapper = styled.section`
       border-top: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
 
-    `}
+    `};
   }
 `
 const Title = styled.h2`
@@ -49,7 +49,7 @@ const Title = styled.h2`
   ${media.tablet`
     font-size: 16px;
     line-height: 22px;
-  `}
+  `};
 `
 
 const LinkWrapper = styled.div`
@@ -59,7 +59,7 @@ const LinkWrapper = styled.div`
 const RowSimpleBorder = styled(Row)`
   @media (min-width: 768px) {
     .w-5:nth-of-type(2) {
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 `
@@ -68,10 +68,15 @@ const SecondaryFooter = () => (
   <SecondaryFooterWrapper>
     <Layout>
       <RowSimpleBorder between="sm">
-        <ColCustom w={5} m={13}>
-        </ColCustom>
+        <ColCustom w={5} m={13} />
         <ColCustom w={5} m={13} className="m-border">
           <Title>Mentions légales</Title>
+          <LinkWrapper>
+            <Link to="/mentions-legales">Mentions légales</Link>
+          </LinkWrapper>
+          <LinkWrapper>
+            <Link to="/cgv">Conditions générales de ventes</Link>
+          </LinkWrapper>
         </ColCustom>
         <ColCustom w={5} m={13} className="m-up">
           <LinkWrapper>
@@ -87,8 +92,7 @@ const SecondaryFooter = () => (
             </Link>
           </LinkWrapper>
         </ColCustom>
-        <ColCustom w={5} m={13}>
-        </ColCustom>
+        <ColCustom w={5} m={13} />
       </RowSimpleBorder>
     </Layout>
   </SecondaryFooterWrapper>

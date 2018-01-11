@@ -56,10 +56,10 @@ export class NewsletterContainer extends React.Component {
   render() {
     let newsletterRender = null
 
-    const { type } = this.props
+    const { type, newsletter} = this.props
     const newsletterComponent = (typeBlock, colorCheck) => (
       <Newsletter
-        newsletter={this.state.newsletter}
+        newsletter={{ ...this.state.newsletter, ...newsletter }}
         handleEmail={this.handleEmail}
         type={typeBlock}
         handleFirstname={this.handleFirstname}
