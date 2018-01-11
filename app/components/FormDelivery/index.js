@@ -137,7 +137,7 @@ class FormDelivery extends React.Component {
                     Téléphone
                     <PhoneWrapper
                       country={this.props.country.value}
-                      placeholder="+33 6 00 00 00 00"
+                      placeholder="06 00 00 00 00"
                       value={this.props.address.phone}
                       onChange={this.handlePhone}
                       convertToNational
