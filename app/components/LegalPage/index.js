@@ -21,7 +21,7 @@ const Layout = styled.div`
 const IntroWrap = styled.div`
   padding-top: 100px;
   padding-bottom: 30px;
-  background-color: var(--tomato);
+  background-color: var(--pale-grey);
   color: white;
 
   h2 {
@@ -55,7 +55,7 @@ function LegalPage(props) {
         <Layout>
           <Row>
             <Col xs={12} sm={6}>
-              <h2>Mentions légales</h2>
+              <h2>Conditions générales de ventes légales</h2>
             </Col>
           </Row>
         </Layout>

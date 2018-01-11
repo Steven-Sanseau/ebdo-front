@@ -20,7 +20,7 @@ const Layout = styled.div`
 const IntroWrap = styled.div`
   padding-top: 100px;
   padding-bottom: 30px;
-  background-color: var(--tomato);
+  background-color: var(--pale-grey);
   color: white;
 
   h2 {
