@@ -11,7 +11,6 @@ import { makeIsLoggedIn } from 'selectors/login'
 import TeamPage from 'components/TeamPage'
 
 export class Team extends React.Component {
-  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { dispatch, page, isLoggedIn } = this.props
     return (
