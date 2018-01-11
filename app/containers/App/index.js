@@ -59,7 +59,7 @@ export default function App() {
         <Route exact path="/v2/mentions-legales" component={Mentions} />
         <Route exact path="/v2/cgv" component={Cgv} />
         <Route component={() => {
-          window.location = 'http://ebdo-lejournal.fr'
+          console.log('test')
           return null
         }} />
       </Switch>
