@@ -10,13 +10,14 @@ import { Link } from 'react-router-dom'
 const IconHome = styled.span`
   margin-right: 10px;
 `
-function Header() {
+
+function Header({ logoColor }) {
   return (
     <div>
       <Wrapper>
         <Link to="/accueil" style={{ textDecoration: 'none' }}>
           <LogoWrapper>
-            <Logo width={175} height={66} />
+            <Logo width={175} height={66} color={logoColor} />
           </LogoWrapper>
           <SubTitle>
             <IconHome>
