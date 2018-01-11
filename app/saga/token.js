@@ -66,6 +66,7 @@ function* getTokenSlimpaySaga() {
       }
     })
     yield put(getTokenSlimpayLoaded(tokenResponse.token, tokenResponse.iframe))
+    window.location.href = tokenResponse.iframe.href
   } catch (err) {
     yield put(getTokenSlimpayError(err.message))
   }
@@ -89,6 +90,7 @@ function* getValidTokenSlimpaySaga() {
     yield put(postCheckout())
   } catch (err) {
     yield put(getValidTokenSlimpayError(err.message))
+    yield put(push('/abonnement'))
   }
 }
 

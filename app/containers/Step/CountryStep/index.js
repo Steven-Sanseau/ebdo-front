@@ -37,6 +37,16 @@ class CountryStep extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    // scroller.scrollTo('myScrollToElement', {
+    //   duration: 1500,
+    //   delay: 100,
+    //   smooth: true,
+    //   containerId: 'ContainerElementID',
+    //   offset: 50
+    // })
+  }
+
   handleAnimationEnding = () => {
     this.setState({ isAnim: false })
   }

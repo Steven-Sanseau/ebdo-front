@@ -7389,6 +7389,12 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
+react-scroll@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.7.5.tgz#7f04c7f5d7f4f420730914184b32dd4c471e607e"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-scrolllock@^1.0.5:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-scrolllock/-/react-scrolllock-1.0.9.tgz#7c9c3c0cce2ed55042af2808b6483b85b121cdcb"

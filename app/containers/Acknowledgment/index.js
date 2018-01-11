@@ -75,6 +75,15 @@ const Loader = styled.div`
     }
   }
 `
+const ErrorText = styled.div`
+  margin: 15% 0 5% 0;
+  font-size: 18px;
+  line-height: 26px;
+`
+const SmallError = styled.div`
+  margin-top: 30px;
+  font-size: 14px;
+`
 
 export class Acknowledgment extends React.Component {
   componentWillMount() {
@@ -125,11 +134,22 @@ export class Acknowledgment extends React.Component {
               </div>
             )}
             {match.params.type === 'chargement' && (
-              <Row center="xs">
-                <LoaderWrapper>
-                  <Loader />
-                </LoaderWrapper>
-              </Row>
+              <div>
+                <Row center="xs">
+                  <Col xs={12} sm={4}>
+                    <ErrorText>
+                      <BoldText>Veuillez patienter</BoldText>
+                      <br />
+                      Merci de ne pas rafraichir cette page
+                    </ErrorText>
+                  </Col>
+                </Row>
+                <Row center="xs">
+                  <LoaderWrapper>
+                    <Loader />
+                  </LoaderWrapper>
+                </Row>
+              </div>
             )}
             {match.params.type === 'erreur' && (
               <div>
@@ -137,10 +157,15 @@ export class Acknowledgment extends React.Component {
                   <Card />
                 </Row>
                 <Row center="xs">
-                  <p>
-                    <BoldText>Une Erreur est survenue</BoldText> lors de votre
-                    commande.
-                  </p>
+                  <Col xs={12} sm={4}>
+                    <ErrorText>
+                      <BoldText>Une Erreur est survenue</BoldText> lors de votre
+                      commande. <br />
+                      Nous vous invitons à vérifier vos informations de paiement
+                      ou à essayer avec un autre moyen de paiement.<br />
+                      <br />
+                    </ErrorText>
+                  </Col>
                 </Row>
                 <Row center="xs">
                   <Col xs={12} sm={3}>
@@ -151,7 +176,7 @@ export class Acknowledgment extends React.Component {
                       Je change mes informations
                     </Button>
                   </Col>
-                  <Col xs={12} sm={3}>
+                  {/* <Col xs={12} sm={3}>
                     <Button
                       color={'--space-grey'}
                       colorText="--space-grey"
@@ -160,6 +185,15 @@ export class Acknowledgment extends React.Component {
                       }}>
                       Retourner à l'accueil
                     </Button>
+                  </Col> */}
+                </Row>
+                <Row center="xs">
+                  <Col xs={12} sm={3}>
+                    <SmallError>
+                      Si l'erreur persiste, n'hésitez pas à contacter notre
+                      service client en cliquant sur la petite bulle bleue en
+                      bas à droite de votre écran.
+                    </SmallError>
                   </Col>
                 </Row>
               </div>
