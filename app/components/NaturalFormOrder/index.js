@@ -271,6 +271,7 @@ export class NaturalFormOrder extends React.Component {
       <div onClick={this.handleClick}>
         <div className={isNaturalForm ? '' : 'hidden'}>
           <DropdownWrap
+            key={'dropdown-offer'}
             className="dropdown-wrap"
             options={options1}
             value={options1.find(el => el.value === (target ? '1' : '0'))}
@@ -282,6 +283,7 @@ export class NaturalFormOrder extends React.Component {
           />
 
           <DropdownWrap
+            key={'dropdown-duration'}
             className="dropdown-wrap"
             options={options2}
             value={options2.find(
@@ -301,6 +303,7 @@ export class NaturalFormOrder extends React.Component {
             pour{' '}
           </TextWrap>
           <DropdownWrap
+            key={'dropdown-price'}
             className="dropdown-wrap"
             options={options3}
             value={options3.find(el => el.value === String(price))}
