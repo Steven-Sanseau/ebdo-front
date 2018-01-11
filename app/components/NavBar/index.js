@@ -207,14 +207,14 @@ class NavBar extends React.Component {
           <Row between="sm" className="nav-menu">
             <Col m={13} mc>
               <Title menuFixed={menuFixed}>
-                <Link to="/">
+                <Link to="/accueil">
                   <Logo
                     width={menuFixed ? 65 : 150}
                     height={menuFixed ? 25 : 56}
                   />
                 </Link>
               </Title>
-              <Subtitle menuFixed={menuFixed}>Lisez vous, lisez nous</Subtitle>
+              <Subtitle menuFixed={menuFixed}>Lisez-vous, lisez-nous</Subtitle>
             </Col>
             <Col m={13}>
               <FlexWrap menuFixed={menuFixed}>

@@ -71,7 +71,7 @@ const Discover = styled.div`
   span {
     color: var(--grey-blue);
   }
-  
+
   ${media.tablet`
     display: none;
   `};
@@ -82,7 +82,6 @@ const Layout = styled.div`
   margin-left: auto;
   margin-right: auto;
   position: relative;
-
 
   ${media.tablet`
     padding: 0;

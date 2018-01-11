@@ -13,6 +13,8 @@ import Source from 'containers/Source/Loadable'
 import Manifest from 'containers/Manifest/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import Login from 'containers/Login/Loadable'
+import Cgv from 'containers/Cgv/Loadable'
+import Mentions from 'containers/Mentions/Loadable'
 
 export default function App() {
   return (
@@ -21,9 +23,17 @@ export default function App() {
         <meta name="description" content="Abonnement ebdo" />
       </Helmet>
       <Switch>
-        <Route path='/' exact component={() => { window.location = 'http://ebdo-lejournal.fr'; return null }} />
+        <Route
+          path="/"
+          exact
+          component={() => {
+            window.location = 'http://ebdo-lejournal.fr'
+            return null
+          }}
+        />
 
         <Route exact path="/accueil" component={Home} />
+        <Route exact path="/" component={Home} />
 
         <Redirect from="/subscribe" to="/abonnement" />
         <Route path="/abonnement/:step" component={Checkout} />
@@ -56,6 +66,8 @@ export default function App() {
 
         <Redirect from="/logout" to="/connexion" />
 
+        <Route exact path="/mentions-legales" component={Mentions} />
+        <Route exact path="/cgv" component={Cgv} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
