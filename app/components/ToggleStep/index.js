@@ -216,7 +216,7 @@ class ToggleStep extends React.Component {
             <StepPostview>
               <Row>
                 {!hideOffsetClose && <ColCustom w={5} w-m={0} />}
-                <ColCustom w={15}>
+                <ColCustom w={!hideOffsetClose ? 15 : 21}>
                   <Row>
                     {!hideIconChecked && (
                       <ColCustom w={1} w-m={2}>

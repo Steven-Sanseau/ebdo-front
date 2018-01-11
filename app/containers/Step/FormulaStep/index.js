@@ -51,6 +51,10 @@ const Price = styled.div`
   color: var(--space-grey);
 `
 
+const ColCustomTextFormulae = styled(ColCustom)`
+  margin-top: 5%;
+`
+
 class FormulaStep extends React.Component {
   constructor(props) {
     super(props)
@@ -147,7 +151,7 @@ class FormulaStep extends React.Component {
     return (
       <div>
         <Row>
-          <ColCustom w={6}>
+          <ColCustom w={9}>
             {offer.data.is_gift && (
               <Image
                 src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png"
@@ -163,7 +167,7 @@ class FormulaStep extends React.Component {
               />
             )}
           </ColCustom>
-          <Col w={17}>
+          <ColCustomTextFormulae w={12}>
             <TextFormulae>
               {offer.data.is_gift && <VioletText>J'offre </VioletText>}
               {!offer.data.is_gift && <VioletText>Je reçois</VioletText>}
@@ -235,7 +239,7 @@ class FormulaStep extends React.Component {
                 Modifier
               </Button>
             </NextStep>
-          </Col>
+          </ColCustomTextFormulae>
         </Row>
       </div>
     )

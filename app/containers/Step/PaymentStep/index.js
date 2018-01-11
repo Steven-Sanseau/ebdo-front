@@ -46,6 +46,11 @@ import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 const ChoicePaymentMethodWrapper = styled.div`
   margin-bottom: 30px;
 `
+
+const LinkCgv = styled(Link)`
+  display: inline;
+  color: var(--grey-blue);
+`
 class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
@@ -185,15 +190,16 @@ class PaymentStep extends React.Component {
           </Row>
         )}
         <div>
-          Vérifiez attentivement vos informations avant de confirmer.
+          Vérifiez attentivement vos informations avant de confirmer. <br />En
+          commandant vous confirmer avoir lu et accepté les{' '}
+          <LinkCgv to="/cgv">CGV</LinkCgv>
           <CheckboxConfirmCheckout
             error={this.state.errorCGV}
             errorMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
-            label="J'ai lu et accepte les "
+            label=""
           />
-          <Link to="/cgv">CGV</Link>
         </div>
       </div>
     )
