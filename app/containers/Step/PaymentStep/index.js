@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
-
+import { Link } from 'react-router-dom'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -45,6 +45,11 @@ import CheckboxConfirmCheckout from 'components/CheckboxConfirmCheckout'
 
 const ChoicePaymentMethodWrapper = styled.div`
   margin-bottom: 30px;
+`
+
+const LinkCgv = styled(Link)`
+  display: inline;
+  color: var(--grey-blue);
 `
 class PaymentStep extends React.Component {
   constructor(props) {
@@ -180,20 +185,20 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
-              <ErrorMessage>
-                {tokenMessageError}
-              </ErrorMessage>
+              <ErrorMessage>{tokenMessageError}</ErrorMessage>
             </Col>
           </Row>
         )}
         <div>
-          Vérifiez attentivement vos informations avant de confirmer.
+          Vérifiez attentivement vos informations avant de confirmer. <br />En
+          commandant vous confirmer avoir lu et accepté les{' '}
+          <LinkCgv to="/cgv">CGV</LinkCgv>
           <CheckboxConfirmCheckout
             error={this.state.errorCGV}
             errorMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
-            label="J'ai lu et accepte les CGV"
+            label=""
           />
         </div>
       </div>
@@ -212,12 +217,7 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const {
-      currentStep,
-      changeStep,
-      stepNumber,
-      tokenIsLoading
-    } = this.props
+    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
 
     return (
       <ToggleStep

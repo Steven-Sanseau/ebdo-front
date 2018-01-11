@@ -20,22 +20,17 @@ export class NewsletterContainer extends React.Component {
         email: ''
       }
     }
-
-    this.handleFirstname = this.handleFirstname.bind(this)
-    this.handleEmail = this.handleEmail.bind(this)
-    this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleFirstname(event) {
+  handleFirstname = event => {
     this.handleChange('firstname', event.target.value)
   }
 
-  handleEmail(event) {
+  handleEmail = event => {
     this.handleChange('email', event.target.value)
   }
 
-  handleChange(key, val) {
+  handleChange = (key, val) => {
     this.setState(
       _.extend(this.state.newsletter, {
         [key]: val
@@ -43,24 +38,30 @@ export class NewsletterContainer extends React.Component {
     )
   }
 
-  handleKeyPress(e) {
+  handleKeyPress = e => {
     if (e.key === 'Enter') {
-      this.sendRequest()
+      this.handleSubmit()
     }
   }
 
-  handleClick() {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.handleClick()
+  }
+
+  handleClick = () => {
     this.props.dispatchNewsletter(this.state.newsletter)
   }
 
   render() {
     let newsletterRender = null
 
-    const { type, newsletter} = this.props
+    const { type, newsletter } = this.props
     const newsletterComponent = (typeBlock, colorCheck) => (
       <Newsletter
         newsletter={{ ...this.state.newsletter, ...newsletter }}
         handleEmail={this.handleEmail}
+        handleSubmit={this.handleSubmit}
         type={typeBlock}
         handleFirstname={this.handleFirstname}
         handleKeyPress={this.handleKeyPress}
