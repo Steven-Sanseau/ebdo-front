@@ -2,6 +2,7 @@ import React from 'react'
 import Lightbox from 'react-images'
 import styled from 'styled-components'
 import { media } from 'global-styles'
+import moment from 'moment'
 
 import 'components/Gallery/Gallery.css'
 
@@ -103,26 +104,32 @@ const Pin = styled.div`
   margin-top: -30px;
   transition: transform 0.3s ease-out;
 `
+
 const Images = [
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/1.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg`
   },
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/2.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg`
   },
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/3.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/2.jpg`
   },
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/4.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/3.jpg`
   },
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/5.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/4.jpg`
   },
   {
-    src: 'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/0/6.jpg'
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/5.jpg`
+  },
+  {
+    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/6.jpg`
   }
 ]
+const firstPage = `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg`
+const summary = `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg`
 
 class Gallery extends React.Component {
   constructor() {
@@ -178,10 +185,10 @@ class Gallery extends React.Component {
   render() {
     return (
       <Cover onClick={this.openLightbox}>
-        <img src="0-couv.jpg" alt="couv" width="100%" />
+        <img src={firstPage} alt="première de couverture ebdo" width="100%" />
         <Pin className="pin">En kiosque cette semaine</Pin>
         <Undercover>
-          <img src="sommaire-droite.png" alt="sommaire" width="100%" />
+          <img src={summary} alt="sommaire" width="100%" />
           <div className="fond" />
           <div className="fond" />
           <div className="fond" />

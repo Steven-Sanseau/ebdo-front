@@ -31,45 +31,44 @@ const Newsletter = props => {
 
   return (
     <Row>
-      {(newsletter.isNewsletterPost && !newsletter.error) ? (
-        <p>
-          Merci de votre inscription à la newsletter !
-        </p>
+      {newsletter.isNewsletterPost && !newsletter.error ? (
+        <p>Merci de votre inscription à la newsletter !</p>
       ) : (
-        <Row>
-          <Col xs={12} sm={type === 'block' ? 12 : 4}>
-            <InputWrapper>
-              <InputText
-                label="Prénom"
-                placeholder="John"
-                color="var(--white-true)"
-                value={newsletter.firstname}
-                onChange={handleFirstname}
-              />
-            </InputWrapper>
-          </Col>
-          <Col
-            xs={12}
-            sm={type === 'block' ? 12 : 7}
-            smOffset={type === 'block' ? 0 : 1}>
-            <InputWrapper>
-              <InputText
-                label="Adresse mail"
-                color="var(--white-true)"
-                placeholder="contact@mail.fr"
-                value={newsletter.email}
-                onChange={handleEmail}
-                handleKeyPress={handleKeyPress}
-              />
-              <Check color={colorCheck} handleClick={handleClick} />
-            </InputWrapper>
-          </Col>
+        <form onSubmit={props.handleSubmit}>
+          <Row>
+            <Col xs={12} sm={type === 'block' ? 12 : 4}>
+              <InputWrapper>
+                <InputText
+                  label="Prénom"
+                  placeholder="John"
+                  color="var(--white-true)"
+                  value={newsletter.firstname}
+                  onChange={handleFirstname}
+                />
+              </InputWrapper>
+            </Col>
+            <Col
+              xs={12}
+              sm={type === 'block' ? 12 : 7}
+              smOffset={type === 'block' ? 0 : 1}>
+              <InputWrapper>
+                <InputText
+                  label="Adresse mail"
+                  color="var(--white-true)"
+                  placeholder="contact@mail.fr"
+                  value={newsletter.email}
+                  onChange={handleEmail}
+                  handleKeyPress={handleKeyPress}
+                />
+                <Check color={colorCheck} handleClick={handleClick} />
+              </InputWrapper>
+            </Col>
 
-          {newsletter.error &&
-          <ErrorMessage>
-            {newsletter.error}
-          </ErrorMessage>}
-        </Row>
+            {newsletter.error && (
+              <ErrorMessage>{newsletter.error}</ErrorMessage>
+            )}
+          </Row>
+        </form>
       )}
     </Row>
   )
@@ -77,6 +76,7 @@ const Newsletter = props => {
 
 Newsletter.propTypes = {
   handleEmail: PropTypes.func,
+  handleSubmit: PropTypes.func,
   handleFirstname: PropTypes.func,
   handleClick: PropTypes.func,
   handleKeyPress: PropTypes.func,
