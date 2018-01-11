@@ -14,19 +14,19 @@ injectGlobal`
     font-family: 'FG-R';
     font-style: normal;
     font-weight: 400;
-    src: url('./FoundersGroteskWeb-Regular.woff') format('woff');
+    src: url('/FoundersGroteskWeb-Regular.woff') format('woff');
   }
   @font-face {
     font-family: "FG-R";
     font-style: normal;
     font-weight: 500;
-    src: url('./FoundersGroteskWeb-Medium.woff') format('woff');
+    src: url('/FoundersGroteskWeb-Medium.woff') format('woff');
   }
   @font-face {
     font-family: "FG-R";
     font-style: normal;
     font-weight: 700;
-    src: url('./FoundersGroteskWeb-Bold.woff') format('woff');
+    src: url('/FoundersGroteskWeb-Bold.woff') format('woff');
   }
 
 

@@ -134,7 +134,7 @@ function HomeLanding() {
           </Title>
           <Text mc m={13}>
             <p>
-              Reportages, enquêtes, actus, photos, BD, vie pratique : Ebdo, une
+              Reportages, enquêtes, actus, photos, BD, vie pratique : ebdo, une
               invitation à prendre du recul pour comprendre, pour soi, pour
               agir.
             </p>

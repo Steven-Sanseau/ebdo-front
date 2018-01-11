@@ -138,7 +138,8 @@ class ToggleStep extends React.Component {
       secondaryButton,
       isError,
       hideIconChecked,
-      hideNextStep
+      hideNextStep,
+      hideOffsetClose
     } = this.props
 
     return (
@@ -214,8 +215,8 @@ class ToggleStep extends React.Component {
           <Layout fluid>
             <StepPostview>
               <Row>
-                <ColCustom w={5} w-m={0} />
-                <ColCustom w={15}>
+                {!hideOffsetClose && <ColCustom w={5} w-m={0} />}
+                <ColCustom w={!hideOffsetClose ? 15 : 21}>
                   <Row>
                     {!hideIconChecked && (
                       <ColCustom w={1} w-m={2}>
@@ -253,6 +254,7 @@ ToggleStep.propTypes = {
   isError: PropTypes.bool,
   hideIconChecked: PropTypes.bool,
   hideNextStep: PropTypes.bool,
+  hideOffsetClose: PropTypes.bool,
   iconName: PropTypes.string,
   title: PropTypes.string,
   stepNumber: PropTypes.number,
@@ -266,7 +268,8 @@ ToggleStep.propTypes = {
 }
 
 ToggleStep.defaultProps = {
-  hideNextStep: false
+  hideNextStep: false,
+  hideOffsetClose: false
 }
 
 export default ToggleStep
