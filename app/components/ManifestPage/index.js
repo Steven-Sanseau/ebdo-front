@@ -56,11 +56,7 @@ function ManifestPage(props) {
           <Row>
             <Col xs={12} sm={6}>
               <h2>Manifeste</h2>
-              <p>
-                Une question ? Vous n’êtes sûrement pas le premier. Parcourez
-                toutes les interrogations de lecteurs auxquelles nous avons
-                répondu.
-              </p>
+              <p>Une question ?</p>
             </Col>
           </Row>
         </Layout>
@@ -69,49 +65,31 @@ function ManifestPage(props) {
         <Row>
           <TextWrap xs={12} sm={6} smOffset={3}>
             <p>
-              L'un est éditeur, l'autre est grand reporter. Ensemble, ils ont
-              fondé XXI et 6Mois, deux revues de référence, sans publicité,
-              vendues en librairie. Avec de nouvelles recrues, ils préparent un
-              hebdomadaire de presse d'un genre nouveau et toujours sans
-              publicité.
-            </p>
-          </TextWrap>
-          <TextWrap xs={12} sm={6} smOffset={3}>
-            <p>
               Nous sommes noyés sous les informations, en perte de repères.{' '}
             </p>
             <br />
             <h4>Comment nous y retrouver ? </h4>
-            <p>
-              Forts de dix ans d’expérience avec les revues XXI et 6Mois ainsi
-              que de deux ans de recherche, nous lançons un nouvel hebdomadaire
-              de presse pour répondre à ce défi et reprendre pied.{' '}
-            </p>
+            Forts de dix ans d’expérience avec les revues XXI et 6Mois ainsi que
+            de deux ans de recherche, nous lançons un nouvel hebdomadaire de
+            presse pour répondre à ce défi et reprendre pied.{' '}
             <h4>ebdo, un rendez-vous sur papier. </h4>
-            <p>
-              Chaque semaine, un remède pour lutter contre le chaos de
-              l’information. Pour nous ressourcer, découvrir, comprendre. Pour
-              nous donner des clés. Un rendez-vous avec le monde, de l’intime au
-              lointain, du coin de la rue au bout de la Terre, pour nous
-              connecter avec les autres et nous-mêmes.
-            </p>
+            Chaque semaine, un remède pour lutter contre le chaos de
+            l’information. Pour nous ressourcer, découvrir, comprendre. Pour
+            nous donner des clés. Un rendez-vous avec le monde, de l’intime au
+            lointain, du coin de la rue au bout de la Terre, pour nous connecter
+            avec les autres et nous-mêmes.
             <h4>Ebdo, un journal dont les lecteurs sont les acteurs.</h4>
-            <p>
-              {' '}
-              L’échange avec vous est le moteur de notre projet. Avec l’outil
-              numérique, nous mettons en place un système innovant d’interaction
-              entre les lecteurs et la rédaction, La Source. C’est une boîte à
-              idées, à questions et à initiatives, qui recueille témoignages et
-              expertises.
-            </p>
-            <h4>Ebdo, un journal sans publicité</h4>,<p>
-              {' '}
-              libre de tout pouvoir, de toute influence. Nos journalistes n’ont
-              de compte à rendre à personne si ce n’est à vous, lecteurs. Notre
-              seule ressource, c’est vous. Un guide pour mieux comprendre le
-              monde, y trouver sa place et en devenir acteur Ebdo, l’essentiel,
-              chaque vendredi
-            </p>
+            L’échange avec vous est le moteur de notre projet. Avec l’outil
+            numérique, nous mettons en place un système innovant d’interaction
+            entre les lecteurs et la rédaction, La Source. C’est une boîte à
+            idées, à questions et à initiatives, qui recueille témoignages et
+            expertises.
+            <h4>Ebdo, un journal sans publicité</h4>
+            libre de tout pouvoir, de toute influence. Nos journalistes n’ont de
+            compte à rendre à personne si ce n’est à vous, lecteurs. Notre seule
+            ressource, c’est vous. Un guide pour mieux comprendre le monde, y
+            trouver sa place et en devenir acteur Ebdo, l’essentiel, chaque
+            vendredi
           </TextWrap>
         </Row>
       </Layout>
