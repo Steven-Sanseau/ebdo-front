@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-flexbox-grid'
-
+import { Link } from 'react-router-dom'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -180,9 +180,7 @@ class PaymentStep extends React.Component {
                 handleChange={this.handleChangeStripeForm}
                 handleSubmit={this.handleSubmitStripeForm}
               />
-              <ErrorMessage>
-                {tokenMessageError}
-              </ErrorMessage>
+              <ErrorMessage>{tokenMessageError}</ErrorMessage>
             </Col>
           </Row>
         )}
@@ -193,8 +191,9 @@ class PaymentStep extends React.Component {
             errorMessage={this.state.errMessage}
             handleConfirmCGV={this.handleCheckboxCGV}
             isChecked={this.props.isCGVAccepted}
-            label="J'ai lu et accepte les CGV"
+            label="J'ai lu et accepte les "
           />
+          <Link to="/cgv">CGV</Link>
         </div>
       </div>
     )
@@ -212,12 +211,7 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const {
-      currentStep,
-      changeStep,
-      stepNumber,
-      tokenIsLoading
-    } = this.props
+    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
 
     return (
       <ToggleStep

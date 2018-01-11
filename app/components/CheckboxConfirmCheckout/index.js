@@ -8,7 +8,7 @@ function FormConfirm(props) {
     <div>
       <Row>
         <Checkbox
-          text="J'ai lu et accepté les CGV"
+          text="J'ai lu et accepté les "
           onCheck={props.handleConfirmCGV}
           isChecked={props.isChecked}
           error={props.error}

@@ -149,7 +149,7 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'tous les mois',
               <span>
-                Sans engagement, je pourrais me désengager en un clic !
+                Sans engagement, je pourrai me désengager en un clic !
               </span>
             )
           },
@@ -158,8 +158,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 3 mois',
               <span>
-                Régler maintenant et recevez 12 numéros (sauf désengagement de
-                votre part)
+                Je règle maintenant et je reçois 12 numéros (sauf désengagement
+                de votre part)
               </span>
             )
           },
@@ -168,8 +168,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 6 mois',
               <span>
-                Régler maintenant et recevez 24 numéros (sauf désengagement de
-                votre part)
+                Je règle maintenant et je reçois 24 numéros (sauf désengagement
+                de votre part)
               </span>
             )
           },
@@ -178,8 +178,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 12 mois',
               <span>
-                Régler maintenant et recevez 48 numéros (sauf désengagement de
-                votre part)
+                Je règle maintenant et je reçois 48 numéros (sauf désengagement
+                de votre part)
               </span>
             )
           }
@@ -190,8 +190,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 3 mois',
               <span>
-                Régler maintenant et recevez 12 numéros (sauf désengagement de
-                votre part)
+                Je règle maintenant et je reçois 12 numéros (sauf désengagement
+                de votre part)
               </span>
             )
           },
@@ -200,8 +200,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 6 mois',
               <span>
-                Régler maintenant et recevez 24 numéros (sauf désengagement de
-                votre part){' '}
+                Je règle maintenant et je reçois 24 numéros (sauf désengagement
+                de votre part){' '}
               </span>
             )
           },
@@ -210,8 +210,8 @@ export class NaturalFormOrder extends React.Component {
             label: this.valueElem(
               'pendant 12 mois',
               <span>
-                Réglez maintenant et recevez 48 numéros (sauf désengagement de
-                votre part)
+                Je règle maintenant et je reçois 48 numéros (sauf désengagement
+                de votre part)
               </span>
             )
           }
