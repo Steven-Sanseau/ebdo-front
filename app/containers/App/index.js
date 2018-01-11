@@ -21,7 +21,9 @@ export default function App() {
         <meta name="description" content="Abonnement ebdo" />
       </Helmet>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route path='/' exact component={() => { window.location = 'http://ebdo-lejournal.fr'; return null }} />
+
+        <Route exact path="/accueil" component={Home} />
 
         <Redirect from="/subscribe" to="/abonnement" />
         <Route path="/abonnement/:step" component={Checkout} />

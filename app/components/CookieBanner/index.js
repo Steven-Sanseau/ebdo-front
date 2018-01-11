@@ -11,6 +11,10 @@ export default function CookieBannerWrapper(props) {
       cookie="user-has-accepted-"
       dismissOnScroll={false}
       buttonMessage="ok"
+      styles={{
+        banner: { height: 'auto', paddingLeft: '100px', paddingRight: '100px' },
+        button: { left: '35px'}
+      }}
     />
   )
 }
