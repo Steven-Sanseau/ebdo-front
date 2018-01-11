@@ -6,9 +6,10 @@ const Layout = styled.div`
   margin-right: auto;
 
   background: var(--background);
+  padding-bottom: 10%;
 
   ${media.tablet`
-    padding: 40px 0;
+    padding: 20% 0;
   `};
 `
 

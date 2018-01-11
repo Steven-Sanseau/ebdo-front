@@ -67,8 +67,12 @@ const Loader = styled.div`
   border-top-color: #ffffff;
   animation: spin 1s infinite linear;
   @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `
 
@@ -79,7 +83,7 @@ export class Acknowledgment extends React.Component {
     }
   }
   returnHome = () => {
-    this.dispatch(push('/'))
+    this.props.dispatch(push('/'))
   }
 
   render() {
@@ -92,7 +96,9 @@ export class Acknowledgment extends React.Component {
         }>
         <Row center="xs" start="lg">
           <Col xs={12}>
-            <Header logoColor={match.params.type === 'merci' ? 'white' : null} />
+            <Header
+              logoColor={match.params.type === 'merci' ? 'white' : null}
+            />
           </Col>
         </Row>
         <Row center="xs">
@@ -131,7 +137,10 @@ export class Acknowledgment extends React.Component {
                   <Card />
                 </Row>
                 <Row center="xs">
-                  <p><BoldText>Une Erreur est survenue</BoldText> lors de votre commande.</p>
+                  <p>
+                    <BoldText>Une Erreur est survenue</BoldText> lors de votre
+                    commande.
+                  </p>
                 </Row>
                 <Row center="xs">
                   <Col xs={12} sm={3}>
