@@ -26,7 +26,8 @@ import {
 import {
   setTokenStripe,
   setTokenStripeLoaded,
-  setTokenStripeError
+  setTokenStripeError,
+  getTokenSlimpay
 } from 'actions/token'
 
 import {
@@ -90,7 +91,7 @@ class PaymentStep extends React.Component {
     const { slimpayIframe } = this.props
 
     if (slimpayIframe && slimpayIframe.href) {
-      window.location.href = slimpayIframe.href
+      // window.location.href = slimpayIframe.href
     }
   }
 
@@ -106,7 +107,7 @@ class PaymentStep extends React.Component {
     })
     if (this.props.isCGVAccepted) {
       if (this.props.payementMethod === 1) {
-        this.handleGoToSlimpay()
+        this.props.dispatchGetSlimpayToken()
       }
       if (this.props.payementMethod === 2) {
         this.getStripeToken()
@@ -276,6 +277,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatchSetPayementMethod: method => dispatch(setPayementMethod(method)),
+    dispatchGetSlimpayToken: () => dispatch(getTokenSlimpay()),
     dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
     dispatchSetTokenStripeLoaded: token =>
       dispatch(setTokenStripeLoaded(token)),

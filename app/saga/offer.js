@@ -86,6 +86,10 @@ function* middleWareSetParamsOffer(action) {
   if (action.params.is_gift && offer.data.duration === 0) {
     yield put(setOfferParams({ duration: 12 }, false))
   }
+
+  if (action.params.duration > 0 && offer.data.payment_method === 1) {
+    yield put(setOfferParams({ payment_method: 2 }, false))
+  }
 }
 
 export default function* sagaOffer() {
