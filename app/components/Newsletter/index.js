@@ -39,8 +39,8 @@ const Newsletter = props => {
             <Col xs={12} sm={type === 'block' ? 12 : 4}>
               <InputWrapper>
                 <InputText
-                  label="Prénom"
-                  placeholder="John"
+                  label="Mon Prénom"
+                  placeholder="Michel"
                   color="var(--white-true)"
                   value={newsletter.firstname}
                   onChange={handleFirstname}
@@ -53,9 +53,9 @@ const Newsletter = props => {
               smOffset={type === 'block' ? 0 : 1}>
               <InputWrapper>
                 <InputText
-                  label="Adresse mail"
+                  label="Mon adresse email"
                   color="var(--white-true)"
-                  placeholder="contact@mail.fr"
+                  placeholder="michel@laposte.fr"
                   value={newsletter.email}
                   onChange={handleEmail}
                   handleKeyPress={handleKeyPress}

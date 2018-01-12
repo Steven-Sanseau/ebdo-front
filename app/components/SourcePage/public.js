@@ -134,7 +134,7 @@ function SourcePagePublic(props) {
               width="560"
               height="317"
               title="La Source"
-              src="https://www.youtube.com/embed/1XiujpNTFxk?modestbranding=1&autohide=1&showinfo=0&controls=0"
+              src="https://www.youtube.com/embed/M6Ok6MS_SlM?modestbranding=1&autohide=1&showinfo=0&rel=0"
               frameBorder="0"
               allowFullScreen
             />
