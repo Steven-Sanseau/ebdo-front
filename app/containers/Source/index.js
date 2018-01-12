@@ -16,7 +16,7 @@ export class Source extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Espace Abonné</title>
+          <title>La Source par ebdo - Espace Abonné</title>
           <meta name="description" content="La Source - Espace Abonné Ebdo" />
         </Helmet>
         <SourcePage

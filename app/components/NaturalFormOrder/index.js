@@ -131,16 +131,16 @@ export class NaturalFormOrder extends React.Component {
             <strong>ebdo</strong> chez moi
           </span>
         )
-      },
-      {
-        value: '1',
-        label: this.valueElem(
-          "J'offre",
-          <span>
-            <strong>ebdo</strong> à un proche
-          </span>
-        )
       }
+      // {
+      //   value: '1',
+      //   label: this.valueElem(
+      //     "J'offre",
+      //     <span>
+      //       <strong>ebdo</strong> à un proche
+      //     </span>
+      //   )
+      // }
     ]
     const options2 = !target
       ? [
@@ -157,30 +157,21 @@ export class NaturalFormOrder extends React.Component {
             value: '12',
             label: this.valueElem(
               'pendant 3 mois',
-              <span>
-                Je règle maintenant et je reçois 12 numéros (sauf désengagement
-                de votre part)
-              </span>
+              <span>Je règle maintenant et je reçois 12 numéros</span>
             )
           },
           {
             value: '24',
             label: this.valueElem(
               'pendant 6 mois',
-              <span>
-                Je règle maintenant et je reçois 24 numéros (sauf désengagement
-                de votre part)
-              </span>
+              <span>Je règle maintenant et je reçois 24 numéros</span>
             )
           },
           {
             value: '48',
             label: this.valueElem(
               'pendant 12 mois',
-              <span>
-                Je règle maintenant et je reçois 48 numéros (sauf désengagement
-                de votre part)
-              </span>
+              <span>Je règle maintenant et je reçois 48 numéros</span>
             )
           }
         ]
@@ -189,30 +180,21 @@ export class NaturalFormOrder extends React.Component {
             value: '12',
             label: this.valueElem(
               'pendant 3 mois',
-              <span>
-                Je règle maintenant et je reçois 12 numéros (sauf désengagement
-                de votre part)
-              </span>
+              <span>Je règle maintenant et je reçois 12 numéros</span>
             )
           },
           {
             value: '24',
             label: this.valueElem(
               'pendant 6 mois',
-              <span>
-                Je règle maintenant et je reçois 24 numéros (sauf désengagement
-                de votre part){' '}
-              </span>
+              <span>Je règle maintenant et je reçois 24 numéros</span>
             )
           },
           {
             value: '48',
             label: this.valueElem(
               'pendant 12 mois',
-              <span>
-                Je règle maintenant et je reçois 48 numéros (sauf désengagement
-                de votre part)
-              </span>
+              <span>Je règle maintenant et je reçois 48 numéros</span>
             )
           }
         ]
@@ -294,10 +276,10 @@ export class NaturalFormOrder extends React.Component {
           />
 
           <TextWrap>
-            {String(time) === '0' && <span>ebdo chaque vendredi</span>}
-            {String(time) === '12' && <span>12 numéros</span>}
+            <span>ebdo chaque vendredi</span>
+            {/* {String(time) === '12' && <span>12 numéros</span>}
             {String(time) === '24' && <span>24 numéros</span>}
-            {String(time) === '48' && <span>48 numéros</span>}
+            {String(time) === '48' && <span>48 numéros</span>} */}
             {String(target) === 'false' && <span> </span>}
             {String(target) === 'true' && <span> à un proche </span>}
             pour{' '}

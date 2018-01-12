@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment'
 import {
   GET_CLIENTS_COUNT_LOADED,
   GET_CLIENTS_COUNT_ERROR,

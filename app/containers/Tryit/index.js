@@ -70,6 +70,10 @@ const Undercover = styled.div`
     }
   }
 `
+const TryTextCol = styled(Col)`
+  margin-top: 5%;
+`
+
 export class Tryit extends React.Component {
   constructor(props) {
     super(props)
@@ -146,14 +150,14 @@ export class Tryit extends React.Component {
           <Row center="xs">
             <Col xs={12}>
               <Row start="lg" center="xs">
-                <Col lg={2} lgOffset={3} xs={12}>
+                <Col md={3} mdOffset={2} xs={12}>
                   <img
-                    src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/tryebdo.png"
+                    src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/tryebdo.png&w=400&t=fit&il"
                     alt="Je veux recevoir un numéro gratuit de ebdo"
                     width="100%"
                   />
                 </Col>
-                <Col lg={5} xs={12}>
+                <TryTextCol md={5} xs={12}>
                   <BigBoldText>
                     Vous voulez <VioletText>essayer ebdo ?</VioletText> <br />
                     On vous offre le prochain numéro.
@@ -163,7 +167,7 @@ export class Tryit extends React.Component {
                     <br />
                     vous fait parvenir son nouveau numéro vendredi prochain.
                   </TextSummary>
-                </Col>
+                </TryTextCol>
               </Row>
             </Col>
           </Row>

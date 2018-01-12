@@ -128,7 +128,7 @@ function ManifestoBlock() {
             width="700"
             height="380"
             title="ebdo - La Tournée, le documentaire par Anouk Rapaport"
-            src="https://www.youtube.com/embed/0bkkaMrMQC4?modestbranding=1&autohide=1&showinfo=0&controls=0"
+            src="https://www.youtube.com/embed/G20NEFXktnM?modestbranding=1&autohide=1&showinfo=0&controls=0"
             frameBorder="0"
             allowFullScreen
           />
@@ -167,7 +167,7 @@ function ManifestoBlock() {
         </ColCustom>
         <ColCustom w={14} m={13} mc className="m-up m-b-60">
           <img
-            src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png"
+            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png&w=730&t=fit&il"
             alt="illustration la fabrique"
             width="100%"
           />

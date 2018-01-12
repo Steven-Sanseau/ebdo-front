@@ -65,7 +65,6 @@ const Text = styled(ColCustom)`
 // Cover should use a flexbox and follow the height of the image
 const Discover = styled.div`
   position: relative;
-  bottom: -80px;
   text-align: center;
   max-height: 390px;
   span {
@@ -136,12 +135,12 @@ function HomeLanding() {
             <p>
               Reportages, enquêtes, actus, photos, BD, vie pratique : ebdo, une
               invitation à prendre du recul pour comprendre, pour soi, pour
-              agir.
+              agir. Mais aussi pour penser à soi.
             </p>
           </Text>
           <Discover>
             <img
-              src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/nomad.png"
+              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/nomad.png?&w=337&t=fit&il"
               alt="illustration nomade"
               width="100%"
             />
