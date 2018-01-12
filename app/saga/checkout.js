@@ -55,6 +55,7 @@ function* postCheckout() {
         offer
       }),
       method,
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       }

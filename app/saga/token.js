@@ -94,14 +94,14 @@ function* getValidTokenSlimpaySaga() {
   }
 }
 
-function* dispatchGetTokenSlimpay(action) {
-  if (action.method === 1) {
-    yield put(getTokenSlimpay())
-  }
-}
+// function* dispatchGetTokenSlimpay(action) {
+//   if (action.method === 1) {
+//     yield put(getTokenSlimpay())
+//   }
+// }
 
 export default function* sagaToken() {
-  yield takeEvery(SET_PAYMENT_METHOD, dispatchGetTokenSlimpay)
+  // yield takeEvery(SET_PAYMENT_METHOD, dispatchGetTokenSlimpay)
   yield takeEvery(SET_TOKEN_STRIPE_LOADED, postTokenStripeSaga)
   yield takeEvery(GET_TOKEN_SLIMPAY, getTokenSlimpaySaga)
   yield takeEvery(GET_VALID_TOKEN_SLIMPAY, getValidTokenSlimpaySaga)
