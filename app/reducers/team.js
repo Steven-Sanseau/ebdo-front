@@ -7,13 +7,13 @@ const initialState = Immutable.fromJS({
   loading: false,
   error: false,
   errorMessage: '',
-  members: new Immutable.Record({})
+  members: []
 })
 
 function teamReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TEAM:
-      return state.set('members', TeamModel).set('loading', true)
+      return state.set('members', TeamModel).set('loading', false)
     default:
       return state
   }
