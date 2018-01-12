@@ -144,7 +144,7 @@ const MainFooter = () => (
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
                 Ebdo est présent dans plus de 10 000 kiosques en France.
-                N’hésitez pas à vous renseigner auprès de vos bureau de presse.
+                N’hésitez pas à vous renseigner auprès de vos bureaux de presse.
               </TextBlock>
             </MobileWrapper>
           </ColCustom>
