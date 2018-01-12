@@ -128,7 +128,7 @@ function ManifestoBlock() {
             width="700"
             height="380"
             title="ebdo - La Tournée, le documentaire par Anouk Rapaport"
-            src="https://www.youtube.com/embed/0bkkaMrMQC4?modestbranding=1&autohide=1&showinfo=0&controls=0"
+            src="https://www.youtube.com/embed/G20NEFXktnM?modestbranding=1&autohide=1&showinfo=0&controls=0"
             frameBorder="0"
             allowFullScreen
           />

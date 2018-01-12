@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment'
 import {
   POST_TOKEN,
   POST_TOKEN_ERROR,
@@ -12,7 +13,6 @@ import {
   GET_VALID_TOKEN_SLIMPAY_LOADED,
   GET_VALID_TOKEN_SLIMPAY_ERROR
 } from 'actions/constants'
-// import { EventTypes } from 'redux-segment'
 
 export function postToken() {
   return {

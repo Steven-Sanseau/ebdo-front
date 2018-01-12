@@ -193,7 +193,7 @@ class Gallery extends React.Component {
     return (
       <Cover onClick={this.openLightbox}>
         <img src={firstPage} alt="première de couverture ebdo" width="100%" />
-        <Pin className="pin">En kiosque, cette semaine le numéro 1 !</Pin>
+        <Pin className="pin">En kiosque cette semaine</Pin>
         <Undercover>
           <img src={summary} alt="sommaire" width="100%" />
           <div className="fond" />

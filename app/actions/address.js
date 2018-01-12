@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment'
 import {
   POST_ADDRESS,
   POST_ADDRESS_LOADED,

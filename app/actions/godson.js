@@ -1,3 +1,4 @@
+import { EventTypes } from 'redux-segment'
 import {
   GET_GODSON_CLIENT,
   GET_GODSON_CLIENT_LOADED,

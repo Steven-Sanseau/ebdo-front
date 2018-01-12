@@ -35,7 +35,40 @@ class Home extends React.Component {
       <div>
         <Helmet>
           <title>ebdo</title>
-          <meta name="description" content="Homepage Ebdo" />
+          <meta name="description" content="ebdo" />
+          <meta property="og:site_name" content="ebdo" />
+          <meta property="og:title" content="ebdo" />
+          <meta property="og:url" content="https://ebdo-lejournal.com/" />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:image"
+            content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
+          />
+          <meta itemprop="name" content="ebdo " />
+          <meta itemprop="url" content="https://ebdo-lejournal.com/" />
+          <meta
+            itemprop="thumbnailUrl"
+            content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
+          />
+          <link
+            rel="image_src"
+            content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
+          />
+          <meta
+            itemprop="image"
+            content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
+          />
+          <meta name="twitter:title" content="ebdo" />
+          <meta
+            name="twitter:image"
+            content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
+          />
+          <meta name="twitter:url" content="https://ebdo-lejournal.com/" />
+          <meta name="twitter:card" content="summary" />
+          <meta
+            name="description"
+            content="Ebdo est le nouvel hebdomadaire par les équipes des revues XXI et 6Mois."
+          />
         </Helmet>
         <ThemeProvider theme={theme}>
           <HomePage
