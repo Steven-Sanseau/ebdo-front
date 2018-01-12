@@ -94,5 +94,7 @@ export const POST_NEWSLETTER_SUCCESS =
   'app/Home/Newsletter/POST_NEWSLETTER_SUCCESS'
 export const POST_NEWSLETTER_ERROR = 'app/Home/Newsletter/POST_NEWSLETTER_ERROR'
 
+export const GET_TEAM = 'app/Team/GET_TEAM'
+
 export const GET_SUBSCRIPTIONS_LOADED =
   'app/Checkout/subscriptions/GET_SUBSCRIPTIONS_LOADED'

@@ -101,7 +101,7 @@ class NaturalFormOrderContainer extends React.Component {
               handleRoute={this.switchUI}
               color="--squash"
               className="big">
-              Revenir au formulaire
+              Merci pour les explications Thierry
             </Button>
           </ButtonWrap>
         )}

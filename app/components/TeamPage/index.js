@@ -181,7 +181,8 @@ function TeamPage(props) {
 TeamPage.propTypes = {
   dispatch: PropTypes.func,
   page: PropTypes.string,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  teamMembers: PropTypes.array
 }
 
 export default TeamPage
