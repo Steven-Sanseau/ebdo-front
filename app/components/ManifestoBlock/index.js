@@ -1,9 +1,3 @@
-/**
- *
- * ManifestoBlock
- *
- */
-
 import React from 'react'
 import styled from 'styled-components'
 
@@ -15,7 +9,6 @@ import ColCustom from 'components/Grid/Col'
 
 import NewsletterContainer from 'containers/NewsletterContainer'
 import { Link } from 'react-router-dom'
-import '!file-loader?name=[name].[ext]!../../images/home/tournee-ebdo.jpg'
 
 const Layout = styled.div`
   width: calc(100% - 80px);
@@ -173,8 +166,12 @@ function ManifestoBlock() {
       </SectionWrapper>
       <SectionWrapperBig between="sm">
         <ColCustom w={7} m={13} mc>
-          <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p">
-            ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
+          <TextBlock
+            title="... et on vous raconte comment !"
+            colorTitle="--topaz"
+            className="no-p">
+            Vie à la rédaction, journalistes en reportage, événements et
+            rencontres… Découvrez les coulisses du journal dans{' '}
             <LinkWrapperOutside href="http://fabrique.ebdo-lejournal.com/?utm_source=ebdo_home&utm_medium=website">
               la Fabrique
             </LinkWrapperOutside>.

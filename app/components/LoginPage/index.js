@@ -191,7 +191,7 @@ function LoginPage(props) {
             </p>
             <TitleWithArrow
               text="F.A.Q"
-              link="/faq"
+              linkOutside="https://aide.ebdo-lejournal.com?utm_source=home&utm_medium=login_page"
               color="--squash"
               textColor="--black"
             />
@@ -199,11 +199,12 @@ function LoginPage(props) {
               La réponse à votre question s’y trouve peut-être !
             </TextLogin>
             <TitleWithArrow
-              text="Telephone"
+              text="Par Telephone"
+              linkOutside="tel:+330176410595"
               color="--squash"
               textColor="--black"
             />
-            <TextLogin>Appellez-nous au 00 00 00 00 00.</TextLogin>
+            <TextLogin>Appellez-nous au 01 76 41 05 95.</TextLogin>
             <TitleWithArrow
               text="Mail"
               link="mailto:contact@ebdo-lejournal.com"
