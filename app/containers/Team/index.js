@@ -19,14 +19,19 @@ export class Team extends React.Component {
   }
 
   render() {
-    const { dispatch, page, isLoggedIn } = this.props
+    const { dispatch, page, isLoggedIn, teamMembers } = this.props
     return (
       <div>
         <Helmet>
           <title>Team</title>
           <meta name="description" content="Description of Team" />
         </Helmet>
-        <TeamPage dispatch={dispatch} page={page} isLoggedIn={isLoggedIn} />
+        <TeamPage
+          dispatch={dispatch}
+          page={page}
+          isLoggedIn={isLoggedIn}
+          teamMembers={teamMembers}
+        />
       </div>
     )
   }

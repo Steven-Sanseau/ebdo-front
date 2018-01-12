@@ -70,6 +70,17 @@ const LinkWrapper = styled(Link)`
     color: var(--white-true);
   }
 `
+
+const LinkWrapperOutside = styled.a`
+  color: var(--grey-blue);
+  border-bottom: 1px solid var(--grey-blue);
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--grey-blue);
+    color: var(--white-true);
+  }
+`
 const Legend = styled.legend`
   margin-top: 20px;
   font-size: 18px;
@@ -89,10 +100,12 @@ function ManifestoBlock() {
             colorTitle="--booger"
             colorSpan="--booger"
             colorHr="--booger">
-            Notre volonté : un journal accessible à tous. Un journal qui
-            s’adresse à tous ses lecteurs et pas qu’en France. Pour cela, Ebdo
-            est le moins cher des hebdomadaires d’actualité : vendu{' '}
-            <span>3,50€</span> en kiosque.
+            Notre volonté ? Être un journal accessible à tous, qui s’adresse à
+            tous ses lecteurs, de toute la France et au-delà, celle des
+            campagnes, des villes, des villages, des banlieues, des bourgs… Pour
+            cela, Ebdo est le moins cher des hebdomadaires d’actualité :{' '}
+            <span>3,50€</span>
+            en kiosque.
           </TextBlock>
         </Col>
         <Col xs={12} smOffset={1} sm={3}>
@@ -101,10 +114,11 @@ function ManifestoBlock() {
             colorTitle="--sunflower"
             colorSpan="--sunflower"
             colorHr="--sunflower">
-            Sans publicité, <strong>ebdo</strong> est libre de toute pression.
+            Sans publicité, <strong>ebdo est libre de toute pression.</strong>{' '}
             Notre rédaction est 100% indépendante : nous choisissons librement
-            nos sujets. Nos lecteurs sont notre seule ressource.{' '}
-            <span>C’est un pacte de confiance.</span>
+            nos sujets. Nos lecteurs sont notre seule ressource.<span>
+              C’est un pacte de confiance.
+            </span>
           </TextBlock>
         </Col>
         <Col xs={12} smOffset={1} sm={4}>
@@ -117,7 +131,7 @@ function ManifestoBlock() {
             nous irriguent de leur idées via{' '}
             <LinkWrapper to="/source">La Source</LinkWrapper>, ils co-organisent
             des événements, nous hébergent et participent activement à faire
-            connaître <strong>ebdo</strong>
+            connaître <strong>ebdo</strong>.
           </TextBlock>
         </Col>
       </SectionWrapperBig>
@@ -128,7 +142,7 @@ function ManifestoBlock() {
             width="700"
             height="380"
             title="ebdo - La Tournée, le documentaire par Anouk Rapaport"
-            src="https://www.youtube.com/embed/G20NEFXktnM?modestbranding=1&autohide=1&showinfo=0&controls=0"
+            src="https://www.youtube.com/embed/G20NEFXktnM?modestbranding=1&autohide=1&showinfo=0&rel=0"
             frameBorder="0"
             allowFullScreen
           />
@@ -139,7 +153,7 @@ function ManifestoBlock() {
         </ColCustom>
         <ColCustom w={7} m={13} mc>
           <TextBlock
-            title="Un journal qui se construit ensemble..."
+            title="Un journal qui se construit avec vous..."
             colorTitle="--sunflower"
             fontSize="28px"
             className="no-p">
@@ -161,15 +175,17 @@ function ManifestoBlock() {
         <ColCustom w={7} m={13} mc>
           <TextBlock title="La Fabrique" colorTitle="--topaz" className="no-p">
             ...vous en explique toutes les coulisses. Rendez-vous sur{' '}
-            <LinkWrapper to="#">la Fabrique</LinkWrapper>.
+            <LinkWrapperOutside href="http://fabrique.ebdo-lejournal.com/?utm_source=ebdo_home&utm_medium=website">
+              la Fabrique
+            </LinkWrapperOutside>.
           </TextBlock>
           <NewsletterContainer />
         </ColCustom>
         <ColCustom w={14} m={13} mc className="m-up m-b-60">
           <img
-            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png&w=730&t=fit&il"
+            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png&w=550&t=fit&il"
             alt="illustration la fabrique"
-            width="100%"
+            width="70%"
           />
         </ColCustom>
       </SectionWrapperBig>

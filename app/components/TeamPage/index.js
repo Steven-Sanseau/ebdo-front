@@ -42,7 +42,7 @@ const TextWrap = styled(Col)`
   }
 `
 const ImageTeam = styled.div`
-  background-image: url(equipe.jpg);
+  background-image: url(${props => props.image});
   width: 100px;
   height: 100px;
   margin: 0 auto;
@@ -111,66 +111,24 @@ function TeamPage(props) {
           </TextWrap>
         </Row>
         <Row between="sm">
-          <Profile xs={12} sm={4}>
-            <ImageTeam />
-            <h3>
-              Laurent Beccaria, <span>Président</span>
-            </h3>
-            <p>
-              « Ces dernières années, voir vingt couvertures sur le même sujet,
-              tourner les pages sans que rien me m’accroche, cela me rend
-              triste. Les journaux ont perdu leur magie. Je suis convaincu que
-              nous ne sommes pas voués à être mal informés. »<br />
-              <a mailto="l.beccaria@rollinpublications.fr">
-                l.beccaria@rollinpublications.fr
-              </a>
-            </p>
-          </Profile>
-          <Profile xs={12} sm={4}>
-            <ImageTeam />
-            <h3>
-              Laurent Beccaria, <span>Président</span>
-            </h3>
-            <p>
-              « Ces dernières années, voir vingt couvertures sur le même sujet,
-              tourner les pages sans que rien me m’accroche, cela me rend
-              triste. Les journaux ont perdu leur magie. Je suis convaincu que
-              nous ne sommes pas voués à être mal informés. »<br />
-              <a mailto="l.beccaria@rollinpublications.fr">
-                l.beccaria@rollinpublications.fr
-              </a>
-            </p>
-          </Profile>
-          <Profile xs={12} sm={4}>
-            <ImageTeam />
-            <h3>
-              Laurent Beccaria, <span>Président</span>
-            </h3>
-            <p>
-              « Ces dernières années, voir vingt couvertures sur le même sujet,
-              tourner les pages sans que rien me m’accroche, cela me rend
-              triste. Les journaux ont perdu leur magie. Je suis convaincu que
-              nous ne sommes pas voués à être mal informés. »<br />
-              <a mailto="l.beccaria@rollinpublications.fr">
-                l.beccaria@rollinpublications.fr
-              </a>
-            </p>
-          </Profile>
-          <Profile xs={12} sm={4}>
-            <ImageTeam />
-            <h3>
-              Laurent Beccaria, <span>Président</span>
-            </h3>
-            <p>
-              « Ces dernières années, voir vingt couvertures sur le même sujet,
-              tourner les pages sans que rien me m’accroche, cela me rend
-              triste. Les journaux ont perdu leur magie. Je suis convaincu que
-              nous ne sommes pas voués à être mal informés. »<br />
-              <a mailto="l.beccaria@rollinpublications.fr">
-                l.beccaria@rollinpublications.fr
-              </a>
-            </p>
-          </Profile>
+          {props.teamMembers.map((member, index) => {
+            return (
+              <Profile xs={12} sm={4} key={index}>
+                <ImageTeam
+                  image={`//images.weserv.nl/?url=ssl:${
+                    member.image
+                  }&w=100&t=fit&il`}
+                />
+                <h3>
+                  {member.name}, <span>{member.job}</span>
+                </h3>
+                <p>
+                  « {member.description} »<br />
+                  <a mailto={member.email}>{member.email}</a>
+                </p>
+              </Profile>
+            )
+          })}
         </Row>
       </Layout>
       <Footer dispatch={props.dispatch} />
