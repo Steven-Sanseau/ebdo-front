@@ -80,16 +80,20 @@ const SecondaryFooter = () => (
         </ColCustom>
         <ColCustom w={5} m={13} className="m-up">
           <LinkWrapper>
-            <Title>Contacter la rédaction</Title>
-            <Link to="mailto:redaction@ebdo-lejournal.com">
-              service-lecteurs@ebdo-lejournal.com
+            <Title>Contacter l'equipe</Title>
+            <Link to="mailto:contact@ebdo-lejournal.com">
+              contact@ebdo-lejournal.com
             </Link>
           </LinkWrapper>
           <LinkWrapper>
-            <Title>Contacter le service lecteurs</Title>
-            <Link to="mailto:service-lecteurs@ebdo-lejournal.com">
-              service-lecteurs@ebdo-lejournal.com
+            <Title>Contacter le service abonnement</Title>
+            <Link to="mailto:abo@ebdo-lejournal.com">
+              abo@ebdo-lejournal.com
             </Link>
+          </LinkWrapper>
+          <LinkWrapper>
+            <Title>Par téléphone</Title>
+            <Link to="tel:0176410595">01 76 41 05 95</Link>
           </LinkWrapper>
         </ColCustom>
         <ColCustom w={5} m={13} />

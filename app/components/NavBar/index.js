@@ -223,11 +223,11 @@ class NavBar extends React.Component {
                     <div className="hamburger" />
                   </div>
                 </Burger>
-                <LinkWrap
+                {/* <LinkWrap
                   color="--tomato"
                   style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
                   <Link to="/equipe">L&apos;équipe</Link>
-                </LinkWrap>
+                </LinkWrap> */}
                 <LinkWrap
                   color="--sunflower"
                   style={
@@ -268,11 +268,11 @@ class NavBar extends React.Component {
                 </LinkWrapMobile>
               </FlexWrap>
               <div className="narrowLinks">
-                <LinkBurger
+                {/* <LinkBurger
                   color="--tomato"
                   style={page === '/equipe' ? { color: 'var(--tomato)' } : {}}>
                   <Link to="/equipe">L&apos;équipe</Link>
-                </LinkBurger>
+                </LinkBurger> */}
                 <LinkBurger
                   color="--sunflower"
                   style={
