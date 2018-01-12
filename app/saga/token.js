@@ -90,7 +90,7 @@ function* getValidTokenSlimpaySaga() {
     yield put(postCheckout())
   } catch (err) {
     yield put(getValidTokenSlimpayError(err.message))
-    yield put(push('/abonnement'))
+    yield put(push('/abo/erreur'))
   }
 }
 
