@@ -72,7 +72,7 @@ const Team = [
     description:
       'Depuis quelque temps, je vois que le lecteur ne se plonge plus dans les journaux. La presse s’adresse aux gens d’une certaine manière, parce qu’elle a toujours fait comme ça. Mais elle ne pense pas assez aux lecteurs qui ont changé',
     email: 'i.tales@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/isabelle.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/isalbelle.png'
   },
   {
     name: 'Marie-Pierre Subtil',

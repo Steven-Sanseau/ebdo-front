@@ -60,7 +60,7 @@ const RecapAbo = props => (
           buttonColor="--warm-purple"
           to="/essai"
           dispatch={props.dispatch}>
-          Le prochain numéro chez vous, gratuitement.
+          Recevez notre prochain numéro chez vous, gratuitement.
         </AboProposition>
       </ColCustom>
       <ColCustom w={5} m={13} mc>
@@ -70,19 +70,19 @@ const RecapAbo = props => (
           buttonColor="--squash"
           to="/abonnement"
           dispatch={props.dispatch}>
-          Rejoignez notre communauté de lecteurs, et recevez ebdo chez vous tous
-          les vendredi.
+          Rejoignez notre communauté de lecteurs, déposez vos idées sur La
+          Source et recevez Ebdo chez vous chaque vendredi.
         </AboProposition>
       </ColCustom>
       <ColCustom w={5} m={13} mc>
         <AboProposition
-          title="Déjà abonné ?"
+          title="Je me connecte"
           buttonText="La source"
           buttonColor="--turquoise-blue"
           to="/lasource"
           dispatch={props.dispatch}>
-          Accédez à La Source pour participer, gérer votre abonnement, offrir
-          ebdo...
+          Accédez à votre espace personnel pour gérer votre abonnement ou offrir
+          Ebdo.
         </AboProposition>
       </ColCustom>
     </Row>
