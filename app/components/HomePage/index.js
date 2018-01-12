@@ -104,7 +104,7 @@ export class HomePage extends React.Component {
                 <ColCustom w={8}>
                   <ImageWrap>
                     <img
-                      src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/price.png"
+                      src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/illu/price.jpg&w=470&t=fit&il"
                       alt="abo illustration"
                       width="100%"
                     />
