@@ -154,14 +154,14 @@ class FormulaStep extends React.Component {
           <ColCustom w={9}>
             {offer.data.is_gift && (
               <Image
-                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png"
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png&w=383&t=fit&il"
                 alt="J'offre un abonnement ebdo illustration"
                 width="100%"
               />
             )}
             {!offer.data.is_gift && (
               <Image
-                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/checkout.png"
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/checkout.png&w=383&t=fit&il"
                 alt="Je m'abonne à ebdo illustration"
                 width="100%"
               />

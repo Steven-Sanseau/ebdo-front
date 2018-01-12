@@ -11,9 +11,6 @@ import Logo from 'components/Icon/Logo'
 import { media } from 'global-styles'
 import ColCustom from 'components/Grid/Col'
 
-import '!file-loader?name=[name].[ext]!images/logos/6mois-white.png'
-import '!file-loader?name=[name].[ext]!images/logos/XXI.png'
-
 const Layout = styled.div`
   width: calc(100% - 80px);
   max-width: 1200px;
@@ -84,9 +81,17 @@ const MainFooter = () => (
           <Logo color="var(--white-true)" />
           <LogoWrapper>
             Par les créateurs de <br />
-            <Image src="/XXI.png" alt="XXI" height={22} />
+            <Image
+              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/XXI.png&w=28&t=fit&il"
+              alt="XXI"
+              height={22}
+            />
             <EtWrapper>et</EtWrapper>
-            <Image src="/6mois-white.png" alt="6 mois" height={22} />
+            <Image
+              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/6mois-white.png&w=76&t=fit&il"
+              alt="6 mois"
+              height={22}
+            />
           </LogoWrapper>
         </ColCustom>
         <ColCustom w={5} m={13}>
@@ -130,7 +135,7 @@ const MainFooter = () => (
         <RowSimpleBorder between="sm">
           <ColCustom w={5} m={13}>
             <Image
-              src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/footer.png"
+              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/footer.png&w=300&t=fit&il"
               alt="footer illustration ebdo"
               width="100%"
             />

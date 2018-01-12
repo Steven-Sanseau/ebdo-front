@@ -207,7 +207,7 @@ class NavBar extends React.Component {
           <Row between="sm" className="nav-menu">
             <Col m={13} mc>
               <Title menuFixed={menuFixed}>
-                <Link to="/accueil">
+                <Link to="/">
                   <Logo
                     width={menuFixed ? 65 : 150}
                     height={menuFixed ? 25 : 56}

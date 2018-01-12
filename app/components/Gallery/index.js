@@ -24,6 +24,7 @@ const Undercover = styled.div`
     border-bottom-width: 0;
     border-bottom: none;
     transition: transform 0.3s ease-out;
+
     &:nth-of-type(1) {
       z-index: -2;
       left: 3px;
@@ -80,10 +81,16 @@ const Cover = styled.div`
   &:hover > img,
   &:hover .pin {
     transform: translateX(-150px);
+    ${media.tablet`
+      transform: translateX(0);
+    `};
   }
   &:hover div img,
   &:hover .fond {
     transform: translateX(50px);
+    ${media.tablet`
+      transform: translateX(0);
+    `};
   }
   &:hover button {
     opacity: 0;
@@ -107,29 +114,29 @@ const Pin = styled.div`
 
 const Images = [
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/2.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/2.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/3.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/3.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/4.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/4.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/5.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/5.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/6.jpg&w=1500&t=fit&il`
   },
   {
-    src: `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/6.jpg`
+    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/7.jpg&w=1500&t=fit&il`
   }
 ]
-const firstPage = `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg`
-const summary = `https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg`
+const firstPage = `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il`
+const summary = `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg&w=1500&t=fit&il`
 
 class Gallery extends React.Component {
   constructor() {
@@ -186,7 +193,7 @@ class Gallery extends React.Component {
     return (
       <Cover onClick={this.openLightbox}>
         <img src={firstPage} alt="première de couverture ebdo" width="100%" />
-        <Pin className="pin">En kiosque cette semaine</Pin>
+        <Pin className="pin">En kiosque, cette semaine le numéro 1 !</Pin>
         <Undercover>
           <img src={summary} alt="sommaire" width="100%" />
           <div className="fond" />

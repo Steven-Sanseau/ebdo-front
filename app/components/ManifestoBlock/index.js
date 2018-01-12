@@ -167,7 +167,7 @@ function ManifestoBlock() {
         </ColCustom>
         <ColCustom w={14} m={13} mc className="m-up m-b-60">
           <img
-            src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png"
+            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/fabric.png&w=730&t=fit&il"
             alt="illustration la fabrique"
             width="100%"
           />
