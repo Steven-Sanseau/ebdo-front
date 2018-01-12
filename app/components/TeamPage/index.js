@@ -110,26 +110,28 @@ function TeamPage(props) {
             </p>
           </TextWrap>
         </Row>
-        <Row between="sm">
-          {props.teamMembers.map((member, index) => {
-            return (
-              <Profile xs={12} sm={4} key={index}>
-                <ImageTeam
-                  image={`//images.weserv.nl/?url=ssl:${
-                    member.image
-                  }&w=100&t=fit&il`}
-                />
-                <h3>
-                  {member.name}, <span>{member.job}</span>
-                </h3>
-                <p>
-                  « {member.description} »<br />
-                  <a mailto={member.email}>{member.email}</a>
-                </p>
-              </Profile>
-            )
-          })}
-        </Row>
+        {props.teamMembers && (
+          <Row between="sm">
+            {props.teamMembers.map((member, index) => {
+              return (
+                <Profile xs={12} sm={4} key={index}>
+                  <ImageTeam
+                    image={`//images.weserv.nl/?url=ssl:${
+                      member.image
+                    }&w=100&t=fit&il`}
+                  />
+                  <h3>
+                    {member.name}, <span>{member.job}</span>
+                  </h3>
+                  <p>
+                    « {member.description} »<br />
+                    <a mailto={member.email}>{member.email}</a>
+                  </p>
+                </Profile>
+              )
+            })}
+          </Row>
+        )}
       </Layout>
       <Footer dispatch={props.dispatch} />
     </div>

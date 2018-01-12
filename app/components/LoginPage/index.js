@@ -180,7 +180,13 @@ function LoginPage(props) {
             </form>
             <ButtonWrap handleRoute={handleRoute} color="--booger">
               {isLoadingLogin && '...'}
-              {!isLoadingLogin && 'Recevoir mon lien'}
+              {!isLoadingLogin &&
+                !waitingForCode &&
+                'Recevoir mon code de connexion'}
+
+              {!isLoadingLogin &&
+                waitingForCode &&
+                'Valider mon code de connexion'}
             </ButtonWrap>
           </ColStyled>
           <ColStyled w={9} m={13} mc>
@@ -207,14 +213,14 @@ function LoginPage(props) {
             <TextLogin>Appellez-nous au 01 76 41 05 95.</TextLogin>
             <TitleWithArrow
               text="Mail"
-              link="mailto:contact@ebdo-lejournal.com"
+              link="mailto:abo@ebdo-lejournal.com"
               color="--squash"
               textColor="--black"
             />
             <TextLogin className="no-b">
               Envoyez votre question à{' '}
-              <a className="link" href="mailto:service-abo@ebdo-lejournal.com">
-                service-abo@ebdo-lejournal.com
+              <a className="link" href="mailto:abo@ebdo-lejournal.com">
+                abo@ebdo-lejournal.com
               </a>
             </TextLogin>
           </ColStyled>
