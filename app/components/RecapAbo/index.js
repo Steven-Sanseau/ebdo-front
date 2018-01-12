@@ -8,8 +8,6 @@ import AboProposition from 'components/RecapAbo/AboProposition'
 import Image from 'components/Image'
 import ColCustom from 'components/Grid/Col'
 
-import '!file-loader?name=[name].[ext]!images/0-couv.jpg'
-
 const Layout = styled.div`
   width: calc(100% - 80px);
   max-width: 1200px;
@@ -49,7 +47,10 @@ const RecapAbo = props => (
     <Row between="sm">
       <ColStyled w={5} m={13} mc>
         <ImageWrapper>
-          <Image src="/0-couv.jpg" alt="Couv" />
+          <Image
+            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il"
+            alt="Couverture ebdo"
+          />
         </ImageWrapper>
       </ColStyled>
       <ColCustom w={5} m={13} mc>

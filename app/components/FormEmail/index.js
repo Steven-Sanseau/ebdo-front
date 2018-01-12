@@ -19,7 +19,7 @@ function FormEmail(props) {
                   type="email"
                   value={props.email}
                   onChange={props.handleEmail}
-                  placeholder="monemail@gmail.com"
+                  placeholder="monemail@email.com"
                 />
               </Col>
             </Row>
