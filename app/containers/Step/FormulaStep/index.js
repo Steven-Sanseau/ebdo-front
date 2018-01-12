@@ -129,7 +129,7 @@ class FormulaStep extends React.Component {
                     handleRoute={this.switchUI}
                     color="--squash"
                     className="big">
-                    Je choisis ma participation
+                    Merci pour les explications Thierry
                   </Button>
                 </ButtonWrap>
               )}
@@ -154,14 +154,14 @@ class FormulaStep extends React.Component {
           <ColCustom w={9}>
             {offer.data.is_gift && (
               <Image
-                src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png"
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png"
                 alt="J'offre un abonnement ebdo illustration"
                 width="100%"
               />
             )}
             {!offer.data.is_gift && (
               <Image
-                src="https://s3.eu-west-3.amazonaws.com/ebdo/front/website/checkout.png"
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/checkout.png"
                 alt="Je m'abonne à ebdo illustration"
                 width="100%"
               />

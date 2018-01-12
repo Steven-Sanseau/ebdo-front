@@ -318,8 +318,9 @@ export class NaturalFormOrder extends React.Component {
             width="560"
             height="315"
             title="Pourquoi des tarifs flexibles"
-            src="https://www.youtube.com/embed/L6lRmAYFI9U"
             frameBorder="0"
+            src="https://www.youtube-nocookie.com/embed/L6lRmAYFI9U?rel=0&amp;controls=0&amp;showinfo=0"
+            allow="autoplay; encrypted-media"
             allowFullScreen
           />
         </div>
