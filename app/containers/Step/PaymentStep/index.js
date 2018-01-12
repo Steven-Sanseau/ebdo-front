@@ -191,9 +191,11 @@ class PaymentStep extends React.Component {
           </Row>
         )}
         <div>
-          Vérifiez attentivement vos informations avant de confirmer. <br />En
-          commandant vous confirmer avoir lu et accepté les{' '}
+          Vérifiez attentivement vos informations avant de confirmer. <br />
+          <br />
+          En commandant vous confirmez avoir lu et accepté les{' '}
           <LinkCgv to="/cgv">CGV</LinkCgv>
+          <br />
           <CheckboxConfirmCheckout
             error={this.state.errorCGV}
             errorMessage={this.state.errMessage}
