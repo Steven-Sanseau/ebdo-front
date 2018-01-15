@@ -60,7 +60,9 @@ function* postCheckout() {
         'Content-Type': 'application/json'
       }
     })
-    yield put(postCheckoutLoaded(checkoutResponse.checkout))
+    yield put(
+      postCheckoutLoaded(checkoutResponse.checkout, checkoutResponse.offer)
+    )
     yield put(newCheckout())
     yield put(push('/abo/merci'))
     yield put(logout())

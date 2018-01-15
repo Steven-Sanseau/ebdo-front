@@ -40,7 +40,7 @@ Team.propTypes = {
   dispatch: PropTypes.func.isRequired,
   page: PropTypes.string,
   isLoggedIn: PropTypes.bool,
-  teamMembers: PropTypes.object
+  teamMembers: PropTypes.array
 }
 
 const mapStateToProps = createStructuredSelector({

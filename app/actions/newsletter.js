@@ -8,18 +8,26 @@ import {
 export function postNewsletter(newsletter) {
   return {
     type: POST_NEWSLETTER,
-    newsletter,
-    meta: {
-      analytics: {
-        eventType: EventTypes.track
-      }
-    }
+    newsletter
   }
 }
 
-export function postNewsletterSuccess() {
+export function postNewsletterSuccess(newsletter) {
   return {
-    type: POST_NEWSLETTER_SUCCESS
+    type: POST_NEWSLETTER_SUCCESS,
+    newsletter,
+    meta: {
+      analytics: {
+        eventType: EventTypes.track,
+        eventPayload: {
+          event: 'New Mail Newsletter',
+          properties: {
+            email: newsletter.email,
+            name: newsletter.name
+          }
+        }
+      }
+    }
   }
 }
 
