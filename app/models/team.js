@@ -40,7 +40,7 @@ const TeamList = [
     description:
       'Il faut que tout soit immédiatement compréhensible. Ce journal sera aussi accessible à ceux qui ne lisent pas la presse d’habitude. Beaucoup de sujets peuvent être traités plus efficacement par une image.',
     email: 'q.leeds@rollinpublications.fr',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thierry.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/quintin.png'
   },
   {
     name: 'Thierry Mandon',
@@ -48,7 +48,7 @@ const TeamList = [
     description:
       'Nous vivons dans des îlots qui ne se parlent plus. C’est cette cassure que je veux combler. Ebdo répondra au principe d’éducation populaire pour recréer du lien. Une université sans diplôme, ouverte, qui met à la portée de tous les sujets essentiels.',
     email: 't.mandon@rollinpublications.fr',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/quintin.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thierry.png'
   },
   {
     name: 'Nicolas Delesalle',
