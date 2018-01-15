@@ -106,7 +106,7 @@ const MainFooter = () => (
               link="/manifest"
               color="--sunflower"
             />
-            <TitleWithArrow text="L'équipe" link="/team" color="--tomato" />
+            <TitleWithArrow text="L'équipe" link="/equipe" color="--tomato" />
           </MobileWrapper>
         </ColCustom>
         <ColCustom w={5} m={13}>

@@ -31,6 +31,11 @@ export function postCheckoutLoaded(checkout, offer) {
   return {
     type: POST_SUBSCRIPTION_LOADED,
     checkout,
+    track: {
+      code: 'DC-8312645/aboebdo1/typage+transactions',
+      transaction_id: checkout.checkout_id,
+      value: offer.price_ttc / 100
+    },
     meta: {
       analytics: [
         {
