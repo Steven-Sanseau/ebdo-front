@@ -19,8 +19,11 @@ import Mentions from 'containers/Mentions/Loadable'
 export default function App() {
   return (
     <div>
-      <Helmet titleTemplate="%s - ebdo" defaultTitle="ebdo">
-        <meta name="description" content="Abonnement ebdo" />
+      <Helmet titleTemplate="%s" defaultTitle="ebdo">
+        <meta
+          name="description"
+          content="ebdo est un journal papier, indépendant, irrigué par ses lecteurs. À retrouver chaque vendredi. Reportages, enquêtes, actus, photos, BD, vie pratique : ebdo, une invitation à prendre du recul pour comprendre, pour soi, pour agir."
+        />
       </Helmet>
       <Switch>
         <Redirect from="/accueil" to="/" />

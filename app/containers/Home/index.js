@@ -35,17 +35,20 @@ class Home extends React.Component {
       <div>
         <Helmet>
           <title>ebdo</title>
-          <meta name="description" content="ebdo" />
+          <meta
+            name="description"
+            content="ebdo est un journal papier, indépendant, irrigué par ses lecteurs. À retrouver chaque vendredi. Reportages, enquêtes, actus, photos, BD, vie pratique : ebdo, une invitation à prendre du recul pour comprendre, pour soi, pour agir."
+          />
           <meta property="og:site_name" content="ebdo" />
           <meta property="og:title" content="ebdo" />
-          <meta property="og:url" content="https://ebdo-lejournal.com/" />
+          <meta property="og:url" content="https://www.ebdo-lejournal.com/" />
           <meta property="og:type" content="website" />
           <meta
             property="og:image"
             content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
           />
           <meta itemprop="name" content="ebdo " />
-          <meta itemprop="url" content="https://ebdo-lejournal.com/" />
+          <meta itemprop="url" content="https://www.ebdo-lejournal.com/" />
           <meta
             itemprop="thumbnailUrl"
             content="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/ogImage.jpg&w=1000&t=fit&il"
