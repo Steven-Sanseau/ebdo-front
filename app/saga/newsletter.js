@@ -3,8 +3,10 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import request from 'utils/request'
 
 import { POST_NEWSLETTER } from '../actions/constants'
-import { postNewsletterSuccess, postNewsletterError } from '../actions/newsletter'
-
+import {
+  postNewsletterSuccess,
+  postNewsletterError
+} from '../actions/newsletter'
 
 function* postNewsletterSaga(action) {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/newsletter`
@@ -13,12 +15,12 @@ function* postNewsletterSaga(action) {
   const name = action.newsletter.firstname
 
   try {
-    yield call(request, paramsApiUrl, {
+    const newsletterResponse = yield call(request, paramsApiUrl, {
       body: JSON.stringify({ newsletter: { email, name } }),
       method,
       headers: { 'Content-Type': 'application/json' }
     })
-    yield put(postNewsletterSuccess())
+    yield put(postNewsletterSuccess(newsletterResponse.newsletter))
   } catch (err) {
     yield put(postNewsletterError(err.message))
   }

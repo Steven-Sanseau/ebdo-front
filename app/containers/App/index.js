@@ -19,8 +19,11 @@ import Mentions from 'containers/Mentions/Loadable'
 export default function App() {
   return (
     <div>
-      <Helmet titleTemplate="%s - ebdo" defaultTitle="ebdo">
-        <meta name="description" content="Abonnement ebdo" />
+      <Helmet titleTemplate="%s" defaultTitle="ebdo">
+        <meta
+          name="description"
+          content="ebdo est un journal papier, indépendant, irrigué par ses lecteurs. À retrouver chaque vendredi. Reportages, enquêtes, actus, photos, BD, vie pratique : ebdo, une invitation à prendre du recul pour comprendre, pour soi, pour agir."
+        />
       </Helmet>
       <Switch>
         <Redirect from="/accueil" to="/" />
@@ -37,8 +40,8 @@ export default function App() {
         <Route path="/essai/:step" component={TryIt} />
         <Route path="/essai" component={TryIt} />
         <Redirect from="/team" to="/equipe" />
-        {/* <Route exact path="/equipe" component={Team} /> */}
-        <Redirect from="/equipe" to="/" />
+        <Route exact path="/equipe" component={Team} />
+        {/* <Redirect from="/equipe" to="/" /> */}
         <Redirect from="/manifest" to="/manifeste" />
         <Redirect from="/pourquoi" to="/manifeste" />
         <Route exact path="/manifeste" component={Manifest} />

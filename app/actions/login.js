@@ -1,4 +1,6 @@
 import { EventTypes } from 'redux-segment'
+import jwtDecode from 'jwt-decode'
+
 import {
   LOGIN_EMAIL,
   LOGIN_EMAIL_LOADED,
@@ -42,22 +44,30 @@ export function loginEmailCode(
     email,
     code,
     isCheckout,
-    redirect,
-    meta: {
-      analytics: {
-        eventType: EventTypes.identify,
-        eventPayload: {
-          email
-        }
-      }
-    }
+    redirect
   }
 }
 
 export function loginEmailCodeLoaded(token) {
+  const client = jwtDecode(token)
+
   return {
     type: LOGIN_EMAIL_CODE_LOADED,
-    token
+    token,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          event: 'Login',
+          userId: client.client_id,
+          traits: {
+            email: client.email,
+            firstName: client.first_name,
+            lastName: client.last_name
+          }
+        }
+      }
+    }
   }
 }
 

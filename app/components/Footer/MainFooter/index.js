@@ -106,7 +106,7 @@ const MainFooter = () => (
               link="/manifest"
               color="--sunflower"
             />
-            <TitleWithArrow text="L'équipe" link="/team" color="--tomato" />
+            <TitleWithArrow text="L'équipe" link="/equipe" color="--tomato" />
           </MobileWrapper>
         </ColCustom>
         <ColCustom w={5} m={13}>
@@ -144,7 +144,7 @@ const MainFooter = () => (
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
                 Ebdo est présent dans plus de 10 000 kiosques en France.
-                N’hésitez pas à vous renseigner auprès de vos bureau de presse.
+                N’hésitez pas à vous renseigner auprès de vos bureaux de presse.
               </TextBlock>
             </MobileWrapper>
           </ColCustom>
