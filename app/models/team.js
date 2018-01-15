@@ -35,7 +35,7 @@ const TeamList = [
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/constance.png'
   },
   {
-    name: 'Thierry Mandon',
+    name: 'Quintin Leeds',
     job: 'Directeur artistique',
     description:
       'Il faut que tout soit immédiatement compréhensible. Ce journal sera aussi accessible à ceux qui ne lisent pas la presse d’habitude. Beaucoup de sujets peuvent être traités plus efficacement par une image.',
@@ -43,7 +43,7 @@ const TeamList = [
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thierry.png'
   },
   {
-    name: 'Quintin Leeds',
+    name: 'Thierry Mandon',
     job: 'Directeur de la publication',
     description:
       'Nous vivons dans des îlots qui ne se parlent plus. C’est cette cassure que je veux combler. Ebdo répondra au principe d’éducation populaire pour recréer du lien. Une université sans diplôme, ouverte, qui met à la portée de tous les sujets essentiels.',

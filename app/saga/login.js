@@ -76,7 +76,7 @@ function* loginEmailCodeSaga(action) {
       }
       yield put(getAddress('invoice'))
       yield put(getAddress('delivery'))
-    } else {
+    } else if (action.redirect) {
       yield put(push(action.redirect))
     }
   } catch (err) {
