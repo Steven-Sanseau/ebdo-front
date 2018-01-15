@@ -1,6 +1,15 @@
-// import { Record } from 'immutable'
-
-const Team = [
+import { Record } from 'immutable'
+const Team = new Record(
+  {
+    name: null,
+    job: null,
+    description: null,
+    email: null,
+    image: null
+  },
+  'team'
+)
+const TeamList = [
   {
     name: 'Laurent Beccaria',
     job: 'Président',
@@ -158,4 +167,4 @@ const Team = [
   }
 ]
 
-export default Team
+export { Team, TeamList }

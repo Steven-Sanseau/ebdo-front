@@ -37,8 +37,8 @@ export default function App() {
         <Route path="/essai/:step" component={TryIt} />
         <Route path="/essai" component={TryIt} />
         <Redirect from="/team" to="/equipe" />
-        {/* <Route exact path="/equipe" component={Team} /> */}
-        <Redirect from="/equipe" to="/" />
+        <Route exact path="/equipe" component={Team} />
+        {/* <Redirect from="/equipe" to="/" /> */}
         <Redirect from="/manifest" to="/manifeste" />
         <Redirect from="/pourquoi" to="/manifeste" />
         <Route exact path="/manifeste" component={Manifest} />
