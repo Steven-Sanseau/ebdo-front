@@ -107,7 +107,7 @@ class FormulaStep extends React.Component {
       <div>
         <Row>
           <FormulaText>
-            Les frais de livraison en France (Métropilitaine et outre-mer) sont
+            Les frais de livraison en France (Métropolitaine et outre-mer) sont
             inclus. Les frais de livraison vers un autre pays seront ajoutés à
             l’étape suivante.
           </FormulaText>

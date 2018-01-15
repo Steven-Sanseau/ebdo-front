@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
+import routerTrackingMiddleware from 'middleware/router'
 import createSagaMiddleware from 'redux-saga'
 import { persistStore, autoRehydrate } from 'redux-persist-immutable'
 import { createTracker } from 'redux-segment'
@@ -13,7 +14,12 @@ export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [tracker, sagaMiddleware, routerMiddleware(history)]
+  const middlewares = [
+    tracker,
+    sagaMiddleware,
+    routerMiddleware(history),
+    routerTrackingMiddleware
+  ]
 
   const enhancers = [applyMiddleware(...middlewares), autoRehydrate()]
 

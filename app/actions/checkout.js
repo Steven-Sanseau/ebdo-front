@@ -35,6 +35,19 @@ export function postCheckoutLoaded(checkout) {
       analytics: {
         eventType: EventTypes.track
       }
+    },
+    meta: {
+      analytics: [
+        {
+          eventType: EventTypes.track
+        },
+        {
+          eventType: EventTypes.track,
+          eventPayload: {
+            event: 'Completed Order'
+          }
+        }
+      ]
     }
   }
 }
