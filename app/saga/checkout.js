@@ -81,6 +81,8 @@ function* newCheckoutSaga(action) {
     if (action.type === NEW_CHECKOUT_TRY) {
       yield put(goToStep(3))
     }
+  } else if (action.isHomeRedirect) {
+    yield put(goToStep(2))
   } else {
     yield put(goToStep(1))
   }

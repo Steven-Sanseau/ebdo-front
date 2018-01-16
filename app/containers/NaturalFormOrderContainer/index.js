@@ -134,7 +134,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(setOfferParams(params, isRedirect)),
     dispatchGetOffer: () => dispatch(getoffer()),
     dispatchPush: route => dispatch(push(route)),
-    dispatchNewCheckout: () => dispatch(newCheckout())
+    dispatchNewCheckout: () => dispatch(newCheckout(true))
   }
 }
 

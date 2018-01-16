@@ -9,6 +9,7 @@ import routeReducer from 'reducers/routes'
 import stepReducer from 'reducers/step'
 import tokenReducer from 'reducers/token'
 import teamReducer from 'reducers/team'
+import trackingReducer from 'reducers/tracking'
 import loginReducer from 'reducers/login'
 import subscriptionReducer from 'reducers/subscription'
 
@@ -23,6 +24,7 @@ export default function createReducer(injectedReducers) {
     route: routeReducer,
     step: stepReducer,
     token: tokenReducer,
+    tracking: trackingReducer,
     team: teamReducer,
     login: loginReducer,
     subscription: subscriptionReducer,

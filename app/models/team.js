@@ -302,12 +302,99 @@ const TeamList = [
   },
   {
     name: 'Thibaut Brugat-Dreux',
-    job: 'Organisatrice de la tournée',
+    job: 'Organisateur de la tournée',
     description:
       'Sortir de sa zone de confort. Se remettre en question. Accepter d’avoir tort. Ebdo sera, devra être là ou on ne l’attend pas.',
-    email: 'thibaut@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'thibaut@ebdo-lejournal.com'
+    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+  },
+  {
+    name: 'Magali Gasperini Courroy',
+    job: 'Rédactrice photo',
+    description:
+      '’est une aventure enthousiasmante. Une belle promesse à vous, lecteurs. Inventer, réinventer. Vous donner à voir le monde, qu’il soit de l’autre côté de la Terre ou de l’autre côté de la rue.',
+    email: 'm.gasperini@ebdo-lejournal.com'
+    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
   }
 ]
+
+// Magali Gasperini Courroy, rédactrice photo
+// C’est une aventure enthousiasmante. Une belle promesse à vous, lecteurs. Inventer, réinventer. Vous donner à voir le monde, qu’il soit de l’autre côté de la Terre ou de l’autre côté de la rue.
+// m.gasperini@ebdo-lejournal.com
+//
+//
+// Olivier Monod, journaliste
+// « Parler de science simplement. Démythifier certains sujets, en réenchanter d’autres. Répondre à vos questions et éclairer les controverses. Ebdo, c’est tout ça et plus encore. »
+// o.monod@ebdo-lejournal.com
+//
+// Gaëlle Macke, co-rédactrice en chef
+// "S’écarter du buzz pour écouter le bruit du monde. S’éloigner des écrans pour regarder la vie en vrai. Et, sans relâche, expliquer, échanger, confronter, poser des repères, donner du sens. Pour faire comprendre et mieux se comprendre. Ensemble."
+// g.macke@ebdo-lejournal.com
+//
+// Anne-Sophie Novel, journaliste installée à Bordeaux
+// "J'aime la presse qui traite autant des plaies du monde que de celles et ceux qui les pansent. Ebdo et ses Ebdonautes rêvent d'un journalisme qui offre un rapport apaisé au monde. Puisse ce rêve se réaliser !"
+// as.novel@ebdo-lejournal.com
+//
+// Arthur Frayer-Laleix
+// “Pour moi, le meilleur journal possible est celui qui me prend à contre-pied. Celui qui fait vaciller mes certitudes. J'avais un avis sur le foot, la chasse, les migrants, l'Amérique, la tarte aux pommes... et voilà que la lecture d'un article me fait douter. Ebdo sera ce journal qui nous pousse à penser à contre-courant de nos certitudes.”
+// a.frayer@ebdo-lejournal.com
+//
+// Adélaïde Michel
+//
+//
+//
+// Mathieu Lehot, journaliste
+// “Ebdo me rappelle ces bons mots de l’artiste Jean Dubuffet : « Le journal, quand on le barbouille d’encre, se plisse, c’est un papier peu résistant. Tant mieux, va pour les plissements ! Comme il boit de bon cœur ! C’est un papier avide buveur. Après quoi il fournit inlassablement ». A la santé d’Ebdo !”
+// m.lehot@ebdo-lejournal.com
+//
+//
+// Emile Rabaté, journaliste installé à Lorient
+// "Si Ebdo était une personne, ce serait cet ami qu’on aime retrouver autour d’une bière ou d’un café, pour le plaisir de bavarder, prendre et donner des nouvelles, dans l’assurance que ce moment passé ensemble ouvre en nous d’autres horizons. Un ami simple et généreux, pas pédant, qui sait aussi bien parler qu’écouter. On se retrouve en terrasse ?"
+// e.rabate@ebdo-lejournal.com
+//
+// Emmanuelle Morau, journaliste
+// "L'audace, c'est ce que j'ai aimé dans le projet d'Ebdo. Elle nourrira notre curiosité et provoquera de belles rencontres, j'en suis convaincue."
+// e.morau@ebdo-lejournal.com
+//
+// Samuel Forey, journaliste
+// "Le grand reportage, c'est aller, chercher, raconter avec la même passion les antipodes et le café du coin. En route pour de nouvelles et incroyables aventures !"
+// s.forey@ebdo-lejournal.com
+//
+//
+// Nicolas Foucher, rédacteur photo
+//
+// "En naviguant sur Internet, j'ai l'impression que le journalisme semble ne se résumer qu'à une succession de "copier-coller". Ebdo, c'est la promesse d'un journalisme fondé non pas sur le réflexe, mais sur la réflexion. Avec vous."
+// n.foucher@ebdo-lejournal.com
+//
+//
+// Estelle Maussion, journaliste
+// “Face au flux d'informations, aux réseaux sociaux et au "buzz", on se sent écrasé, noyé, désemparé.
+// Pour résister et respirer, nous allons prendre de la hauteur, donner des repères, miser sur le sens. Bref, parler de l'actualité autrement.”
+// e.maussion@ebdo-lejournal.com
+//
+// Charlotte Chaffanjon, journaliste
+// "Ebdo ? Un saut dans le vide. Des histoires vraies, des histoires folles, des histoires hallucinantes, des histoires qui font réfléchir, et puis d'autres qui font rêver, qui font peur, qui font pleurer, qui font voyager. Des histoires proches ou plus lointaines. Une aventure.”
+// c.chaffanjon@ebdo-lejournal.com
+//
+// Thibaut Brugat-Dreux, coordinateur de la tournée Ebdo
+// "Sortir de sa zone de confort. Se remettre en question. Accepter d’avoir tort. Ebdo sera, devra être là ou on ne l’attend pas. "
+// thibaut@ebdo-lejournal.com
+//
+// Benoist Simmat, journaliste, responsable des pages BD
+// “Surprise, sourire, rire, questionnements. Je connais le regard et les réactions de ceux qui découvrent une bande dessinée. Paradoxalement, ce mode narratif n'a jamais été aussi en vogue. Ebdo l'utilisera pour expliquer les thématiques d'actualités restant difficile à éclairer avec des mots. Nouveau journal, nouveaux modes de lecture… (photo © Yan Jumeau)”
+// b.simmat@ebdo-lejournal.com
+//
+//
+// Damien Carême, représentant des lecteurs
+// “En apportant l'ensemble des données sur les sujets au lecteur, sans pression d'annonceurs ou d'actionnaires-financiers, et dans un langage accessible à tous, ebdo sera un véritable outil d'éducation populaire dans lequel les lecteurs se reconnaîtront. Je serai heureux de veiller à cela. Quelle formidable aventure ! “
+// d.careme@ebdo-lejournal.com
+//
+// Margaux Velikonia, secrétaire de rédaction
+// « Je vois Ebdo comme un journal que l'on picore, dévore, commente, emporte avec soi, du petit déj' à la nuit tombée. On aura envie de s'en saisir, de s'y plonger, quand il traînera sur la table basse du salon et nous fera réfléchir même une fois refermé ! »
+// m.velikonia@ebdo-lejournal.com
+//
+// Adrien Absolu, journaliste
+// « Ebdo, pour moi, c’est d’abord une terrible excitation. Celle d’exercer un nouveau métier, de participer à une aventure collective, de rencontrer plein de gens – nouveaux collègues, futurs lecteurs. De sauter dans le vide. C’est le sel et le piment. »
+// a.absolu@ebdo-lejournal.com
 
 export { Team, TeamList }

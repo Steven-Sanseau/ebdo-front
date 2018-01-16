@@ -47,7 +47,19 @@ export function useClientExist() {
 export function getClientLoaded(client) {
   return {
     type: GET_CLIENT_LOADED,
-    client
+    client,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          event: 'New Checkout from exist User',
+          userId: client.client_id,
+          traits: {
+            email: client.email
+          }
+        }
+      }
+    }
   }
 }
 
@@ -68,7 +80,19 @@ export function postClient(checkEmail = false) {
 export function postClientLoaded(client) {
   return {
     type: POST_CLIENT_LOADED,
-    client
+    client,
+    meta: {
+      analytics: {
+        eventType: EventTypes.identify,
+        eventPayload: {
+          event: 'New Client',
+          userId: client.client_id,
+          traits: {
+            email: client.email
+          }
+        }
+      }
+    }
   }
 }
 
