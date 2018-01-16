@@ -4,6 +4,7 @@ import { Grid, Row, Col } from 'react-styled-flexboxgrid'
 import Footer from 'components/Footer'
 import styled from 'styled-components'
 import { media } from 'global-styles'
+import Obfuscate from 'react-obfuscate'
 
 import NavBar from 'components/NavBar'
 
@@ -114,7 +115,7 @@ function TeamPage(props) {
           <Row between="sm">
             {props.teamMembers.map((member, index) => {
               return (
-                <Profile xs={12} sm={4} key={index}>
+                <Profile xs={12} sm={4} key={member.email}>
                   <ImageTeam
                     image={`//images.weserv.nl/?url=ssl:${
                       member.image
@@ -125,7 +126,7 @@ function TeamPage(props) {
                   </h3>
                   <p>
                     « {member.description} »<br />
-                    <a mailto={member.email}>{member.email}</a>
+                    <Obfuscate email={member.email} />
                   </p>
                 </Profile>
               )
