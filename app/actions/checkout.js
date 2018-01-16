@@ -31,12 +31,31 @@ export function postCheckoutLoaded(checkout, offer) {
   let track = {}
   let meta = {}
 
+  // Offre d'essai
   if (offer.is_free_gift) {
     track = {
-      code: 'DC-8312645/aboebdo1/typage+transactions',
+      code: 'DC-8312645/site18/confgrat+standard',
       transaction_id: checkout.checkout_id,
       value: 'gift'
     }
+
+    meta = {
+      analytics: [
+        {
+          eventType: EventTypes.track,
+          eventPayload: {
+            event: 'Gift Number Ordered',
+            properties: {
+              orderId: checkout.checkout_id,
+              total: 0,
+              revenue: 0,
+              description: offer.description
+            }
+          }
+        }
+      ]
+    }
+    // Offre ADD
   } else if (offer.time_limited) {
     track = {
       code: 'DC-8312645/aboebdo1/typage+transactions',
@@ -49,7 +68,7 @@ export function postCheckoutLoaded(checkout, offer) {
         {
           eventType: EventTypes.track,
           eventPayload: {
-            event: '',
+            event: 'Purchased Subscribe Time Limited',
             properties: {
               orderId: checkout.checkout_id,
               total: offer.price_ttc / 100,
@@ -61,6 +80,7 @@ export function postCheckoutLoaded(checkout, offer) {
         }
       ]
     }
+    // Offre ADL
   } else if (!offer.time_limited) {
     track = {
       code: 'DC-8312645/aboebdo1/typage+transactions',
@@ -73,7 +93,7 @@ export function postCheckoutLoaded(checkout, offer) {
         {
           eventType: EventTypes.track,
           eventPayload: {
-            event: 'Completed Subscribe',
+            event: 'Purchased Subscribe Unlimited',
             properties: {
               orderId: checkout.checkout_id,
               total: offer.price_ttc / 100,
