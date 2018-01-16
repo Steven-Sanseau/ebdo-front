@@ -38,7 +38,7 @@ export default function configureStore(initialState = {}, history) {
     composeEnhancers(...enhancers)
   )
 
-  persistStore(store, { blacklist: ['route'] })
+  persistStore(store, { blacklist: ['route', 'client'] })
 
   // Extensions
   store.runSaga = sagaMiddleware.run
