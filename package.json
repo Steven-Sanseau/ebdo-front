@@ -266,6 +266,7 @@
     "redux-segment": "^1.6.2",
     "reselect": "3.0.1",
     "sanitize.css": "5.0.0",
+    "sitemap": "^1.13.0",
     "styled-components": "2.4.0",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.3"

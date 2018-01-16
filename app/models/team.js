@@ -35,20 +35,20 @@ const TeamList = [
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/constance.png'
   },
   {
-    name: 'Thierry Mandon',
+    name: 'Quintin Leeds',
     job: 'Directeur artistique',
     description:
       'Il faut que tout soit immédiatement compréhensible. Ce journal sera aussi accessible à ceux qui ne lisent pas la presse d’habitude. Beaucoup de sujets peuvent être traités plus efficacement par une image.',
     email: 'q.leeds@rollinpublications.fr',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thierry.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/quintin.png'
   },
   {
-    name: 'Quintin Leeds',
+    name: 'Thierry Mandon',
     job: 'Directeur de la publication',
     description:
       'Nous vivons dans des îlots qui ne se parlent plus. C’est cette cassure que je veux combler. Ebdo répondra au principe d’éducation populaire pour recréer du lien. Une université sans diplôme, ouverte, qui met à la portée de tous les sujets essentiels.',
     email: 't.mandon@rollinpublications.fr',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/quintin.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thierry.png'
   },
   {
     name: 'Nicolas Delesalle',
@@ -90,8 +90,7 @@ const TeamList = [
     description:
       'Aujourd’hui, on doit pratiquer le journalisme autrement. Tisser des liens étroits avec ceux qui nous lisent. Je suis frappée par tous les gens qui essaient de changer leur mode de vie. Nous sommes comme eux, nous voulons changer notre métier.',
     email: 'mp.subtil@6mois.fr',
-    image:
-      's3.eu-west-3.amazonaws.com/ebdo/front/website/team/marie%2Bpierre.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/mp.png'
   },
   {
     name: 'Mathieu Palain',
@@ -163,7 +162,151 @@ const TeamList = [
     description:
       "«Écrire, comme on marche dans la rue», disait l'autre. C'est ça, comme on respire et comme on vit quoi. Un journalisme du journalier, de la vie, un journalisme de tout et de tous. Car tout a sa place. Tout mérite d'être raconté. Je pense que c'est ça, Ebdo.",
     email: 'a.babin@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/alice.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/charlottec.jpg'
+  },
+  {
+    name: 'Mathieu Lehot',
+    job: 'Journaliste',
+    description:
+      'Ebdo me rappelle ces bons mots de l’artiste Jean Dubuffet : « Le journal, quand on le barbouille d’encre, se plisse, c’est un papier peu résistant. Tant mieux, va pour les plissements ! Comme il boit de bon cœur ! C’est un papier avide buveur. Après quoi il fournit inlassablement ». A la santé d’Ebdo !',
+    email: 'm.lehot@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/mathieul.png'
+  },
+  {
+    name: 'Estelle Maussion',
+    job: 'Journaliste',
+    description:
+      'Face au flux d\'informations, aux réseaux sociaux et au "buzz", on se sent écrasé, noyé, désemparé. Pour résister et respirer, nous allons prendre de la hauteur, donner des repères, miser sur le sens. Bref, parler de l\'actualité autrement.',
+    email: 'e.maussion@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/estelle.jpg'
+  },
+  {
+    name: 'Emile Rabaté',
+    job: 'Journaliste installé à Lorient',
+    description:
+      'Si Ebdo était une personne, ce serait cet ami qu’on aime retrouver autour d’une bière ou d’un café, pour le plaisir de bavarder, prendre et donner des nouvelles, dans l’assurance que ce moment passé ensemble ouvre en nous d’autres horizons. Un ami simple et généreux, pas pédant, qui sait aussi bien parler qu’écouter. On se retrouve en terrasse ?',
+    email: 'e.rabate@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/estelle.jpg'
+  },
+  {
+    name: 'Emmanuelle Morau',
+    job: 'Journaliste',
+    description:
+      "L'audace, c'est ce que j'ai aimé dans le projet d'Ebdo. Elle nourrira notre curiosité et provoquera de belles rencontres, j'en suis convaincue.",
+    email: 'e.morau@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/emmanuelle.png'
+  },
+  {
+    name: 'Samuel Forey',
+    job: 'Journaliste',
+    description:
+      "Le grand reportage, c'est aller, chercher, raconter avec la même passion les antipodes et le café du coin. En route pour de nouvelles et incroyables aventures !",
+    email: 's.forey@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/samuel.png'
+  },
+  {
+    name: 'Sylvain Venayre',
+    job: 'Historien',
+    description:
+      'Les historiens sont des espèces de voyageurs. Avec eux, Ebdo partira sur les grands chemins du passé. Pour mieux voir, comprendre et sentir le présent.',
+    email: 's.venayre@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/sylvain.png'
+  },
+  {
+    name: 'Benoist Simmat',
+    job: 'Journaliste, responsable des pages BD',
+    description:
+      "Surprise, sourire, rire, questionnements. Je connais le regard et les réactions de ceux qui découvrent une bande dessinée. Paradoxalement, ce mode narratif n'a jamais été aussi en vogue. Ebdo l'utilisera pour expliquer les thématiques d'actualités restant difficile à éclairer avec des mots. Nouveau journal, nouveaux modes de lecture … Photo © Yan Jumeau",
+    email: 'b.simmat@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/sylvain.png'
+  },
+  {
+    name: 'Marion Vasseur',
+    job: 'Chargée de communication digitale',
+    description:
+      "Surprise, sourire, rire, questionnements. Je connais le regard et les réactions de ceux qui découvrent une bande dessinée. Paradoxalement, ce mode narratif n'a jamais été aussi en vogue. Ebdo l'utilisera pour expliquer les thématiques d'actualités restant difficile à éclairer avec des mots. Nouveau journal, nouveaux modes de lecture … Photo © Yan Jumeau",
+    email: 'm.vasseur@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/marion.jpg'
+  },
+  {
+    name: 'Nicolas Foucher',
+    job: 'Rédacteur photo',
+    description:
+      "En naviguant sur Internet, j'ai l'impression que le journalisme semble ne se résumer qu'à une succession de \"copier-coller\". Ebdo, c'est la promesse d'un journalisme fondé non pas sur le réflexe, mais sur la réflexion. Avec vous.",
+    email: 'n.foucher@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/nicolas.png'
+  },
+  {
+    name: 'Léa Taillefert-Rolland',
+    job: 'Rédactrice graphiste',
+    description:
+      "C'est une nouvelle aventure, une mission passionnante, celle de mettre en image les mots de nos équipes mais aussi les vôtres, nos lecteurs. Créer un journal qui vous ressemble et régaler vos yeux !",
+    email: 'l.taillefert@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/lea.png'
+  },
+  {
+    name: 'Sandra Fauché',
+    job: 'Rédactrice graphiste',
+    description:
+      'Un journal papier à l’heure des réseaux numériques, j’ai voulu participer ! Ebdo racontera l’aventure de nos vies. Il sera accueillant, généreux, joyeux, vif, incisif parfois. Sa voix sera singulière comme celle de chacun d’entre nous.',
+    email: 's.fauche@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/sandra.png'
+  },
+  {
+    name: 'Clémentine Simonet',
+    job: 'Rédactrice graphiste',
+    description:
+      "Le papier est un support formidable, qui permet de tout imaginer et d'aider à comprendre notre monde. La preuve : il a traversé toutes les époques. Continuons à en faire un élément essentiel de nos vies.",
+    email: 'c.simonet@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/clementine.png'
+  },
+  {
+    name: 'Safia Bouda',
+    job: 'Secrétaire de rédaction',
+    description:
+      'Mon boulot, c’est qu’un lecteur, en découvrant un titre, une légende photo, ait envie de plonger dans l’article. Puis qu’il comprenne tout, qu’il ne décroche pas. Passionnant quand on choisit de s’adresser au plus grand nombre, et à ceux qui ne lisent plus la presse, ou qui ne la lisent pas encore…',
+    email: 's.bouda@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/safia.png'
+  },
+  {
+    name: 'Bertrand Courrège',
+    job: 'Secrétaire de rédaction',
+    description:
+      'Distinguer l’essentiel de l’accessoire, éclairer et approfondir. Chaque semaine, Ebdo fera le tri et rendra intéressant ce qui est important.',
+    email: 'b.courrege@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/bertrand.png'
+  },
+  {
+    name: 'Margaux Velikonia',
+    job: 'Secrétaire de rédaction',
+    description:
+      "Je vois Ebdo comme un journal que l'on picore, dévore, commente, emporte avec soi, du petit déj' à la nuit tombée. On aura envie de s'en saisir, de s'y plonger, quand il traînera sur la table basse du salon et nous fera réfléchir même une fois refermé !",
+    email: 'm.velikonia@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/margaux.jpg'
+  },
+  {
+    name: 'Damien Carême',
+    job: 'Représentant des lecteurs',
+    description:
+      "En apportant l'ensemble des données sur les sujets au lecteur, sans pression d'annonceurs ou d'actionnaires-financiers, et dans un langage accessible à tous, Ebdo sera un véritable outil d'éducation populaire dans lequel les lecteurs se reconnaîtront. Je serai heureux de veiller à cela. Quelle formidable aventure !",
+    email: 'd.careme@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/damien.png'
+  },
+  {
+    name: 'Sharlie Minette',
+    job: 'Organisatrice de la tournée',
+    description:
+      'Ebdo n’est pas qu’une aventure de presse, c’est un projet de société. À bord du minibus, nous partons à votre rencontre partout en France et en Belgique. Vos avis et vos envies enrichissent chaque jour ce que sera Ebdo : un journal qui vous ressemble.',
+    email: 's.minette@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/sharlie.png'
+  },
+  {
+    name: 'Thibaut Brugat-Dreux',
+    job: 'Organisatrice de la tournée',
+    description:
+      'Sortir de sa zone de confort. Se remettre en question. Accepter d’avoir tort. Ebdo sera, devra être là ou on ne l’attend pas.',
+    email: 'thibaut@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
   }
 ]
 
