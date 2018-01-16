@@ -50,7 +50,9 @@ class ToggleStep extends React.Component {
           }
         }
 
-        this.setState({ isAnim: false, animInstance: null })
+        if (this.isMounted()) {
+          this.setState({ isAnim: false, animInstance: null })
+        }
       })
     }
   }
