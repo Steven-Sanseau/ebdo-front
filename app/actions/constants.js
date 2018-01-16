@@ -98,3 +98,5 @@ export const GET_TEAM = 'app/Team/GET_TEAM'
 
 export const GET_SUBSCRIPTIONS_LOADED =
   'app/Checkout/subscriptions/GET_SUBSCRIPTIONS_LOADED'
+
+export const SET_TRACKER = 'app/Tracking/SET_TRACKER'

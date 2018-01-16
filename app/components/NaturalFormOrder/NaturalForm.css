@@ -50,9 +50,9 @@
   border-bottom: 1px solid #d4dadd;
 }
 
-.dropdown-wrap.Dropdown-root:not(.is-open):after {
+.Dropdown-arrow {
   content: '';
-  display: block;
+  display: inline-block;
   border: 9px solid transparent;
   border-top-color: inherit;
   position: absolute;

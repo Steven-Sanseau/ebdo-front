@@ -18,9 +18,7 @@ export class ProgressContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.clientCount || this.props.clientCount === 0) {
-      this.props.dispatch(getClientsCount())
-    }
+    this.props.dispatch(getClientsCount())
   }
 
   _handleWaypointEnter = event => {

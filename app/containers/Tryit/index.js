@@ -71,7 +71,7 @@ const Undercover = styled.div`
   }
 `
 const TryTextCol = styled(Col)`
-  margin-top: 5%;
+  margin-top: 10%;
 `
 
 export class Tryit extends React.Component {

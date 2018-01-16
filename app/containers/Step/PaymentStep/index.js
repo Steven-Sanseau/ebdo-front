@@ -140,7 +140,7 @@ class PaymentStep extends React.Component {
                 {!offer.data.time_limited && (
                   <Col lg={6} xs={12}>
                     <InputCheckbox
-                      text="Prélèvement banquaire"
+                      text="Prélèvement bancaire"
                       onCheck={this.handlePaiementMethod}
                       isChecked={payementMethod === 1}
                       icon={<SepaIcon />}
@@ -150,7 +150,7 @@ class PaymentStep extends React.Component {
                 )}
                 <Col lg={6} xs={12}>
                   <InputCheckbox
-                    text="Carte Banquaire"
+                    text="Carte bancaire"
                     onCheck={this.handlePaiementMethod}
                     isChecked={payementMethod === 2}
                     icon={<CBIcon />}
@@ -213,7 +213,7 @@ class PaymentStep extends React.Component {
     return (
       <div>
         Je souhaite regler mon abonnement par
-        {payementMethod === 1 && <span>prélèvement banquaire</span>}
+        {payementMethod === 1 && <span>prélèvement bancaire</span>}
         {payementMethod === 2 && <span>carte bancaire</span>}
       </div>
     )
