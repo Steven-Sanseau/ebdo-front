@@ -28,31 +28,69 @@ export function postCheckout() {
   }
 }
 export function postCheckoutLoaded(checkout, offer) {
-  return {
-    type: POST_SUBSCRIPTION_LOADED,
-    checkout,
-    track: {
+  let track = {}
+  let meta = {}
+
+  if (offer.is_free_gift) {
+    track = {
+      code: 'DC-8312645/aboebdo1/typage+transactions',
+      transaction_id: checkout.checkout_id,
+      value: 'gift'
+    }
+  } else if (offer.time_limited) {
+    track = {
       code: 'DC-8312645/aboebdo1/typage+transactions',
       transaction_id: checkout.checkout_id,
       value: offer.price_ttc / 100
-    },
-    meta: {
+    }
+
+    meta = {
       analytics: [
         {
           eventType: EventTypes.track,
           eventPayload: {
-            event: 'Completed Order',
+            event: '',
             properties: {
               orderId: checkout.checkout_id,
-              total: offer.duration,
+              total: offer.price_ttc / 100,
               revenue: offer.price_ttc / 100,
               currency: '€',
-              category: offer.description
+              description: offer.description
             }
           }
         }
       ]
     }
+  } else if (!offer.time_limited) {
+    track = {
+      code: 'DC-8312645/aboebdo1/typage+transactions',
+      transaction_id: checkout.checkout_id,
+      value: offer.price_ttc / 100
+    }
+
+    meta = {
+      analytics: [
+        {
+          eventType: EventTypes.track,
+          eventPayload: {
+            event: 'Completed Subscribe',
+            properties: {
+              orderId: checkout.checkout_id,
+              total: offer.price_ttc / 100,
+              revenue: offer.price_ttc / 100,
+              currency: '€',
+              description: offer.description
+            }
+          }
+        }
+      ]
+    }
+  }
+  return {
+    type: POST_SUBSCRIPTION_LOADED,
+    checkout,
+    track,
+    meta
   }
 }
 
@@ -64,14 +102,16 @@ export function postCheckoutError(errorMessage, errorCode) {
   }
 }
 
-export function newCheckout() {
+export function newCheckout(isHomeRedirect = false) {
   return {
-    type: NEW_CHECKOUT
+    type: NEW_CHECKOUT,
+    isHomeRedirect
   }
 }
 
-export function newCheckoutTry() {
+export function newCheckoutTry(isHomeRedirect = false) {
   return {
-    type: NEW_CHECKOUT_TRY
+    type: NEW_CHECKOUT_TRY,
+    isHomeRedirect
   }
 }

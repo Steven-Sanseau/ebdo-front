@@ -11,7 +11,6 @@ import 'components/NaturalFormOrder/NaturalForm.css'
 const DropdownWrap = styled(Dropdown)`
   display: inline-block;
   border-radius: 35px;
-  padding: 0 50px 5px 20px;
   border-color: var(${props => (props.color ? props.color : '--black')});
   border-style: dashed;
   border-width: 1px;
@@ -20,6 +19,14 @@ const DropdownWrap = styled(Dropdown)`
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
+
+  .valueWrap {
+    margin: 0 50px 5px 20px;
+  }
+
+  .dropdown-price .Dropdown-menu {
+    width: 130%;
+  }
 
   &:not(.is-open):hover {
     background-color: var(${props => (props.color ? props.color : '--black')});
@@ -91,7 +98,7 @@ const Help = styled.div`
   background-color: var(--turquoise-blue);
   color: white;
   ${media.tablet`
-    margin-top: -20px;
+    margin-top: 20px;
   `} &:hover {
     transform: scale(1.1);
   }
@@ -250,10 +257,10 @@ export class NaturalFormOrder extends React.Component {
     ]
 
     return (
-      <div onClick={this.handleClick}>
+      <div>
         <div className={isNaturalForm ? '' : 'hidden'}>
           <DropdownWrap
-            key={'dropdown-offer'}
+            key="dropdown-offer"
             className="dropdown-wrap"
             options={options1}
             value={options1.find(el => el.value === (target ? '1' : '0'))}
@@ -265,7 +272,7 @@ export class NaturalFormOrder extends React.Component {
           />
 
           <DropdownWrap
-            key={'dropdown-duration'}
+            key="dropdown-duration"
             className="dropdown-wrap"
             options={options2}
             value={options2.find(
@@ -285,8 +292,8 @@ export class NaturalFormOrder extends React.Component {
             pour{' '}
           </TextWrap>
           <DropdownWrap
-            key={'dropdown-price'}
-            className="dropdown-wrap"
+            key="dropdown-price"
+            className="dropdown-wrap dropdown-price"
             options={options3}
             value={options3.find(el => el.value === String(price))}
             color="--turquoise-blue"

@@ -11,6 +11,20 @@ const routerMiddleware = store => next => action => {
       })
     }
 
+    if (action.payload.pathname === '/essai') {
+      gtag('event', 'conversion', {
+        allow_custom_scripts: true,
+        send_to: 'DC-8312645/site18/essai+standard'
+      })
+    }
+
+    if (action.payload.pathname === '/abonnement') {
+      gtag('event', 'conversion', {
+        allow_custom_scripts: true,
+        send_to: 'DC-8312645/site18/abonnement+standard'
+      })
+    }
+
     if (action.payload.pathname === '/source') {
       gtag('event', 'conversion', {
         allow_custom_scripts: true,
@@ -35,7 +49,6 @@ const routerMiddleware = store => next => action => {
   }
 
   if (action.track) {
-    console.log(action.track)
     let gtmObject = {
       allow_custom_scripts: true,
       send_to: action.track.code
