@@ -21,7 +21,7 @@ const routerMiddleware = store => next => action => {
     if (action.payload.pathname === '/abonnement') {
       gtag('event', 'conversion', {
         allow_custom_scripts: true,
-        send_to: 'DC-8312645/site18/abonnement+standard'
+        send_to: 'DC-8312645/site18/choixabo+standard'
       })
     }
 
@@ -32,7 +32,7 @@ const routerMiddleware = store => next => action => {
       })
     }
 
-    if (action.payload.pathname === '/manifest') {
+    if (action.payload.pathname === '/manifeste') {
       gtag('event', 'conversion', {
         allow_custom_scripts: true,
         send_to: 'DC-8312645/site18/pourquoi+standard'

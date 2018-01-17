@@ -235,6 +235,7 @@ class PaymentStep extends React.Component {
         isLoadingNextStep={tokenIsLoading}
         textButtonNextStep="Payer"
         handleAnimationEnding={this.handleAnimationEnding}
+        isLongAnim
       />
     )
   }
