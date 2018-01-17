@@ -91,26 +91,15 @@ function TeamPage(props) {
             <Col xs={12} sm={6}>
               <h2>L'équipe</h2>
               <p>
-                Une question ? Vous n’êtes sûrement pas le premier. Parcourez
-                toutes les interrogations de lecteurs auxquelles nous avons
-                répondu.
+                Venus de tous horizons, passionnés d’informations, convaincus de
+                l’avenir du papier, ils inventent le journalisme dont ils ont
+                toujours rêvé.
               </p>
             </Col>
           </Row>
         </Layout>
       </IntroWrap>
       <Layout>
-        <Row>
-          <TextWrap xs={12} sm={6} smOffset={3}>
-            <p>
-              L'un est éditeur, l'autre est grand reporter. Ensemble, ils ont
-              fondé XXI et 6Mois, deux revues de référence, sans publicité,
-              vendues en librairie. Avec de nouvelles recrues, ils préparent un
-              hebdomadaire de presse d'un genre nouveau et toujours sans
-              publicité.
-            </p>
-          </TextWrap>
-        </Row>
         {props.teamMembers && (
           <Row between="sm">
             {props.teamMembers.map((member, index) => {

@@ -84,17 +84,24 @@ const SecondaryFooter = () => (
             <Link to="mailto:contact@ebdo-lejournal.com">
               contact@ebdo-lejournal.com
             </Link>
+            <p>
+              <strong>Rollin Publications</strong>
+              <br />19 rue Visconti - 75006 Paris
+            </p>
           </LinkWrapper>
           <LinkWrapper>
             <Title>Contacter le service abonnement</Title>
-            <Link to="mailto:abo@ebdo-lejournal.com">
-              abo@ebdo-lejournal.com
-            </Link>
+            <p>
+              Par email:{' '}
+              <Link to="mailto:abo@ebdo-lejournal.com">
+                abo@ebdo-lejournal.com
+              </Link>
+            </p>
+            <p>
+              Par téléphone: <Link to="tel:0176410595">01 76 41 05 95</Link>
+            </p>
           </LinkWrapper>
-          <LinkWrapper>
-            <Title>Par téléphone</Title>
-            <Link to="tel:0176410595">01 76 41 05 95</Link>
-          </LinkWrapper>
+          <LinkWrapper />
         </ColCustom>
         <ColCustom w={5} m={13} />
       </RowSimpleBorder>
