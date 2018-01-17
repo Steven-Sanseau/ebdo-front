@@ -23,8 +23,11 @@ export class Team extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Team</title>
-          <meta name="description" content="Description of Team" />
+          <title>L'équipe d'ebdo</title>
+          <meta
+            name="description"
+            content="Venus de tous horizons, passionnés d’informations, convaincus de l’avenir du papier, ils inventent le journalisme dont ils ont toujours rêvé."
+          />
         </Helmet>
         <TeamPage
           dispatch={dispatch}

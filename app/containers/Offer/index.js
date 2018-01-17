@@ -104,8 +104,11 @@ export class Offer extends React.Component {
       <div>
         <Layout>
           <Helmet>
-            <title>Soutenir ebdo</title>
-            <meta name="description" content="Abonnement à ebdo le journal" />
+            <title>Offrir ebdo à un proche</title>
+            <meta
+              name="description"
+              content="Offrir un abonnement ebdo à un proche"
+            />
           </Helmet>
           <Row center="xs" start="lg">
             <Col xs={12}>

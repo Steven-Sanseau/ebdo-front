@@ -71,8 +71,8 @@ export class Login extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>connexion à mon espace abonné ebdo</title>
-          <meta name="description" content="Abonnement à ebdo le journal" />
+          <title>Connexion à mon espace abonné ebdo</title>
+          <meta name="description" content="Espace abonné à ebdo le journal" />
         </Helmet>
 
         <ThemeProvider theme={theme}>
