@@ -139,8 +139,11 @@ export class Tryit extends React.Component {
       <div>
         <Layout>
           <Helmet>
-            <title>Soutenir ebdo</title>
-            <meta name="description" content="Abonnement à ebdo le journal" />
+            <title>Recevoir gratuitement un exemplaire d'ebdo</title>
+            <meta
+              name="description"
+              content="Recevoir gratuitement un exemplaire d'ebdo le journal"
+            />
           </Helmet>
           <Row center="xs" start="lg">
             <Col xs={12}>

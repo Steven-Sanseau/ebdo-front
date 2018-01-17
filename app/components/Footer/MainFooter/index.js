@@ -81,17 +81,27 @@ const MainFooter = () => (
           <Logo color="var(--white-true)" />
           <LogoWrapper>
             Par les créateurs de <br />
-            <Image
-              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/XXI.png&w=28&t=fit&il"
-              alt="XXI"
-              height={22}
-            />
+            <a
+              target="_blank"
+              rel="noopener"
+              href="http://www.revue21.fr/?utm_source=ebdo&utm_medium=footer">
+              <Image
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/XXI.png&w=28&t=fit&il"
+                alt="XXI"
+                height={22}
+              />
+            </a>
             <EtWrapper>et</EtWrapper>
-            <Image
-              src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/6mois-white.png&w=76&t=fit&il"
-              alt="6 mois"
-              height={22}
-            />
+            <a
+              target="_blank"
+              rel="noopener"
+              href="http://www.6mois.fr/?utm_source=ebdo&utm_medium=footer">
+              <Image
+                src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/6mois-white.png&w=76&t=fit&il"
+                alt="6 mois"
+                height={22}
+              />
+            </a>
           </LogoWrapper>
         </ColCustom>
         <ColCustom w={5} m={13}>
@@ -143,7 +153,7 @@ const MainFooter = () => (
           <ColCustom w={5} m={13}>
             <MobileWrapper>
               <TextBlock title="Où nous trouver ?" type="footer">
-                Ebdo est présent dans plus de 10 000 kiosques en France.
+                Ebdo est présent dans plus de 20.000 kiosques en France.
                 N’hésitez pas à vous renseigner auprès de vos bureaux de presse.
               </TextBlock>
             </MobileWrapper>
