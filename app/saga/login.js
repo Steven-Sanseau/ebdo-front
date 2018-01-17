@@ -65,7 +65,7 @@ function* loginEmailCodeSaga(action) {
       if (subscriptions.subscriptions.length > 0) {
         let redirect = false
         subscriptions.subscriptions.map(subscription => {
-          if (subscription.status === '01') {
+          if (subscription.aboweb_offer_id.indexOf('DL') !== -1) {
             redirect = true
           }
         })

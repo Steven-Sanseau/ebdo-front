@@ -200,30 +200,18 @@ export class Acknowledgment extends React.Component {
             )}
             {match.params.type === 'existe' && (
               <div>
-                Vous possédez déjà un abonnement il est donc impossible de vous
-                réabonner.
+                Vous possédez déjà un abonnement sans engagement il est donc
+                impossible de vous réabonner une seconde fois avec le même
+                compte.
                 <div>
-                  {subscriptions.map((subscription, key) => {
-                    if (subscription.status === '01') {
-                      return (
-                        <Subscription key={key}>
-                          <p>
-                            Abonnement du{' '}
-                            {new Date(
-                              subscription.begin_at
-                            ).toLocaleDateString()}{' '}
-                            au{' '}
-                            {new Date(subscription.end_at).toLocaleDateString()}
-                          </p>
-                          <p>
-                            Dernier numéro reçu n°{
-                              subscription.last_number_delivered
-                            }
-                          </p>
-                        </Subscription>
-                      )
-                    }
-                  })}
+                  <Subscription>
+                    <Button
+                      handleRoute={() => {
+                        this.props.dispatch(push('/'))
+                      }}>
+                      Retourner à l{"'"}accueil
+                    </Button>
+                  </Subscription>
                 </div>
               </div>
             )}
