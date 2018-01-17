@@ -50,9 +50,7 @@ class ToggleStep extends React.Component {
           }
         }
 
-        if (this.isMounted()) {
-          this.setState({ isAnim: false, animInstance: null })
-        }
+        this.setState({ isAnim: false, animInstance: null })
       })
     }
   }
@@ -65,6 +63,7 @@ class ToggleStep extends React.Component {
     const basicTimeline = anime.timeline({
       autoplay: false
     })
+
     basicTimeline
       .add({
         targets: this.text,
@@ -87,36 +86,40 @@ class ToggleStep extends React.Component {
         width: 140,
         easing: 'easeOutCubic'
       })
-      .add({
-        targets: this.progressBar,
-        duration: 1100,
-        left: 140,
-        width: 0,
-        easing: 'easeOutCubic'
-      })
-      .add({
-        targets: this.progressBar,
-        duration: 0,
-        left: 0,
-        width: 0
-      })
-      .add({
-        targets: this.progressBar,
-        duration: 1100,
-        width: 140,
-        easing: 'easeOutCubic'
-      })
-      .add({
-        targets: this.progressBar,
-        duration: 1100,
-        left: 140,
-        width: 0,
-        easing: 'easeOutCubic'
-      })
-      .add({
-        targets: this.button,
-        duration: 100
-      })
+
+    if (this.props.isLongAnim) {
+      basicTimeline
+        .add({
+          targets: this.progressBar,
+          duration: 1100,
+          left: 140,
+          width: 0,
+          easing: 'easeOutCubic'
+        })
+        .add({
+          targets: this.progressBar,
+          duration: 0,
+          left: 0,
+          width: 0
+        })
+        .add({
+          targets: this.progressBar,
+          duration: 1100,
+          width: 140,
+          easing: 'easeOutCubic'
+        })
+        .add({
+          targets: this.progressBar,
+          duration: 1100,
+          left: 140,
+          width: 0,
+          easing: 'easeOutCubic'
+        })
+        .add({
+          targets: this.button,
+          duration: 100
+        })
+    }
 
     if (!this.state.isAnim) {
       this.props.nextStep(event)
@@ -266,12 +269,14 @@ ToggleStep.propTypes = {
   textButtonNextStep: PropTypes.string,
   colorButtonNextStep: PropTypes.string,
   updateStepHide: PropTypes.bool,
-  handleAnimationEnding: PropTypes.func
+  handleAnimationEnding: PropTypes.func,
+  isLongAnim: PropTypes.bool
 }
 
 ToggleStep.defaultProps = {
   hideNextStep: false,
-  hideOffsetClose: false
+  hideOffsetClose: false,
+  isLongAnim: false
 }
 
 export default ToggleStep
