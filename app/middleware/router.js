@@ -53,6 +53,7 @@ const routerMiddleware = store => next => action => {
       allow_custom_scripts: true,
       send_to: action.track.code
     }
+
     if (action.track.value) {
       gtmObject.value = action.track.value
     }
