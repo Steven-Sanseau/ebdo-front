@@ -214,7 +214,7 @@ class NavBar extends React.Component {
                   />
                 </Link>
               </Title>
-              <Subtitle menuFixed={menuFixed}>Lisez-vous, lisez-nous</Subtitle>
+              <Subtitle menuFixed={menuFixed}>Lisez-nous, lisez-vous</Subtitle>
             </Col>
             <Col m={13}>
               <FlexWrap menuFixed={menuFixed}>
