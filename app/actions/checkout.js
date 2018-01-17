@@ -36,7 +36,7 @@ export function postCheckoutLoaded(checkout, offer) {
     track = {
       code: 'DC-8312645/site18/confgrat+standard',
       transaction_id: checkout.checkout_id,
-      value: 'gift'
+      value: 0
     }
 
     meta = {
