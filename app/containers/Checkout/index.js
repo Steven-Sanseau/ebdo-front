@@ -42,7 +42,7 @@ export class Checkout extends React.Component {
   componentWillMount() {
     if (this.props.subscriptions) {
       this.props.subscriptions.map(subscription => {
-        if (subscription.status === '01') {
+        if (subscription.aboweb_offer_id.indexOf('DL') !== -1) {
           this.props.goToAboExist()
         }
       })

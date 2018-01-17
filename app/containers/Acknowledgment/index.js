@@ -95,6 +95,17 @@ export class Acknowledgment extends React.Component {
     this.props.dispatch(push('/'))
   }
 
+  handleCrisp = () => {
+    localStorage.setItem('crisp-intro', 'true')
+    $crisp.push(['do', 'chat:open'])
+    $crisp.push([
+      'do',
+      'message:show',
+      ['text', 'Bonjour :)! vous souhaitez offrir un abonnement ?']
+    ])
+    $crisp.push(['set', 'session:segments', [['full']]])
+  }
+
   render() {
     const { match, subscriptions } = this.props
 
@@ -200,30 +211,29 @@ export class Acknowledgment extends React.Component {
             )}
             {match.params.type === 'existe' && (
               <div>
-                Vous possédez déjà un abonnement il est donc impossible de vous
-                réabonner.
+                Vous possédez déjà un abonnement sans engagement il est donc
+                impossible de vous réabonner une seconde fois avec le même
+                compte.<br />
+                Si vous souhaitez offrir un abonnement, veuillez contacter notre
+                service client
                 <div>
-                  {subscriptions.map((subscription, key) => {
-                    if (subscription.status === '01') {
-                      return (
-                        <Subscription key={key}>
-                          <p>
-                            Abonnement du{' '}
-                            {new Date(
-                              subscription.begin_at
-                            ).toLocaleDateString()}{' '}
-                            au{' '}
-                            {new Date(subscription.end_at).toLocaleDateString()}
-                          </p>
-                          <p>
-                            Dernier numéro reçu n°{
-                              subscription.last_number_delivered
-                            }
-                          </p>
-                        </Subscription>
-                      )
-                    }
-                  })}
+                  <Subscription>
+                    <Row center="xs">
+                      <Col xs={12} sm={3}>
+                        <Button
+                          handleRoute={() => {
+                            this.props.dispatch(push('/'))
+                          }}>
+                          Retourner à l{"'"}accueil
+                        </Button>
+                      </Col>{' '}
+                      <Col xs={12} sm={3}>
+                        <Button color="--squash" handleRoute={this.handleCrisp}>
+                          Contacter le service client
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Subscription>
                 </div>
               </div>
             )}

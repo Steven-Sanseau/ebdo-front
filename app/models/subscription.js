@@ -5,6 +5,7 @@ const Subscription = new Record(
     subscription_id: null,
     aboweb_subscription_id: null,
     aboweb_client_id: null,
+    aboweb_offer_id: null,
     first_number_delivered: null,
     last_number_delivered: null,
     is_invoiced: null,
