@@ -95,6 +95,17 @@ export class Acknowledgment extends React.Component {
     this.props.dispatch(push('/'))
   }
 
+  handleCrisp = () => {
+    localStorage.setItem('crisp-intro', 'true')
+    $crisp.push(['do', 'chat:open'])
+    $crisp.push([
+      'do',
+      'message:show',
+      ['text', 'Bonjour :)! vous souhaitez offrir un abonnement ?']
+    ])
+    $crisp.push(['set', 'session:segments', [['full']]])
+  }
+
   render() {
     const { match, subscriptions } = this.props
 
@@ -202,15 +213,26 @@ export class Acknowledgment extends React.Component {
               <div>
                 Vous possédez déjà un abonnement sans engagement il est donc
                 impossible de vous réabonner une seconde fois avec le même
-                compte.
+                compte.<br />
+                Si vous souhaitez offrir un abonnement, veuillez contacter notre
+                service client
                 <div>
                   <Subscription>
-                    <Button
-                      handleRoute={() => {
-                        this.props.dispatch(push('/'))
-                      }}>
-                      Retourner à l{"'"}accueil
-                    </Button>
+                    <Row center="xs">
+                      <Col xs={12} sm={3}>
+                        <Button
+                          handleRoute={() => {
+                            this.props.dispatch(push('/'))
+                          }}>
+                          Retourner à l{"'"}accueil
+                        </Button>
+                      </Col>{' '}
+                      <Col xs={12} sm={3}>
+                        <Button color="--squash" handleRoute={this.handleCrisp}>
+                          Contacter le service client
+                        </Button>
+                      </Col>
+                    </Row>
                   </Subscription>
                 </div>
               </div>
