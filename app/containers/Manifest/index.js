@@ -15,8 +15,8 @@ export class Manifest extends React.Component {
     return (
       <div>
         <Helmet>
-          <title>Manifest</title>
-          <meta name="description" content="manifest ebdo" />
+          <title>Manifeste</title>
+          <meta name="description" content="Manifeste ebdo" />
         </Helmet>
         <ManifestPage dispatch={dispatch} page={page} isLoggedIn={isLoggedIn} />
       </div>

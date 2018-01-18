@@ -114,29 +114,38 @@ const Pin = styled.div`
 
 const Images = [
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/2.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/2.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/3.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/3.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/4.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/4.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/5.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/5.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/6.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/6.jpg'
   },
   {
-    src: `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/7.jpg&w=1500&t=fit&il`
+    src:
+      'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/7.jpg'
   }
 ]
-const firstPage = `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il`
-const summary = `//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg&w=1500&t=fit&il`
+const firstPage =
+  'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg'
+const summary =
+  'https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/1.jpg'
 
 class Gallery extends React.Component {
   constructor() {
