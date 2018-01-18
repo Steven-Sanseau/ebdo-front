@@ -34,13 +34,9 @@ const IntroWrap = styled.div`
     font-size: 18px;
   }
 `
-const TextWrap = styled(Col)`
+const TextWrap = styled(Row)`
   padding-top: 100px;
   padding-bottom: 100px;
-  p {
-    font-weight: 700;
-    font-size: 18px;
-  }
 `
 const ImageTeam = styled.div`
   background-image: url(${props => props.image});
@@ -101,26 +97,24 @@ function TeamPage(props) {
       </IntroWrap>
       <Layout>
         {props.teamMembers && (
-          <Row between="sm">
-            {props.teamMembers.map((member, index) => {
-              return (
-                <Profile xs={12} sm={4} key={member.email}>
-                  <ImageTeam
-                    image={`//images.weserv.nl/?url=ssl:${
-                      member.image
-                    }&w=100&t=fit&il`}
-                  />
-                  <h3>
-                    {member.name}, <span>{member.job}</span>
-                  </h3>
-                  <p>
-                    « {member.description} »<br />
-                    <Obfuscate email={member.email} />
-                  </p>
-                </Profile>
-              )
-            })}
-          </Row>
+          <TextWrap between="sm">
+            {props.teamMembers.map(member => (
+              <Profile xs={12} sm={4} key={member.email}>
+                <ImageTeam
+                  image={`//images.weserv.nl/?url=ssl:${
+                    member.image
+                  }&w=100&t=fit&il`}
+                />
+                <h3>
+                  {member.name}, <span>{member.job}</span>
+                </h3>
+                <p>
+                  « {member.description} »<br />
+                  <Obfuscate email={member.email} />
+                </p>
+              </Profile>
+            ))}
+          </TextWrap>
         )}
       </Layout>
       <Footer dispatch={props.dispatch} />

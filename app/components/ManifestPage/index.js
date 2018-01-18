@@ -56,7 +56,6 @@ function ManifestPage(props) {
           <Row>
             <Col xs={12} sm={6}>
               <h2>Manifeste</h2>
-              <p>Une question ?</p>
             </Col>
           </Row>
         </Layout>
