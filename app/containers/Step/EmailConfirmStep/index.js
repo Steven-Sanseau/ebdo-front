@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -15,6 +16,17 @@ import { loginEmailCode } from 'actions/login'
 import InputText from 'components/InputText'
 import ToggleStep from 'components/ToggleStep/Loadable'
 
+const InputCode = styled(InputText)`
+  input {
+    -moz-appearance: textfield;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`
 class EmailConfirmStep extends React.Component {
   state = {
     code: '',
@@ -46,7 +58,7 @@ class EmailConfirmStep extends React.Component {
       <div>
         <p>Veuillez rentrer le code reçu par email pour valider la connexion</p>
         <form onSubmit={this.handleSubmit}>
-          <InputText
+          <InputCode
             name="code"
             type="number"
             value={this.state.code}
@@ -83,7 +95,7 @@ class EmailConfirmStep extends React.Component {
         nextStep={this.handleNextStep}
         textButtonNextStep="Valider le code"
         isLoadingNextStep={checkoutIsLoading}
-        updateStepHide={true}
+        updateStepHide
         handleAnimationEnding={this.handleAnimationEnding}
       />
     )
