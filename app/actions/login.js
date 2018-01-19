@@ -19,7 +19,7 @@ export function loginEmail(email, redirect) {
   }
 }
 
-export function loginEmailLoaded(redirect) {
+export function loginEmailLoaded(redirect = true) {
   return {
     type: LOGIN_EMAIL_LOADED,
     redirect
