@@ -128,7 +128,8 @@ class FormulaStep extends React.Component {
                   <Button
                     handleRoute={this.switchUI}
                     color="--squash"
-                    className="big">
+                    className="big"
+                  >
                     Merci pour les explications Thierry
                   </Button>
                 </ButtonWrap>
@@ -156,7 +157,7 @@ class FormulaStep extends React.Component {
               <Image
                 src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/website/giftebdo.png&w=383&t=fit&il"
                 alt="J'offre un abonnement ebdo illustration"
-                width="100%"
+                width="70%"
               />
             )}
             {!offer.data.is_gift && (
@@ -235,7 +236,8 @@ class FormulaStep extends React.Component {
                 border
                 colorText="--silver"
                 handleRoute={this.handleGoToStep}
-                color="--background">
+                color="--background"
+              >
                 Modifier
               </Button>
             </NextStep>

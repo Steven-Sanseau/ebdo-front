@@ -182,7 +182,13 @@ class DeliveryStep extends React.Component {
           errorForm={!this.state.isAnim ? this.state.error.invoice : {}}
           errorFormMessage={this.state.errorMessage.invoice}
         />
-        <Title>Adresse de livraison</Title>
+        {!isOffer && <Title>Adresse de livraison</Title>}
+        {isOffer && (
+          <Title>
+            Adresse de livraison de la personne qui va recevoir votre abonnement
+            en cadeau
+          </Title>
+        )}
         {displayDeliveryAddress &&
           !isOffer && (
             <CheckboxShowDeliveryForm

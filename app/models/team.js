@@ -96,7 +96,7 @@ const TeamList = [
     name: 'Mathieu Palain',
     job: 'Journaliste',
     description:
-      'Depuis que je suis journaliste, mes potes, se sont remis à lire. Ces mecs, il ne leur serait jamais venu à l’idée de mettre les pieds dans une librairie. Ils se disaient : « Ce n’est pas pour moi, c’est un truc d’intello». J’aimerais que cet hebdo leur parle.',
+      'Depuis que je suis journaliste, mes potes, se sont remis à lire. Ces mecs, il ne leur serait jamais venu à l’idée de mettre les pieds dans une librairie. Ils se disaient :  Ce n’est pas pour moi, c’est un truc d’intello. J’aimerais que cet hebdo leur parle.',
     email: 'm.palain@ebdo-lejournal.com',
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/mathieup.png'
   },
@@ -136,7 +136,7 @@ const TeamList = [
     name: 'Haydée Sabéran',
     job: 'Journaliste installée à Lille',
     description:
-      "«Alors tu déménages à Paris ?» Pour quoi faire ? Lille m'a adoptée. C'est d'ici que je pars et c'est ici que je me retrouve. Ebdo a envie de multiplier les regards, et c'est pour ça que j'ai envie d'Ebdo.",
+      "Alors tu déménages à Paris ? Pour quoi faire ? Lille m'a adoptée. C'est d'ici que je pars et c'est ici que je me retrouve. Ebdo a envie de multiplier les regards, et c'est pour ça que j'ai envie d'Ebdo.",
     email: 'h.saberan@ebdo-lejournal.com',
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/haydee.png'
   },
@@ -144,7 +144,7 @@ const TeamList = [
     name: 'Anne Jouan',
     job: 'Journaliste',
     description:
-      '"C\'est excitant une naissance ! Surtout quand beaucoup pensent que les journaux print sont morts. Parce que je crois en la presse, parce que j\'aime le journalisme et sentir le papier entre mes doigts, je suis heureuse de participer à Ebdo. Sans publicité !" Dessin © V.Cabut "',
+      "C'est excitant une naissance ! Surtout quand beaucoup pensent que les journaux print sont morts. Parce que je crois en la presse, parce que j'aime le journalisme et sentir le papier entre mes doigts, je suis heureuse de participer à Ebdo. Sans publicité ! Dessin © V.Cabut",
     email: 'a.jouan@ebdo-lejournal.com',
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/anne.png'
   },
@@ -152,7 +152,7 @@ const TeamList = [
     name: 'Alice Babin',
     job: 'Journaliste',
     description:
-      "«Écrire, comme on marche dans la rue», disait l'autre. C'est ça, comme on respire et comme on vit quoi. Un journalisme du journalier, de la vie, un journalisme de tout et de tous. Car tout a sa place. Tout mérite d'être raconté. Je pense que c'est ça, Ebdo.",
+      "Écrire, comme on marche dans la rue, disait l'autre. C'est ça, comme on respire et comme on vit quoi. Un journalisme du journalier, de la vie, un journalisme de tout et de tous. Car tout a sa place. Tout mérite d'être raconté. Je pense que c'est ça, Ebdo.",
     email: 'a.babin@ebdo-lejournal.com',
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/alice.png'
   },
@@ -168,7 +168,7 @@ const TeamList = [
     name: 'Mathieu Lehot',
     job: 'Journaliste',
     description:
-      'Ebdo me rappelle ces bons mots de l’artiste Jean Dubuffet : « Le journal, quand on le barbouille d’encre, se plisse, c’est un papier peu résistant. Tant mieux, va pour les plissements ! Comme il boit de bon cœur ! C’est un papier avide buveur. Après quoi il fournit inlassablement ». A la santé d’Ebdo !',
+      'Ebdo me rappelle ces bons mots de l’artiste Jean Dubuffet :  Le journal, quand on le barbouille d’encre, se plisse, c’est un papier peu résistant. Tant mieux, va pour les plissements ! Comme il boit de bon cœur ! C’est un papier avide buveur. Après quoi il fournit inlassablement . A la santé d’Ebdo !',
     email: 'm.lehot@ebdo-lejournal.com',
     image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/mathieul.png'
   },
@@ -320,7 +320,7 @@ const TeamList = [
     name: 'Olivier Monod',
     job: 'Journaliste',
     description:
-      '« Parler de science simplement. Démythifier certains sujets, en réenchanter d’autres. Répondre à vos questions et éclairer les controverses. Ebdo, c’est tout ça et plus encore. »',
+      ' Parler de science simplement. Démythifier certains sujets, en réenchanter d’autres. Répondre à vos questions et éclairer les controverses. Ebdo, c’est tout ça et plus encore. ',
     email: 'o.monod@ebdo-lejournal.com'
     // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
   },
