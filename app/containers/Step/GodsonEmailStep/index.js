@@ -60,7 +60,8 @@ class GodsonEmailStep extends React.Component {
     if (email === '') {
       this.setState({
         errorEmail: true,
-        errorMessage: "Veuillez remplir l'adresse email du parrainé"
+        errorMessage:
+          "Veuillez remplir l'adresse email de la personne qui va recevoir cet abonnement"
       })
       return false
     }
@@ -100,8 +101,8 @@ class GodsonEmailStep extends React.Component {
     const { email } = this.props
     return (
       <span>
-        Toutes les informations concernant le parrainé seront <br /> envoyées
-        à <BoldText>{email}</BoldText>
+        Toutes les informations concernant l'abonnement seront <br /> envoyées à{' '}
+        <BoldText>{email}</BoldText>
       </span>
     )
   }
@@ -117,7 +118,7 @@ class GodsonEmailStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je renseigne l'email du parrainé"
+        title="Je renseigne l'email de la personne qui va recevoir ebdo"
         iconName="mail"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}

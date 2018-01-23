@@ -88,7 +88,7 @@ export class Offer extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        isOffer={true}
+        isOffer
       />,
       <Elements>
         <PaymentStep
