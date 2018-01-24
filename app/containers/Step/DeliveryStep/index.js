@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { push } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { isValidPhoneNumber } from 'react-phone-number-input'
@@ -196,6 +197,7 @@ class DeliveryStep extends React.Component {
               showDeliveryForm={this.showDeliveryForm}
             />
           )}
+
         {!isInvoiceSameDelivery && (
           <FormDelivery
             address={delivery}

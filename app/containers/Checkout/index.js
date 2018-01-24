@@ -68,21 +68,21 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/formule'}
+        stepUrl="/abonnement/formule"
       />,
       <CountryStep
         stepNumber={2}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/pays'}
+        stepUrl="/abonnement/pays"
       />,
       <EmailStep
         stepNumber={3}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/email'}
+        stepUrl="/abonnement/email"
       />
     ]
 
@@ -93,7 +93,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
-          stepUrl={'/abonnement/confirmation'}
+          stepUrl="/abonnement/confirmation"
         />
       )
     }
@@ -105,7 +105,7 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/adresse'}
+        stepUrl="/abonnement/adresse"
       />,
       <Elements>
         <PaymentStep
@@ -113,7 +113,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
-          stepUrl={'/abonnement/paiement'}
+          stepUrl="/abonnement/paiement"
         />
       </Elements>
     ])
@@ -163,7 +163,7 @@ function mapDispatchToProps(dispatch) {
     nextStep: () => dispatch(nextStep()),
     dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step)),
-    goToAboExist: () => dispatch(push('abo/existe'))
+    goToAboExist: () => dispatch(push('/abo/existe'))
   }
 }
 
