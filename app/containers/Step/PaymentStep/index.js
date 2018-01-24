@@ -101,11 +101,13 @@ class PaymentStep extends React.Component {
 
   handleSubscribe = () => {
     this.setState({
-      isAnim: true,
       errMessage: '',
       errorCGV: false
     })
     if (this.props.isCGVAccepted) {
+      this.setState({
+        isAnim: true
+      })
       if (this.props.payementMethod === 1) {
         this.props.dispatchGetSlimpayToken()
       }
@@ -115,7 +117,8 @@ class PaymentStep extends React.Component {
     } else {
       this.setState({
         errMessage: 'Vous devez acceptez les CGV',
-        errorCGV: true
+        errorCGV: true,
+        isAnim: false
       })
     }
   }
@@ -233,7 +236,7 @@ class PaymentStep extends React.Component {
         changeStep={changeStep}
         nextStep={this.handleSubscribe}
         isLoadingNextStep={tokenIsLoading}
-        textButtonNextStep="Payer"
+        textButtonNextStep="Finaliser ma commande"
         handleAnimationEnding={this.handleAnimationEnding}
         isLongAnim
       />
