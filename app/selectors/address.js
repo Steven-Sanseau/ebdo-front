@@ -27,7 +27,7 @@ const makeSelectAddressId = () =>
   createSelector(selectAddress, address => address.get('invoice'))
 
 const makeSelectAddressType = type =>
-  createSelector(selectAddress, address => address.get(type))
+  createSelector(selectAddress, address => address.get(type).toJS())
 
 const makeSelectIsEditableAddress = type =>
   createSelector(selectAddress, address => address.get('isEditableAddress'))

@@ -41,7 +41,12 @@ class EmailConfirmStep extends React.Component {
     event.preventDefault()
 
     this.setState({ isAnim: true })
-    this.props.dispatchloginEmailCode(this.props.email, this.state.code, true)
+
+    this.props.dispatchloginEmailCode(
+      this.props.email,
+      this.state.code,
+      !this.props.isOffer
+    )
     // TODO Handle wrong code
   }
 
@@ -109,7 +114,12 @@ EmailConfirmStep.propTypes = {
   currentStep: PropTypes.number,
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  isOffer: PropTypes.bool
+}
+
+EmailConfirmStep.defaultProps = {
+  isOffer: false
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -118,10 +128,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchNextStep: () => dispatch(nextStep()),
-    dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchloginEmailCode: (email, code, isCheckout) =>
-      dispatch(loginEmailCode(email, code, isCheckout))
+      dispatch(loginEmailCode(email, code, isCheckout, null))
   }
 }
 

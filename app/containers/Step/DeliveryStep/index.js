@@ -337,10 +337,10 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeAddress: (type, address) =>
       dispatch(setAddress(type, address)),
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
-    dispatchPostAddressDelivery: addressId =>
-      dispatch(postAddress('delivery', addressId || null)),
-    dispatchPostAddressInvoice: (addressId, isOffer) =>
-      dispatch(postAddress('invoice', addressId || null, isOffer))
+    dispatchPostAddressDelivery: (addressId, isOffer) =>
+      dispatch(postAddress('delivery', addressId || null, isOffer)),
+    dispatchPostAddressInvoice: addressId =>
+      dispatch(postAddress('invoice', addressId || null))
   }
 }
 

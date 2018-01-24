@@ -25,6 +25,7 @@ function* postAddress(action) {
   let method = 'POST'
   let Authorization = null
   try {
+    console.log(address)
     if (address.address_id !== null) {
       method = 'PATCH'
       paramsApiUrl = `${paramsApiUrl}/${action.addressId}`

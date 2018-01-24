@@ -12,6 +12,8 @@ import {
   makeSelectGodsonExist
 } from 'selectors/godson'
 
+import { makeSelectClientEmail } from 'selectors/client'
+
 import { setGodsonEmail, postGodson, useGodsonExist } from 'actions/godson'
 import { nextStep } from 'actions/step'
 
@@ -62,6 +64,15 @@ class GodsonEmailStep extends React.Component {
         errorEmail: true,
         errorMessage:
           "Veuillez remplir l'adresse email de la personne qui va recevoir cet abonnement"
+      })
+      return false
+    }
+
+    if (email === this.props.clientEmail) {
+      this.setState({
+        errorEmail: true,
+        errorMessage:
+          "Vous ne pouvez pas offrir un abonnement sur votre propre compte, veuillez changer d'email"
       })
       return false
     }
@@ -147,13 +158,15 @@ GodsonEmailStep.propTypes = {
   dispatchPostGodson: PropTypes.func,
   dispatchUseGodsonExist: PropTypes.func,
   dispatchNextStep: PropTypes.func,
-  clientExist: PropTypes.bool
+  clientExist: PropTypes.bool,
+  clientEmail: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectGodsonIsLoading(),
   clientExist: makeSelectGodsonExist(),
-  email: makeSelectGodsonEmail()
+  email: makeSelectGodsonEmail(),
+  clientEmail: makeSelectClientEmail()
 })
 
 function mapDispatchToProps(dispatch) {
