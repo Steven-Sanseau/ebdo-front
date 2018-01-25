@@ -11,6 +11,9 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { getValidTokenSlimpay } from 'actions/token'
+import { setOfferParams } from 'actions/offer'
+import { newCheckout } from 'actions/checkout'
+
 // SELECTOR
 import { makeSelectPath } from 'selectors/route'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
@@ -113,7 +116,8 @@ export class Acknowledgment extends React.Component {
       <Layout
         background={
           match.params.type !== 'merci' ? '--background' : '--blue-greened'
-        }>
+        }
+      >
         <Row center="xs" start="lg">
           <Col xs={12}>
             <Header
@@ -139,7 +143,8 @@ export class Acknowledgment extends React.Component {
                 <Button
                   colorText="--topaz"
                   color="--white-true"
-                  handleRoute={this.returnHome}>
+                  handleRoute={this.returnHome}
+                >
                   Retourner à l'accueil
                 </Button>
               </div>
@@ -183,7 +188,8 @@ export class Acknowledgment extends React.Component {
                     <Button
                       handleRoute={() => {
                         this.props.dispatch(push('/abonnement'))
-                      }}>
+                      }}
+                    >
                       Je change mes informations
                     </Button>
                   </Col>
@@ -223,10 +229,24 @@ export class Acknowledgment extends React.Component {
                         <Button
                           handleRoute={() => {
                             this.props.dispatch(push('/'))
-                          }}>
+                          }}
+                        >
                           Retourner à l{"'"}accueil
                         </Button>
                       </Col>{' '}
+                      <Col xs={12} sm={3}>
+                        <Button
+                          color="--warm-purple"
+                          handleRoute={() => {
+                            this.props.dispatch(
+                              setOfferParams({ is_gift: true })
+                            )
+                            this.props.dispatch(newCheckout())
+                          }}
+                        >
+                          Offrir un abonnement
+                        </Button>
+                      </Col>
                       <Col xs={12} sm={3}>
                         <Button color="--squash" handleRoute={this.handleCrisp}>
                           Contacter le service client
