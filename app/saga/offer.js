@@ -61,7 +61,10 @@ function* redirectCheckout(action) {
     }
   }
 
-  if (action.type === NEW_CHECKOUT || action.checkRightCheckout) {
+  if (
+    (action.type === NEW_CHECKOUT && action.redirect) ||
+    action.checkRightCheckout
+  ) {
     const isGift = yield select(makeSelectOfferIsGift())
     if (isGift) {
       route = '/offre'

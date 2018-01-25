@@ -123,10 +123,11 @@ export function postCheckoutError(errorMessage, errorCode) {
   }
 }
 
-export function newCheckout(isHomeRedirect = false) {
+export function newCheckout(isHomeRedirect = false, redirect = true) {
   return {
     type: NEW_CHECKOUT,
-    isHomeRedirect
+    isHomeRedirect,
+    redirect
   }
 }
 
