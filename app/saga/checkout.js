@@ -21,6 +21,7 @@ import { makeSelectTokenData } from 'selectors/token'
 import { makeSelectOfferData } from 'selectors/offer'
 import { makeIsLoggedIn } from 'selectors/login'
 import { makeSelectClient, makeSelectClientId } from 'selectors/client'
+import { makeSelectGodsonId } from 'selectors/godson'
 import {
   makeSelectAddressInvoice,
   makeSelectAddressDelivery
@@ -35,6 +36,7 @@ function* postCheckout() {
   const addressDelivery = yield select(makeSelectAddressDelivery())
   const checkout = yield select(makeSelectCheckoutData())
   const client = yield select(makeSelectClient())
+  const godsonId = yield select(makeSelectGodsonId())
   const token = yield select(makeSelectTokenData())
   const offer = yield select(makeSelectOfferData())
 
@@ -52,7 +54,8 @@ function* postCheckout() {
         addressDelivery,
         client,
         token,
-        offer
+        offer,
+        godson: { client_id: godsonId }
       }),
       method,
       mode: 'cors',

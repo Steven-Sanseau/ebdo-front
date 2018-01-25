@@ -8,13 +8,14 @@ import { Elements } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+// ACTION
+import { nextStep, goToStep } from 'actions/step'
+import { newCheckout, checkPathCheckout } from 'actions/checkout'
+
 // SELECTOR
 import { makeSelectStep } from 'selectors/step'
-import { makeSelectLogin } from 'selectors/login'
-import { nextStep, goToStep } from 'actions/step'
-import { newCheckout } from 'actions/checkout'
+import { makeSelectLogin, makeIsLoggedIn } from 'selectors/login'
 import { makeSelectClientExist } from 'selectors/client'
-import { makeIsLoggedIn } from 'selectors/login'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
@@ -36,6 +37,10 @@ export class Offer extends React.Component {
 
     this.nextStep = this.nextStep.bind(this)
     this.changeStep = this.changeStep.bind(this)
+  }
+
+  componentWillMount() {
+    this.props.dispatchCheckPathCheckout()
   }
 
   nextStep() {
@@ -131,7 +136,9 @@ Offer.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   nextStep: PropTypes.func,
   dispatchNewCheckout: PropTypes.func,
-  goToStep: PropTypes.func
+  dispatchCheckPathCheckout: PropTypes.func,
+  goToStep: PropTypes.func,
+  clientExist: PropTypes.bool
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -144,6 +151,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
+    dispatchCheckPathCheckout: () => dispatch(checkPathCheckout(true)),
     dispatchNewCheckout: () => dispatch(newCheckout()),
     goToStep: step => dispatch(goToStep(step))
   }

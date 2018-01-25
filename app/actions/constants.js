@@ -1,4 +1,5 @@
 export const NEW_CHECKOUT = 'app/Checkout/NEW_CHECKOUT'
+export const CHECK_PATH_CHECKOUT = 'app/Checkout/CHECK_PATH_CHECKOUT'
 export const NEW_CHECKOUT_TRY = 'app/Checkout/NEW_CHECKOUT_TRY'
 
 export const NEXT_STEP = 'app/Checkout/step/NEXT_STEP'
