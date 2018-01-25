@@ -66,7 +66,7 @@ function* postCheckout() {
     yield put(
       postCheckoutLoaded(checkoutResponse.checkout, checkoutResponse.offer)
     )
-    yield put(newCheckout())
+    yield put(newCheckout(false, false))
     yield put(push('/abo/merci'))
     yield put(logout())
   } catch (err) {
