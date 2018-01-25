@@ -140,7 +140,7 @@ class PaymentStep extends React.Component {
           <Row start="xs">
             <Col xs={12}>
               <Row>
-                {!offer.data.time_limited && (
+                {/* {!offer.data.time_limited && (
                   <Col lg={6} xs={12}>
                     <InputCheckbox
                       text="Prélèvement bancaire"
@@ -150,7 +150,7 @@ class PaymentStep extends React.Component {
                       valueCheck={1}
                     />
                   </Col>
-                )}
+                )} */}
                 <Col lg={6} xs={12}>
                   <InputCheckbox
                     text="Carte bancaire"
