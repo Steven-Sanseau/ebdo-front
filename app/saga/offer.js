@@ -10,6 +10,7 @@ import {
   NEW_CHECKOUT,
   SET_COUNTRY_ADDRESS,
   SET_PAYMENT_METHOD,
+  CHECK_PATH_CHECKOUT,
   SET_COUNTRY_ADDRESS_OFFER_VALID
 } from 'actions/constants'
 import { getOfferError, getOfferLoaded, setOfferParams } from 'actions/offer'
@@ -50,6 +51,7 @@ function* getOffer(action) {
 
 function* redirectCheckout(action) {
   let route = null
+  // Redirect on change params in form
   if (action.isRedirect && action.params) {
     if (action.params.is_gift === true) {
       route = '/offre'
@@ -59,7 +61,10 @@ function* redirectCheckout(action) {
     }
   }
 
-  if (action.type === NEW_CHECKOUT) {
+  if (
+    (action.type === NEW_CHECKOUT && action.redirect) ||
+    action.checkRightCheckout
+  ) {
     const isGift = yield select(makeSelectOfferIsGift())
     if (isGift) {
       route = '/offre'
@@ -99,5 +104,6 @@ export default function* sagaOffer() {
   yield takeEvery(GET_OFFER, getOffer)
   yield takeEvery(SET_OFFER_PARAMS, redirectCheckout)
   yield takeEvery(NEW_CHECKOUT, redirectCheckout)
+  yield takeEvery(CHECK_PATH_CHECKOUT, redirectCheckout)
   yield takeEvery(SET_COUNTRY_ADDRESS_OFFER_VALID, nextStepSaga)
 }

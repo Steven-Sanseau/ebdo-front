@@ -33,7 +33,8 @@ export default class StripeForm extends Component {
           <Row>
             <Col lg={6} xs={12}>
               <LabelCard
-                color={this.props.errorCardType.card ? '--tomato' : ''}>
+                color={this.props.errorCardType.card ? '--tomato' : ''}
+              >
                 <Row>
                   <Col xs={12}>
                     Numéro de carte<Required>*</Required>
@@ -57,7 +58,8 @@ export default class StripeForm extends Component {
             </Col>
             <Col lg={3} xs={12}>
               <LabelCard
-                color={this.props.errorCardType.year ? '--tomato' : ''}>
+                color={this.props.errorCardType.year ? '--tomato' : ''}
+              >
                 <Row>
                   <Col xs={12}>
                     Date d{"'"}expiration<Required>*</Required>
@@ -95,6 +97,16 @@ export default class StripeForm extends Component {
                   </Col>
                 </Row>
               </LabelCard>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={12} xs={12}>
+              <p>
+                Simple et 100% sécurisée. Nous ne stockons pas vos coordonnées
+                bancaires.<br />
+                La transaction est effectué par notre partenaire Stripe, leader
+                mondial des paiements en ligne.
+              </p>
             </Col>
           </Row>
         </form>

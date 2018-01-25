@@ -138,16 +138,16 @@ export class NaturalFormOrder extends React.Component {
             <strong>ebdo</strong> chez moi
           </span>
         )
+      },
+      {
+        value: '1',
+        label: this.valueElem(
+          "J'offre",
+          <span>
+            <strong>ebdo</strong> à un proche
+          </span>
+        )
       }
-      // {
-      //   value: '1',
-      //   label: this.valueElem(
-      //     "J'offre",
-      //     <span>
-      //       <strong>ebdo</strong> à un proche
-      //     </span>
-      //   )
-      // }
     ]
     const options2 = !target
       ? [

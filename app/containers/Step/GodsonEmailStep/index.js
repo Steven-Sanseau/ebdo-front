@@ -12,6 +12,8 @@ import {
   makeSelectGodsonExist
 } from 'selectors/godson'
 
+import { makeSelectClientEmail } from 'selectors/client'
+
 import { setGodsonEmail, postGodson, useGodsonExist } from 'actions/godson'
 import { nextStep } from 'actions/step'
 
@@ -60,7 +62,17 @@ class GodsonEmailStep extends React.Component {
     if (email === '') {
       this.setState({
         errorEmail: true,
-        errorMessage: "Veuillez remplir l'adresse email du parrainé"
+        errorMessage:
+          "Veuillez remplir l'adresse email de la personne qui va recevoir cet abonnement"
+      })
+      return false
+    }
+
+    if (email === this.props.clientEmail) {
+      this.setState({
+        errorEmail: true,
+        errorMessage:
+          "Vous ne pouvez pas offrir un abonnement sur votre propre compte, veuillez changer d'email"
       })
       return false
     }
@@ -100,8 +112,8 @@ class GodsonEmailStep extends React.Component {
     const { email } = this.props
     return (
       <span>
-        Toutes les informations concernant le parrainé seront <br /> envoyées
-        à <BoldText>{email}</BoldText>
+        Toutes les informations concernant l'abonnement seront <br /> envoyées à{' '}
+        <BoldText>{email}</BoldText>
       </span>
     )
   }
@@ -117,7 +129,7 @@ class GodsonEmailStep extends React.Component {
 
     return (
       <ToggleStep
-        title="Je renseigne l'email du parrainé"
+        title="Je renseigne l'email de la personne qui va recevoir ebdo"
         iconName="mail"
         stepNumber={stepNumber}
         contentClose={this.contentClose()}
@@ -146,13 +158,15 @@ GodsonEmailStep.propTypes = {
   dispatchPostGodson: PropTypes.func,
   dispatchUseGodsonExist: PropTypes.func,
   dispatchNextStep: PropTypes.func,
-  clientExist: PropTypes.bool
+  clientExist: PropTypes.bool,
+  clientEmail: PropTypes.string
 }
 
 const mapStateToProps = createStructuredSelector({
   clientIsLoading: makeSelectGodsonIsLoading(),
   clientExist: makeSelectGodsonExist(),
-  email: makeSelectGodsonEmail()
+  email: makeSelectGodsonEmail(),
+  clientEmail: makeSelectClientEmail()
 })
 
 function mapDispatchToProps(dispatch) {

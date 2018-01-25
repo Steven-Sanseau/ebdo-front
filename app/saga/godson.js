@@ -17,16 +17,20 @@ import {
 import { nextStep } from 'actions/step'
 
 import { makeSelectGodsonEmail } from '../selectors/godson'
+import { makeSelectClientId } from '../selectors/client'
 
 function* postGodson() {
   const paramsApiUrl = `${process.env.EBDO_API_URL}/v1/client`
   const email = yield select(makeSelectGodsonEmail())
+  const godFatherId = yield select(makeSelectClientId())
 
   const method = 'POST'
 
   try {
     const clientResponse = yield call(request, paramsApiUrl, {
-      body: JSON.stringify({ client: { email, is_godson: true } }),
+      body: JSON.stringify({
+        client: { email, is_godson: true, id_client_god_father: godFatherId }
+      }),
       method,
       headers: {
         'Content-Type': 'application/json'

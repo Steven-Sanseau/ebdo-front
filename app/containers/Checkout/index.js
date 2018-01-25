@@ -15,7 +15,7 @@ import { makeSelectPath } from 'selectors/route'
 import { makeIsLoggedIn } from 'selectors/login'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
 import { nextStep, goToStep } from 'actions/step'
-import { newCheckout } from 'actions/checkout'
+import { newCheckout, checkPathCheckout } from 'actions/checkout'
 
 // CONTAINERS
 import FormulaStep from 'containers/Step/FormulaStep/Loadable'
@@ -40,6 +40,8 @@ export class Checkout extends React.Component {
   }
 
   componentWillMount() {
+    this.props.dispatchCheckPathCheckout()
+
     if (this.props.subscriptions) {
       this.props.subscriptions.map(subscription => {
         if (subscription.aboweb_offer_id.indexOf('DL') !== -1) {
@@ -68,21 +70,21 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/formule'}
+        stepUrl="/abonnement/formule"
       />,
       <CountryStep
         stepNumber={2}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/pays'}
+        stepUrl="/abonnement/pays"
       />,
       <EmailStep
         stepNumber={3}
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/email'}
+        stepUrl="/abonnement/email"
       />
     ]
 
@@ -93,7 +95,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
-          stepUrl={'/abonnement/confirmation'}
+          stepUrl="/abonnement/confirmation"
         />
       )
     }
@@ -105,7 +107,7 @@ export class Checkout extends React.Component {
         changeStep={this.changeStep}
         nextStep={this.nextStep}
         currentStep={step}
-        stepUrl={'/abonnement/adresse'}
+        stepUrl="/abonnement/adresse"
       />,
       <Elements>
         <PaymentStep
@@ -113,7 +115,7 @@ export class Checkout extends React.Component {
           changeStep={this.changeStep}
           nextStep={this.nextStep}
           currentStep={step}
-          stepUrl={'/abonnement/paiement'}
+          stepUrl="/abonnement/paiement"
         />
       </Elements>
     ])
@@ -144,6 +146,7 @@ export class Checkout extends React.Component {
 Checkout.propTypes = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   dispatchNewCheckout: PropTypes.func,
+  dispatchCheckPathCheckout: PropTypes.func,
   nextStep: PropTypes.func,
   goToStep: PropTypes.func,
   path: PropTypes.object,
@@ -162,8 +165,9 @@ function mapDispatchToProps(dispatch) {
   return {
     nextStep: () => dispatch(nextStep()),
     dispatchNewCheckout: () => dispatch(newCheckout()),
+    dispatchCheckPathCheckout: () => dispatch(checkPathCheckout(true)),
     goToStep: step => dispatch(goToStep(step)),
-    goToAboExist: () => dispatch(push('abo/existe'))
+    goToAboExist: () => dispatch(push('/abo/existe'))
   }
 }
 

@@ -135,6 +135,7 @@ function LoginPage(props) {
     email,
     code,
     handleRoute,
+    handleResendCode,
     isLoadingLogin
   } = props
   return (
@@ -150,8 +151,8 @@ function LoginPage(props) {
             <img src="la-source.png" alt="la source" className="laSource" />
             <Title>Accédez à La Source</Title>
             <p>
-              Entrez votre Adresse email pour accéder à La Source. Nous vous
-              enverrons un mail contenant votre accès temporaire.
+              Vous êtes abonné•es ? Entrez votre adresse email pour recevoir
+              votre code d{"'"}accès temporaire
             </p>
             <form onSubmit={handleSubmit}>
               {!waitingForCode && (
@@ -188,6 +189,12 @@ function LoginPage(props) {
                 waitingForCode &&
                 'Valider mon code de connexion'}
             </ButtonWrap>
+            {!isLoadingLogin &&
+              waitingForCode && (
+                <a href="#" className="link" onClick={handleResendCode}>
+                  <small>Générer un nouveau code</small>
+                </a>
+              )}
           </ColStyled>
           <ColStyled w={9} m={13} mc>
             <TitleColor>Vous voulez gérer votre abonnement ?</TitleColor>
@@ -235,6 +242,7 @@ LoginPage.propTypes = {
   handleSubmit: PropTypes.func,
   handleEmail: PropTypes.func,
   handleRoute: PropTypes.func,
+  handleResendCode: PropTypes.func,
   handleCode: PropTypes.func,
   dispatch: PropTypes.func,
   isLoadingLogin: PropTypes.bool

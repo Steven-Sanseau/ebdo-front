@@ -54,6 +54,10 @@ export class Login extends React.Component {
     }
   }
 
+  handleResendCode = () => {
+    this.props.dispatchLoginEmail(this.state.email)
+  }
+
   handleEmail = event => {
     this.setState({ email: event.target.value })
   }
@@ -82,6 +86,7 @@ export class Login extends React.Component {
             handleEmail={this.handleEmail}
             handleCode={this.handleCode}
             handleRoute={this.handleRoute}
+            handleResendCode={this.handleResendCode}
             code={this.state.code}
             email={this.state.email}
             isLoadingLogin={isLoadingLogin}

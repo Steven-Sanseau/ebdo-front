@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { push } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { isValidPhoneNumber } from 'react-phone-number-input'
@@ -182,7 +183,13 @@ class DeliveryStep extends React.Component {
           errorForm={!this.state.isAnim ? this.state.error.invoice : {}}
           errorFormMessage={this.state.errorMessage.invoice}
         />
-        <Title>Adresse de livraison</Title>
+        {!isOffer && <Title>Adresse de livraison</Title>}
+        {isOffer && (
+          <Title>
+            Adresse de livraison de la personne qui va recevoir votre abonnement
+            en cadeau
+          </Title>
+        )}
         {displayDeliveryAddress &&
           !isOffer && (
             <CheckboxShowDeliveryForm
@@ -190,6 +197,7 @@ class DeliveryStep extends React.Component {
               showDeliveryForm={this.showDeliveryForm}
             />
           )}
+
         {!isInvoiceSameDelivery && (
           <FormDelivery
             address={delivery}
@@ -329,10 +337,10 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeAddress: (type, address) =>
       dispatch(setAddress(type, address)),
     dispatchAddressEqual: () => dispatch(setAddressEqual()),
-    dispatchPostAddressDelivery: addressId =>
-      dispatch(postAddress('delivery', addressId || null)),
-    dispatchPostAddressInvoice: (addressId, isOffer) =>
-      dispatch(postAddress('invoice', addressId || null, isOffer))
+    dispatchPostAddressDelivery: (addressId, isOffer) =>
+      dispatch(postAddress('delivery', addressId || null, isOffer)),
+    dispatchPostAddressInvoice: addressId =>
+      dispatch(postAddress('invoice', addressId || null))
   }
 }
 

@@ -6,6 +6,7 @@ import {
   POST_SUBSCRIPTION_LOADED,
   POST_SUBSCRIPTION_ERROR,
   NEW_CHECKOUT,
+  CHECK_PATH_CHECKOUT,
   NEW_CHECKOUT_TRY
 } from 'actions/constants'
 
@@ -122,10 +123,18 @@ export function postCheckoutError(errorMessage, errorCode) {
   }
 }
 
-export function newCheckout(isHomeRedirect = false) {
+export function newCheckout(isHomeRedirect = false, redirect = true) {
   return {
     type: NEW_CHECKOUT,
-    isHomeRedirect
+    isHomeRedirect,
+    redirect
+  }
+}
+
+export function checkPathCheckout(checkRightCheckout = false) {
+  return {
+    type: CHECK_PATH_CHECKOUT,
+    checkRightCheckout
   }
 }
 

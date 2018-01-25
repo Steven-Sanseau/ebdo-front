@@ -15,7 +15,7 @@ function Header({ logoColor }) {
   return (
     <div>
       <Wrapper>
-        <Link to="/accueil" style={{ textDecoration: 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
           <LogoWrapper>
             <Logo width={175} height={66} color={logoColor} />
           </LogoWrapper>
