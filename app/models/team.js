@@ -186,7 +186,7 @@ const TeamList = [
     description:
       'Si Ebdo était une personne, ce serait cet ami qu’on aime retrouver autour d’une bière ou d’un café, pour le plaisir de bavarder, prendre et donner des nouvelles, dans l’assurance que ce moment passé ensemble ouvre en nous d’autres horizons. Un ami simple et généreux, pas pédant, qui sait aussi bien parler qu’écouter. On se retrouve en terrasse ?',
     email: 'e.rabate@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/estelle.jpg'
+    image: ''
   },
   {
     name: 'Emmanuelle Morau',
@@ -218,7 +218,7 @@ const TeamList = [
     description:
       "Surprise, sourire, rire, questionnements. Je connais le regard et les réactions de ceux qui découvrent une bande dessinée. Paradoxalement, ce mode narratif n'a jamais été aussi en vogue. Ebdo l'utilisera pour expliquer les thématiques d'actualités restant difficile à éclairer avec des mots. Nouveau journal, nouveaux modes de lecture … Photo © Yan Jumeau",
     email: 'b.simmat@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/sylvain.png'
+    image: ''
   },
   {
     name: 'Marion Vasseur',
