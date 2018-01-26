@@ -48,7 +48,7 @@ const RecapAbo = props => (
       <ColStyled w={5} m={13} mc>
         <ImageWrapper>
           <Image
-            src="//images.weserv.nl/?url=ssl:s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg&w=1500&t=fit&il"
+            src="https://s3.eu-west-3.amazonaws.com/ebdo/front/home/thumbmail/current/0.jpg"
             alt="Couverture ebdo"
           />
         </ImageWrapper>
@@ -59,7 +59,8 @@ const RecapAbo = props => (
           buttonText="Je commande"
           buttonColor="--warm-purple"
           to="/essai"
-          dispatch={props.dispatch}>
+          dispatch={props.dispatch}
+        >
           Recevez notre prochain numéro chez vous, gratuitement.
         </AboProposition>
       </ColCustom>
@@ -69,7 +70,8 @@ const RecapAbo = props => (
           buttonText="Je m'abonne"
           buttonColor="--squash"
           to="/abonnement"
-          dispatch={props.dispatch}>
+          dispatch={props.dispatch}
+        >
           Rejoignez notre communauté de lecteurs, déposez vos idées sur La
           Source et recevez Ebdo chez vous chaque vendredi.
         </AboProposition>
@@ -80,7 +82,8 @@ const RecapAbo = props => (
           buttonText="La source"
           buttonColor="--turquoise-blue"
           to="/lasource"
-          dispatch={props.dispatch}>
+          dispatch={props.dispatch}
+        >
           Accédez à votre espace personnel pour gérer votre abonnement ou offrir
           Ebdo.
         </AboProposition>
