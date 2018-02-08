@@ -25,12 +25,12 @@ const Progress = props => {
         top: '-60px',
         padding: '7px 10px',
         height: '40px',
-        transition: `left 1400ms ease-in-out`,
+        transition: 'left 1400ms ease-in-out',
         left: `calc(${rate * 100}% - 75px)`
       }
     }
   }
-  const textNumber = `${number} abonnés`
+  const textNumber = `${number} inscrits`
 
   return (
     <div>

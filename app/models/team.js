@@ -186,7 +186,7 @@ const TeamList = [
     description:
       'Si Ebdo était une personne, ce serait cet ami qu’on aime retrouver autour d’une bière ou d’un café, pour le plaisir de bavarder, prendre et donner des nouvelles, dans l’assurance que ce moment passé ensemble ouvre en nous d’autres horizons. Un ami simple et généreux, pas pédant, qui sait aussi bien parler qu’écouter. On se retrouve en terrasse ?',
     email: 'e.rabate@ebdo-lejournal.com',
-    image: ''
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/emile.png'
   },
   {
     name: 'Emmanuelle Morau',
@@ -218,7 +218,7 @@ const TeamList = [
     description:
       "Surprise, sourire, rire, questionnements. Je connais le regard et les réactions de ceux qui découvrent une bande dessinée. Paradoxalement, ce mode narratif n'a jamais été aussi en vogue. Ebdo l'utilisera pour expliquer les thématiques d'actualités restant difficile à éclairer avec des mots. Nouveau journal, nouveaux modes de lecture … Photo © Yan Jumeau",
     email: 'b.simmat@ebdo-lejournal.com',
-    image: ''
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/benoist.jpg'
   },
   {
     name: 'Marion Vasseur',
@@ -290,7 +290,7 @@ const TeamList = [
     description:
       "En apportant l'ensemble des données sur les sujets au lecteur, sans pression d'annonceurs ou d'actionnaires-financiers, et dans un langage accessible à tous, Ebdo sera un véritable outil d'éducation populaire dans lequel les lecteurs se reconnaîtront. Je serai heureux de veiller à cela. Quelle formidable aventure !",
     email: 'd.careme@ebdo-lejournal.com',
-    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/damien.png'
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/damien.jpg'
   },
   {
     name: 'Sharlie Minette',
@@ -305,16 +305,16 @@ const TeamList = [
     job: 'Organisateur de la tournée',
     description:
       'Sortir de sa zone de confort. Se remettre en question. Accepter d’avoir tort. Ebdo sera, devra être là ou on ne l’attend pas.',
-    email: 'thibaut@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'thibaut@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut_b.jpg'
   },
   {
     name: 'Magali Gasperini Courroy',
     job: 'Rédactrice photo',
     description:
       'C’est une aventure enthousiasmante. Une belle promesse à vous, lecteurs. Inventer, réinventer. Vous donner à voir le monde, qu’il soit de l’autre côté de la Terre ou de l’autre côté de la rue.',
-    email: 'm.gasperini@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'm.gasperini@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/magali.jpg'
   },
   {
     name: 'Olivier Monod',
@@ -329,32 +329,33 @@ const TeamList = [
     job: 'Co-Rédactrice en chef',
     description:
       'S’écarter du buzz pour écouter le bruit du monde. S’éloigner des écrans pour regarder la vie en vrai. Et, sans relâche, expliquer, échanger, confronter, poser des repères, donner du sens. Pour faire comprendre et mieux se comprendre. Ensemble.',
-    email: 'g.macke@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'g.macke@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/gaelle.png'
   },
   {
     name: 'Anne-Sophie Novel',
     job: 'Journaliste installée à Bordeaux',
     description:
       "J'aime la presse qui traite autant des plaies du monde que de celles et ceux qui les pansent. Ebdo et ses Ebdonautes rêvent d'un journalisme qui offre un rapport apaisé au monde. Puisse ce rêve se réaliser !",
-    email: 'as.novel@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'as.novel@ebdo-lejournal.com',
+    image:
+      's3.eu-west-3.amazonaws.com/ebdo/front/website/team/annesophienovel.png'
   },
   {
     name: 'Arthur Frayer-Laleix',
     job: '',
     description:
       "Pour moi, le meilleur journal possible est celui qui me prend à contre-pied. Celui qui fait vaciller mes certitudes. J'avais un avis sur le foot, la chasse, les migrants, l'Amérique, la tarte aux pommes... et voilà que la lecture d'un article me fait douter. Ebdo sera ce journal qui nous pousse à penser à contre-courant de nos certitudes.",
-    email: 'a.frayer@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'a.frayer@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/arthur.png'
   },
-  // {
-  //   name: 'Adélaïde Michel',
-  //   job: 'Animatrice de communauté',
-  //   description: '',
-  //   email: 'a.michel@ebdo-lejournal.com'
-  //   // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
-  // },
+  {
+    name: 'Adélaïde Michel',
+    job: 'Animatrice de communauté',
+    description: '',
+    email: 'a.michel@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/adelaide.png'
+  },
   // {
   //   name: 'Steven Sanséau',
   //   job: 'Webmestre', // LOOOOOOOLL
@@ -367,8 +368,8 @@ const TeamList = [
     job: 'Journaliste',
     description:
       'Ebdo, pour moi, c’est d’abord une terrible excitation. Celle d’exercer un nouveau métier, de participer à une aventure collective, de rencontrer plein de gens – nouveaux collègues, futurs lecteurs. De sauter dans le vide. C’est le sel et le piment. ',
-    email: 'a.absolu@ebdo-lejournal.com'
-    // image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/thibaut.jpg'
+    email: 'a.absolu@ebdo-lejournal.com',
+    image: 's3.eu-west-3.amazonaws.com/ebdo/front/website/team/adrien.png'
   }
 ]
 
