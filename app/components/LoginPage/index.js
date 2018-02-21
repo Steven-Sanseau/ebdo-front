@@ -136,7 +136,10 @@ function LoginPage(props) {
     code,
     handleRoute,
     handleResendCode,
-    isLoadingLogin
+    isLoadingLogin,
+    changeEmail,
+    error,
+    errorMessage
   } = props
   return (
     <LoginWrap>
@@ -149,10 +152,11 @@ function LoginPage(props) {
         <RowStyled center="sm">
           <ColStyled w={9} m={13} mc className="mgr">
             <img src="la-source.png" alt="la source" className="laSource" />
-            <Title>Accédez à La Source</Title>
+            <Title>Contribuer à La Source</Title>
             <p>
-              Vous êtes abonné•es ? Entrez votre adresse email pour recevoir
-              votre code d{"'"}accès temporaire
+              Ici, pas de mot de passe compliqué à retenir. <br />
+              Renseignez votre email et nous vous enverrons votre code de
+              connexion temporaire.
             </p>
             <form onSubmit={handleSubmit}>
               {!waitingForCode && (
@@ -161,19 +165,26 @@ function LoginPage(props) {
                   type="email"
                   value={email}
                   onChange={handleEmail}
+                  error={error}
+                  errorMessage={errorMessage}
                   placeholder="contact@mail.fr"
-                  label="Adresse email"
+                  label="Mon adresse email renseignée lors de mon abonnement:"
                 />
               )}
               {waitingForCode && (
                 <div>
-                  <p>Veuillez rentrer le code pour valider la connexion</p>
+                  <p>
+                    Veuillez consulter votre boite de réception. Notre mail peut
+                    prendre une petite minute à arriver.
+                  </p>
                   <InputText
                     name="code"
                     type="number"
                     value={code}
                     onChange={handleCode}
                     placeholder="1234"
+                    error={error}
+                    errorMessage={errorMessage}
                     label="Votre code reçu par email"
                   />
                 </div>
@@ -191,9 +202,15 @@ function LoginPage(props) {
             </ButtonWrap>
             {!isLoadingLogin &&
               waitingForCode && (
-                <a href="#" className="link" onClick={handleResendCode}>
-                  <small>Générer un nouveau code</small>
-                </a>
+                <div>
+                  <a href="#" className="link" onClick={handleResendCode}>
+                    <small>Générer un nouveau code</small>
+                  </a>{' '}
+                  <br />
+                  <a href="#" className="link" onClick={changeEmail}>
+                    <small>Modifier mon email</small>
+                  </a>
+                </div>
               )}
           </ColStyled>
           <ColStyled w={9} m={13} mc>
@@ -202,6 +219,13 @@ function LoginPage(props) {
               Un espace dédié vous permettra bientôt d’éditer toutes vos
               informations. D’ici là, contactez-nous pour tout changement :
             </p>
+            <TitleWithArrow
+              text="Me réabonner"
+              link="/abonnement"
+              color="--squash"
+              textColor="--black"
+            />
+            <TextLogin />
             <TitleWithArrow
               text="F.A.Q"
               linkOutside="https://aide.ebdo-lejournal.com?utm_source=home&utm_medium=login_page"
@@ -243,7 +267,10 @@ LoginPage.propTypes = {
   handleEmail: PropTypes.func,
   handleRoute: PropTypes.func,
   handleResendCode: PropTypes.func,
+  changeEmail: PropTypes.func,
   handleCode: PropTypes.func,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
   dispatch: PropTypes.func,
   isLoadingLogin: PropTypes.bool
 }

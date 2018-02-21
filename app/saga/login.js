@@ -31,7 +31,7 @@ function* loginEmailSaga(action) {
     })
     yield put(loginEmailLoaded(action.redirect))
   } catch (err) {
-    yield put(loginEmailError(err.message))
+    yield put(loginEmailError(err.response))
   }
 }
 

@@ -8,6 +8,7 @@ import {
   LOGIN_EMAIL_CODE,
   LOGIN_EMAIL_CODE_LOADED,
   LOGIN_EMAIL_CODE_ERROR,
+  CHANGE_EMAIL_LOGIN,
   LOGOUT
 } from './constants'
 
@@ -16,6 +17,12 @@ export function loginEmail(email, redirect) {
     type: LOGIN_EMAIL,
     email,
     redirect
+  }
+}
+
+export function changeEmailLogin() {
+  return {
+    type: CHANGE_EMAIL_LOGIN
   }
 }
 

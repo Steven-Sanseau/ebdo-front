@@ -19,6 +19,9 @@ const makeIsLoadingLogin = () =>
 const makeIsErrorLogin = () =>
   createSelector(selectLogin, login => login.get('error'))
 
+const makeSelectErrorMessage = () =>
+  createSelector(selectLogin, login => login.get('errorMessage'))
+
 const makeSelectWaitingForCode = () =>
   createSelector(selectLogin, login => login.get('waitingForCode'))
 
@@ -26,6 +29,7 @@ export {
   makeSelectToken,
   makeIsLoggedIn,
   makeIsErrorLogin,
+  makeSelectErrorMessage,
   makeSelectLogin,
   makeSelectWaitingForCode,
   makeIsLoadingLogin

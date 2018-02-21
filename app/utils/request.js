@@ -27,7 +27,7 @@ function checkStatus(response) {
   }
 
   const error = new Error(response.statusText)
-  error.response = response
+  error.response = response.json()
   throw error
 }
 
@@ -44,4 +44,3 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON)
 }
-

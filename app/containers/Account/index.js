@@ -106,33 +106,16 @@ export class Login extends React.Component {
     )
   }
 }
-Login.propTypes = {
-  dispatchLoginEmail: PropTypes.func,
-  dispatchLoginEmailCode: PropTypes.func,
-  waitingForCode: PropTypes.bool,
-  isLoadingLogin: PropTypes.bool,
-  error: PropTypes.bool,
-  errorMessage: PropTypes.string,
-  dispatch: PropTypes.func,
-  dispatchChangeEmail: PropTypes.func
+Account.propTypes = {
+
 }
 
 const mapStateToProps = createStructuredSelector({
-  login: makeSelectLogin(),
-  waitingForCode: makeSelectWaitingForCode(),
-  errorMessage: makeSelectErrorMessage(),
-  error: makeIsErrorLogin(),
-  isLoadingLogin: makeIsLoadingLogin()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchChangeEmail: () => dispatch(changeEmailLogin()),
-    dispatchLoginEmail: email => dispatch(loginEmail(email)),
-    dispatchLoginEmailCode: (email, code, redirect) =>
-      dispatch(loginEmailCode(email, code, false, redirect)),
-    dispatch
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Account)

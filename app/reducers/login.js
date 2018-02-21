@@ -7,6 +7,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_EMAIL_CODE_ERROR,
   LOGIN_EMAIL,
+  CHANGE_EMAIL_LOGIN,
   LOGOUT
 } from '../actions/constants'
 
@@ -28,32 +29,41 @@ function loginReducer(state = initialState, action) {
         .set('waitingForCode', true)
         .set('loading', false)
         .set('error', false)
-    case LOGIN_EMAIL_ERROR:
+    case LOGIN_EMAIL_ERROR: {
+      console.log(action.error)
       return state
         .set('error', true)
-        .set('errorMessage', action.error)
+        .set('errorMessage', action.error.message)
         .set('waitingForCode', false)
         .set('loading', false)
         .set('token', null)
         .set('isUserConnected', false)
+    }
     case LOGIN_EMAIL_CODE_LOADED:
       return state
         .set('token', action.token)
         .set('waitingForCode', false)
         .set('isUserConnected', true)
         .set('loading', false)
-    case LOGIN_EMAIL_CODE_ERROR:
+    case LOGIN_EMAIL_CODE_ERROR: {
+      console.log(action.error.value.message)
       return state
         .set('error', true)
-        .set('errorMessage', action.error)
+        .set('errorMessage', action.error.message)
         .set('loading', false)
         .set('token', null)
         .set('isUserConnected', false)
+    }
     case LOGIN_USER_SUCCESS:
       return state
         .set('isUserConnected', true)
         .set('loading', false)
         .set('waitingForCode', false)
+        .set('error', false)
+    case CHANGE_EMAIL_LOGIN:
+      return state
+        .set('waitingForCode', false)
+        .set('loading', false)
         .set('error', false)
     case LOGOUT:
       return state

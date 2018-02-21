@@ -82,6 +82,7 @@ export const POST_SUBSCRIPTION_LOADED =
 
 export const LOGIN_EMAIL = 'app/Login/LOGIN_EMAIL'
 export const LOGIN_EMAIL_LOADED = 'app/Login/LOGIN_EMAIL_LOADED'
+export const CHANGE_EMAIL_LOGIN = 'app/Login/CHANGE_EMAIL_LOGIN'
 export const LOGIN_EMAIL_ERROR = 'app/Login/LOGIN_EMAIL_ERROR'
 export const LOGIN_USER_SUCCESS = 'app/Login/LOGIN_USER_SUCCESS'
 

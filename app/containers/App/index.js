@@ -2,8 +2,10 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import PublicRoute from 'utils/PublicRoute'
+import PrivateRoute from 'utils/PrivateRoute'
 
 import Home from 'containers/Home/Loadable'
+import Account from 'containers/Account/Loadable'
 import Checkout from 'containers/Checkout/Loadable'
 import Acknowledgment from 'containers/Acknowledgment/Loadable'
 import Offer from 'containers/Offer/Loadable'
@@ -53,6 +55,9 @@ export default function App() {
         <Redirect from="/logout" to="/connexion" />
         <Route exact path="/mentions-legales" component={Mentions} />
         <Route exact path="/cgv" component={Cgv} />
+
+        <PrivateRoute exact path="/compte" component={Account} />
+
         {/* <Route
           component={() => {
             window.location = 'http://ebdo-lejournal.fr'
