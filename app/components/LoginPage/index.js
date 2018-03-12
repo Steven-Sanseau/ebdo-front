@@ -4,6 +4,7 @@ import { Row } from 'react-styled-flexboxgrid'
 import Footer from 'components/Footer'
 import styled from 'styled-components'
 import { media } from 'global-styles'
+
 import Header from 'components/Header'
 import TitleWithArrow from 'components/TitleWithArrow'
 import Col from 'components/Grid/Col'

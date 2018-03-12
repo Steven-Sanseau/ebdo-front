@@ -7,17 +7,10 @@ import Helmet from 'react-helmet'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { makeSelectPathName } from 'selectors/route'
+import { makeIsLoggedIn } from 'selectors/login'
 
-import {
-  makeSelectLogin,
-  makeSelectWaitingForCode,
-  makeIsLoadingLogin,
-  makeIsErrorLogin,
-  makeSelectErrorMessage
-} from 'selectors/login'
-import { loginEmail, loginEmailCode, changeEmailLogin } from 'actions/login'
-
-import LoginPage from 'components/LoginPage'
+import AccountPage from 'components/AccountPage'
 
 const theme = {
   flexboxgrid: {
@@ -26,80 +19,30 @@ const theme = {
     outerMargin: 0 // rem
   }
 }
-const TextLogin = styled.div`
-  font-size: 18px;
-  font-family: 'FG-R';
-`
-export class Login extends React.Component {
+
+export class Account extends React.Component {
   constructor(props) {
     super(props)
   }
-  state = {
-    email: null,
-    code: '',
-    redirect: '/'
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-    const { waitingForCode, location } = this.props
-
-    if (waitingForCode && this.state.code !== '') {
-      const redirect = new URLSearchParams(location.search).get('redirect')
-      this.props.dispatchLoginEmailCode(
-        this.state.email,
-        this.state.code,
-        redirect
-      )
-    } else {
-      this.props.dispatchLoginEmail(this.state.email)
-    }
-  }
-
-  handleResendCode = () => {
-    this.props.dispatchLoginEmail(this.state.email)
-  }
-
-  handleEmail = event => {
-    this.setState({ email: event.target.value })
-  }
-
-  handleCode = event => {
-    this.setState({ code: event.target.value })
-  }
-
-  handleRoute = event => {
-    this.handleSubmit(event)
-  }
-
-  changeEmail = () => {
-    this.setState({ email: null })
-    this.props.dispatchChangeEmail()
-  }
 
   render() {
-    const { isLoadingLogin, dispatch } = this.props
+    const {
+      isLoadingLogin, dispatch, page, isLoggedIn
+    } = this.props
 
     return (
       <div>
         <Helmet>
-          <title>Connexion à mon espace abonné ebdo</title>
-          <meta name="description" content="Espace abonné à ebdo le journal" />
+          <title>Gérer mon abonnement ebdo</title>
+          <meta name="description" content="Mon espace de gestion abonnement" />
         </Helmet>
 
         <ThemeProvider theme={theme}>
-          <LoginPage
+          <AccountPage
             {...this.props}
-            handleSubmit={this.handleSubmit}
-            handleEmail={this.handleEmail}
-            handleCode={this.handleCode}
-            handleRoute={this.handleRoute}
-            handleResendCode={this.handleResendCode}
-            code={this.state.code}
-            email={this.state.email}
-            isLoadingLogin={isLoadingLogin}
             dispatch={dispatch}
-            changeEmail={this.changeEmail}
+            page={page}
+            isLoggedIn={isLoggedIn}
           />
         </ThemeProvider>
       </div>
@@ -107,14 +50,27 @@ export class Login extends React.Component {
   }
 }
 Account.propTypes = {
-
+  dispatch: PropTypes.func.isRequired,
+  dispatchSetOfferParams: PropTypes.func,
+  offer: PropTypes.object,
+  token: PropTypes.object,
+  addressDelivery: PropTypes.object,
+  addressInvoice: PropTypes.object,
+  page: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  subscriptions: PropTypes.object
 }
 
 const mapStateToProps = createStructuredSelector({
+  page: makeSelectPathName(),
+  isLoggedIn: makeIsLoggedIn()
+  // subscriptions: makeSelectSubscriptions()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
+    // getSubscriptions: () => dispatch(getSubscriptions()),
+    dispatch
   }
 }
 

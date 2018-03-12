@@ -56,7 +56,7 @@ export default function App() {
         <Route exact path="/mentions-legales" component={Mentions} />
         <Route exact path="/cgv" component={Cgv} />
 
-        <PrivateRoute exact path="/compte" component={Account} />
+        <PrivateRoute path="/compte" component={Account} />
 
         {/* <Route
           component={() => {

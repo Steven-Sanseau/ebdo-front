@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Route, Redirect } from 'react-router-dom'
-import { createStructuredSelector } from 'reselect'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
-import { makeIsLoggedIn } from 'selectors/login'
+import { makeIsLoggedIn } from 'selectors/login';
 
 class PrivateRoute extends Component {
   componentDidMount() {}
 
   render() {
-    const { isLoggedIn, component, ...rest } = this.props
+    const { isLoggedIn, component, ...rest } = this.props;
     if (isLoggedIn !== null) {
       return (
         <Route
@@ -28,23 +28,23 @@ class PrivateRoute extends Component {
             )
           }
         />
-      )
+      );
     }
-    return null
+    return null;
   }
 }
 
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool
-}
+};
 
 PrivateRoute.defaultProps = {
-  isLoggedIn: false
-}
+  // isLoggedIn: false
+};
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: makeIsLoggedIn()
-})
+});
 
-export default connect(mapStateToProps, {})(PrivateRoute)
+export default connect(mapStateToProps, {})(PrivateRoute);

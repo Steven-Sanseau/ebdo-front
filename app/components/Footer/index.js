@@ -10,14 +10,19 @@ import RecapAbo from 'components/RecapAbo'
 
 const Footer = props => (
   <div>
-    <RecapAbo dispatch={props.dispatch} />
+    {!props.hideRecap && <RecapAbo dispatch={props.dispatch} />}
     <MainFooter />
     <SecondaryFooter />
   </div>
 )
 
 Footer.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  hideRecap: PropTypes.bool
+}
+
+Footer.defaultProps = {
+  hideRecap: false
 }
 
 export default Footer

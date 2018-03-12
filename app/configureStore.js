@@ -1,27 +1,31 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { fromJS } from 'immutable'
-import { routerMiddleware } from 'react-router-redux'
-import routerTrackingMiddleware from 'middleware/router'
-import createSagaMiddleware from 'redux-saga'
-import { persistStore, autoRehydrate } from 'redux-persist-immutable'
-import { createTracker } from 'redux-segment'
-import createReducer from './reducers'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { fromJS } from 'immutable';
+import { routerMiddleware } from 'react-router-redux';
+import routerTrackingMiddleware from 'middleware/router';
+import createSagaMiddleware from 'redux-saga';
+import { persistStore, autoRehydrate } from 'redux-persist-immutable';
+import { createTracker } from 'redux-segment';
+import createReducer from './reducers';
 
-const tracker = createTracker()
+const tracker = createTracker();
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
-  const middlewares = [
-    tracker,
-    sagaMiddleware,
+  const middlewares = [tracker, sagaMiddleware];
+
+  const middlewaresPostRehydrate = [
     routerMiddleware(history),
     routerTrackingMiddleware
-  ]
+  ];
 
-  const enhancers = [applyMiddleware(...middlewares), autoRehydrate()]
+  const enhancers = [
+    applyMiddleware(...middlewares),
+    autoRehydrate(),
+    applyMiddleware(...middlewaresPostRehydrate)
+  ];
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle */
@@ -30,28 +34,26 @@ export default function configureStore(initialState = {}, history) {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ shouldHotReload: false })
-      : compose
+      : compose;
 
   const store = createStore(
     createReducer(),
     fromJS(initialState),
     composeEnhancers(...enhancers)
-  )
-
-  persistStore(store, { blacklist: ['route', 'team'] })
+  );
 
   // Extensions
-  store.runSaga = sagaMiddleware.run
-  store.injectedReducers = {} // Reducer registry
-  store.injectedSagas = {} // Saga registry
+  store.runSaga = sagaMiddleware.run;
+  store.injectedReducers = {}; // Reducer registry
+  store.injectedSagas = {}; // Saga registry
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers))
-    })
+      store.replaceReducer(createReducer(store.injectedReducers));
+    });
   }
 
-  return store
+  return store;
 }
