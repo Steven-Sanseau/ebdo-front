@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import emailRegex from 'email-regex'
+import { push } from 'react-router-redux'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -72,14 +73,16 @@ class EmailStep extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    if (this.validateEmail()) {
-      if (this.props.clientExist) {
-        this.props.dispatchLoginEmail(this.props.email, false)
-        this.props.dispatchUseClientExist(!this.props.isOfferStep)
-      } else {
-        this.props.dispatchPostClient(this.props.isFreeNumberStep)
-      }
-    }
+    this.props.dispatchStopSubscriptionPage()
+
+    // if (this.validateEmail()) {
+    //   if (this.props.clientExist) {
+    //     this.props.dispatchLoginEmail(this.props.email, false)
+    //     this.props.dispatchUseClientExist(!this.props.isOfferStep)
+    //   } else {
+    //     this.props.dispatchPostClient(this.props.isFreeNumberStep)
+    //   }
+    // }
   }
 
   contentOpen() {
@@ -157,6 +160,7 @@ EmailStep.propTypes = {
   nextStep: PropTypes.func,
   stepNumber: PropTypes.number,
   dispatchChangeEmail: PropTypes.func,
+  dispatchStopSubscriptionPage: PropTypes.func,
   dispatchPostClient: PropTypes.func,
   dispatchUseClientExist: PropTypes.func,
   dispatchNextStep: PropTypes.func,
@@ -180,6 +184,7 @@ function mapDispatchToProps(dispatch) {
     dispatchChangeEmail: email => dispatch(setClientEmail(email)),
     dispatchPostClient: checkEmail => dispatch(postClient(checkEmail)),
     dispatchUseClientExist: () => dispatch(useClientExist()),
+    dispatchStopSubscriptionPage: () => dispatch(push('/abo/error')),
     dispatchLoginEmail: (email, redirect) =>
       dispatch(loginEmail(email, redirect)),
     dispatchNextStep: () => dispatch(nextStep())
