@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
 import LogoWrapper from './LogoWrapper'
 import SubTitle from './SubTitle'
@@ -11,7 +13,7 @@ const IconHome = styled.span`
   margin-right: 10px;
 `
 
-function Header({ logoColor }) {
+function Header({ logoColor, hideMenu }) {
   return (
     <div>
       <Wrapper>
@@ -19,12 +21,14 @@ function Header({ logoColor }) {
           <LogoWrapper>
             <Logo width={175} height={66} color={logoColor} />
           </LogoWrapper>
-          <SubTitle>
-            <IconHome>
-              <HomeIcon />
-            </IconHome>
-            <span>Retourner à l'accueil</span>
-          </SubTitle>
+          {!hideMenu && (
+            <SubTitle>
+              <IconHome>
+                <HomeIcon />
+              </IconHome>
+              <span>Retourner à l'accueil</span>
+            </SubTitle>
+          )}
         </Link>
       </Wrapper>
     </div>

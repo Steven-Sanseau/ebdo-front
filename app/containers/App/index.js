@@ -13,6 +13,7 @@ import Source from 'containers/Source/Loadable'
 import Manifest from 'containers/Manifest/Loadable'
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import Login from 'containers/Login/Loadable'
+import Landing from 'containers/Landing/Loadable'
 import Cgv from 'containers/Cgv/Loadable'
 import Mentions from 'containers/Mentions/Loadable'
 
@@ -53,6 +54,7 @@ export default function App() {
         <Redirect from="/logout" to="/connexion" />
         <Route exact path="/mentions-legales" component={Mentions} />
         <Route exact path="/cgv" component={Cgv} />
+        <Route exact path="/landing-:type" component={Landing} />
         {/* <Route
           component={() => {
             window.location = 'http://ebdo-lejournal.fr'
