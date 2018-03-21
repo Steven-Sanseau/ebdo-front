@@ -99,7 +99,7 @@ export class Landing extends React.Component {
       <Layout background="--background">
         <Row center="xs" start="lg">
           <Col xs={12}>
-            <Header hideMenu={match.params.type === 'stop'} />
+            <Header />
           </Col>
         </Row>
         <Row center="xs">
