@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { push } from 'react-router-redux'
 
 import {
   makeSelectTokenIsLoading,
@@ -56,6 +57,12 @@ class PaymentStep extends React.Component {
   constructor(props) {
     super(props)
     this.state = { errMessage: '', errorCGV: false, isAnim: false }
+  }
+
+  componentWillMount() {
+    if (this.props.currentStep >= this.props.stepNumber) {
+      this.props.dispatchStopSubscriptionPage()
+    }
   }
 
   getStripeToken = () => {
@@ -223,7 +230,9 @@ class PaymentStep extends React.Component {
   }
 
   render() {
-    const { currentStep, changeStep, stepNumber, tokenIsLoading } = this.props
+    const {
+      currentStep, changeStep, stepNumber, tokenIsLoading
+    } = this.props
 
     return (
       <ToggleStep
@@ -255,6 +264,7 @@ PaymentStep.propTypes = {
   dispatchSetTokenError: PropTypes.func,
   dispatchSetPayementMethod: PropTypes.func,
   dispatchConfirmCheckout: PropTypes.func,
+  dispatchStopSubscriptionPage: PropTypes.func,
   dispatchConfirmCGV: PropTypes.func,
   payementMethod: PropTypes.number,
   tokenIsLoading: PropTypes.bool,
@@ -284,6 +294,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchSetPayementMethod: method => dispatch(setPayementMethod(method)),
     dispatchGetSlimpayToken: () => dispatch(getTokenSlimpay()),
+    dispatchStopSubscriptionPage: () => dispatch(push('/abo/error')),
     dispatchSetTokenStripe: () => dispatch(setTokenStripe()),
     dispatchSetTokenStripeLoaded: token =>
       dispatch(setTokenStripeLoaded(token)),
@@ -293,6 +304,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default injectStripe(
-  connect(mapStateToProps, mapDispatchToProps)(PaymentStep)
-)
+export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(PaymentStep))
