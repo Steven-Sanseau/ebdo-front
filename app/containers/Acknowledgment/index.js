@@ -22,6 +22,7 @@ import { makeSelectSubscriptionData } from 'selectors/subscription'
 import Header from 'components/Header'
 import Button from 'components/Button'
 import Card from 'components/Icon/Card'
+import ArrowDown from 'components/Icon/ArrowDown'
 import BoldText from 'components/LayoutStep/BoldText'
 
 const Subscription = styled(Col)`
@@ -215,6 +216,23 @@ export class Acknowledgment extends React.Component {
                 </Row>
               </div>
             )}
+            {match.params.type === 'error' && (
+              <div>
+                <Row center="xs">
+                  <ArrowDown />
+                </Row>
+                <Row center="xs">
+                  <Col xs={12} sm={4}>
+                    <ErrorText>
+                      <BoldText>Une erreur est survenue</BoldText>
+                      <br />
+                      Nous revenons très vite.<br />
+                      <br />
+                    </ErrorText>
+                  </Col>
+                </Row>
+              </div>
+            )}
             {match.params.type === 'existe' && (
               <div>
                 Vous possédez déjà un abonnement sans engagement il est donc
@@ -238,9 +256,7 @@ export class Acknowledgment extends React.Component {
                         <Button
                           color="--warm-purple"
                           handleRoute={() => {
-                            this.props.dispatch(
-                              setOfferParams({ is_gift: true })
-                            )
+                            this.props.dispatch(setOfferParams({ is_gift: true }))
                             this.props.dispatch(newCheckout())
                           }}
                         >
