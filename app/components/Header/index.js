@@ -17,7 +17,7 @@ function Header({ logoColor, hideMenu }) {
   return (
     <div>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/home" style={{ textDecoration: 'none' }}>
           <LogoWrapper>
             <Logo width={175} height={66} color={logoColor} />
           </LogoWrapper>
