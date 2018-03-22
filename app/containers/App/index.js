@@ -27,8 +27,8 @@ export default function App() {
         />
       </Helmet>
       <Switch>
-        <Redirect from="/accueil" to="/" />
-        <Route exact path="/" component={Home} />
+        <Redirect from="/accueil" to="/home" />
+        <Route exact path="/home" component={Home} />
         <Redirect from="/subscribe" to="/abonnement" />
         <Route path="/abonnement/:step" component={Checkout} />
         <Route path="/abonnement" component={Checkout} />
@@ -54,7 +54,9 @@ export default function App() {
         <Redirect from="/logout" to="/connexion" />
         <Route exact path="/mentions-legales" component={Mentions} />
         <Route exact path="/cgv" component={Cgv} />
-        <Route exact path="/landing-:type" component={Landing} />
+        <Redirect from="/abonnement" to="/" />
+        <Redirect from="/offre" to="/" />
+        <Route path="/" component={Landing} />
         {/* <Route
           component={() => {
             window.location = 'http://ebdo-lejournal.fr'

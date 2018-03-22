@@ -10,10 +10,6 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { getValidTokenSlimpay } from 'actions/token'
-import { setOfferParams } from 'actions/offer'
-import { newCheckout } from 'actions/checkout'
-
 // SELECTOR
 import { makeSelectPath } from 'selectors/route'
 import { makeSelectSubscriptionData } from 'selectors/subscription'
@@ -103,76 +99,67 @@ export class Landing extends React.Component {
         </Row>
         <Row center="xs">
           <Col xs={12}>
-            {match.params.type === 'stop' && (
-              <div>
-                <Row center="xs">
-                  <Col xs={12} sm={5}>
-                    <ErrorText>
-                      <BoldText>
-                        Chère lectrice,<br /> Cher lecteur,<br />
-                      </BoldText>
-                      <br />
-                      <br />
-                      Le 12 janvier, lorsque le premier numéro d’Ebdo est paru,
-                      la rédaction était portée par votre soutien, par les
-                      rencontres avec ses futurs lecteurs lors de la tournée du
-                      bus Ebdo et par le succès de la campagne de crowdfunding.<br />
-                      <br />
-                      Notre projet se voulait à contre-courant de la fatalité et
-                      du déclin de la presse : un hebdomadaire papier,
-                      indépendant, sans publicité, généraliste et accessible au
-                      plus grand nombre.<br />
-                      <br />
-                      Chacun de ces mots représentait un défi à lui seul. Tenir
-                      les cinq engagements à la fois était une gageure. Nous
-                      pensions que c’était justement ainsi, en mettant la barre
-                      au plus haut, qu’Ebdo pourrait faire la différence.<br />
-                      <br />
-                      En deux mois, la rédaction a réussi de belles choses.
-                      Presque vingt mille lecteurs – dont vous faites partie –
-                      achètent ou reçoivent chaque semaine ce journal de poche
-                      qui ne ressemble à aucun autre. Mais ce n’est pas assez,
-                      hélas !<br />
-                      <br />
-                      Depuis un mois, notre situation économique s’est dégradée
-                      de manière spectaculaire. Les ventes et les abonnements
-                      sont désormais au plus bas. Nous avons essayé de répondre
-                      aux critiques et d’améliorer Ebdo, semaine après semaine.
-                      Sans succès. <br />
-                      <br />Nous n’avons pas d’autre choix que de décider la
-                      suspension de la parution de votre journal et de demander
-                      la nomination d’un administrateur judiciaire pour
-                      poursuivre l’activité des revues XXI et 6Mois et avoir le
-                      temps de trouver une solution globale.<br />
-                      <br /> Pour les abonnés d’Ebdo qui avaient choisi le
-                      prélèvement mensuel, celui-ci sera arrêté. Pour les
-                      autres, nous étudions les modalités d’une offre
-                      commerciale à partir des revues XXI et 6Mois et nous
-                      revien-drons très vite vers vous.<br />
-                      <br />
-                      Un journal sans publicité ne peut pas vivre sans lecteurs.
-                      S’il ne se vend pas, il meurt. C’est la règle du jeu et
-                      nous la connaissions avant de nous lancer dans l’aventure
-                      d’un journal indépendant et sans publicité.<br />
-                      <br />
-                      Il reste le formidable espoir suscité par ce journal, ces
-                      mois intenses de préparation, l’innovation de la Source et
-                      de grandes émotions vécues ensemble, malgré quelques
-                      tempêtes.<br />
-                      <br />
-                      Merci à toute l’équipe d’avoir cru à ce projet.<br />
-                      Merci à vous d’avoir soutenu la presse indépendante.<br />
-                      <br />
-                      <br />
-                      Laurent Beccaria et Patrick de Saint-Exupéry
-                    </ErrorText>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>.</Col>
-                </Row>
-              </div>
-            )}
+            <Row center="xs">
+              <Col xs={12} sm={5}>
+                <ErrorText>
+                  <BoldText>
+                    Chère lectrice,<br /> Cher lecteur,<br />
+                  </BoldText>
+                  <br />
+                  <br />
+                  Le 12 janvier, lorsque le premier numéro d’Ebdo est paru, la
+                  rédaction était portée par votre soutien, par les rencontres
+                  avec ses futurs lecteurs lors de la tournée du bus Ebdo et par
+                  le succès de la campagne de crowdfunding.<br />
+                  <br />
+                  Notre projet se voulait à contre-courant de la fatalité et du
+                  déclin de la presse : un hebdomadaire papier, indépendant,
+                  sans publicité, généraliste et accessible au plus grand
+                  nombre.<br />
+                  <br />
+                  Chacun de ces mots représentait un défi à lui seul. Tenir les
+                  cinq engagements à la fois était une gageure. Nous pensions
+                  que c’était justement ainsi, en mettant la barre au plus haut,
+                  qu’Ebdo pourrait faire la différence.<br />
+                  <br />
+                  En deux mois, la rédaction a réussi de belles choses. Presque
+                  vingt mille lecteurs – dont vous faites partie – achètent ou
+                  reçoivent chaque semaine ce journal de poche qui ne ressemble
+                  à aucun autre. Mais ce n’est pas assez, hélas !<br />
+                  <br />
+                  Depuis un mois, notre situation économique s’est dégradée de
+                  manière spectaculaire. Les ventes et les abonnements sont
+                  désormais au plus bas. Nous avons essayé de répondre aux
+                  critiques et d’améliorer Ebdo, semaine après semaine. Sans
+                  succès. <br />
+                  <br />Nous n’avons pas d’autre choix que de décider la
+                  suspension de la parution de votre journal et de demander la
+                  nomination d’un administrateur judiciaire pour poursuivre
+                  l’activité des revues XXI et 6Mois et avoir le temps de
+                  trouver une solution globale.<br />
+                  <br /> Pour les abonnés d’Ebdo qui avaient choisi le
+                  prélèvement mensuel, celui-ci sera arrêté. Pour les autres,
+                  nous étudions les modalités d’une offre commerciale à partir
+                  des revues XXI et 6Mois et nous revien-drons très vite vers
+                  vous.<br />
+                  <br />
+                  Un journal sans publicité ne peut pas vivre sans lecteurs.
+                  S’il ne se vend pas, il meurt. C’est la règle du jeu et nous
+                  la connaissions avant de nous lancer dans l’aventure d’un
+                  journal indépendant et sans publicité.<br />
+                  <br />
+                  Il reste le formidable espoir suscité par ce journal, ces mois
+                  intenses de préparation, l’innovation de la Source et de
+                  grandes émotions vécues ensemble, malgré quelques tempêtes.<br />
+                  <br />
+                  Merci à toute l’équipe d’avoir cru à ce projet.<br />
+                  Merci à vous d’avoir soutenu la presse indépendante.<br />
+                  <br />
+                  <br />
+                  Laurent Beccaria et Patrick de Saint-Exupéry
+                </ErrorText>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Layout>
@@ -193,7 +180,6 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatchSlimpayTokenValid: () => dispatch(getValidTokenSlimpay()),
     dispatch
   }
 }
