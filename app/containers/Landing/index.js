@@ -145,10 +145,10 @@ export class Landing extends React.Component {
                       poursuivre l’activité des revues XXI et 6Mois et avoir le
                       temps de trouver une solution globale.<br />
                       <br /> Pour les abonnés d’Ebdo qui avaient choisi le
-                      prélèvement bancaire, celui-ci sera arrêté. Pour ceux qui
-                      avaient choisi de payer par chèque, nous étudions les
-                      modalités d’une offre commerciale à partir des revues XXI
-                      et 6Mois et nous reviendrons très vite vers vous.<br />
+                      prélèvement mensuel, celui-ci sera arrêté. Pour les
+                      autres, nous étudions les modalités d’une offre
+                      commerciale à partir des revues XXI et 6Mois et nous
+                      revien-drons très vite vers vous.<br />
                       <br />
                       Un journal sans publicité ne peut pas vivre sans lecteurs.
                       S’il ne se vend pas, il meurt. C’est la règle du jeu et
